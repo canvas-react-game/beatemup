@@ -1,6 +1,4 @@
-import {useState, ChangeEvent} from "react";
-
-export enum SignUpFieldNames {
+enum SignUpFieldNames {
     surname = 'surname',
     firstname = 'firstname',
     mail = 'mail',
@@ -19,21 +17,20 @@ export interface SignUpValues {
 }
 
 export const useSignUp = () => {
-    const [login, setLogin] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-
-    const onLoginChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setLogin(e.currentTarget.value);
-    const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setPassword(e.currentTarget.value);
+    const fieldSet = [
+        {name: SignUpFieldNames.surname, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},
+        {name: SignUpFieldNames.firstname, rules: [{ required: true, message: 'Введите имя' }], placeholder: 'Имя'},
+        {name: SignUpFieldNames.mail, rules: [{ required: true, message: 'Введите почту' }], placeholder: 'Эл. почта'},
+        {name: SignUpFieldNames.phone, rules: [{ required: true, message: 'Введите телефон' }], placeholder: 'Телефон'},
+        {name: SignUpFieldNames.login, rules: [{ required: true, message: 'Введите логин' }], placeholder: 'Логин'},
+        {name: SignUpFieldNames.password, rules: [{ required: true, message: 'Введите пароль' }], placeholder: 'Пароль',
+            type:'password'},
+    ]
 
     const onSubmit = (values: SignUpValues) => console.log(values);
 
     return {
-        login,
-        password,
-        onLoginChange,
-        onPasswordChange,
+        fieldSet,
         onSubmit
     };
 }

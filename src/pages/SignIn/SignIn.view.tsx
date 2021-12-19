@@ -1,15 +1,17 @@
 import React, {FC} from "react";
-import {SignInFieldNames, useSignInForm} from './SignIn.helpers';
-import { UserOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
+
+import { UserOutlined } from '@ant-design/icons';
+import Container from "@/components/Container";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Password from "@/components/Password";
+import Nav from "@/components/InnerNavBar";
+import Header from "@/components/Header";
+import {routes} from "@/config/routes/routes";
+
 import styles from './SignIn.module.scss';
-import Container from "../../components/Container";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
-import Password from "../../components/Password";
-import Nav from "../../components/InnerNavBar";
-import Header from "../../components/Header";
-import {routes} from "../../config/routes/routes";
+import {SignInFieldNames, useSignInForm} from './SignIn.helpers';
 
 const SignIn:FC = () => {
     const { onFinish, onFinishFailed } = useSignInForm();

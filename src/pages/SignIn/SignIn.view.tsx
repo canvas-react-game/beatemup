@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {SignInFieldNames, SignInValues, useLogin} from './SignIn.helpers';
+import {SignInFieldNames, SignInValues, useSignIn} from './SignIn.helpers';
 import { UserOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import styles from './SignIn.module.scss';
@@ -11,7 +11,7 @@ import Nav from ".//Nav";
 import Header from "../../components/Header";
 
 const SignIn:FC = () => {
-    const { onSubmit } = useLogin();
+    const { onSubmit } = useSignIn();
 
     const onFinish = (values: SignInValues) => {
         onSubmit(values);

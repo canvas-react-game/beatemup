@@ -10,7 +10,7 @@ export interface SignInValues {
     password: string,
 }
 
-export const useLogin = () => {
+export const useSignIn = () => {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 

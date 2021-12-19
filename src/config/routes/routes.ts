@@ -7,7 +7,7 @@ type Routes = {
     [key: string]: Route;
 }
 
-const routes: Routes = {
+export const routes: Routes = {
     main: {
         path: '/',
         checkAccess: true

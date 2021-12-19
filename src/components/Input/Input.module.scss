@@ -2,10 +2,10 @@
 
 .input {
   &:global(.ant-input-affix-wrapper) {
-    background: none;
+    background: none !important;;
     color: variables.$primary;
     > input {
-      background: none;
+      background: none !important;
       color: white;
     }
     > input::placeholder {
@@ -13,6 +13,10 @@
     }
     > input::selection {
       background: variables.$primary;
+    }
+    // todo не срабатывает
+    > input:-webkit-autofill {
+      background: none !important;
     }
   }
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):hover {
@@ -23,5 +27,11 @@
   }
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):not(:focus) {
     border-color: variables.$primary;
+  }
+  //.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input
+  &:global(.ant-form-item-has-error) {
+    > div > div > div > span {
+      background: none;
+    }
   }
 }

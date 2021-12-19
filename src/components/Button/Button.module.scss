@@ -8,5 +8,13 @@ button {
       background: darken(variables.$primary, 10%);
       border-color: darken(variables.$primary, 10%);
     }
+    &:active {
+      background: darken(variables.$primary, 10%);
+      border-color: darken(variables.$primary, 10%);
+    }
+    &:focus {
+      background: darken(variables.$primary, 10%);
+      border-color: darken(variables.$primary, 10%);
+    }
   }
 }

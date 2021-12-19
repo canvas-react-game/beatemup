@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Login from "../../pages/Login";
+import Login from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 
 

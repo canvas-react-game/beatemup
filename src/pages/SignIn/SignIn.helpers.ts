@@ -1,11 +1,11 @@
 import {useState, ChangeEvent} from "react";
 
-export enum LoginFieldNames {
+export enum SignInFieldNames {
     login = 'login',
     password = 'password'
 }
 
-export interface LoginValues {
+export interface SignInValues {
     login: string,
     password: string,
 }
@@ -19,7 +19,7 @@ export const useLogin = () => {
     const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
         setPassword(e.currentTarget.value);
 
-    const onSubmit = (values: LoginValues) => console.log(values);
+    const onSubmit = (values: SignInValues) => console.log(values);
 
     return {
         login,

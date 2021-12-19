@@ -5,10 +5,10 @@ import NavBar from "../NavBar";
 
 // todo
 const links = [
-    { route: '', label: 'Об игре'},
-    { route: '', label: 'Профиль'},
-    { route: '', label: 'Таблица лидеров'},
-    { route: '', label: 'Форум'},
+    { route: '1', label: 'Об игре'},
+    { route: '2', label: 'Профиль'},
+    { route: '3', label: 'Таблица лидеров'},
+    { route: '4', label: 'Форум'},
 ]
 
 const Header: FC = () => {

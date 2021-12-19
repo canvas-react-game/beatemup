@@ -3,16 +3,18 @@ export enum SignInFieldNames {
     password = 'password'
 }
 
-export interface SignInValues {
+interface SignInValues {
     login: string,
     password: string,
 }
 
 export const useSignInForm = () => {
 
-    const onSubmit = (values: SignInValues) => console.log(values);
+    const onFinish = (values: SignInValues) => console.log(values);
+    const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);
 
     return {
-        onSubmit
+        onFinish,
+        onFinishFailed
     };
 }

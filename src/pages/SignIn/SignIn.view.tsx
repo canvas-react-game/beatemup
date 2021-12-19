@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {SignInFieldNames, SignInValues, useSignInForm} from './SignIn.helpers';
+import {SignInFieldNames, useSignInForm} from './SignIn.helpers';
 import { UserOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import styles from './SignIn.module.scss';
@@ -12,15 +12,7 @@ import Header from "../../components/Header";
 import {routes} from "../../config/routes/routes";
 
 const SignIn:FC = () => {
-    const { onSubmit } = useSignInForm();
-
-    const onFinish = (values: SignInValues) => {
-        onSubmit(values);
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+    const { onFinish, onFinishFailed } = useSignInForm();
 
     return (
         <Container>

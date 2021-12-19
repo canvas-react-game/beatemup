@@ -1,4 +1,4 @@
-import {routes} from "../../config/routes/routes";
+import {routes} from "@/config/routes/routes";
 
 enum SignUpFieldNames {
     surname = 'surname',

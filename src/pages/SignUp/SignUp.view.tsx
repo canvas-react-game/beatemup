@@ -1,11 +1,13 @@
 import React, {FC} from "react";
 import { Form } from 'antd';
+
+import Container from "@/components/Container";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Nav from "@/components/InnerNavBar";
+import Header from "@/components/Header";
+
 import styles from './SignUp.module.scss';
-import Container from "../../components/Container";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
-import Nav from "../../components/InnerNavBar";
-import Header from "../../components/Header";
 import { useSignUp} from "./SignUp.helpers";
 import YandexSignIn from "./YandexSignIn";
 

@@ -1,7 +1,9 @@
 import React, {FC} from "react";
-import Router from "../Router";
-import ErrorBoundary from "../components/ErrorBoundary";
 import "antd/dist/antd.css";
+
+import ErrorBoundary from "@/components/ErrorBoundary";
+
+import Router from "../Router";
 import styles from './App.module.scss';
 
 const App: FC = () => {

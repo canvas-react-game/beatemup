@@ -1,7 +1,9 @@
 import React, {FC} from "react";
 import { Input as CustomInput, InputProps } from 'antd';
-import styles from './Password.module.scss';
+
 import {LockOutlined} from "@ant-design/icons";
+
+import styles from './Password.module.scss';
 
 interface Props extends InputProps {}
 

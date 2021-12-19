@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
+
+import {routes} from "@/config/routes/routes";
+
 import styles from './Header.module.scss';
-import {routes} from "../../config/routes/routes";
 import NavBar from "../NavBar";
 
 // todo

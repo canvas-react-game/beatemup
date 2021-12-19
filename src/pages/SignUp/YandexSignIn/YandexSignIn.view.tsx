@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
-import styles from './YandexSignIn.module.scss';
 import {LoginOutlined} from '@ant-design/icons';
+
+import styles from './YandexSignIn.module.scss';
 
 const YandexSignIn: FC = () => (
     <div className={styles.link}>

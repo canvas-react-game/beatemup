@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Password from "../../components/Password";
 import Nav from ".//Nav";
-import Header from ".//Header";
+import Header from "../../components/Header";
 
 const SignIn:FC = () => {
     const { onSubmit } = useLogin();

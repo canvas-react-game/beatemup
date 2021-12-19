@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import styles from './Header.module.scss';
-import {routes} from "../../../config/routes/routes";
-import NavBar from "../../../components/NavBar";
+import {routes} from "../../config/routes/routes";
+import NavBar from "../NavBar";
 
 // todo
 const links = [

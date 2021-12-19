@@ -1,5 +1,4 @@
 import React, {FC} from "react";
-import { LoginOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import styles from './SignUp.module.scss';
 import Container from "../../components/Container";
@@ -9,6 +8,7 @@ import Nav from "../../components/InnerNavBar";
 import Header from "../../components/Header";
 import { SignUpValues, useSignUp} from "./SignUp.helpers";
 import {routes} from "../../config/routes/routes";
+import YandexSignIn from "./YandexSignIn";
 
 const SignUp:FC = () => {
     const { fieldSet, onSubmit } = useSignUp();
@@ -36,10 +36,7 @@ const SignUp:FC = () => {
                                 <Input type={set.type ?? ''} placeholder={set.placeholder} />
                             </Form.Item>
                         )}
-                    <div className={styles.link}>
-                        <LoginOutlined className={styles.icon}/>
-                        <a href={''}>Войти через Яндекс</a>
-                    </div>
+                    <YandexSignIn/>
                     <Form.Item>
                         <Button block type="primary" htmlType="submit">Заргеистрироваться</Button>
                     </Form.Item>

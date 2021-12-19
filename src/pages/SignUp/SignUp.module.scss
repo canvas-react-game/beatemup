@@ -1,0 +1,7 @@
+@use './src/styles/variables.module.scss' as variables;
+
+.formContainer {
+  margin: 10vh auto auto;
+  padding: variables.$spacing_x2;
+  max-width: 360px;
+}

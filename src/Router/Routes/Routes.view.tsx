@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from "../../pages/SignIn";
-import SignUp from "../../pages/SignUp";
+import SignUpView from "../../pages/SignUp";
 
 
 const Routes: FC = () => {
@@ -9,7 +9,7 @@ const Routes: FC = () => {
       <Switch>
         <Redirect exact from={'/'} to={'/signin'}/>
         <Route path={'/signin'} exact component={Login}/>
-        <Route path={'/signup'} exact component={SignUp}/>
+        <Route path={'/signup'} exact component={SignUpView}/>
       </Switch>
   );
 };

@@ -1,20 +1,21 @@
 import React, {FC} from "react";
-import {SignInFieldNames, SignInValues, useSignInForm} from './SignIn.helpers';
 import { UserOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
-import styles from './SignIn.module.scss';
+import styles from './SignUp.module.scss';
 import Container from "../../components/Container";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Password from "../../components/Password";
 import Nav from "../../components/InnerNavBar";
 import Header from "../../components/Header";
+import {SignUpFieldNames, SignUpValues, useSignUp} from "./SignUp.helpers";
 import {routes} from "../../config/routes/routes";
 
-const SignIn:FC = () => {
-    const { onSubmit } = useSignInForm();
+const SignUp:FC = () => {
 
-    const onFinish = (values: SignInValues) => {
+    const { onSubmit } = useSignUp();
+
+    const onFinish = (values: SignUpValues) => {
         onSubmit(values);
     };
 
@@ -26,24 +27,24 @@ const SignIn:FC = () => {
         <Container>
             <Header/>
             <div className={styles.formContainer}>
-                <Nav currentRoute={`/#${routes.signIn.path}`}/>
+                <Nav currentRoute={`/#${routes.signUp.path}`}/>
                 <Form
-                    name='signIn'
+                    name='signUp'
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout='vertical'>
                     <Form.Item
-                        name={SignInFieldNames.login}
+                        name={SignUpFieldNames.login}
                         rules={[{ required: true, message: 'Введите логин' }]}>
                         <Input placeholder='логин' prefix={<UserOutlined />}/>
                     </Form.Item>
                     <Form.Item
-                        name={SignInFieldNames.password}
+                        name={SignUpFieldNames.password}
                         rules={[{ required: true, message: 'Введите пароль' }]}>
                         <Password placeholder='пароль' />
                     </Form.Item>
                     <Form.Item>
-                        <Button block type="primary" htmlType="submit">Войти</Button>
+                        <Button block type="primary" htmlType="submit">Заргеистрироваться</Button>
                     </Form.Item>
                 </Form>
             </div>
@@ -51,4 +52,4 @@ const SignIn:FC = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;

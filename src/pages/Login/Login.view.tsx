@@ -1,9 +1,11 @@
 import React, {FC} from "react";
 import {LoginFieldNames, LoginValues, useLogin} from './Login.helpers';
 import { UserOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Typography } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Form, Typography } from 'antd';
 import Container from "../../components/Container";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import Password from "../../components/Password";
 
 const { Title } = Typography;
 
@@ -13,8 +15,7 @@ const layout = {
 };
 
 const Login:FC = () => {
-    const { password, onPasswordChange, onSubmit } = useLogin();
-    const { Password } = Input;
+    const { onSubmit } = useLogin();
 
     const onFinish = (values: LoginValues) => {
         onSubmit(values);
@@ -33,34 +34,17 @@ const Login:FC = () => {
                 name='signIn'
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-                layout='vertical'
-            >
-
+                layout='vertical'>
                 <Form.Item
-                    label='Логин'
                     name={LoginFieldNames.login}
-                    rules={[{ required: true, message: 'Введите логин' }]}
-                >
-                    <Input
-                        placeholder='логин'
-
-                        prefix={<UserOutlined />}
-                        />
+                    rules={[{ required: true, message: 'Введите логин' }]}>
+                    <Input placeholder='логин' prefix={<UserOutlined />}/>
                 </Form.Item>
-
                 <Form.Item
-                    label='Пароль'
                     name={LoginFieldNames.password}
-                    rules={[{ required: true, message: 'Введите пароль' }]}
-                >
-                    <Password
-                        required
-                        placeholder='пароль'
-                        value={password} onChange={onPasswordChange}
-                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                    />
+                    rules={[{ required: true, message: 'Введите пароль' }]}>
+                    <Password placeholder='пароль' />
                 </Form.Item>
-
                 <Form.Item>
                     <Button block type="primary" htmlType="submit">Войти</Button>
                 </Form.Item>

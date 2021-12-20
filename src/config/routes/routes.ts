@@ -19,6 +19,10 @@ export const routes: Routes = {
     signUp: {
         path: '/signup',
         checkAccess: true
+    },
+    leaderBoard: {
+        path: '/leaderboard',
+        checkAccess: true
     }
 }
 

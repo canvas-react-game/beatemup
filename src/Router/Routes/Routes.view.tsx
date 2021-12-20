@@ -4,6 +4,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from "@/pages/SignIn";
 import SignUpView from "@/pages/SignUp";
 import Main from "@/pages/Main";
+import Profile from "@/pages/Profile";
+import Forum from "@/pages/Forum";
+import About from "@/pages/About";
+import Leaderboard from "@/pages/Leaderboard";
 import {routes} from "@/config/routes/routes";
 
 
@@ -14,6 +18,10 @@ const Routes: FC = () => {
         <Route path={routes.signIn.path} exact component={Login}/>
         <Route path={routes.signUp.path} exact component={SignUpView}/>
         <Route path={routes.main.path} exact component={Main}/>
+        <Route path={routes.profile.path} exact component={Profile}/>
+        <Route path={routes.forum.path} exact component={Forum}/>
+        <Route path={routes.leaderboard.path} exact component={Leaderboard}/>
+        <Route path={routes.about.path} exact component={About}/>
       </Switch>
   );
 };

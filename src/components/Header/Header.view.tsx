@@ -5,25 +5,29 @@ import {routes} from "@/config/routes/routes";
 import styles from './Header.module.scss';
 import NavBar from "../NavBar";
 
-// todo
+// todo поправить при переходе на browserouter
 const links = [
-    { route: '1', label: 'Об игре'},
-    { route: '2', label: 'Профиль'},
-    { route: '3', label: 'Таблица лидеров'},
-    { route: '4', label: 'Форум'},
+    { route: `/#${routes.about.path}`, label: 'Об игре'},
+    { route: `/#${routes.profile.path}`, label: 'Профиль'},
+    { route: `/#${routes.leaderboard.path}`, label: 'Таблица лидеров'},
+    { route: `/#${routes.forum.path}`, label: 'Форум'},
 ]
+
+const mainRoute = `/#${routes.main.path}`;
+const signInRoute = `/#${routes.signIn.path}`;
+const signUpRoute = `/#${routes.signUp.path}`;
 
 const Header: FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <a href={`/#${routes.main.path}`}>Logo</a>
+                <a href={mainRoute}>Logo</a>
             </div>
             <div className={styles.routesContainer}>
                 <NavBar links={links} />
                 <div className={styles.buttonContainer}>
-                    <a className={styles.signIn} href={`/#${routes.signIn.path}`}>Вход</a>
-                    <a className={styles.signUp} href={`/#${routes.signUp.path}`}>Регистрация</a>
+                    <a className={styles.signIn} href={signInRoute}>Вход</a>
+                    <a className={styles.signUp} href={signUpRoute}>Регистрация</a>
                 </div>
             </div>
         </div>

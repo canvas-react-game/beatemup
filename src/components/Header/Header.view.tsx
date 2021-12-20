@@ -17,7 +17,7 @@ const Header: FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <a href={`/#${routes.signIn.path}`}>Logo</a>
+                <a href={`/#${routes.main.path}`}>Logo</a>
             </div>
             <div className={styles.routesContainer}>
                 <NavBar links={links} />

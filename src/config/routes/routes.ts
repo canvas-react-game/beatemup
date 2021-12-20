@@ -9,7 +9,7 @@ type Routes = {
 
 export const routes: Routes = {
     main: {
-        path: '/',
+        path: '/main',
         checkAccess: true
     },
     signIn: {

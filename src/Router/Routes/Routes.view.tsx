@@ -9,6 +9,7 @@ import Forum from "@/pages/Forum";
 import About from "@/pages/About";
 import Leaderboard from "@/pages/Leaderboard";
 import {routes} from "@/config/routes/routes";
+import Error from "@/pages/Error";// todo
 
 
 const Routes: FC = () => {
@@ -22,6 +23,7 @@ const Routes: FC = () => {
         <Route path={routes.forum.path} exact component={Forum}/>
         <Route path={routes.leaderboard.path} exact component={Leaderboard}/>
         <Route path={routes.about.path} exact component={About}/>
+        <Route path={'/error'} exact component={Error}/>
       </Switch>
   );
 };

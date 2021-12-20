@@ -19,7 +19,7 @@ interface SignUpValues {
 }
 
 export const useSignUp = () => {
-    const currentRoute = `/#${routes.signUp.path}`;
+    const currentPath = `/#${routes.signUp.path}`;
 
     const fieldSet = [
         {name: SignUpFieldNames.surname, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},
@@ -38,7 +38,7 @@ export const useSignUp = () => {
     const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);
 
     return {
-        currentRoute,
+        currentPath,
         fieldSet,
         onFinish,
         onFinishFailed

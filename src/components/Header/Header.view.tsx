@@ -1,34 +1,34 @@
 import React, {FC} from 'react';
 
-import {routes} from "@/config/routes/routes";
+import {routes as appRoutes} from "@/config/routes/routes";
 
 import styles from './Header.module.scss';
 import NavBar from "../NavBar";
 
 interface Props {
-    currentRoute?: string;
+    currentPath?: string;
 }
 
 // todo поправить при переходе на browserouter
-const links = [
-    { route: `/#${routes.about.path}`, label: 'Об игре'},
-    { route: `/#${routes.profile.path}`, label: 'Профиль'},
-    { route: `/#${routes.leaderboard.path}`, label: 'Таблица лидеров'},
-    { route: `/#${routes.forum.path}`, label: 'Форум'},
+const routes = [
+    { path: `/#${appRoutes.about.path}`, label: 'Об игре'},
+    { path: `/#${appRoutes.profile.path}`, label: 'Профиль'},
+    { path: `/#${appRoutes.leaderboard.path}`, label: 'Таблица лидеров'},
+    { path: `/#${appRoutes.forum.path}`, label: 'Форум'},
 ]
 
-const mainRoute = `/#${routes.main.path}`;
-const signInRoute = `/#${routes.signIn.path}`;
-const signUpRoute = `/#${routes.signUp.path}`;
+const mainRoute = `/#${appRoutes.main.path}`;
+const signInRoute = `/#${appRoutes.signIn.path}`;
+const signUpRoute = `/#${appRoutes.signUp.path}`;
 
-const Header: FC<Props> = ({ currentRoute }) => {
+const Header: FC<Props> = ({ currentPath }) => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
                 <a href={mainRoute}>Logo</a>
             </div>
             <div className={styles.routesContainer}>
-                <NavBar currentRoute={currentRoute} links={links} />
+                <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
                     <a className={styles.signIn} href={signInRoute}>Вход</a>
                     <a className={styles.signUp} href={signUpRoute}>Регистрация</a>

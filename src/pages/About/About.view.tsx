@@ -4,12 +4,12 @@ import Container from "@/components/Container";
 import Header from "@/components/Header";
 import {routes} from '@/config/routes/routes';
 
-const currentRoute = `/#${routes.about.path}`;
+const currentPath = `/#${routes.about.path}`;
 
 const About: FC = () => {
     return (
         <Container>
-            <Header currentRoute={currentRoute} />
+            <Header currentPath={currentPath} />
         </Container>
     );
 };

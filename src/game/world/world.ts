@@ -171,7 +171,7 @@ export class World {
 
     destroy() {
         window.removeEventListener("keydown", this._keyDownListener)
-        window.removeEventListener("keydown", this._keyDownListener)
+        window.removeEventListener("keyup", this._keyUpListener)
     }
 
 }

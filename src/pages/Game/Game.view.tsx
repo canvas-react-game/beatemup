@@ -9,6 +9,10 @@ const Game: FC<{}> = () => {
     useEffect(() => {
         const world = new World()
         world.init(canvasRef.current)
+
+        return () => {
+            world.destroy()
+        }
     }, [])
 
     return (

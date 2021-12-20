@@ -9,7 +9,7 @@ import NavBar from "../NavBar";
 const links = [
     { route: '1', label: 'Об игре'},
     { route: '2', label: 'Профиль'},
-    { route: '3', label: 'Таблица лидеров'},
+    { route: `#${routes.leaderBoard.path}`, label: 'Таблица лидеров'},
     { route: '4', label: 'Форум'},
 ]
 

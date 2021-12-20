@@ -8,15 +8,21 @@ import { Player } from "./objects/player"
 import { Enemy } from "./objects/enemy"
 import { Wall } from "./objects/wall"
 
+type Listener = (this: Window, ev: KeyboardEvent) => any
+
 // Игровой мир
 export class World {
 
-    canvas: HTMLCanvasElement | null = null
-    renderer: Renderer | null = null
-    scene: Scene | null = null
-    camera: Camera | null = null
+    canvas: HTMLCanvasElement | null
+    renderer: Renderer
+    scene: Scene
+    camera: Camera
 
-    eventBus: EventBus | null = null
+    eventBus: EventBus
+
+    // События, от которых нужно отписаться
+    private _keyDownListener: Listener
+    private _keyUpListener: Listener
 
     constructor() {
 
@@ -33,7 +39,7 @@ export class World {
             height: window.innerHeight
         })
 
-        // Задаем бэкграунд и создаем сценц
+        // Задаем бэкграунд и создаем сцену
         const background = new Color(0, 0, 255)
         this.scene = new Scene(background)
         // Создаем камеру (пока что пустую)
@@ -123,7 +129,7 @@ export class World {
     registerEvents() {
         const eventBus = this.eventBus as EventBus
 
-        window.addEventListener("keydown", (e: KeyboardEvent) => {
+        this._keyDownListener = (e: KeyboardEvent) => {
             switch(e.key) {
                 case KeyboardEvents.ArrowDown:
                     eventBus.emit(EventTypes.arrowBottomDown)
@@ -139,8 +145,9 @@ export class World {
                 default:
                     break                                                         
             }
-        })
-        window.addEventListener("keyup", (e: KeyboardEvent) => {
+        }
+
+        this._keyUpListener = (e: KeyboardEvent) => {
             switch(e.key) {
                 case KeyboardEvents.ArrowDown:
                     eventBus.emit(EventTypes.arrowBottomUp)
@@ -156,7 +163,15 @@ export class World {
                 default:
                     break                                                       
             }            
-        })
+        }
+
+        window.addEventListener("keydown", this._keyDownListener)
+        window.addEventListener("keyup", this._keyUpListener)
+    }
+
+    destroy() {
+        window.removeEventListener("keydown", this._keyDownListener)
+        window.removeEventListener("keydown", this._keyDownListener)
     }
 
 }

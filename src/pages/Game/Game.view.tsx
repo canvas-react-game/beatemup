@@ -1,8 +1,11 @@
 import React, { FC, useEffect } from "react";
-import {World} from "../../game/world/world"
+
+import {World} from "@/game/world/world";
+
+import Menu from './Menu';
 import styles from './Game.module.scss';
 
-const Game: FC<{}> = () => {
+const Game: FC = () => {
 
     const canvasRef = React.useRef<HTMLCanvasElement>(null)
 
@@ -16,8 +19,11 @@ const Game: FC<{}> = () => {
     }, [])
 
     return (
-        <canvas className={styles.game} ref={canvasRef} />
+        <>
+            <canvas className={styles.game} ref={canvasRef} />
+            <Menu />
+        </>
     )
-} 
+};
   
 export default Game

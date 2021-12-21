@@ -14,6 +14,8 @@ module.exports = {
             '@/components': path.resolve(__dirname, 'src/components'),
             '@/pages': path.resolve(__dirname, 'src/pages'),
             '@/config': path.resolve(__dirname, 'src/config'),
+            '@/game': path.resolve(__dirname, 'src/game'),
+            '@/styles': path.resolve(__dirname, 'src/styles'),
         }
     },
     module: {

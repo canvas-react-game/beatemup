@@ -1,3 +1,4 @@
+import Game from "../../pages/Game/Game.view";
 import React, {FC} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ import Leaderboard from "@/pages/Leaderboard";
 import {routes} from "@/config/routes/routes";
 import Error from "@/pages/Error";// todo
 
-
+// NOTE: Для отладки в этой ветке удобно оставить /game дефолтным
 const Routes: FC = () => {
   return (
       <Switch>
@@ -24,6 +25,7 @@ const Routes: FC = () => {
         <Route path={routes.leaderboard.path} exact component={Leaderboard}/>
         <Route path={routes.about.path} exact component={About}/>
         <Route path={'/error'} exact component={Error}/>
+          <Route path={'/game'} exact component={Game}/>
       </Switch>
   );
 };

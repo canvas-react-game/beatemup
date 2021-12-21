@@ -41,5 +41,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         })
-    ]
+    ],
+    devServer: {
+        static: {
+          directory: path.join(__dirname, 'static'),
+        },
+        historyApiFallback: {
+          index: 'index.html'
+        },
+        compress: true,
+        port: 3000,
+      },
 };

@@ -115,3 +115,26 @@
         color: variables.$primary;
     }
 }
+
+.nameContainer {
+    display: flex;
+    align-items: center;
+    padding: 1px 8px;
+    background-color: variables.$light_green;
+    border: 1px solid;
+    color: variables.$green;
+    border-radius: 2px;
+    width: max-content;
+}
+
+.nameActive {
+    border-color: variables.$green;
+    background-color: variables.$light_green;
+    color: variables.$green;
+}
+
+.nameBanned {
+    border-color: variables.$red;
+    background-color: variables.$light_red;
+    color: variables.$red;
+}

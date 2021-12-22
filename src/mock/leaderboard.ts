@@ -3,6 +3,7 @@ export type LeaderBoardUser = {
     name: string,
     position: number,
     score: number,
+    is_banned?: boolean
 }
 
 export const LeaderBoardData: LeaderBoardUser[] = [
@@ -29,6 +30,7 @@ export const LeaderBoardData: LeaderBoardUser[] = [
         name: 'Jim Red',
         score: 132,
         position: 4,
+        is_banned: true
     },
     {
         key: '5',

@@ -6,7 +6,7 @@ import Container from "@/components/Container";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Password from "@/components/Password";
-import Nav from "@/components/InnerNavBar";
+import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 import {routes} from "@/config/routes/routes";
 
@@ -20,7 +20,7 @@ const SignIn:FC = () => {
         <Container>
             <Header/>
             <div className={styles.formContainer}>
-                <Nav currentRoute={`/#${routes.signIn.path}`}/>
+                <Nav currentPath={`/#${routes.signIn.path}`}/>
                 <Form
                     name='signIn'
                     onFinish={onFinish}

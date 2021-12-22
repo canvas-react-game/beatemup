@@ -4,7 +4,7 @@ import { Form } from 'antd';
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import Nav from "@/components/InnerNavBar";
+import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 
 import styles from './SignUp.module.scss';
@@ -12,13 +12,13 @@ import { useSignUp} from "./SignUp.helpers";
 import YandexSignIn from "./YandexSignIn";
 
 const SignUp:FC = () => {
-    const { currentRoute, fieldSet, onFinish, onFinishFailed } = useSignUp();
+    const { currentPath, fieldSet, onFinish, onFinishFailed } = useSignUp();
 
     return (
         <Container>
             <Header/>
             <div className={styles.formContainer}>
-                <Nav currentRoute={currentRoute}/>
+                <Nav currentPath={currentPath}/>
                 <Form
                     name='signUp'
                     onFinish={onFinish}

@@ -1,29 +1,46 @@
 import React, {FC} from 'react';
 
-import {routes} from "@/config/routes/routes";
+import {routes as appRoutes} from "@/config/routes/routes";
 
 import styles from './Header.module.scss';
 import NavBar from "../NavBar";
 
+<<<<<<< HEAD
 // todo
 const links = [
     { route: '1', label: 'Об игре'},
     { route: '2', label: 'Профиль'},
     { route: `#${routes.leaderBoard.path}`, label: 'Таблица лидеров'},
     { route: '4', label: 'Форум'},
+=======
+interface Props {
+    currentPath?: string;
+}
+
+// todo поправить при переходе на browserouter
+const routes = [
+    { path: `/#${appRoutes.about.path}`, label: 'Об игре'},
+    { path: `/#${appRoutes.profile.path}`, label: 'Профиль'},
+    { path: `/#${appRoutes.leaderboard.path}`, label: 'Таблица лидеров'},
+    { path: `/#${appRoutes.forum.path}`, label: 'Форум'},
+>>>>>>> sprint_1_pages
 ]
 
-const Header: FC = () => {
+const mainRoute = `/#${appRoutes.main.path}`;
+const signInRoute = `/#${appRoutes.signIn.path}`;
+const signUpRoute = `/#${appRoutes.signUp.path}`;
+
+const Header: FC<Props> = ({ currentPath }) => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <a href={`/#${routes.signIn.path}`}>Logo</a>
+                <a href={mainRoute}>Logo</a>
             </div>
             <div className={styles.routesContainer}>
-                <NavBar links={links} />
+                <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
-                    <a className={styles.signIn} href={`/#${routes.signIn.path}`}>Вход</a>
-                    <a className={styles.signUp} href={`/#${routes.signUp.path}`}>Регистрация</a>
+                    <a className={styles.signIn} href={signInRoute}>Вход</a>
+                    <a className={styles.signUp} href={signUpRoute}>Регистрация</a>
                 </div>
             </div>
         </div>

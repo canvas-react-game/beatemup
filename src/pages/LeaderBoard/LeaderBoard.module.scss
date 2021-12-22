@@ -5,7 +5,7 @@
 }
 
 .leaderBoardTable {
-    
+    // Бэкграунд и цвета в таблице
     :global(.ant-table) {
         background-color: transparent;
         color: white;
@@ -21,12 +21,63 @@
         th {
             color: white;
         }
+    }
+    // Ховер строки 
+    :global(.ant-table-row):hover {
+        color: variables.$primary;
     }        
-    
+    // Иконки сортировки
+    :global(.ant-table-column-sorter-up.active) {
+        color: variables.$primary;
+    }
+    :global(.ant-table-column-sorter-down.active) {
+        color: variables.$primary;
+    }
+    // Все по пагинации
+    :global(.ant-pagination-item-active) {
+        border-color: variables.$primary;
+        a {
+            color: variables.$primary;
+        }
+    }
+    :global(.ant-pagination-item:hover) {
+        border-color: variables.$primary;
+        a {
+            color: variables.$primary;
+        }
+    }
+    // Disabled
+    :global(.ant-pagination-disabled .ant-pagination-item-link) {
+        border-color: variables.$disbled;
+        color: variables.$disbled;
+    }
+    // Active
+    :global(
+        .ant-pagination-prev:focus-visible:not(.ant-pagination-disabled) 
+        .ant-pagination-item-link
+    ) {
+        border-color: variables.$primary;
+        color: variables.$primary;
+    }
+    :global(
+        .ant-pagination-next:focus-visible:not(.ant-pagination-disabled) 
+        .ant-pagination-item-link
+    ) {
+        border-color: variables.$primary;
+        color: variables.$primary;
+    }
+    :global(
+        .ant-pagination-prev:hover:not(.ant-pagination-disabled) 
+        .ant-pagination-item-link
+    ) {
+        border-color: variables.$primary;
+        color: variables.$primary;
+    }
+    :global(
+        .ant-pagination-next:hover:not(.ant-pagination-disabled) 
+        .ant-pagination-item-link 
+    ) {
+        border-color: variables.$primary;
+        color: variables.$primary;
+    }
 }
-
-// .leaderBoardTableRow {
-//     :hover {
-//         background-color: orange !important;
-//     }
-// }

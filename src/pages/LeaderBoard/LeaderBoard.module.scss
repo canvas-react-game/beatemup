@@ -2,9 +2,24 @@
 
 .leaderBoardContainer {
     user-select: none;
+    height: calc(100vh - #{variables.$navbar_height} - #{variables.$margin_bottom});
+    margin: 0;
 }
 
 .leaderBoardTable {
+    // Размеры
+    height: 100%;
+
+    :global(.ant-spin-nested-loading) {
+        height: 100%;
+    }
+    // Расположение таблицы и пагинации
+    :global(.ant-spin-container) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
     // Бэкграунд и цвета в таблице
     :global(.ant-table) {
         background-color: transparent;
@@ -34,6 +49,22 @@
         color: variables.$primary;
     }
     // Все по пагинации
+    // Background + colors
+    :global(.ant-pagination-item-link) {
+        background-color: transparent;
+        span { 
+            color: white;
+        }
+    }
+    :global(.ant-pagination-item) {
+        background-color: transparent;
+        font-size: inherit;
+        font-style: inherit;
+        font-family: inherit;
+        a {
+            color: white;
+        }
+    }
     :global(.ant-pagination-item-active) {
         border-color: variables.$primary;
         a {
@@ -50,6 +81,9 @@
     :global(.ant-pagination-disabled .ant-pagination-item-link) {
         border-color: variables.$disbled;
         color: variables.$disbled;
+        span { 
+            color: variables.$disbled;
+        }
     }
     // Active
     :global(

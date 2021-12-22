@@ -19,6 +19,20 @@ const columns: ColumnsType<LeaderBoardUser> = [
       dataIndex: 'name',
       sorter: (a: LeaderBoardUser, b: LeaderBoardUser) => a.name.length - b.name.length,
       sortDirections: ['descend'],
+      render: (value: string, item: LeaderBoardUser) => {
+        return (
+            <div 
+                className={
+                    styles.nameContainer + " " +
+                    (item.is_banned ? 
+                    styles.nameBanned : 
+                    styles.nameActive)
+                }
+            >
+                {value}
+            </div>
+        )
+      }
     },
     {
       title: 'Очки',

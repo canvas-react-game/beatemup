@@ -19,6 +19,7 @@ export class World {
     camera: Camera
 
     eventBus: EventBus
+    pause: boolean = false
 
     // События, от которых нужно отписаться
     private _keyDownListener: Listener
@@ -106,6 +107,10 @@ export class World {
         this.animate()
     }
 
+    setPause(pause: boolean) {
+        this.pause = pause;
+    }
+
     animate() {
         const renderer = this.renderer as Renderer
         const scene = this.scene as Scene
@@ -116,10 +121,12 @@ export class World {
             let now = performance.now()
             let dt = now - last
             last = now
-            renderer.prerender(scene, dt, now)
-            // TODO: Реализовать класс camera
-            // camera.update()
-            renderer.render(scene, camera)
+            if (!this.pause) {
+                renderer.prerender(scene, dt, now)
+                // TODO: Реализовать класс camera
+                // camera.update()
+                renderer.render(scene, camera)
+            }
             requestAnimationFrame(() => render())
         }
 

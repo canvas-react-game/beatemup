@@ -8,16 +8,28 @@ import Menu from './Menu';
 import styles from './Game.module.scss';
 
 const Game: FC = () => {
-    const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const [active, setActive] = useState(true);
+    const [pause, setPause] = useState(false);
+    const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
 
+    const world = new World();
+
+    const callMenu = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            setActive(true);
+            setPause(true);
+            world.setPause(true);
+        }
+    }
+
     useEffect(() => {
-        const world = new World()
-        world.init(canvasRef.current)
+        world.init(canvasRef.current);
+        document.addEventListener('keydown', callMenu);
 
         return () => {
             world.destroy()
+            // TODO removeListener
         }
     }, []);
 
@@ -26,12 +38,27 @@ const Game: FC = () => {
         history.push(`/#${routes.main.path}`);
     };
 
-    const onStart = () => setActive(false);
+    const onStart = () => {
+        setPause(false);
+        setActive(false);
+    }
+
+    const onResume = () => {
+        setPause(false);
+        setActive(false);
+        world.setPause(false)
+    }
 
     return (
         <>
             <canvas className={styles.game} ref={canvasRef} />
-            <Menu active={active} onClose={onClose} onStart={onStart} />
+            <Menu
+                active={active}
+                onClose={onClose}
+                onStart={onStart}
+                isPause={pause}
+                onResume={onResume}
+            />
         </>
     )
 };

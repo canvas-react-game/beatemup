@@ -1,0 +1,32 @@
+@use './src/styles/variables.module.scss' as variables;
+
+.leaderBoardContainer {
+    user-select: none;
+}
+
+.leaderBoardTable {
+    
+    :global(.ant-table) {
+        background-color: transparent;
+        color: white;
+    }
+    :global(.ant-table-cell) {
+        background-color: transparent;
+    }
+    :global(th.ant-table-column-sort) {
+        background-color: transparent;
+    }
+    :global(.ant-table-thead) {
+        background-color: variables.$secondary;
+        th {
+            color: white;
+        }
+    }        
+    
+}
+
+// .leaderBoardTableRow {
+//     :hover {
+//         background-color: orange !important;
+//     }
+// }

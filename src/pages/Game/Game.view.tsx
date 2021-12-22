@@ -44,9 +44,9 @@ const Game: FC = () => {
     }
 
     const onResume = () => {
+        world.setPause(false);
         setPause(false);
         setActive(false);
-        world.setPause(false)
     }
 
     return (

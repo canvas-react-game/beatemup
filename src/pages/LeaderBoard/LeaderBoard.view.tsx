@@ -2,14 +2,16 @@ import Header from "@/components/Header";
 import Container from "@/components/Container";
 import React, { FC } from "react";
 import {Table} from "antd"
-import { ColumnsType } from 'antd/es/table';
+import { ColumnsType, TablePaginationConfig } from 'antd/es/table';
 
 import styles from "./LeaderBoard.module.scss"
 import { LeaderBoardData, LeaderBoardUser } from "@/mock/leaderboard";
+import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
+// Колонки таблицы
 const columns: ColumnsType<LeaderBoardUser> = [
     {
-      title: 'N',
+      title: 'Место',
       dataIndex: 'position',
     },
     {
@@ -26,10 +28,15 @@ const columns: ColumnsType<LeaderBoardUser> = [
     },
 ];
   
-
-  
-function onChange(pagination: any, filters: any, sorter: any, extra: any) {
-console.log('params', pagination, filters, sorter, extra);
+// Дефолтный колбэк при сортировке/пагинации/фильтрации 
+const onChange = (
+        pagination: TablePaginationConfig, 
+        filters: Record<string, FilterValue | null>, 
+        sorter: SorterResult<LeaderBoardUser> | SorterResult<any>[], 
+        extra: TableCurrentDataSource<any>
+    ) => 
+    {
+        console.log('params', pagination, filters, sorter, extra);
 }
 
 const LeaderBoard: FC<{}> = () => {
@@ -40,8 +47,8 @@ const LeaderBoard: FC<{}> = () => {
             <div className={styles.leaderBoardContainer}>
                 <Table 
                     className={styles.leaderBoardTable} 
-                    rowClassName={styles.leaderBoardTableRow}
-                    columns={columns} dataSource={LeaderBoardData} 
+                    columns={columns} 
+                    dataSource={LeaderBoardData} 
                     onChange={onChange} 
                 />
             </div>

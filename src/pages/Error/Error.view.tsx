@@ -1,18 +1,20 @@
-import React, {FC} from 'react';
-import {Typography} from "antd";
+import React, { FC } from "react"
+import { Typography } from "antd"
 
-import Container from "@/components/Container";
-import {routes} from '@/config/routes/routes';
+import Container from "@/components/Container"
+import { routes } from "@/config/routes/routes"
 
-import styles from './Error.module.scss';
-import {ErrorInfo} from './Error.helpers';
+import styles from "./Error.module.scss"
+import { ErrorInfo } from "./Error.helpers"
 
 interface Props {
-    status: '404' | '403' | '500'
+    status: "404" | "403" | "500"
 }
 
-const Error: FC<Props> = ({ status = '404' }) => {
-    const { container, errorContainer, title, info, back, notFound} = styles;
+const Error: FC<Props> = ({ status = "404" }) => {
+    const {
+        container, errorContainer, title, info, back, notFound,
+    } = styles
 
     return (
         <Container>
@@ -25,7 +27,7 @@ const Error: FC<Props> = ({ status = '404' }) => {
                 <div className={notFound}/>
             </div>
         </Container>
-    );
-};
+    )
+}
 
-export default Error;
+export default Error

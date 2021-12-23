@@ -1,17 +1,15 @@
-import React, {FC} from 'react';
+import React, { FC } from "react"
 
-import Container from "@/components/Container";
-import Header from "@/components/Header";
-import {routes} from '@/config/routes/routes';
+import Container from "@/components/Container"
+import Header from "@/components/Header"
+import { routes } from "@/config/routes/routes"
 
-const currentPath = `/#${routes.profile.path}`;
+const currentPath = `/#${routes.profile.path}`
 
-const Profile: FC = () => {
-    return (
-        <Container>
-            <Header currentPath={currentPath} />
-        </Container>
-    );
-};
+const Profile: FC = () => (
+    <Container>
+        <Header currentPath={currentPath} />
+    </Container>
+)
 
-export default Profile;
+export default Profile

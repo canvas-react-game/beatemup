@@ -20,7 +20,9 @@
       "linebreak-style": [0],
       "eol-last": [0],
       "import/prefer-default-export": [0],
+      "import/extensions": [0],
       "no-restricted-globals": [0],
+      "no-restricted-exports": [0],
       "no-restricted-syntax": [0],
       "no-underscore-dangle": [0],
       "prefer-destructuring": [1],
@@ -40,7 +42,7 @@
         {
           "selector": "variableLike",
           "leadingUnderscore": "allow",
-          "format": ["camelCase", "UPPER_CASE"]
+          "format": ["camelCase", "PascalCase", "UPPER_CASE"]
         },
         {
           "selector": "typeLike",

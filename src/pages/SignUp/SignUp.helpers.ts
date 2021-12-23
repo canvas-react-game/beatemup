@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes/routes"
+import { routes } from "@/config/routes/routes";
 
 enum SignUpFieldNames {
     surname = "surname",
@@ -19,7 +19,7 @@ interface SignUpValues {
 }
 
 export const useSignUp = () => {
-    const currentPath = `/#${routes.signUp.path}`
+    const currentPath = `/#${routes.signUp.path}`;
 
     const fieldSet = [
         {
@@ -53,16 +53,16 @@ export const useSignUp = () => {
             placeholder: "Пароль",
             type: "password",
         },
-    ]
+    ];
 
-    const onFinish = (values: SignUpValues) => console.log(values)
+    const onFinish = (values: SignUpValues) => console.log(values);
 
-    const onFinishFailed = (errorInfo: any) => console.log("Failed:", errorInfo)
+    const onFinishFailed = (errorInfo: any) => console.log("Failed:", errorInfo);
 
     return {
         currentPath,
         fieldSet,
         onFinish,
         onFinishFailed,
-    }
-}
+    };
+};

@@ -1,10 +1,10 @@
-import React, { FC } from "react"
-import "antd/dist/antd.css"
+import React, { FC } from "react";
+import "antd/dist/antd.css";
 
-import ErrorBoundary from "@/components/ErrorBoundary"
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-import Router from "../Router"
-import styles from "./App.module.scss"
+import Router from "../Router";
+import styles from "./App.module.scss";
 
 const App: FC = () => (
     <div className={styles.App}>
@@ -12,5 +12,5 @@ const App: FC = () => (
             <Router/>
         </ErrorBoundary>
     </div>
-)
-export default App
+);
+export default App;

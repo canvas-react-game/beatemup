@@ -11,12 +11,15 @@
     "stylelint": "node_modules/.bin/stylelint ./src --fix"
   },
   "husky": {
-    "pre-push": "npm run eslint"
+    "hooks": {
+      "pre-push": "npm run eslint"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-router": "^5.1.17",

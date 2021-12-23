@@ -8,7 +8,8 @@
     "start": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "eslint": "node_modules/.bin/eslint ./src --fix",
-    "stylelint": "node_modules/.bin/stylelint ./src --fix"
+    "stylelint": "node_modules/.bin/stylelint ./src --fix",
+    "husky": "node_modules/.bin/husky"
   },
   "keywords": [],
   "author": "",

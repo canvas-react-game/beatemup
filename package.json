@@ -9,6 +9,7 @@
     "build": "webpack --mode production",
     "eslint": "node_modules/.bin/eslint ./src --fix",
     "stylelint": "node_modules/.bin/stylelint ./src --fix",
+    "prepush": "npm-run-all eslint stylelint",
     "husky": "node_modules/.bin/husky"
   },
   "keywords": [],

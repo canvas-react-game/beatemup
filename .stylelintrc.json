@@ -3,11 +3,25 @@
     "rules": {
       "color-hex-case": "lower",
       "selector-class-pattern": null,
-      "value-no-vendor-prefix": null
+      "value-no-vendor-prefix": null,
+      "no-descending-specificity": null,
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": ["use"]
+        }
+      ],
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": ["global"]
+        }
+      ]
     },
     "ignoreFiles": [
       "dist/*",
       "**/*.ts",
+      "**/*.tsx",
       "**/*.js",
       "**/*.html",
       "**/*.toml",
@@ -19,7 +33,7 @@
     "overrides": [
         {
           "files": ["**/*.scss"],
-          "customSyntax": "postcss"
+          "customSyntax": "postcss-scss"
         }
     ]
 } 

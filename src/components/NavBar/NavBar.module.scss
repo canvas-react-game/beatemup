@@ -1,4 +1,4 @@
-@use './src/styles/variables.module.scss' as variables;
+@use "./src/styles/variables.module.scss" as variables;
 
 .ulContainer {
   display: flex;
@@ -11,9 +11,11 @@
   font-size: 14px;
   padding: 0;
   margin: 0;
+
   > li {
     margin: 12px;
   }
+
   > li > a {
     padding: 4px;
   }
@@ -24,9 +26,9 @@
     color: variables.$primary;
     border-bottom: 2px solid;
   }
+
   > a:hover {
     color: darken(variables.$primary, 10%);
-
   }
 }
 
@@ -35,6 +37,7 @@
     color: white;
     border: none;
   }
+
   > a:hover {
     color: darken(variables.$primary, 10%);
     border-bottom: 2px solid;

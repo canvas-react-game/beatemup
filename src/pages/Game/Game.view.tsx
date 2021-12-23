@@ -10,10 +10,9 @@ import styles from './Game.module.scss';
 const Game: FC = () => {
     const [active, setActive] = useState(true);
     const [pause, setPause] = useState(false);
+    const [world] = useState(new World());
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
-
-    const world = new World();
 
     const callMenu = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
@@ -24,21 +23,17 @@ const Game: FC = () => {
     }
 
     useEffect(() => {
-        world.init(canvasRef.current);
         document.addEventListener('keydown', callMenu);
-
-        return () => {
-            world.destroy()
-            // TODO removeListener
-        }
     }, []);
 
     const onClose = () => {
         setActive(false);
+        world.destroy()
         history.push(`/#${routes.main.path}`);
     };
 
     const onStart = () => {
+        world.init(canvasRef.current);
         setPause(false);
         setActive(false);
     }

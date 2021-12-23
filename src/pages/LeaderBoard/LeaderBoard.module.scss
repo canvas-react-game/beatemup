@@ -79,10 +79,10 @@
     }
     // Disabled
     :global(.ant-pagination-disabled .ant-pagination-item-link) {
-        border-color: variables.$disbled;
-        color: variables.$disbled;
+        border-color: variables.$disabled;
+        color: variables.$disabled;
         span { 
-            color: variables.$disbled;
+            color: variables.$disabled;
         }
     }
     // Active

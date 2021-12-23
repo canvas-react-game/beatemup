@@ -1,9 +1,9 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 
-import { routes as appRoutes } from "@/config/routes/routes"
+import { routes as appRoutes } from "@/config/routes/routes";
 
-import styles from "./Header.module.scss"
-import NavBar from "../NavBar"
+import styles from "./Header.module.scss";
+import NavBar from "../NavBar";
 
 interface Props {
     currentPath?: string;
@@ -15,11 +15,11 @@ const routes = [
     { path: `/#${appRoutes.profile.path}`, label: "Профиль" },
     { path: `/#${appRoutes.leaderboard.path}`, label: "Таблица лидеров" },
     { path: `/#${appRoutes.forum.path}`, label: "Форум" },
-]
+];
 
-const mainRoute = `/#${appRoutes.main.path}`
-const signInRoute = `/#${appRoutes.signIn.path}`
-const signUpRoute = `/#${appRoutes.signUp.path}`
+const mainRoute = `/#${appRoutes.main.path}`;
+const signInRoute = `/#${appRoutes.signIn.path}`;
+const signUpRoute = `/#${appRoutes.signUp.path}`;
 
 const Header: FC<Props> = ({ currentPath }) => (
     <div className={styles.container}>
@@ -34,6 +34,6 @@ const Header: FC<Props> = ({ currentPath }) => (
             </div>
         </div>
     </div>
-)
+);
 
-export default Header
+export default Header;

@@ -1,6 +1,6 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 
-import styles from "./NavBar.module.scss"
+import styles from "./NavBar.module.scss";
 
 export interface Route {
     path: string;
@@ -28,6 +28,6 @@ const NavBar: FC<Props> = ({ currentPath, routes }) => (
             }
         </ul>
     </div>
-)
+);
 
-export default NavBar
+export default NavBar;

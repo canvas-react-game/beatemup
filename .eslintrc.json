@@ -9,7 +9,7 @@
     ],
     "parserOptions": {
          "project": "./tsconfig.json",
-         "ecmaVersion": 13,
+         "ecmaVersion": "latest",
          "sourceType": "module"
     },
     "rules": {
@@ -30,7 +30,7 @@
       "import/no-cycle": [0],
       "no-param-reassign": [0],
       "max-classes-per-file": [0],
-      "@typescript-eslint/semi": [2, "never"],
+      "@typescript-eslint/semi": [2, "always"],
       "@typescript-eslint/quotes": [2, "double"],
       "@typescript-eslint/eol-last": [0],
       "@typescript-eslint/lines-between-class-members": [0],

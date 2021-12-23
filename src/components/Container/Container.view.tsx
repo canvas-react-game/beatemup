@@ -1,11 +1,11 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 
-import styles from "./Container.module.scss"
+import styles from "./Container.module.scss";
 
 const Container: FC = ({ children }) => (
     <div className={styles.container}>
         {children}
     </div>
-)
+);
 
-export default Container
+export default Container;

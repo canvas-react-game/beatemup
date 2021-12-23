@@ -1,11 +1,11 @@
 type Route = {
     path: string,
     checkAccess: boolean
-}
+};
 
 type Routes = {
     [key: string]: Route;
-}
+};
 
 export const routes: Routes = {
     main: {
@@ -36,9 +36,9 @@ export const routes: Routes = {
         path: "/about",
         checkAccess: true,
     },
-}
+};
 
 export const findRoute = (path: Route["path"]): Route | null => {
-    const route = Object.values(routes).find((route) => route.path === path)
-    return route ?? null
-}
+    const route = Object.values(routes).find((route) => route.path === path);
+    return route ?? null;
+};

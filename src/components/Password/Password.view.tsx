@@ -1,13 +1,13 @@
-import React, { FC } from "react"
-import { Input as CustomInput, InputProps } from "antd"
+import React, { FC } from "react";
+import { Input as CustomInput, InputProps } from "antd";
 
-import { LockOutlined } from "@ant-design/icons"
+import { LockOutlined } from "@ant-design/icons";
 
-import styles from "./Password.module.scss"
+import styles from "./Password.module.scss";
 
 interface Props extends InputProps {}
 
-const { Password } = CustomInput
+const { Password } = CustomInput;
 
 const CustomPassword:FC<Props> = (props) => (
     <Password
@@ -16,6 +16,6 @@ const CustomPassword:FC<Props> = (props) => (
         iconRender={() => false}
         {...props}
     />
-)
+);
 
-export default CustomPassword
+export default CustomPassword;

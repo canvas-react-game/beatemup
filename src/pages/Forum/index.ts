@@ -1,1 +1,1 @@
-export { default } from "./Forum.view"
+export { default } from "./Forum.view";

@@ -41,6 +41,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "path": "^0.12.7",
+    "postcss-scss": "^4.0.2",
     "sass": "^1.45.0",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",

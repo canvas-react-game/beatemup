@@ -10,11 +10,6 @@
     "eslint": "node_modules/.bin/eslint ./src --fix",
     "stylelint": "node_modules/.bin/stylelint ./src --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run eslint"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

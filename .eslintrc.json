@@ -15,7 +15,7 @@
     "rules": {
       "max-len": [2, 100],
       "max-params": [2, 4],
-      "semi": [2, "never"],
+      "semi": [2, "always"],
       "quotes": [2, "double"],
       "linebreak-style": [0],
       "eol-last": [0],

@@ -1,0 +1,21 @@
+# top-most EditorConfig file
+root = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js}]
+charset = utf-8
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab
+
+# Indentation override for all JS
+[**/**.js]
+indent_style = space
+indent_size = 2
+
+# Matches the exact files either package.json
+[{package.json}]
+indent_style = space
+indent_size = 2

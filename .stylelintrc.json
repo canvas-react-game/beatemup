@@ -1,0 +1,25 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "color-hex-case": "lower",
+      "selector-class-pattern": null,
+      "value-no-vendor-prefix": null
+    },
+    "ignoreFiles": [
+      "dist/*",
+      "**/*.ts",
+      "**/*.js",
+      "**/*.html",
+      "**/*.toml",
+      "**/*.json",
+      "**/*.md",
+      "**/*.jpg",
+      "**/*.png"
+    ],
+    "overrides": [
+        {
+          "files": ["**/*.scss"],
+          "customSyntax": "postcss"
+        }
+    ]
+} 

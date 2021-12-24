@@ -8,7 +8,7 @@ export class RectangleGeometry extends Geometry {
     height: number
 
     constructor(width: number, height: number) {
-        super({ geomType: GeometryTypes.rectangle })
+        super({ geomType: GeometryTypes.Rectangle })
 
         this.width = width
         this.height = height

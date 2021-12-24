@@ -42,35 +42,35 @@ export class Player extends Object2D implements Collidable {
     init() {
 
         this.eventBus.on(
-            EventTypes.arrowLeftDown, 
+            EventTypes.ArrowLeftDown, 
             () => this.moveState.isMovingLeft = true
         )
         this.eventBus.on(
-            EventTypes.arrowBottomDown, 
+            EventTypes.ArrowBottomDown, 
             () => this.moveState.isMovingDown = true
         )
         this.eventBus.on(
-            EventTypes.arrowTopDown, 
+            EventTypes.ArrowTopDown, 
             () => this.moveState.isMovingTop = true
         )
         this.eventBus.on(
-            EventTypes.arrowRightDown, 
+            EventTypes.ArrowRightDown, 
             () => this.moveState.isMovingRight = true
         )
         this.eventBus.on(
-            EventTypes.arrowLeftUp, 
+            EventTypes.ArrowLeftUp, 
             () => this.moveState.isMovingLeft = false
         )
         this.eventBus.on(
-            EventTypes.arrowTopUp, 
+            EventTypes.ArrowTopUp, 
             () => this.moveState.isMovingTop = false
         )
         this.eventBus.on(
-            EventTypes.arrowBottomUp,
+            EventTypes.ArrowBottomUp,
             () => this.moveState.isMovingDown = false 
         )
         this.eventBus.on(
-            EventTypes.arrowRightUp, 
+            EventTypes.ArrowRightUp, 
             () => this.moveState.isMovingRight = false
         )        
     }

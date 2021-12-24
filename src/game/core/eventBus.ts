@@ -1,14 +1,14 @@
 
 // Список всех событий в игре
 export enum EventTypes {
-    arrowLeftDown = "arrowLeftDown",
-    arrowTopDown = "arrowTopDown",
-    arrowBottomDown = "arrowBottomDown",
-    arrowRightDown = "arrowRightDown",
-    arrowLeftUp = "arrowLeftUp",
-    arrowTopUp = "arrowTopUp",
-    arrowBottomUp = "arrowBottomUp",
-    arrowRightUp = "arrowRightUp",
+    ArrowLeftDown = "ArrowLeftDown",
+    ArrowTopDown = "ArrowTopDown",
+    ArrowBottomDown = "ArrowBottomDown",
+    ArrowRightDown = "ArrowRightDown",
+    ArrowLeftUp = "ArrowLeftUp",
+    ArrowTopUp = "ArrowTopUp",
+    ArrowBottomUp = "ArrowBottomUp",
+    ArrowRightUp = "ArrowRightUp",
 }
 
 export enum KeyboardEvents {

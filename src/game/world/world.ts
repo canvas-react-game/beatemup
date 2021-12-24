@@ -139,16 +139,16 @@ export class World {
         this._keyDownListener = (e: KeyboardEvent) => {
             switch(e.key) {
                 case KeyboardEvents.ArrowDown:
-                    eventBus.emit(EventTypes.arrowBottomDown)
+                    eventBus.emit(EventTypes.ArrowBottomDown)
                     break
                 case KeyboardEvents.ArrowLeft:
-                    eventBus.emit(EventTypes.arrowLeftDown)
+                    eventBus.emit(EventTypes.ArrowLeftDown)
                     break
                 case KeyboardEvents.ArrowRight:
-                    eventBus.emit(EventTypes.arrowRightDown)
+                    eventBus.emit(EventTypes.ArrowRightDown)
                     break
                 case KeyboardEvents.ArrowUp:
-                    eventBus.emit(EventTypes.arrowTopDown)   
+                    eventBus.emit(EventTypes.ArrowTopDown)   
                 default:
                     break                                                         
             }
@@ -157,16 +157,16 @@ export class World {
         this._keyUpListener = (e: KeyboardEvent) => {
             switch(e.key) {
                 case KeyboardEvents.ArrowDown:
-                    eventBus.emit(EventTypes.arrowBottomUp)
+                    eventBus.emit(EventTypes.ArrowBottomUp)
                     break
                 case KeyboardEvents.ArrowLeft:
-                    eventBus.emit(EventTypes.arrowLeftUp)
+                    eventBus.emit(EventTypes.ArrowLeftUp)
                     break
                 case KeyboardEvents.ArrowRight:
-                    eventBus.emit(EventTypes.arrowRightUp)
+                    eventBus.emit(EventTypes.ArrowRightUp)
                     break
                 case KeyboardEvents.ArrowUp:
-                    eventBus.emit(EventTypes.arrowTopUp)     
+                    eventBus.emit(EventTypes.ArrowTopUp)     
                 default:
                     break                                                       
             }            

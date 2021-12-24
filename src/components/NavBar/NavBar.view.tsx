@@ -13,7 +13,7 @@ interface Props {
 }
 
 const NavBar: FC<Props> = ({ currentPath, routes }) => (
-    <div className={styles.ulContainer}>
+    <nav className={styles.ulContainer}>
         <ul className={styles.ul}>
             {routes.map((route) => <li
                 className={
@@ -27,7 +27,7 @@ const NavBar: FC<Props> = ({ currentPath, routes }) => (
             </li>)
             }
         </ul>
-    </div>
+    </nav>
 );
 
 export default NavBar;

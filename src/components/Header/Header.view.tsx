@@ -5,14 +5,6 @@ import {routes as appRoutes} from "@/config/routes/routes";
 import styles from './Header.module.scss';
 import NavBar from "../NavBar";
 
-<<<<<<< HEAD
-// todo
-const links = [
-    { route: '1', label: 'Об игре'},
-    { route: '2', label: 'Профиль'},
-    { route: `#${routes.leaderBoard.path}`, label: 'Таблица лидеров'},
-    { route: '4', label: 'Форум'},
-=======
 interface Props {
     currentPath?: string;
 }
@@ -23,7 +15,6 @@ const routes = [
     { path: `/#${appRoutes.profile.path}`, label: 'Профиль'},
     { path: `/#${appRoutes.leaderboard.path}`, label: 'Таблица лидеров'},
     { path: `/#${appRoutes.forum.path}`, label: 'Форум'},
->>>>>>> sprint_1_pages
 ]
 
 const mainRoute = `/#${appRoutes.main.path}`;

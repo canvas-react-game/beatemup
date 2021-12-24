@@ -1,26 +1,24 @@
 @use "./src/styles/variables.module.scss" as variables;
 
-
 .ant-input {
   background: none;
   color: white;
 
   &::selection {
-      background: variables.$primary;
+    background: variables.$primary;
   }
 
   &:hover {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
-  
+
   &:focus {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
 
   &:not(:focus) {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
-
 }
 
 .ant-input-affix-wrapper {
@@ -41,17 +39,16 @@
   }
 
   &:not(.ant-input-affix-wrapper-disabled):hover {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
 
   &:not(.ant-input-affix-wrapper-disabled):focus {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
 
   &:not(.ant-input-affix-wrapper-disabled):not(:focus) {
-      border-color: variables.$primary;
+    border-color: variables.$primary;
   }
-
 }
 
 .ant-form-item-has-error {
@@ -61,19 +58,10 @@
 }
 
 // Глобальные стили (из antd)
-.ant-form-item-has-error 
-:not(.ant-input-disabled):not(.ant-input-borderless).ant-input, 
-
-.ant-form-item-has-error 
-:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
-
-.ant-form-item-has-error 
-:not(.ant-input-disabled)
-:not(.ant-input-borderless).ant-input:hover, 
-
-.ant-form-item-has-error 
-:not(.ant-input-affix-wrapper-disabled)
-:not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-    background-color: transparent !important;
-    border-color: #ff4d4f;
+.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
+.ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
+.ant-form-item-has-error :not(.ant-input-disabled) :not(.ant-input-borderless).ant-input:hover,
+.ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled) :not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+  background-color: transparent !important;
+  border-color: #ff4d4f;
 }

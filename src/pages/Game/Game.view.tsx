@@ -1,25 +1,35 @@
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 
 import {useGame} from "@/pages/Game/Game.helpers";
 
 import Menu from './Menu';
 import styles from './Game.module.scss';
+import { useMountEffect } from "@/hooks/useMountEffect";
+import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 
 const Game: FC = () => {
-   const { active, pause, canvasRef, onStart, onResume, onClose, setUpPauseButton } = useGame();
+   const {
+       isActive, isPaused, canvasRef, 
+       onStart, onResume, onClose, 
+       onUnmount, setUpPauseButton 
+    } = useGame();
 
-    useEffect(() => {
-        setUpPauseButton();
-    }, []);
+    useMountEffect(() => {
+        setUpPauseButton()
+    })
+
+    useUnmountEffect(() => {
+        onUnmount()
+    })
 
     return (
         <>
             <canvas className={styles.game} ref={canvasRef} />
             <Menu
-                active={active}
+                isActive={isActive}
                 onClose={onClose}
                 onStart={onStart}
-                isPause={pause}
+                isPaused={isPaused}
                 onResume={onResume}
             />
         </>

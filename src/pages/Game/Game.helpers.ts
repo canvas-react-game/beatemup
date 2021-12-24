@@ -1,53 +1,58 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import {useHistory} from "react-router-dom";
 
 import {World} from "@/game/world/world";
 import {routes} from "@/config/routes/routes";
 
 export const useGame = () => {
-    const [active, setActive] = useState(true);
-    const [pause, setPause] = useState(false);
+    const [isActive, setActive] = useState(true);
+    const [isPaused, setPause] = useState(false);
     const [world] = useState(new World());
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
 
-    const callMenu = (e: KeyboardEvent) => {
+    const callMenu = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             setActive(true);
             setPause(true);
             world.setPause(true);
         }
-    }
+    }, [])
 
-    const setUpPauseButton = () => {
+    const setUpPauseButton = useCallback(() => {
         document.addEventListener('keydown', callMenu);
-    }
+    }, [])
 
-    const onClose = () => {
+    const onClose = useCallback(() => {
         setActive(false);
-        world.destroy()
         history.push(`/#${routes.main.path}`);
-    };
+    }, [])
 
-    const onStart = () => {
+    const onStart = useCallback(() => {
         world.init(canvasRef.current);
         setPause(false);
         setActive(false);
-    }
+    }, [])
 
-    const onResume = () => {
+    const onResume = useCallback(() => {
         world.setPause(false);
         setPause(false);
         setActive(false);
-    }
+    }, [])
+
+    const onUnmount = useCallback(() => {
+        world.destroy()
+        document.removeEventListener('keydown', callMenu);
+    }, [])
 
     return {
-        active,
-        pause,
+        isActive,
+        isPaused,
         canvasRef,
         onStart,
         onResume,
         onClose,
+        onUnmount,
         setUpPauseButton
     }
 }

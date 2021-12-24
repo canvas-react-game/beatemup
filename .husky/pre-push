@@ -3,4 +3,4 @@
 
 npm run prepush
 git add .
-git commit -m "lint auto commit"
+git diff-index --quiet HEAD || git commit -m "lint auto commit"

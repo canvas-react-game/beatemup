@@ -2,7 +2,6 @@ import { Vector2D } from "../utils/vector"
 import { Box2 } from "../utils/box2"
 import { Circle } from "../utils/circle"
 
-let _geometryId = 0
 
 export enum GeometryTypes {
     Rectangle = "Rectangle",
@@ -13,6 +12,14 @@ export enum GeometryTypes {
 type GeometryProps = {
     geomType: string, // GeometryTypes
 }
+
+// Get unique geometry id (ssr)
+const getGeomId = function() {
+    let geometryId = 0
+    return () => {
+        return geometryId ++
+    }
+}()
 
 export class Geometry {
 
@@ -29,7 +36,7 @@ export class Geometry {
 
     constructor(props: GeometryProps) {
 
-        this.id = _geometryId ++
+        this.id = getGeomId()
         this.name = ""
         this.type = props.geomType
 

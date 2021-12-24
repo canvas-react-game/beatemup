@@ -30,6 +30,7 @@ export class World {
     }
 
     init(canvas: HTMLCanvasElement | null) {
+        
         this.canvas = canvas
         this.eventBus = new EventBus()
         

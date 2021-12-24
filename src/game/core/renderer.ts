@@ -56,7 +56,7 @@ export class Renderer {
         // Отрисовка в цикле всех объектов в сцене
         for(let obj of scene.objects) {
             switch(obj.geometry.type) {
-                case GeometryTypes.rectangle:
+                case GeometryTypes.Rectangle:
                     this._drawRectangle(obj)
                     break
                 default:

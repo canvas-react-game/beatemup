@@ -5,9 +5,9 @@ import { Circle } from "../utils/circle"
 let _geometryId = 0
 
 export enum GeometryTypes {
-    rectangle = "rectangle",
-    circle = "circle",
-    shape = "shape", // Свободная форма
+    Rectangle = "Rectangle",
+    Circle = "Circle",
+    Shape = "Shape", // Свободная форма
 }
 
 type GeometryProps = {

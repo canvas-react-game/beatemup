@@ -2,8 +2,9 @@ FROM node:17.3-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY dist /app/dist
+COPY server.js /app/server.js
 
-RUN npm i
+RUN npm i express express-rate-limit
 
-CMD npm start
+CMD node server.js

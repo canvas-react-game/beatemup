@@ -64,6 +64,7 @@ const LeaderBoard: FC<{}> = () => {
                     columns={columns} 
                     dataSource={LeaderBoardData} 
                     onChange={onChange} 
+                    showSorterTooltip={false}
                 />
             </div>
         </Container>

@@ -1,0 +1,61 @@
+@use "./src/styles/variables.module.scss" as variables;
+
+
+  .ant-input {
+    background: none;
+    color: white;
+
+    &::selection {
+        background: variables.$primary;
+    }
+
+    &:hover {
+        border-color: variables.$primary;
+    }
+    
+    &:focus {
+        border-color: variables.$primary;
+    }
+
+    &:not(:focus) {
+        border-color: variables.$primary;
+    }
+
+  }
+
+  .ant-input-affix-wrapper {
+    background: none;
+    color: variables.$primary;
+
+    > input {
+      background: none;
+      color: white;
+    }
+
+    > input::selection {
+      background: variables.$primary;
+    }
+
+    > input:-webkit-autofill {
+      background: none;
+    }
+
+    &:not(.ant-input-affix-wrapper-disabled):hover {
+        border-color: variables.$primary;
+    }
+
+    &:not(.ant-input-affix-wrapper-disabled):focus {
+        border-color: variables.$primary;
+    }
+
+    &:not(.ant-input-affix-wrapper-disabled):not(:focus) {
+        border-color: variables.$primary;
+    }
+
+  }
+
+  .ant-form-item-has-error {
+    > div > div > div > span {
+      background: none;
+    }
+  }

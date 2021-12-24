@@ -1,9 +1,7 @@
 import React, { FC } from "react";
-import { Form } from "antd";
+import { Input, Button, Form } from "antd";
 
 import Container from "@/components/Container";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
 import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 

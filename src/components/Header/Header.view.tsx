@@ -18,22 +18,16 @@ const routes = [
 ];
 
 const mainRoute = `/#${appRoutes.main.path}`;
-const signInRoute = `/#${appRoutes.signIn.path}`;
-const signUpRoute = `/#${appRoutes.signUp.path}`;
 
 const Header: FC<Props> = ({ currentPath }) => (
-    <div className={styles.container}>
+    <header className={styles.container}>
         <div className={styles.logo}>
             <a href={mainRoute}>Logo</a>
         </div>
         <div className={styles.routesContainer}>
             <NavBar currentPath={currentPath} routes={routes} />
-            <div className={styles.buttonContainer}>
-                <a className={styles.signIn} href={signInRoute}>Вход</a>
-                <a className={styles.signUp} href={signUpRoute}>Регистрация</a>
-            </div>
         </div>
-    </div>
+    </header>
 );
 
 export default Header;

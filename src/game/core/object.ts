@@ -7,7 +7,13 @@ export type Object2DProps = {
     color?: Color
 }
 
-let _object2DId = 0
+// Get unique geometry id (ssr)
+const getObject2DId = function() {
+    let objectId = 0
+    return () => {
+        return objectId ++
+    }
+}()
 
 export class Object2D {
 
@@ -34,7 +40,7 @@ export class Object2D {
 
     constructor(props: Object2DProps) {
         // Задаем дефолтные значения
-        this.id = _object2DId ++
+        this.id = getObject2DId()
         this.name = ""
         this.positon = new Vector2D(0, 0)
         this.visible = true

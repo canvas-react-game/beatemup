@@ -9,7 +9,6 @@ export enum Method {
 const root  = 'https://ya-praktikum.tech/api/v2';
 
 class APIService {
-    // todo реализовать сервис отлова ошибок апи
     async request(method: Method, data = {}, url: string) {
         const response = await fetch(`${root}/${url}`, {
             method,
@@ -21,7 +20,7 @@ class APIService {
             },
             body: JSON.stringify(data)
         });
-        return await response.json() ?? null;
+        return await response ?? null;
     }
 }
 

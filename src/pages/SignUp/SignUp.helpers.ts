@@ -1,8 +1,7 @@
 import {useHistory} from "react-router";
-import { notification } from 'antd';
 
 import {routes} from "@/config/routes/routes";
-import api, {SignUpData} from '@/api/Auth';
+import api, {SignUpData} from '@/api/SignUp';
 
 enum SignUpFieldNames {
     secondName = 'second_name',
@@ -12,10 +11,6 @@ enum SignUpFieldNames {
     login = 'login',
     password = 'password',
 }
-
-const success = () =>  notification.success({ message: 'Регистрация прошла успешно' });
-
-const error = () => notification.error({ message: 'Отправленные данные не корректны' });
 
 export const useSignUp = () => {
     const history = useHistory();
@@ -35,12 +30,9 @@ export const useSignUp = () => {
 
     const onFinish = async (values: SignUpData) => {
         const response = await api.signUp(values);
+        console.log(response);
         if (response) {
             history.push(routes.signIn.path);
-            success();
-        } else {
-            // todo реализовать сервис отлова ошибок апи
-            error();
         }
     }
 

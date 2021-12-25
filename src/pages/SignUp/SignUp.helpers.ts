@@ -1,7 +1,7 @@
 import {useHistory} from "react-router";
 
 import {routes} from "@/config/routes/routes";
-import api, {SignUpData} from '@/api/SignUp';
+import api, {SignUpData} from '@/api/Auth';
 
 enum SignUpFieldNames {
     secondName = 'second_name',
@@ -30,7 +30,6 @@ export const useSignUp = () => {
 
     const onFinish = async (values: SignUpData) => {
         const response = await api.signUp(values);
-        console.log(response);
         if (response) {
             history.push(routes.signIn.path);
         }

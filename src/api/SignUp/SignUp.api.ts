@@ -19,8 +19,7 @@ class SignUpApi {
         switch (response.status) {
             case 200:
                 notification.success({message: 'Регистрация прошла успешно'});
-                const result = await response.json();
-                return result;
+                return await response.json();
             case 400:
                 notification.error({message: 'Отправленные данные не корректны'});
                 break;

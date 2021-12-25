@@ -3,6 +3,7 @@ import { routes } from "@/config/routes/routes";
 export type Component = "Input" | "Password";
 
 export type FormItem = {
+  value?: string;
   name: string;
   required: boolean;
   disabled?: boolean;
@@ -19,49 +20,6 @@ interface ProfileValues {
   login: string;
   password: string;
 }
-
-export const form: FormItem[] = [
-  {
-    name: "name",
-    required: false,
-    placeholder: "Имя",
-    component: "Input",
-  },
-  {
-    name: "surname",
-    required: false,
-    placeholder: "Фамилия",
-    component: "Input",
-  },
-  {
-    name: "email",
-    required: true,
-    message: "Введите эл. почту",
-    placeholder: "Эл. почта",
-    component: "Input",
-  },
-  {
-    name: "phone",
-    required: false,
-    placeholder: "Телефон",
-    component: "Input",
-  },
-  {
-    name: "login",
-    disabled: true,
-    required: true,
-    message: "Введите логин",
-    placeholder: "Логин",
-    component: "Input",
-  },
-  {
-    name: "password",
-    required: true,
-    message: "Введите пароль",
-    placeholder: "Пароль",
-    component: "Password",
-  },
-];
 
 export const useProfileForm = () => {
   const currentPath = `/#${routes.profile.path}`;

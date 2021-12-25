@@ -11,7 +11,7 @@ interface SignInValues {
 }
 
 export const useSignInForm = () => {
-    const currentPath = `/#${routes.signIn.path}`;
+    const currentPath = routes.signIn.path;
 
     const onFinish = (values: SignInValues) => console.log(values);
     const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);

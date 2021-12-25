@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 import Header from "@/components/Header";
 import {routes} from '@/config/routes/routes';
 
-const currentPath = `/#${routes.about.path}`;
+const currentPath = routes.about.path;
 
 const About: FC = () => {
     return (

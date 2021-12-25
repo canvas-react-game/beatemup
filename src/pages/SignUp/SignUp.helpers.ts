@@ -35,7 +35,7 @@ export const useSignUp = () => {
         }
     }
 
-    const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);
+    const onFinishFailed = (errorInfo: Error) => console.log('Failed:', errorInfo);
 
     return {
         currentPath,

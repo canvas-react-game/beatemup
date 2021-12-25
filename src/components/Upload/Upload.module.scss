@@ -1,0 +1,16 @@
+@use "./src/styles/variables.module.scss" as variables;
+
+div {
+  &:global(.ant-upload) {
+    background: none !important;
+  }
+  &:global(.ant-upload)::selection {
+    background: variables.$primary;
+  }
+  &:global(.ant-upload):hover {
+    border-color: variables.$primary !important;
+  }
+  &:global(.ant-upload):focus {
+    border-color: variables.$primary;
+  }
+}

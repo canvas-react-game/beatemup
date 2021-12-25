@@ -5,7 +5,8 @@ module.exports = {
     entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"),
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: '/'
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
@@ -38,7 +39,8 @@ module.exports = {
         ]
     },
     devServer: {
-        port: 3000
+        port: 3000,
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({

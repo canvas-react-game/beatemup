@@ -19,8 +19,8 @@ class SignUpApi {
         switch (response.status) {
             case 200:
                 notification.success({message: 'Регистрация прошла успешно'});
-                console.log('id', response.json().id)
-                return await response.json();
+                const result = await response.json();
+                return result;
             case 400:
                 notification.error({message: 'Отправленные данные не корректны'});
                 break;
@@ -35,7 +35,6 @@ class SignUpApi {
 
     public async signUp(data: SignUpData): Promise<string | null> {
         const response = await APIService.request(Method.POST, data, `${root}/signup`);
-        console.log('edev')
         if (response) {
             const result = await this.processResponseStatus(response);
             return result ? result.id : null;

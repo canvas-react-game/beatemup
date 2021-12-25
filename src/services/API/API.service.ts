@@ -20,7 +20,7 @@ class APIService {
             },
             body: JSON.stringify(data)
         });
-        return await response ?? null;
+        return response ?? null;
     }
 }
 

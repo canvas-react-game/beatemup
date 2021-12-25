@@ -14,7 +14,7 @@ export interface SignUpData {
 
 const root = 'auth';
 
-class SignUpApi {
+class AuthApi {
     async processResponseStatus(response: any) {
         switch (response.status) {
             case 200:
@@ -42,4 +42,4 @@ class SignUpApi {
     }
 }
 
-export default new SignUpApi();
+export default new AuthApi();

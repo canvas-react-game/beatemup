@@ -1,93 +1,123 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Form, Modal, Space, Row, Col } from "antd";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Button from "@/components/Button";
-import Input from "@/components/Input";
-import Password from "@/components/Password";
 import Upload from "@/components/Upload";
 import Statistic from "@/components/Statistic";
 
 import styles from "./Profile.module.scss";
-import { FormItem, Component, useProfileForm } from "./Profile.helpers";
 
-const components = {
-  Input: Input,
-  Password: Password,
+import { FormElement } from "./Profile.types";
+import { useProfileForm } from "./Profile.helpers";
+
+const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
+  const { fields } = useProfileForm();
+
+  return (
+    <>
+      {fields.map((item: any, index: any) => {
+        const { component, name, message, required, disabled, placeholder } =
+          item;
+
+        const Item = component;
+
+        return (
+          <Form.Item
+            key={`item-${index}`}
+            name={name}
+            rules={[{ required, message }]}
+          >
+            <Item disabled={disabled && !isEdit} placeholder={placeholder} />
+          </Form.Item>
+        );
+      })}
+    </>
+  );
 };
 
-const uploadButton = (
-  <div>
-    <PlusOutlined style={{ color: "white" }} />
-    <div style={{ marginTop: 8, color: "white", fontSize: 9 }}>Загрузить</div>
-  </div>
-);
+const FormControls: FC<FormElement> = ({
+  isEdit,
+  setIsEdit,
+  onFinish,
+  form,
+}) => {
+  if (isEdit) {
+    return (
+      <>
+        <Form.Item>
+          <Button
+            type="text"
+            onClick={() => {
+              setIsEdit(!isEdit);
+              form.resetFields();
+            }}
+          >
+            Отменить
+            <EditOutlined />
+          </Button>
+        </Form.Item>
+        <Form.Item>
+          <Button
+            block
+            type="primary"
+            onClick={() => {
+              Modal.confirm({
+                title: "Сохранить?",
+                content: "Будут изменены данные профиля",
+                cancelText: "Нет",
+                okText: "Да",
+                onOk() {
+                  setIsEdit(false);
+                  onFinish(form.getFieldsValue(true));
+                },
+                onCancel() {
+                  setIsEdit(false);
+                  form.resetFields();
+                },
+              });
+            }}
+          >
+            Сохранить
+          </Button>
+        </Form.Item>
+      </>
+    );
+  }
 
-const Profile: FC = () => {
-  const [previewVisible, setPreviewVisible] = useState<boolean>(false);
-  const [avatar] = useState<string | undefined>("");
-  const [isEdit, setEdit] = useState<boolean>(false);
-  const [form] = useState<FormItem[]>([
-    {
-      name: "name",
-      disabled: true,
-      required: false,
-      placeholder: "Имя",
-      component: "Input",
-      value: "Андрей",
-    },
-    {
-      name: "surname",
-      disabled: true,
-      required: false,
-      placeholder: "Фамилия",
-      component: "Input",
-      value: "Иванов",
-    },
-    {
-      name: "email",
-      disabled: true,
-      required: true,
-      message: "Введите эл. почту",
-      placeholder: "Эл. почта",
-      component: "Input",
-      value: "andrey@game.com",
-    },
-    {
-      name: "phone",
-      disabled: true,
-      required: false,
-      placeholder: "Телефон",
-      component: "Input",
-      value: "+77754443322",
-    },
-    {
-      name: "login",
-      disabled: true,
-      required: true,
-      message: "Введите логин",
-      placeholder: "Логин",
-      component: "Input",
-      value: "andrey",
-    },
-    {
-      name: "password",
-      disabled: true,
-      required: true,
-      message: "Введите пароль",
-      placeholder: "Пароль",
-      component: "Password",
-      value: "andrey",
-    },
-  ]);
+  return (
+    <Form.Item>
+      <Button type="text" onClick={() => setIsEdit(!isEdit)}>
+        Редактировать
+        <EditOutlined />
+      </Button>
+    </Form.Item>
+  );
+};
 
-  const { currentPath, onFinish, onFinishFailed } = useProfileForm();
+const UploadButton = () => {
+  return (
+    <div>
+      <PlusOutlined style={{ color: "white" }} />
+      <div style={{ marginTop: 8, color: "white", fontSize: 9 }}>Загрузить</div>
+    </div>
+  );
+};
+
+const Profile = () => {
+  const {
+    currentPath,
+    onFinish,
+    isEdit,
+    setIsEdit,
+    avatar,
+    initialValues,
+    form,
+  } = useProfileForm();
 
   const handleChangeAvatar = ({ fileList }: any) => console.log(fileList);
-  const handlePreview = () => setPreviewVisible(true);
-  const handleCancel = () => setPreviewVisible(false);
 
   return (
     <Container>
@@ -107,73 +137,26 @@ const Profile: FC = () => {
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 listType="picture-card"
                 disabled={!isEdit}
-                onPreview={handlePreview}
                 onChange={handleChangeAvatar}
               >
-                {avatar || uploadButton}
+                {avatar || <UploadButton />}
               </Upload>
             </Col>
-            <Modal
-              visible={previewVisible}
-              title="Аватар"
-              footer={null}
-              onCancel={handleCancel}
-            >
-              <img alt="example" style={{ width: "100%" }} src={avatar} />
-            </Modal>
           </Row>
 
           <Form
-            name="signIn"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            name="profile"
+            form={form}
+            initialValues={initialValues}
             layout="vertical"
           >
-            {form.map((item, index) => {
-              const { component } = item;
-              const Item = components[component as Component];
-
-              return (
-                <Form.Item
-                  key={`item-${index}`}
-                  name={item.name}
-                  initialValue={item.value}
-                  rules={[{ required: item.required, message: item.message }]}
-                >
-                  <Item
-                    disabled={item.disabled && !isEdit}
-                    placeholder={item.placeholder}
-                  />
-                </Form.Item>
-              );
-            })}
-            {isEdit ? (
-              <>
-                <Form.Item>
-                  <Button type="text" onClick={() => setEdit(!isEdit)}>
-                    Отменить
-                    <EditOutlined />
-                  </Button>
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    block
-                    type="primary"
-                    htmlType="submit"
-                    onClick={() => setEdit(false)}
-                  >
-                    Сохранить
-                  </Button>
-                </Form.Item>
-              </>
-            ) : (
-              <Form.Item>
-                <Button type="text" onClick={() => setEdit(!isEdit)}>
-                  Редактировать
-                  <EditOutlined />
-                </Button>
-              </Form.Item>
-            )}
+            <FormFields isEdit={isEdit} />
+            <FormControls
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
+              form={form}
+              onFinish={onFinish}
+            />
           </Form>
         </Space>
       </div>

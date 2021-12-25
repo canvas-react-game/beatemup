@@ -1,46 +1,94 @@
+import { useState } from "react";
+import { useForm } from "antd/lib/form/Form";
+
 import { routes } from "@/config/routes/routes";
 
-export type Component = "Input" | "Password";
+import Input from "@/components/Input";
+import Password from "@/components/Password";
 
-export type FormItem = {
-  value?: string;
-  name: string;
-  required: boolean;
-  disabled?: boolean;
-  message?: string;
-  placeholder: string;
-  component: string;
-};
-
-interface ProfileValues {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  login: string;
-  password: string;
-}
+import { ProfileValue } from "./Profile.types";
 
 export const useProfileForm = () => {
   const currentPath = `/#${routes.profile.path}`;
 
-  const onFinish = (values: ProfileValues) => console.log(values);
+  const onFinish = (values: ProfileValue[]) => console.log(values);
   const onFinishFailed = (errorInfo: any) => console.log("Failed:", errorInfo);
+
+  const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  const [avatar] = useState<string | undefined>("");
+  const [initialValues] = useState({
+    name: "Андрей",
+    surname: "Иванов",
+    email: "test@mail.ru",
+    phone: "+77758662255",
+    login: "test",
+    password: "12345",
+  });
+  const [form] = useForm();
+  const [fields] = useState<ProfileValue[]>([
+    {
+      name: "name",
+      disabled: true,
+      required: false,
+      placeholder: "Имя",
+      component: Input,
+    },
+    {
+      name: "surname",
+      disabled: true,
+      required: false,
+      placeholder: "Фамилия",
+      component: Input,
+    },
+    {
+      name: "email",
+      disabled: true,
+      required: true,
+      message: "Введите эл. почту",
+      placeholder: "Эл. почта",
+      component: Input,
+    },
+    {
+      name: "phone",
+      disabled: true,
+      required: false,
+      placeholder: "Телефон",
+      component: Input,
+    },
+    {
+      name: "login",
+      disabled: true,
+      required: true,
+      message: "Введите логин",
+      placeholder: "Логин",
+      component: Input,
+    },
+    {
+      name: "password",
+      disabled: true,
+      required: true,
+      message: "Введите пароль",
+      placeholder: "Пароль",
+      component: Password,
+    },
+  ]);
 
   return {
     currentPath,
     onFinish,
     onFinishFailed,
+    isPreviewVisible,
+    setIsPreviewVisible,
+    isConfirmVisible,
+    setIsConfirmVisible,
+    isEdit,
+    setIsEdit,
+    avatar,
+    initialValues,
+    form,
+    fields,
   };
 };
-
-export function getBase64(file: File, cb: Function) {
-  let reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-    cb(reader.result);
-  };
-  reader.onerror = function (error) {
-    console.log("Error: ", error);
-  };
-}

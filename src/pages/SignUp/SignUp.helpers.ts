@@ -1,30 +1,30 @@
+import {useHistory} from "react-router";
+import { notification } from 'antd';
+
 import {routes} from "@/config/routes/routes";
+import api, {SignUpData} from '@/api/Auth';
 
 enum SignUpFieldNames {
-    surname = 'surname',
-    firstname = 'firstname',
-    mail = 'mail',
+    secondName = 'second_name',
+    firstName = 'first_name',
+    email = 'email',
     phone = 'phone',
     login = 'login',
     password = 'password',
 }
 
-interface SignUpValues {
-    surname: string;
-    firstname: string;
-    mail: string;
-    phone: string;
-    login: string;
-    password: string;
-}
+const success = () =>  notification.success({ message: 'Регистрация прошла успешно' });
+
+const error = () => notification.error({ message: 'Отправленные данные не корректны' });
 
 export const useSignUp = () => {
+    const history = useHistory();
     const currentPath = `/#${routes.signUp.path}`;
 
     const fieldSet = [
-        {name: SignUpFieldNames.surname, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},
-        {name: SignUpFieldNames.firstname, rules: [{ required: true, message: 'Введите имя' }], placeholder: 'Имя'},
-        {name: SignUpFieldNames.mail, rules: [{ required: true, message: 'Введите почту' }], placeholder: 'Эл. почта'},
+        {name: SignUpFieldNames.secondName, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},
+        {name: SignUpFieldNames.firstName, rules: [{ required: true, message: 'Введите имя' }], placeholder: 'Имя'},
+        {name: SignUpFieldNames.email, rules: [{ required: true, message: 'Введите почту' }], placeholder: 'Эл. почта'},
         {name: SignUpFieldNames.phone, rules: [{ required: true, message: 'Введите телефон' }], placeholder: 'Телефон'},
         {name: SignUpFieldNames.login, rules: [{ required: true, message: 'Введите логин' }], placeholder: 'Логин'},
         {
@@ -33,7 +33,16 @@ export const useSignUp = () => {
         },
     ]
 
-    const onFinish = (values: SignUpValues) => console.log(values);
+    const onFinish = async (values: SignUpData) => {
+        const response = await api.signUp(values);
+        if (response) {
+            history.push(routes.signIn.path);
+            success();
+        } else {
+            // todo реализовать сервис отлова ошибок апи
+            error();
+        }
+    }
 
     const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);
 

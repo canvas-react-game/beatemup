@@ -8,7 +8,7 @@ import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 
 import styles from './SignUp.module.scss';
-import { useSignUp} from "./SignUp.helpers";
+import { useSignUp } from "./SignUp.helpers";
 import YandexSignIn from "./YandexSignIn";
 
 const SignUp:FC = () => {

@@ -15,28 +15,31 @@ export interface SignUpData {
 const root = 'auth';
 
 class AuthApi {
-    async processResponseStatus(response: any) {
+     isSuccessfulRequest(response: any) {
         switch (response.status) {
             case 200:
                 notification.success({message: 'Регистрация прошла успешно'});
-                return await response.json();
+                return true;
             case 400:
                 notification.error({message: 'Отправленные данные не корректны'});
-                break;
+                return false;
             case 401:
                 notification.error({message: 'Неверный логин или пароль'});
-                break;
+                return false;
             case 500:
                 notification.error({message: 'Произошла неизвестная ошибка'});
-                break;
+                return false;
         }
     }
 
     public async signUp(data: SignUpData): Promise<string | null> {
         const response = await APIService.request(Method.POST, data, `${root}/signup`);
         if (response) {
-            const result = await this.processResponseStatus(response);
-            return result ? result.id : null;
+            const success = this.isSuccessfulRequest(response);
+            if (success) {
+                const result = await response.json();
+                return result.id ?? null;
+            }
         }
         return null;
     }

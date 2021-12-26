@@ -12,13 +12,13 @@ interface Props {
 }
 
 const mainRoute = appRoutes.main.path;
-const signUpRoute = appRoutes.signUp.path;
 
 const Header: FC<Props> = ({ currentPath }) => {
     const {
         routes,
         renderSignInButton,
-        renderSignOutButton
+        renderSignOutButton,
+        renderSignUpButton
     } = useHeader();
 
     return (
@@ -30,7 +30,7 @@ const Header: FC<Props> = ({ currentPath }) => {
                 <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
                     {checkAccess() ? renderSignOutButton() : renderSignInButton()}
-                    {!checkAccess() && <a className={styles.signUp} href={signUpRoute}>Регистрация</a>}
+                    {!checkAccess() && renderSignUpButton()}
                 </div>
             </div>
         </div>

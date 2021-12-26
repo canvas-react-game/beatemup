@@ -1,5 +1,6 @@
-import React, {FC} from 'react'
-import { Route, RouteProps } from 'react-router-dom'
+import React, {FC} from 'react';
+import { Route, RouteProps } from 'react-router-dom';
+
 import {checkAccess} from "@/helpers/acess";
 import Error from "@/pages/Error";
 

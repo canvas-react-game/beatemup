@@ -10,8 +10,7 @@ import About from "@/pages/About";
 import Leaderboard from "@/pages/Leaderboard";
 import {routes} from "@/config/routes/routes";
 import Error from "@/pages/Error";
-
-import AccessRoute from "../AccessRoute";
+import AccessRoute from "@/components/AccessRoute";
 
 const Routes: FC = () => {
   return (

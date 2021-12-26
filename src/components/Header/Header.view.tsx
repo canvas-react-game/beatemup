@@ -1,26 +1,26 @@
 import React, {FC} from 'react';
 
 import {routes as appRoutes} from "@/config/routes/routes";
+import {checkAccess} from '@/helpers/acess';
 
 import styles from './Header.module.scss';
 import NavBar from "../NavBar";
+import {useHeader} from "./Header.helpers";
 
 interface Props {
     currentPath?: string;
 }
 
 const mainRoute = appRoutes.main.path;
-const signInRoute = appRoutes.signIn.path;
 const signUpRoute = appRoutes.signUp.path;
 
-const routes = [
-    { path: appRoutes.about.path, label: 'Об игре'},
-    { path: appRoutes.profile.path, label: 'Профиль'},
-    { path: appRoutes.leaderboard.path, label: 'Таблица лидеров'},
-    { path: appRoutes.forum.path, label: 'Форум'},
-]
-
 const Header: FC<Props> = ({ currentPath }) => {
+    const {
+        routes,
+        renderSignInButton,
+        renderSignOutButton
+    } = useHeader();
+
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
@@ -29,8 +29,8 @@ const Header: FC<Props> = ({ currentPath }) => {
             <div className={styles.routesContainer}>
                 <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
-                    <a className={styles.signIn} href={signInRoute}>Вход</a>
-                    <a className={styles.signUp} href={signUpRoute}>Регистрация</a>
+                    {checkAccess() ? renderSignOutButton() : renderSignInButton()}
+                    {!checkAccess() && <a className={styles.signUp} href={signUpRoute}>Регистрация</a>}
                 </div>
             </div>
         </div>

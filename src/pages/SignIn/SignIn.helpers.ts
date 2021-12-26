@@ -16,8 +16,8 @@ export const useSignInForm = () => {
     const onFinish = async (values: SignInData) => {
         const response = await api.signIn(values);
         if (response) {
-            history.push(routes.main.path);
             setAccess(true);
+            history.push(routes.main.path);
         }
     }
 

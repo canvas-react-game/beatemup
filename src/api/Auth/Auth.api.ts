@@ -19,13 +19,18 @@ export interface SignInData {
 
 const root = 'auth';
 
+type Request = 'signIn' | 'signOut' | undefined;
+
 class AuthApi {
-     isSuccessfulRequest(response: any, signIn = false) {
+     isSuccessfulRequest(response: any, type: Request = undefined) {
         switch (response.status) {
             case 200:
-                notification.success({
-                    message: signIn ? 'Выполнен вход в приложение' : 'Регистрация прошла успешно'
-                });
+                let message = 'Регистрация прошла успешно';
+                if (type) {
+                    message = type === 'signIn' ?
+                        'Выполнен вход в приложение' : 'Выполнен выход из приложения';
+                }
+                notification.success({message});
                 return true;
             case 400:
                 notification.error({message: 'Отправленные данные не корректны'});
@@ -54,9 +59,17 @@ class AuthApi {
     }
 
     public async signIn(data: SignInData): Promise<boolean> {
-        const response = await APIService.request(Method.POST, data, `${root}/signup`);
+        const response = await APIService.request(Method.POST, data, `${root}/signin`);
         if (response) {
-            return this.isSuccessfulRequest(response, true);
+            return this.isSuccessfulRequest(response, 'signIn');
+        }
+        return false;
+    }
+
+    public async logOut(): Promise<boolean> {
+        const response = await APIService.request(Method.POST, {}, `${root}/logout`);
+        if (response) {
+            return this.isSuccessfulRequest(response, 'signOut');
         }
         return false;
     }

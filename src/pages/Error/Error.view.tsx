@@ -20,7 +20,8 @@ const Error: FC<Props> = ({ status = '404' }) => {
                 <div className={errorContainer}>
                     <Typography className={title}>{status}</Typography>
                     <Typography className={info}>{ErrorInfo[status]}</Typography>
-                    <a href={`#${routes.main.path}`} className={back}>Вернуться</a>
+                    <a href={status === '403' ? routes.signIn.path
+                        : routes.main.path} className={back}>Вернуться</a>
                 </div>
                 <div className={notFound}/>
             </div>

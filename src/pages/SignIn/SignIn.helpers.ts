@@ -1,7 +1,8 @@
+import {useHistory} from "react-router";
+
 import {routes} from '@/config/routes/routes';
 import api, {SignInData} from '@/api/Auth';
-import {useHistory} from "react-router";
-import {setAccess} from "helpers/acess";
+import {setAccess} from "@/helpers/acess";
 
 export enum SignInFieldNames {
     login = 'login',

@@ -1,8 +1,5 @@
-import {checkAccess} from "@/helpers/acess";
-
 type Route = {
-    path: string,
-    checkAccess: boolean
+    path: string
 }
 
 type Routes = {
@@ -11,32 +8,25 @@ type Routes = {
 
 export const routes: Routes = {
     main: {
-        path: '/main',
-        checkAccess: checkAccess()
+        path: '/main'
     },
     signIn: {
-        path: '/signin',
-        checkAccess: true
+        path: '/signin'
     },
     signUp: {
-        path: '/signup',
-        checkAccess: true
+        path: '/signup'
     },
     profile: {
-        path: '/profile',
-        checkAccess: checkAccess()
+        path: '/profile'
     },
     forum: {
-        path: '/forum',
-        checkAccess: checkAccess()
+        path: '/forum'
     },
     leaderboard: {
-        path: '/leaderboard',
-        checkAccess: checkAccess()
+        path: '/leaderboard'
     },
     about: {
-        path: '/about',
-        checkAccess: checkAccess()
+        path: '/about'
     },
 }
 

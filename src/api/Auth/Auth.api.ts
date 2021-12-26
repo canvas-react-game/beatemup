@@ -12,13 +12,20 @@ export interface SignUpData {
     password: string;
 }
 
+export interface SignInData {
+    login: string;
+    password: string;
+}
+
 const root = 'auth';
 
 class AuthApi {
-     isSuccessfulRequest(response: any) {
+     isSuccessfulRequest(response: any, signIn = false) {
         switch (response.status) {
             case 200:
-                notification.success({message: 'Регистрация прошла успешно'});
+                notification.success({
+                    message: signIn ? 'Выполнен вход в приложение' : 'Регистрация прошла успешно'
+                });
                 return true;
             case 400:
                 notification.error({message: 'Отправленные данные не корректны'});
@@ -29,6 +36,8 @@ class AuthApi {
             case 500:
                 notification.error({message: 'Произошла неизвестная ошибка'});
                 return false;
+                default:
+                    return false;
         }
     }
 
@@ -42,6 +51,14 @@ class AuthApi {
             }
         }
         return null;
+    }
+
+    public async signIn(data: SignInData): Promise<boolean> {
+        const response = await APIService.request(Method.POST, data, `${root}/signup`);
+        if (response) {
+            return this.isSuccessfulRequest(response, true);
+        }
+        return false;
     }
 }
 

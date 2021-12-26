@@ -22,7 +22,7 @@ const SignUp:FC = () => {
                 <Form
                     name='signUp'
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
+                    onFinishFailed={() => onFinishFailed}
                     layout='vertical'>
                         {fieldSet.map(({rules, name, placeholder, type}) =>
                             <Form.Item key={name} name={name} rules={rules}>

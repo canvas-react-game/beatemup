@@ -1,3 +1,5 @@
+import {checkAccess} from "@/helpers/acess";
+
 type Route = {
     path: string,
     checkAccess: boolean
@@ -10,7 +12,7 @@ type Routes = {
 export const routes: Routes = {
     main: {
         path: '/main',
-        checkAccess: true
+        checkAccess: checkAccess()
     },
     signIn: {
         path: '/signin',
@@ -22,19 +24,19 @@ export const routes: Routes = {
     },
     profile: {
         path: '/profile',
-        checkAccess: true
+        checkAccess: checkAccess()
     },
     forum: {
         path: '/forum',
-        checkAccess: true
+        checkAccess: checkAccess()
     },
     leaderboard: {
         path: '/leaderboard',
-        checkAccess: true
+        checkAccess: checkAccess()
     },
     about: {
         path: '/about',
-        checkAccess: true
+        checkAccess: checkAccess()
     },
 }
 

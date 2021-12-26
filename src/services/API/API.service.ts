@@ -14,9 +14,10 @@ class APIService {
             method,
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache',
-            credentials: 'same-origin',
+            credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': 'true'
             },
             body: JSON.stringify(data)
         });

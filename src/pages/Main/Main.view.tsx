@@ -3,6 +3,7 @@ import { Typography } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
+import { routes } from "@/config/routes/routes";
 
 import styles from "./Main.module.scss";
 
@@ -19,7 +20,7 @@ const Main: FC = () => {
                     <Typography className={info}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     </Typography>
-                    <a href='' className={gameHref}>Играть</a>
+                    <a href={routes.game.path} className={gameHref}>Играть</a>
                 </div>
             </div>
         </Container>

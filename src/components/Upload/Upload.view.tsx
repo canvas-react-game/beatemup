@@ -6,24 +6,22 @@ import styles from "./Upload.module.scss";
 interface Props extends UploadProps {}
 
 const Upload: FC<Props> = ({
-  action,
-  listType,
-  onPreview,
-  onChange,
-  disabled,
-  children,
-}) => {
-  return (
+    action,
+    listType,
+    onPreview,
+    onChange,
+    disabled,
+    children,
+}) => (
     <CustomUpload
-      className={styles.antUpload}
-      action={action}
-      listType={listType}
-      onPreview={onPreview}
-      onChange={onChange}
-      disabled={disabled}
-      children={children}
+        className={styles.antUpload}
+        action={action}
+        listType={listType}
+        onPreview={onPreview}
+        onChange={onChange}
+        disabled={disabled}
+        children={children}
     />
-  );
-};
+);
 
 export default Upload;

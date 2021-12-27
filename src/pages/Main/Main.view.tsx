@@ -1,13 +1,15 @@
-import React, {FC} from 'react';
-import {Typography} from "antd";
+import React, { FC } from "react";
+import { Typography } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
 
-import styles from './Main.module.scss';
+import styles from "./Main.module.scss";
 
 const Main: FC = () => {
-    const { gameHref, title, info, infoContainer, container } = styles;
+    const {
+        gameHref, title, info, infoContainer, container,
+    } = styles;
     return (
         <Container>
             <Header/>

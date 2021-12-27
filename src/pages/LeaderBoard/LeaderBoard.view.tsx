@@ -11,15 +11,15 @@ import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/tabl
 // Колонки таблицы
 const columns: ColumnsType<LeaderBoardUser> = [
     {
-      title: 'Место',
-      dataIndex: 'position',
+    title: 'Место',
+    dataIndex: 'position',
     },
     {
-      title: 'Имя',
-      dataIndex: 'name',
-      sorter: (a: LeaderBoardUser, b: LeaderBoardUser) => a.name.length - b.name.length,
-      sortDirections: ['descend'],
-      render: (value: string, item: LeaderBoardUser) => {
+    title: 'Имя',
+    dataIndex: 'name',
+    sorter: (a: LeaderBoardUser, b: LeaderBoardUser) => a.name.length - b.name.length,
+    sortDirections: ['descend'],
+    render: (value: string, item: LeaderBoardUser) => {
         return (
             <div 
                 className={
@@ -32,13 +32,13 @@ const columns: ColumnsType<LeaderBoardUser> = [
                 {value}
             </div>
         )
-      }
+    }
     },
     {
-      title: 'Очки',
-      dataIndex: 'score',
-      defaultSortOrder: 'descend',
-      sorter: (a: LeaderBoardUser, b: LeaderBoardUser) => a.score - b.score,
+    title: 'Очки',
+    dataIndex: 'score',
+    defaultSortOrder: 'descend',
+    sorter: (a: LeaderBoardUser, b: LeaderBoardUser) => a.score - b.score,
     },
 ];
   
@@ -52,7 +52,7 @@ const onChange = (
     {
         console.log('params', pagination, filters, sorter, extra);
 }
-
+  
 const LeaderBoard: FC<{}> = () => {
 
     return (
@@ -64,11 +64,10 @@ const LeaderBoard: FC<{}> = () => {
                     columns={columns} 
                     dataSource={LeaderBoardData} 
                     onChange={onChange} 
-                    showSorterTooltip={false}
                 />
             </div>
         </Container>
     )
 }
 
-export default LeaderBoard
+export default LeaderBoard     

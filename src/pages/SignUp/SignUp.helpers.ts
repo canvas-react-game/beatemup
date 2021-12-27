@@ -19,7 +19,7 @@ interface SignUpValues {
 }
 
 export const useSignUp = () => {
-    const currentPath = `/#${routes.signUp.path}`;
+    const currentPath = routes.signUp.path;
 
     const fieldSet = [
         {name: SignUpFieldNames.surname, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},

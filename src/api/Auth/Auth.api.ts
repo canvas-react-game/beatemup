@@ -33,7 +33,11 @@ class AuthApi {
                 notification.success({message});
                 return true;
             case 400:
-                notification.error({message: 'Отправленные данные не корректны'});
+                let errorMessage = 'Отправленные данные не корректны';
+                if (type === 'signIn') {
+                    errorMessage = 'Пользователь уже авторизован в системе';
+                }
+                notification.error({message: errorMessage});
                 return false;
             case 401:
                 notification.error({message: 'Неверный логин или пароль'});

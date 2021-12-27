@@ -5,8 +5,8 @@ import api, {SignInData} from '@/api/Auth';
 import {setAccess} from "@/helpers/acess";
 
 export enum SignInFieldNames {
-    login = 'login',
-    password = 'password'
+    login = "login",
+    password = "password",
 }
 
 export const useSignInForm = () => {
@@ -26,6 +26,6 @@ export const useSignInForm = () => {
     return {
         currentPath,
         onFinish,
-        onFinishFailed
+        onFinishFailed,
     };
-}
+};

@@ -4,7 +4,7 @@ type Route = {
 
 type Routes = {
     [key: string]: Route;
-}
+};
 
 export const routes: Routes = {
     main: {
@@ -28,8 +28,9 @@ export const routes: Routes = {
     about: {
         path: '/about'
     },
-}
+};
 
-export const findRoute = (path: Route['path']): Route | null => {
-    return Object.values(routes).find(route => route.path === path) ?? null;
-}
+export const findRoute = (path: Route["path"]): Route | null => {
+    const route = Object.values(routes).find((route) => route.path === path);
+    return route ?? null;
+};

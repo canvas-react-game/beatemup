@@ -10,7 +10,7 @@ export type Object2DProps = {
 // Get unique geometry id (ssr)
 const getObject2DId = (function () {
     let objectId = 0;
-    return () => objectId++;
+    return () => objectId += 1;
 }());
 
 export class Object2D {

@@ -10,9 +10,9 @@ interface Props {
 }
 
 const routes = [
-    { path: appRoutes.signIn.path, label: 'Вход'},
-    { path: appRoutes.signUp.path, label: 'Регистрация'},
-]
+    { path: appRoutes.signIn.path, label: "Вход" },
+    { path: appRoutes.signUp.path, label: "Регистрация" },
+];
 
 const Nav: FC<Props> = ({ currentPath }) => (
     <div className={styles.nav}>

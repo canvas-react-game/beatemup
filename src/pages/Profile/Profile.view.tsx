@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import React, { FC } from "react";
-
-import Container from "@/components/Container";
-import Header from "@/components/Header";
-import { routes } from "@/config/routes/routes";
-=======
 import React, { useCallback } from "react";
 import { Form, Space, Row, Col } from "antd";
 
@@ -15,17 +8,9 @@ import Statistic from "@/components/Statistic";
 import FormFields from "./components/FormFields";
 import FormControls from "./components/FormControls";
 import UploadButton from "./components/UploadButton";
->>>>>>> sprint_1_pages
 
 import styles from "./Profile.module.scss";
 
-<<<<<<< HEAD
-const Profile: FC = () => (
-    <Container>
-        <Header currentPath={currentPath} />
-    </Container>
-);
-=======
 import { useProfileForm } from "./Profile.helpers";
 
 const Profile = () => {
@@ -86,6 +71,5 @@ const Profile = () => {
     </Container>
   );
 };
->>>>>>> sprint_1_pages
 
 export default Profile;

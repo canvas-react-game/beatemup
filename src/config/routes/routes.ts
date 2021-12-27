@@ -36,6 +36,10 @@ export const routes: Routes = {
         path: "/about",
         checkAccess: true,
     },
+    game: {
+        path: "/game",
+        checkAccess: true,
+    },
 };
 
 export const findRoute = (path: Route["path"]): Route | null => {

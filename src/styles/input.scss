@@ -1,14 +1,18 @@
 @use "./src/styles/variables.module.scss" as variables;
 
 .ant-input {
-  background: none;
-  color: white;
+  background: none !important;
+  color: white !important;
 
   &::selection {
     background: variables.$primary;
   }
 
   &:hover {
+    border-color: variables.$primary;
+  }
+
+  &[disabled]:hover {
     border-color: variables.$primary;
   }
 
@@ -22,7 +26,7 @@
 }
 
 .ant-input-affix-wrapper {
-  background-color: transparent;
+  background-color: transparent !important;
   color: variables.$primary;
 
   > input {
@@ -51,9 +55,17 @@
   }
 }
 
+.ant-input-affix-wrapper-disabled {
+  border-color: variables.$primary;
+
+  &:hover {
+    border-color: variables.$primary;
+  }
+}
+
 .ant-form-item-has-error {
   > div > div > div > span {
-    background: none;
+    background: none !important;
   }
 }
 

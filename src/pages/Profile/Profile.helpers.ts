@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "antd/lib/form/Form";
 
 import { routes } from "@/config/routes/routes";
@@ -11,8 +11,14 @@ import { ProfileValue } from "./Profile.types";
 export const useProfileForm = () => {
   const currentPath = `/#${routes.profile.path}`;
 
-  const onFinish = (values: ProfileValue[]) => console.log(values);
-  const onFinishFailed = (errorInfo: any) => console.log("Failed:", errorInfo);
+  const onFinish = useCallback(
+    () => (values: ProfileValue[]) => console.log(values),
+    []
+  );
+  const onFinishFailed = useCallback(
+    () => (errorInfo: any) => console.log("Failed:", errorInfo),
+    []
+  );
 
   const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState<boolean>(false);

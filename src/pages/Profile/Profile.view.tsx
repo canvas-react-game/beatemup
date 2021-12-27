@@ -1,110 +1,17 @@
-import React, { FC } from "react";
-import { Form, Modal, Space, Row, Col } from "antd";
-import { EditOutlined, PlusOutlined } from "@ant-design/icons";
+import React, { useCallback } from "react";
+import { Form, Space, Row, Col } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
-import Button from "@/components/Button";
 import Upload from "@/components/Upload";
 import Statistic from "@/components/Statistic";
+import FormFields from "./components/FormFields";
+import FormControls from "./components/FormControls";
+import UploadButton from "./components/UploadButton";
 
 import styles from "./Profile.module.scss";
 
-import { FormElement } from "./Profile.types";
 import { useProfileForm } from "./Profile.helpers";
-
-const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
-  const { fields } = useProfileForm();
-
-  return (
-    <>
-      {fields.map((item: any, index: any) => {
-        const { component, name, message, required, disabled, placeholder } =
-          item;
-
-        const Item = component;
-
-        return (
-          <Form.Item
-            key={`item-${index}`}
-            name={name}
-            rules={[{ required, message }]}
-          >
-            <Item disabled={disabled && !isEdit} placeholder={placeholder} />
-          </Form.Item>
-        );
-      })}
-    </>
-  );
-};
-
-const FormControls: FC<FormElement> = ({
-  isEdit,
-  setIsEdit,
-  onFinish,
-  form,
-}) => {
-  if (isEdit) {
-    return (
-      <>
-        <Form.Item>
-          <Button
-            type="text"
-            onClick={() => {
-              setIsEdit(!isEdit);
-              form.resetFields();
-            }}
-          >
-            Отменить
-            <EditOutlined />
-          </Button>
-        </Form.Item>
-        <Form.Item>
-          <Button
-            block
-            type="primary"
-            onClick={() => {
-              Modal.confirm({
-                title: "Сохранить?",
-                content: "Будут изменены данные профиля",
-                cancelText: "Нет",
-                okText: "Да",
-                onOk() {
-                  setIsEdit(false);
-                  onFinish(form.getFieldsValue(true));
-                },
-                onCancel() {
-                  setIsEdit(false);
-                  form.resetFields();
-                },
-              });
-            }}
-          >
-            Сохранить
-          </Button>
-        </Form.Item>
-      </>
-    );
-  }
-
-  return (
-    <Form.Item>
-      <Button type="text" onClick={() => setIsEdit(!isEdit)}>
-        Редактировать
-        <EditOutlined />
-      </Button>
-    </Form.Item>
-  );
-};
-
-const UploadButton = () => {
-  return (
-    <div>
-      <PlusOutlined style={{ color: "white" }} />
-      <div style={{ marginTop: 8, color: "white", fontSize: 9 }}>Загрузить</div>
-    </div>
-  );
-};
 
 const Profile = () => {
   const {
@@ -117,7 +24,12 @@ const Profile = () => {
     form,
   } = useProfileForm();
 
-  const handleChangeAvatar = ({ fileList }: any) => console.log(fileList);
+  const handleChangeAvatar = useCallback(
+    () =>
+      ({ fileList }: any) =>
+        console.log(fileList),
+    []
+  );
 
   return (
     <Container>
@@ -126,11 +38,7 @@ const Profile = () => {
         <Space direction="vertical" size="middle">
           <Row justify="space-between">
             <Col>
-              <Statistic
-                style={{ textAlign: "left" }}
-                title="Рекорд"
-                value={1128}
-              />
+              <Statistic title="Рекорд" value={1128} />
             </Col>
             <Col>
               <Upload

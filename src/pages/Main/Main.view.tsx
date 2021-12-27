@@ -20,7 +20,7 @@ const Main: FC = () => {
                     <Typography className={info}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     </Typography>
-                    <a href={`/#${routes.game.path}`} className={gameHref}>Играть</a>
+                    <a href={routes.game.path} className={gameHref}>Играть</a>
                 </div>
             </div>
         </Container>

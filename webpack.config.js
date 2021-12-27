@@ -39,13 +39,17 @@ module.exports = {
             },
         ]
     },
-    devServer: {
-        port: 3000,
-        historyApiFallback: true,
-    },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
-        }),
+        })
     ],
+    devServer: {
+        static: {
+          directory: path.join(__dirname, 'assets'), 
+        },
+        historyApiFallback: true,
+        compress: true,
+        port: 3000,
+      },
 };

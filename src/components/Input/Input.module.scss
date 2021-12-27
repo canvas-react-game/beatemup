@@ -23,10 +23,12 @@ input:-webkit-autofill:active {
   &:global(.ant-input-affix-wrapper) {
     background: none !important;
     color: variables.$primary;
+
     > input {
       background: none !important;
       color: white;
     }
+
     > input::selection {
       background: variables.$primary;
     }
@@ -35,12 +37,15 @@ input:-webkit-autofill:active {
       background: none !important;
     }
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):hover {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):focus {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):not(:focus) {
     border-color: variables.$primary;
   }

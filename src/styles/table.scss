@@ -1,0 +1,110 @@
+@use "./src/styles/variables.module.scss" as variables;
+
+.ant-spin-nested-loading {
+  height: 100%;
+}
+// Расположение таблицы и пагинации
+.ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+// Бэкграунд и цвета в таблице
+.ant-table {
+  background: transparent !important;
+  color: white;
+}
+
+.ant-table-cell {
+  background: transparent !important;
+}
+
+.ant-table-column-sort {
+  background: transparent !important;
+}
+
+.ant-table-thead {
+  background: variables.$secondary !important;
+
+  th {
+    color: white !important;
+  }
+}
+// Ховер строки
+.ant-table-row:hover {
+  color: variables.$primary;
+}
+// Иконки сортировки
+.ant-table-column-sorter-up.active {
+  color: variables.$primary;
+}
+
+.ant-table-column-sorter-down.active {
+  color: variables.$primary;
+}
+// Все по пагинации
+// Background + colors
+.ant-pagination-item-link {
+  background: transparent !important;
+
+  span {
+    color: white;
+  }
+}
+
+.ant-pagination-item {
+  background: transparent !important;
+  font-size: inherit;
+  font-style: inherit;
+  font-family: inherit;
+
+  a {
+    color: white;
+  }
+}
+
+.ant-pagination-item-active {
+  border-color: variables.$primary;
+
+  a {
+    color: variables.$primary;
+  }
+}
+
+.ant-pagination-item:hover {
+  border-color: variables.$primary;
+
+  a {
+    color: variables.$primary;
+  }
+}
+// Disabled
+.ant-pagination-disabled .ant-pagination-item-link {
+  border-color: variables.$disabled;
+  color: variables.$disabled;
+
+  span {
+    color: variables.$disabled;
+  }
+}
+// Active
+.ant-pagination-prev:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
+  border-color: variables.$primary;
+  color: variables.$primary;
+}
+
+.ant-pagination-next:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
+  border-color: variables.$primary;
+  color: variables.$primary;
+}
+
+.ant-pagination-prev:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
+  border-color: variables.$primary;
+  color: variables.$primary;
+}
+
+.ant-pagination-next:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
+  border-color: variables.$primary;
+  color: variables.$primary;
+}

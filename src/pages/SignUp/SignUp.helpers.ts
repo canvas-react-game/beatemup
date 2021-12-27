@@ -14,7 +14,7 @@ enum SignUpFieldNames {
 
 export const useSignUp = () => {
     const history = useHistory();
-    const currentPath = `/#${routes.signUp.path}`;
+    const currentPath = routes.signUp.path;
 
     const fieldSet = [
         {name: SignUpFieldNames.SecondName, rules: [{ required: true, message: 'Введите фамилию' }], placeholder: 'Фамилия'},
@@ -41,6 +41,6 @@ export const useSignUp = () => {
         currentPath,
         fieldSet,
         onFinish,
-        onFinishFailed
+        onFinishFailed,
     };
-}
+};

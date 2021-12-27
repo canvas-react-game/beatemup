@@ -1,4 +1,5 @@
 import {useHistory} from "react-router";
+import {useCallback} from "react";
 
 import {routes} from '@/config/routes/routes';
 import api, {SignInData} from '@/api/Auth';
@@ -13,13 +14,13 @@ export const useSignInForm = () => {
     const history = useHistory();
     const currentPath = routes.signIn.path;
 
-    const onFinish = async (values: SignInData) => {
+    const onFinish = useCallback(async (values: SignInData) => {
         const response = await api.signIn(values);
         if (response) {
             setAccess(true);
             history.push(routes.main.path);
         }
-    }
+    }, []);
 
     const onFinishFailed = (errorInfo: Error) => console.log('Failed:', errorInfo);
 

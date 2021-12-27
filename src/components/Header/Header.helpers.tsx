@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {useHistory} from "react-router";
 
 import {routes as appRoutes} from "@/config/routes/routes";
@@ -19,14 +19,14 @@ export const useHeader = () => {
     const signInRoute = appRoutes.signIn.path;
     const signUpRoute = appRoutes.signUp.path;
 
-    const onSignOut = async (event: any) => {
+    const onSignOut = useCallback(async (event: any) => {
         event.preventDefault();
         const response = await api.logOut();
         if (response) {
             setAccess(false);
             history.push(signInRoute);
         }
-    }
+    }, []);
 
     const renderSignInButton = () => (<a className={styles.signIn} href={signInRoute}>Войти</a>);
 

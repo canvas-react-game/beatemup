@@ -1,0 +1,13 @@
+@use "./src/styles/variables.module.scss" as variables;
+
+div {
+  &:global(.ant-statistic-title) {
+    color: white;
+    text-align: left;
+  }
+
+  &:global(.ant-statistic-content) {
+    color: white;
+    font-family: "Press Start 2P", cursive;
+  }
+}

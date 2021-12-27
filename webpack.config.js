@@ -15,6 +15,7 @@ module.exports = {
             '@/components': path.resolve(__dirname, 'src/components'),
             '@/pages': path.resolve(__dirname, 'src/pages'),
             '@/config': path.resolve(__dirname, 'src/config'),
+            '@/game': path.resolve(__dirname, 'src/game'),
             '@/services': path.resolve(__dirname, 'src/services'),
             '@/api': path.resolve(__dirname, 'src/api'),
             '@/helpers': path.resolve(__dirname, 'src/helpers'),
@@ -41,13 +42,17 @@ module.exports = {
             },
         ]
     },
-    devServer: {
-        port: 3000,
-        historyApiFallback: true,
-    },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
-        }),
+        })
     ],
+    devServer: {
+        static: {
+          directory: path.join(__dirname, 'assets'),
+        },
+        historyApiFallback: true,
+        compress: true,
+        port: 3000,
+      },
 };

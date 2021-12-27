@@ -1,17 +1,15 @@
-import React, {FC} from "react";
-import { Form } from 'antd';
+import React, { FC } from "react";
+import { Input, Button, Form } from "antd";
 
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from "@ant-design/icons";
 import Container from "@/components/Container";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
 import Password from "@/components/Password";
 import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
-import {routes} from "@/config/routes/routes";
+import { routes } from "@/config/routes/routes";
 
-import styles from './SignIn.module.scss';
-import {SignInFieldNames, useSignInForm} from './SignIn.helpers';
+import styles from "./SignIn.module.scss";
+import { SignInFieldNames, useSignInForm } from "./SignIn.helpers";
 
 const SignIn:FC = () => {
     const { onFinish, onFinishFailed } = useSignInForm();
@@ -28,12 +26,12 @@ const SignIn:FC = () => {
                     layout='vertical'>
                     <Form.Item
                         name={SignInFieldNames.login}
-                        rules={[{ required: true, message: 'Введите логин' }]}>
+                        rules={[{ required: true, message: "Введите логин" }]}>
                         <Input placeholder='логин' prefix={<UserOutlined />}/>
                     </Form.Item>
                     <Form.Item
                         name={SignInFieldNames.password}
-                        rules={[{ required: true, message: 'Введите пароль' }]}>
+                        rules={[{ required: true, message: "Введите пароль" }]}>
                         <Password placeholder='пароль' />
                     </Form.Item>
                     <Form.Item>

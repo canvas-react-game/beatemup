@@ -28,6 +28,9 @@ export const routes: Routes = {
     about: {
         path: '/about'
     },
+    game: {
+        path: '/game'
+    },
 };
 
 export const findRoute = (path: Route["path"]): Route | null => {

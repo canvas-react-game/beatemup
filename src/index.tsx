@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App/App.view";
 
-// Подключаем глобальные стили
-import "./styles/button.scss";
-import "./styles/input.scss";
+import "./styles/table.scss";
 
 ReactDOM.render(<App/>, document.getElementById("root"));

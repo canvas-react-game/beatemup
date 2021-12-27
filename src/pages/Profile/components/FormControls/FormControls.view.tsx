@@ -1,8 +1,6 @@
 import React, { FC } from "react";
-import { Form, Modal } from "antd";
+import { Button, Form, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-
-import Button from "@/components/Button";
 
 import { FormElement } from "../../Profile.types";
 

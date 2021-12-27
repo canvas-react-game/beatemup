@@ -20,7 +20,7 @@ const SignIn:FC = () => {
         <Container>
             <Header/>
             <div className={styles.formContainer}>
-                <Nav currentPath={`/#${routes.signIn.path}`}/>
+                <Nav currentPath={routes.signIn.path}/>
                 <Form
                     name='signIn'
                     onFinish={onFinish}

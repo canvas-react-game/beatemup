@@ -1,10 +1,9 @@
-@use './src/styles/variables.module.scss' as variables;
+@use "./src/styles/variables.module.scss" as variables;
 
 .App {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 16px;
-    text-align: center;
-    background-size: cover;
-    background: variables.$secondary url('../../assets/images/background.png') no-repeat center center;
-    height: 100vh;
+  font-family: "Press Start 2P", cursive;
+  font-size: 16px;
+  text-align: center;
+  background: variables.$secondary url("../../assets/images/background.png") no-repeat center center cover;
+  height: 100vh;
 }

@@ -1,5 +1,6 @@
-@use './src/styles/variables.module.scss' as variables;
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@use "./src/styles/variables.module.scss" as variables;
+
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 .buttonContainer {
   display: flex;
@@ -14,22 +15,22 @@
 .gameModal {
   // todo более того, шрифт тоже не подгружается просто так
   &:global(.ant-modal) {
-    font-family: 'Press Start 2P';
+    font-family: "Press Start 2P", cursive;
     width: 400px !important;
   }
 
-  :global(.ant-modal-body) { 
-    background: variables.$background url('../../../../assets/images/background.png') no-repeat center center;    
+  :global(.ant-modal-body) {
+    background: variables.$background url("../../../../assets/images/background.png") no-repeat center center;
   }
 
-  :global(.ant-modal-header) { 
+  :global(.ant-modal-header) {
     background: variables.$background;
     border: none;
     text-align: center;
   }
 
-  :global(.ant-modal-title) { 
+  :global(.ant-modal-title) {
     color: white;
-    font-size: 24px;  
+    font-size: 24px;
   }
 }

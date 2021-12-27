@@ -1,19 +1,21 @@
-@use './src/styles/variables.module.scss' as variables;
+@use "./src/styles/variables.module.scss" as variables;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: all 0s 50000s;
+}
 
 .input {
   &:global(.ant-input) {
-    background: none !important;;
-    color: white;
+    background: none !important;
+    color: white !important;
   }
-  &:global(.ant-input)::selection {
-    background: variables.$primary;
-  }
-  &:global(.ant-input):hover {
-    border-color: variables.$primary;
-  }
-  &:global(.ant-input):focus {
-    border-color: variables.$primary;
-  }
+
+  &:global(.ant-input)::selection,
+  &:global(.ant-input):hover,
+  &:global(.ant-input):focus,
   &:global(.ant-input):not(:focus) {
     border-color: variables.$primary;
   }

@@ -3,7 +3,7 @@ import { Typography } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
-import {routes} from '@/config/routes/routes';
+import { routes } from "@/config/routes/routes";
 
 import styles from "./Main.module.scss";
 

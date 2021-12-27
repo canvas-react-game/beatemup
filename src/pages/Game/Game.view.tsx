@@ -1,26 +1,26 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 
-import {useGame} from "@/pages/Game/Game.helpers";
+import { useGame } from "@/pages/Game/Game.helpers";
 
-import Menu from './Menu';
-import styles from './Game.module.scss';
+import Menu from "./Menu";
+import styles from "./Game.module.scss";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 
 const Game: FC = () => {
-   const {
-       isActive, isPaused, canvasRef, 
-       onStart, onResume, onClose, 
-       onUnmount, setUpPauseButton 
+    const {
+        isActive, isPaused, canvasRef,
+        onStart, onResume, onClose,
+        onUnmount, setUpPauseButton,
     } = useGame();
 
     useMountEffect(() => {
-        setUpPauseButton()
-    })
+        setUpPauseButton();
+    });
 
     useUnmountEffect(() => {
-        onUnmount()
-    })
+        onUnmount();
+    });
 
     return (
         <>
@@ -33,7 +33,7 @@ const Game: FC = () => {
                 onResume={onResume}
             />
         </>
-    )
+    );
 };
-  
-export default Game
+
+export default Game;

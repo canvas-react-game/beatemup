@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
+import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 
 import { routes } from "@/config/routes/routes";
 
-import Input from "@/components/Input";
 import Password from "@/components/Password";
 
 import { ProfileValue } from "./Profile.types";

@@ -10,8 +10,8 @@ interface Props {
 }
 
 const mainRoute = appRoutes.main.path;
-const signInRoute = appRoutes.signIn.path;
-const signUpRoute = appRoutes.signUp.path;
+// const signInRoute = appRoutes.signIn.path;
+// const signUpRoute = appRoutes.signUp.path;
 
 const routes = [
     { path: appRoutes.about.path, label: "Об игре" },

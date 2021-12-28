@@ -109,7 +109,7 @@ export class World {
   }
 
   reinit() {
-    this.init(this.canvas);
+    this.init(null);
   }
 
   animate() {

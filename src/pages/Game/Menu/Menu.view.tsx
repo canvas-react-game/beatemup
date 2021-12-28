@@ -32,10 +32,7 @@ const Menu: FC<Props> = ({
   >
     <div className={styles.buttonContainer}>
       {isGameOver && (
-        <Title
-          style={{ color: "white", textAlign: "center", marginBottom: 20 }}
-          level={3}
-        >
+        <Title className={styles.title} level={3}>
           Потрачено!
         </Title>
       )}

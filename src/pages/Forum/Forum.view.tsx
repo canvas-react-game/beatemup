@@ -1,17 +1,15 @@
-import React, {FC} from 'react';
+import React, { FC } from "react";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
-import {routes} from '@/config/routes/routes';
+import { routes } from "@/config/routes/routes";
 
-const currentPath = `/#${routes.forum.path}`;
+const currentPath = routes.forum.path;
 
-const Forum: FC = () => {
-    return (
-        <Container>
-            <Header currentPath={currentPath} />
-        </Container>
-    );
-};
+const Forum: FC = () => (
+    <Container>
+        <Header currentPath={currentPath} />
+    </Container>
+);
 
 export default Forum;

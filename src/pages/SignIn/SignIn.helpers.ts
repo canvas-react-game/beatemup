@@ -1,24 +1,33 @@
-import {routes} from '@/config/routes/routes';
+import { useHistory } from "react-router";
+import { useCallback } from "react";
+
+import { routes } from "@/config/routes/routes";
+import api, { SignInData } from "@/api/Auth";
+import { setAccess } from "@/helpers/acess";
 
 export enum SignInFieldNames {
-    login = 'login',
-    password = 'password'
-}
-
-interface SignInValues {
-    login: string,
-    password: string,
+    login = "login",
+    password = "password",
 }
 
 export const useSignInForm = () => {
-    const currentPath = `/#${routes.signIn.path}`;
+    const history = useHistory();
+    const currentPath = routes.signIn.path;
 
-    const onFinish = (values: SignInValues) => console.log(values);
-    const onFinishFailed = (errorInfo: any) => console.log('Failed:', errorInfo);
+    const onFinish = useCallback(async (values: SignInData) => {
+        const response = await api.signIn(values);
+        if (response) {
+            setAccess(true);
+            history.push(routes.main.path);
+        }
+    }, []);
+
+    const onFinishFailed = (errorInfo: Error) =>
+        console.log("Failed:", errorInfo);
 
     return {
         currentPath,
         onFinish,
-        onFinishFailed
+        onFinishFailed,
     };
-}
+};

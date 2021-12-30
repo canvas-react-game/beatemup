@@ -1,4 +1,4 @@
-@use './src/styles/variables.module.scss' as variables;
+@use "./src/styles/variables.module.scss" as variables;
 
 .container {
   padding: variables.$spacing_x1;
@@ -32,8 +32,9 @@
   width: 128px;
   height: 40px;
   background: variables.$primary;
-  padding: 7px
+  padding: 7px;
 }
+
 .gameHref:hover {
   background: darken(variables.$primary, 10%);
   color: white;

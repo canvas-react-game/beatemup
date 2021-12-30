@@ -1,4 +1,4 @@
-@use '../../styles/variables.module' as variables;
+@use "../../styles/variables.module" as variables;
 
 .container {
   display: flex;
@@ -12,9 +12,11 @@
   font-size: 36px;
   font-weight: 400;
   text-align: center;
+
   > a {
     color: white;
   }
+
   > a:hover {
     color: darken(variables.$primary, 10%);
   }
@@ -36,7 +38,7 @@
 }
 
 .signIn {
-  width: 72px;
+  width: 84px;
   height: 24px;
   background-color: variables.$primary;
 }
@@ -46,7 +48,6 @@
   height: 24px;
   border: 1px solid white;
 }
-
 
 .signIn:hover {
   color: white;

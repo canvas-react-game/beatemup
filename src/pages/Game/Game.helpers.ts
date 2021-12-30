@@ -25,7 +25,7 @@ export const useGame = () => {
 
     const onClose = useCallback(() => {
         setActive(false);
-        history.push(`/#${routes.main.path}`);
+        history.push(routes.main.path);
     }, []);
 
     const onStart = useCallback(() => {

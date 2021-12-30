@@ -1,25 +1,23 @@
-import { Object2D } from "./object"
-import { Color } from "./utils/color"
+import { Object2D } from "./object";
+import { Color } from "./utils/color";
 
 export class Scene {
-
     // TODO: Добавить поддержку Object в качесте бэкграунда (+ sprite)
-    public background: Color
+    public background: Color;
     // Список объектов в сцене
-    public objects: Object2D[]
+    public objects: Object2D[];
 
     constructor(background?: Color) {
-        this.objects = []
+        this.objects = [];
 
-        this.background = background || new Color(255, 255, 255)
+        this.background = background || new Color(255, 255, 255);
     }
 
     add(object: Object2D) {
-        this.objects.push(object)
+        this.objects.push(object);
     }
 
     remove(object: Object2D) {
-        this.objects = this.objects.filter(x => x !== object)
+        this.objects = this.objects.filter((x) => x !== object);
     }
-
 }

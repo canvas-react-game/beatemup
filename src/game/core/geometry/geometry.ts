@@ -1,7 +1,6 @@
-import { Vector2D } from "../utils/vector"
-import { Box2 } from "../utils/box2"
-import { Circle } from "../utils/circle"
-
+import { Vector2D } from "../utils/vector";
+import { Box2 } from "../utils/box2";
+import { Circle } from "../utils/circle";
 
 export enum GeometryTypes {
     Rectangle = "Rectangle",
@@ -11,37 +10,36 @@ export enum GeometryTypes {
 
 type GeometryProps = {
     geomType: string, // GeometryTypes
-}
+};
 
 // Get unique geometry id (ssr)
-const getGeomId = function() {
-    let geometryId = 0
+const getGeomId = (function () {
+    let geometryId = 0;
     return () => {
-        return geometryId ++
-    }
-}()
+        geometryId += 1;
+        return geometryId;
+    };
+}());
 
 export class Geometry {
-
     // Уникальный id геометрии
-    id: number
+    id: number;
     // Опциональное имя
-    name: string
+    name: string;
     // Bounding box геометрии (для расчетов)
-    boundingBox: Box2 | null
+    boundingBox: Box2 | null;
     // Bounding circle геометрии (для расчетов)
-    boundingCircle: Circle | null
+    boundingCircle: Circle | null;
     // Тип геометрии (для отрисовки)
-    type: string
+    type: string;
 
     constructor(props: GeometryProps) {
+        this.id = getGeomId();
+        this.name = "";
+        this.type = props.geomType;
 
-        this.id = getGeomId()
-        this.name = ""
-        this.type = props.geomType
-
-        this.boundingBox = null
-        this.boundingCircle = null
+        this.boundingBox = null;
+        this.boundingCircle = null;
     }
 
     // TODO: Методы работы с геометрией

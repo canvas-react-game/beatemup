@@ -16,6 +16,8 @@ module.exports = {
             '@/pages': path.resolve(__dirname, 'src/pages'),
             '@/config': path.resolve(__dirname, 'src/config'),
             '@/game': path.resolve(__dirname, 'src/game'),
+            '@/services': path.resolve(__dirname, 'src/services'),
+            '@/api': path.resolve(__dirname, 'src/api'),
         }
     },
     module: {
@@ -46,7 +48,7 @@ module.exports = {
     ],
     devServer: {
         static: {
-          directory: path.join(__dirname, 'assets'), 
+          directory: path.join(__dirname, 'assets'),
         },
         historyApiFallback: true,
         compress: true,

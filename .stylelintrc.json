@@ -1,0 +1,39 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "color-hex-case": "lower",
+      "selector-class-pattern": null,
+      "value-no-vendor-prefix": null,
+      "no-descending-specificity": null,
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": ["use", "import"]
+        }
+      ],
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": ["global"]
+        }
+      ]
+    },
+    "ignoreFiles": [
+      "dist/*",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.html",
+      "**/*.toml",
+      "**/*.json",
+      "**/*.md",
+      "**/*.jpg",
+      "**/*.png"
+    ],
+    "overrides": [
+        {
+          "files": ["**/*.scss"],
+          "customSyntax": "postcss-scss"
+        }
+    ]
+} 

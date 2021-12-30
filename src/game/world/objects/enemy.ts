@@ -25,5 +25,4 @@ export class Enemy extends Object2D implements Collidable {
       callGameOverOutside();
       console.log("Game over !");
     }
-  }
 }

@@ -12,16 +12,32 @@ export interface SignUpData {
     password: string;
 }
 
+export interface SignInData {
+    login: string;
+    password: string;
+}
+
 const root = 'auth';
 
+type Request = 'signIn' | 'signOut' | undefined;
+
 class AuthApi {
-     isSuccessfulRequest(response: any) {
+     isSuccessfulRequest(response: any, type: Request = undefined) {
         switch (response.status) {
             case 200:
-                notification.success({message: 'Регистрация прошла успешно'});
+                let message = 'Регистрация прошла успешно';
+                if (type) {
+                    message = type === 'signIn' ?
+                        'Выполнен вход в приложение' : 'Выполнен выход из приложения';
+                }
+                notification.success({message});
                 return true;
             case 400:
-                notification.error({message: 'Отправленные данные не корректны'});
+                let errorMessage = 'Отправленные данные не корректны';
+                if (type === 'signIn') {
+                    errorMessage = 'Пользователь уже авторизован в системе';
+                }
+                notification.error({message: errorMessage});
                 return false;
             case 401:
                 notification.error({message: 'Неверный логин или пароль'});
@@ -29,6 +45,8 @@ class AuthApi {
             case 500:
                 notification.error({message: 'Произошла неизвестная ошибка'});
                 return false;
+                default:
+                    return false;
         }
     }
 
@@ -42,6 +60,22 @@ class AuthApi {
             }
         }
         return null;
+    }
+
+    public async signIn(data: SignInData): Promise<boolean> {
+        const response = await APIService.request(Method.POST, data, `${root}/signin`);
+        if (response) {
+            return this.isSuccessfulRequest(response, 'signIn');
+        }
+        return false;
+    }
+
+    public async logOut(): Promise<boolean> {
+        const response = await APIService.request(Method.POST, {}, `${root}/logout`);
+        if (response) {
+            return this.isSuccessfulRequest(response, 'signOut');
+        }
+        return false;
     }
 }
 

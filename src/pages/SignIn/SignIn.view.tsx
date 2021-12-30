@@ -22,7 +22,7 @@ const SignIn:FC = () => {
                 <Form
                     name='signIn'
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
+                    onFinishFailed={() => onFinishFailed}
                     layout='vertical'>
                     <Form.Item
                         name={SignInFieldNames.login}

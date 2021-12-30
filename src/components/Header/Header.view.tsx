@@ -1,34 +1,40 @@
-import React, { FC } from "react";
+import React, {FC} from 'react';
 
-import { routes as appRoutes } from "@/config/routes/routes";
+import {routes as appRoutes} from "@/config/routes/routes";
+import {checkAccess} from '@/helpers/acess';
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
+import {useHeader} from "./Header.helpers";
 
 interface Props {
     currentPath?: string;
 }
 
 const mainRoute = appRoutes.main.path;
-// const signInRoute = appRoutes.signIn.path;
-// const signUpRoute = appRoutes.signUp.path;
 
-const routes = [
-    { path: appRoutes.about.path, label: "Об игре" },
-    { path: appRoutes.profile.path, label: "Профиль" },
-    { path: appRoutes.leaderboard.path, label: "Таблица лидеров" },
-    { path: appRoutes.forum.path, label: "Форум" },
-];
+const Header: FC<Props> = ({ currentPath }) => {
+    const {
+        routes,
+        renderSignInButton,
+        renderSignOutButton,
+        renderSignUpButton
+    } = useHeader();
 
-const Header: FC<Props> = ({ currentPath }) => (
-    <header className={styles.container}>
-        <div className={styles.logo}>
-            <a href={mainRoute}>Logo</a>
+    return (
+        <div className={styles.container}>
+            <div className={styles.logo}>
+                <a href={mainRoute}>Logo</a>
+            </div>
+            <div className={styles.routesContainer}>
+                <NavBar currentPath={currentPath} routes={routes} />
+                <div className={styles.buttonContainer}>
+                    {checkAccess() ? renderSignOutButton() : renderSignInButton()}
+                    {!checkAccess() && renderSignUpButton()}
+                </div>
+            </div>
         </div>
-        <div className={styles.routesContainer}>
-            <NavBar currentPath={currentPath} routes={routes} />
-        </div>
-    </header>
-);
+    );
+};
 
 export default Header;

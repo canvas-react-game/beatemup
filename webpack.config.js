@@ -18,6 +18,7 @@ module.exports = {
             '@/game': path.resolve(__dirname, 'src/game'),
             '@/services': path.resolve(__dirname, 'src/services'),
             '@/api': path.resolve(__dirname, 'src/api'),
+            '@/helpers': path.resolve(__dirname, 'src/helpers'),
         }
     },
     module: {

@@ -1,0 +1,57 @@
+@use '../../styles/variables.module' as variables;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: variables.$navbar_height;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  > a {
+    color: white;
+  }
+  > a:hover {
+    color: darken(variables.$primary, 10%);
+  }
+}
+
+.buttonContainer {
+  margin-left: 26px;
+  display: flex;
+  > a {
+    margin-right: 26px;
+    color: white;
+  }
+}
+
+.routesContainer {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.signIn {
+  width: 72px;
+  height: 24px;
+  background-color: variables.$primary;
+}
+
+.signUp {
+  width: 176px;
+  height: 24px;
+  border: 1px solid white;
+}
+
+
+.signIn:hover {
+  color: white;
+}
+
+.signUp:hover {
+  color: white;
+}

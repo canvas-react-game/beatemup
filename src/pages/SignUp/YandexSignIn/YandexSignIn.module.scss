@@ -1,0 +1,22 @@
+@use './src/styles/variables.module.scss' as variables;
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  margin-bottom: 24px;
+  > a {
+    color: variables.$primary;
+    margin-left: 7px;
+  }
+  > a:hover {
+    color: darken(variables.$primary, 10%);
+  }
+}
+
+.icon {
+  > * {
+    color: variables.$primary;
+  }
+}

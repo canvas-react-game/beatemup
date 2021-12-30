@@ -7,9 +7,9 @@ type Routes = {
     [key: string]: Route;
 }
 
-const routes: Routes = {
+export const routes: Routes = {
     main: {
-        path: '/',
+        path: '/main',
         checkAccess: true
     },
     signIn: {
@@ -19,7 +19,23 @@ const routes: Routes = {
     signUp: {
         path: '/signup',
         checkAccess: true
-    }
+    },
+    profile: {
+        path: '/profile',
+        checkAccess: true
+    },
+    forum: {
+        path: '/forum',
+        checkAccess: true
+    },
+    leaderboard: {
+        path: '/leaderboard',
+        checkAccess: true
+    },
+    about: {
+        path: '/about',
+        checkAccess: true
+    },
 }
 
 export const findRoute = (path: Route['path']): Route | null => {

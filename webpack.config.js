@@ -8,7 +8,13 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
+        alias: {
+            '@': path.resolve(__dirname, 'src/'),
+            '@/components': path.resolve(__dirname, 'src/components'),
+            '@/pages': path.resolve(__dirname, 'src/pages'),
+            '@/config': path.resolve(__dirname, 'src/config'),
+        }
     },
     module: {
         rules: [
@@ -16,6 +22,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: "ts-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
             },
             {
                 test: /\.(sa|sc|c)ss$/,

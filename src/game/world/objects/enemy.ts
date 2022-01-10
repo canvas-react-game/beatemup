@@ -2,16 +2,18 @@ import { Object2D, Object2DProps } from "../../core/object";
 import { Collidable } from "../../core/physics/physics";
 import { Player } from "./player";
 
-import { callGameOverOutside } from "@/pages/Game/Game.view";
-
-type EnemyProps = Object2DProps & {};
+type EnemyProps = Object2DProps & {
+    gameOverCallback: () => void
+};
 
 export class Enemy extends Object2D implements Collidable {
     canCollide: boolean = true;
+    gameOverCallback: () => void;
 
     constructor(props: EnemyProps) {
         super(props);
 
+        this.gameOverCallback = props.gameOverCallback;
         this.init();
     }
 
@@ -22,7 +24,7 @@ export class Enemy extends Object2D implements Collidable {
     //
     onCollide(obstacle: Object2D & Collidable) {
         if (obstacle instanceof Player) {
-            callGameOverOutside();
+            this.gameOverCallback();
             console.log("Game over !");
         }
     }

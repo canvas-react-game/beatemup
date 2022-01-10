@@ -1,1 +1,1 @@
-export { default } from './AccessRoute';
+export { default } from "./AccessRoute";

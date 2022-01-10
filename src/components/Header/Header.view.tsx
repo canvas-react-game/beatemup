@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
+import React, { FC } from "react";
 
-import {routes as appRoutes} from "@/config/routes/routes";
-import {checkAccess} from '@/helpers/acess';
+import { routes as appRoutes } from "@/config/routes/routes";
+import { checkAccess } from "@/helpers/acess";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
-import {useHeader} from "./Header.helpers";
+import { useHeader } from "./Header.helpers";
 
 interface Props {
     currentPath?: string;

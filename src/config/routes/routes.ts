@@ -1,6 +1,6 @@
 type Route = {
     path: string
-}
+};
 
 type Routes = {
     [key: string]: Route;
@@ -8,28 +8,28 @@ type Routes = {
 
 export const routes: Routes = {
     main: {
-        path: '/main'
+        path: "/main",
     },
     signIn: {
-        path: '/signin'
+        path: "/signin",
     },
     signUp: {
-        path: '/signup'
+        path: "/signup",
     },
     profile: {
-        path: '/profile'
+        path: "/profile",
     },
     forum: {
-        path: '/forum'
+        path: "/forum",
     },
     leaderboard: {
-        path: '/leaderboard'
+        path: "/leaderboard",
     },
     about: {
-        path: '/about'
+        path: "/about",
     },
     game: {
-        path: '/game'
+        path: "/game",
     },
 };
 

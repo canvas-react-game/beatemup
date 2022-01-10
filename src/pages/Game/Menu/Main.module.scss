@@ -13,7 +13,7 @@
 .gameModal {
   // todo более того, шрифт тоже не подгружается просто так
   &:global(.ant-modal) {
-    font-family: "Press Start 2P";
+    font-family: "Press Start 2P", cursive;
     width: 400px !important;
   }
 

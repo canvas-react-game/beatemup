@@ -1,19 +1,23 @@
-@use './src/styles/variables.module.scss' as variables;
+@use "./src/styles/variables.module.scss" as variables;
 
 .input {
   &:global(.ant-input) {
-    background: none !important;;
+    background: none !important;
     color: white;
   }
+
   &:global(.ant-input)::selection {
     background: variables.$primary;
   }
+
   &:global(.ant-input):hover {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input):focus {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input):not(:focus) {
     border-color: variables.$primary;
   }
@@ -21,10 +25,12 @@
   &:global(.ant-input-affix-wrapper) {
     background: none !important;
     color: variables.$primary;
+
     > input {
       background: none !important;
       color: white;
     }
+
     > input::selection {
       background: variables.$primary;
     }
@@ -33,12 +39,15 @@
       background: none !important;
     }
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):hover {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):focus {
     border-color: variables.$primary;
   }
+
   &:global(.ant-input-affix-wrapper):not(.ant-input-affix-wrapper-disabled):not(:focus) {
     border-color: variables.$primary;
   }

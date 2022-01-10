@@ -9,9 +9,15 @@ import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 
 const Game: FC = () => {
     const {
-        isActive, isPaused, canvasRef,
-        onStart, onResume, onClose,
-        onUnmount, setUpPauseButton,
+        isActive,
+        isPaused,
+        canvasRef,
+        onStart,
+        onResume,
+        onClose,
+        onUnmount,
+        setUpPauseButton,
+        isGameOver,
     } = useGame();
 
     useMountEffect(() => {
@@ -30,6 +36,7 @@ const Game: FC = () => {
                 onClose={onClose}
                 onStart={onStart}
                 isPaused={isPaused}
+                isGameOver={isGameOver}
                 onResume={onResume}
             />
         </>

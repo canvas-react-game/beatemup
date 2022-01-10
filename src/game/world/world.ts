@@ -10,6 +10,11 @@ import { Wall } from "./objects/wall";
 
 type Listener = (this: Window, ev: KeyboardEvent) => any;
 
+type WorldProps = {
+    canvas: HTMLCanvasElement | null
+    gameOverCallback: () => void
+};
+
 // Игровой мир
 export class World {
     canvas: HTMLCanvasElement | null;
@@ -18,19 +23,28 @@ export class World {
     camera: Camera;
 
     eventBus: EventBus;
-    pause: boolean = false;
+
+    // Управление анимацией
+    animationNumber: number | undefined;
 
     // События, от которых нужно отписаться
     private _keyDownListener: Listener;
     private _keyUpListener: Listener;
 
-    init(canvas: HTMLCanvasElement | null) {
-        this.canvas = canvas;
+    // Gameover callback to interact with GUI
+    gameOverCallback: () => void;
+
+    /**
+       Инициализирует world и начинает анимацию
+    */
+    init(props: WorldProps) {
+        this.canvas = props.canvas;
+        this.gameOverCallback = props.gameOverCallback;
         this.eventBus = new EventBus();
 
         // Создаем Renderer
         this.renderer = new Renderer({
-            canvas,
+            canvas: this.canvas,
             width: window.innerWidth,
             height: window.innerHeight,
         });
@@ -61,6 +75,7 @@ export class World {
         const enemy = new Enemy({
             geometry: enemyGeom,
             color: new Color(255, 0, 0),
+            gameOverCallback: this.gameOverCallback,
         });
         // Зададим дефолтное положение
         enemy.positon.x = window.innerWidth / 4;
@@ -99,33 +114,31 @@ export class World {
         this.scene.add(enemy);
 
         this.registerEvents();
-        this.animate();
+        this.startAnimataion();
     }
 
-    setPause(pause: boolean) {
-        this.pause = pause;
-    }
-
-    animate() {
-        const renderer = this.renderer as Renderer;
-        const scene = this.scene as Scene;
-        const camera = this.camera as Camera;
-
+    startAnimataion() {
         let last = performance.now();
         const render = () => {
+            // NOTE: Важно именно здесь нахождение вызова
+            // для корректного cancelAnimationFrame
+            this.animationNumber = requestAnimationFrame(() => render());
             const now = performance.now();
             const dt = now - last;
             last = now;
-            if (!this.pause) {
-                renderer.prerender(scene, dt, now);
-                // TODO: Реализовать класс camera
-                // camera.update()
-                renderer.render(scene, camera);
-            }
-            requestAnimationFrame(() => render());
+            this.renderer.prerender(this.scene, dt, now);
+            // TODO: Реализовать класс camera
+            // this.camera.update()
+            this.renderer.render(this.scene, this.camera);
         };
 
         render();
+    }
+
+    stopAnimation() {
+        if (this.animationNumber) {
+            cancelAnimationFrame(this.animationNumber);
+        }
     }
 
     registerEvents() {
@@ -174,6 +187,7 @@ export class World {
     }
 
     destroy() {
+        this.stopAnimation();
         window.removeEventListener("keydown", this._keyDownListener);
         window.removeEventListener("keyup", this._keyUpListener);
     }

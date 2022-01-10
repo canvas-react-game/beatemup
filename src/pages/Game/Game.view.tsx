@@ -7,8 +7,6 @@ import styles from "./Game.module.scss";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 
-let callGameOverOutside = () => {};
-
 const Game: FC = () => {
     const {
         isActive,
@@ -19,11 +17,8 @@ const Game: FC = () => {
         onClose,
         onUnmount,
         setUpPauseButton,
-        callGameOver,
         isGameOver,
     } = useGame();
-
-    callGameOverOutside = callGameOver;
 
     useMountEffect(() => {
         setUpPauseButton();
@@ -48,5 +43,4 @@ const Game: FC = () => {
     );
 };
 
-export { callGameOverOutside };
 export default Game;

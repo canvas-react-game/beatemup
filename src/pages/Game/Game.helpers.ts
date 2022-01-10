@@ -16,14 +16,14 @@ export const useGame = () => {
         if (e.key === "Escape") {
             setActive(true);
             setPause(true);
-            world.setPause(true);
+            world.stopAnimation();
         }
     }, []);
 
     const callGameOver = useCallback(() => {
         setActive(true);
         setGameOver(true);
-        world.reinit();
+        world.destroy();
     }, []);
 
     const setUpPauseButton = useCallback(() => {
@@ -36,13 +36,17 @@ export const useGame = () => {
     }, []);
 
     const onStart = useCallback(() => {
-        world.init(canvasRef.current);
+        world.init({
+            canvas: canvasRef.current,
+            gameOverCallback: callGameOver,
+        });
+        setGameOver(false);
         setPause(false);
         setActive(false);
     }, []);
 
     const onResume = useCallback(() => {
-        world.setPause(false);
+        world.startAnimataion();
         setPause(false);
         setActive(false);
     }, []);
@@ -61,7 +65,6 @@ export const useGame = () => {
         onClose,
         onUnmount,
         setUpPauseButton,
-        callGameOver,
         isGameOver,
     };
 };

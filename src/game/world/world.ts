@@ -7,6 +7,7 @@ import { Color } from "../core/utils/color";
 import { Player } from "./objects/player";
 import { Enemy } from "./objects/enemy";
 import { Wall } from "./objects/wall";
+import PlayerImage from "../../../assets/images/player.png";
 
 type Listener = (this: Window, ev: KeyboardEvent) => any;
 
@@ -66,7 +67,7 @@ export class World {
         player.positon.y = window.innerHeight / 2;
         // Загружаем изображение для спрайта игрока
         const image = new Image(36, 36);
-        image.src = "player.png";
+        image.src = PlayerImage;
         // Устанавливаем спрайт
         player.sprite = image;
 

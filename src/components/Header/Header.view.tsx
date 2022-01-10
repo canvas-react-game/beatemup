@@ -16,9 +16,7 @@ const mainRoute = appRoutes.main.path;
 const Header: FC<Props> = ({ currentPath }) => {
     const {
         routes,
-        renderSignInButton,
         renderSignOutButton,
-        renderSignUpButton
     } = useHeader();
 
     return (
@@ -29,8 +27,7 @@ const Header: FC<Props> = ({ currentPath }) => {
             <div className={styles.routesContainer}>
                 <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
-                    {checkAccess() ? renderSignOutButton() : renderSignInButton()}
-                    {!checkAccess() && renderSignUpButton()}
+                    {checkAccess() && renderSignOutButton()}
                 </div>
             </div>
         </div>

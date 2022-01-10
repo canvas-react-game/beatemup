@@ -17,7 +17,6 @@ export const useHeader = () => {
     ]
 
     const signInRoute = appRoutes.signIn.path;
-    const signUpRoute = appRoutes.signUp.path;
 
     const onSignOut = useCallback(async (event: any) => {
         event.preventDefault();
@@ -28,17 +27,11 @@ export const useHeader = () => {
         }
     }, []);
 
-    const renderSignInButton = () => (<a className={styles.signIn} href={signInRoute}>Войти</a>);
-
     const renderSignOutButton = () =>
         (<a className={styles.signIn} href='' onClick={onSignOut}>Выйти</a>);
 
-    const renderSignUpButton = () => (<a className={styles.signUp} href={signUpRoute}>Регистрация</a>);
-
     return {
         routes,
-        renderSignInButton,
         renderSignOutButton,
-        renderSignUpButton
     }
 }

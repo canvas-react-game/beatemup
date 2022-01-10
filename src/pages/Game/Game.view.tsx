@@ -10,42 +10,42 @@ import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 let callGameOverOutside = () => {};
 
 const Game: FC = () => {
-  const {
-    isActive,
-    isPaused,
-    canvasRef,
-    onStart,
-    onResume,
-    onClose,
-    onUnmount,
-    setUpPauseButton,
-    callGameOver,
-    isGameOver,
-  } = useGame();
+    const {
+        isActive,
+        isPaused,
+        canvasRef,
+        onStart,
+        onResume,
+        onClose,
+        onUnmount,
+        setUpPauseButton,
+        callGameOver,
+        isGameOver,
+    } = useGame();
 
-  callGameOverOutside = callGameOver;
+    callGameOverOutside = callGameOver;
 
-  useMountEffect(() => {
-    setUpPauseButton();
-  });
+    useMountEffect(() => {
+        setUpPauseButton();
+    });
 
-  useUnmountEffect(() => {
-    onUnmount();
-  });
+    useUnmountEffect(() => {
+        onUnmount();
+    });
 
-  return (
-    <>
-      <canvas className={styles.game} ref={canvasRef} />
-      <Menu
-        isActive={isActive}
-        onClose={onClose}
-        onStart={onStart}
-        isPaused={isPaused}
-        isGameOver={isGameOver}
-        onResume={onResume}
-      />
-    </>
-  );
+    return (
+        <>
+            <canvas className={styles.game} ref={canvasRef} />
+            <Menu
+                isActive={isActive}
+                onClose={onClose}
+                onStart={onStart}
+                isPaused={isPaused}
+                isGameOver={isGameOver}
+                onResume={onResume}
+            />
+        </>
+    );
 };
 
 export { callGameOverOutside };

@@ -8,7 +8,7 @@
 
 ### Играть
 
-<a href="https://www.heroku.com/">
+<a href="https://ultimatedungeoncrawler.herokuapp.com/">
     <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"
         alt="Heroku" width="80" height="28">
 </a>

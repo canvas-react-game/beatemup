@@ -1,9 +1,9 @@
-import {useHistory} from "react-router";
-import {useCallback} from "react";
+import { useHistory } from "react-router-dom";
+import { useCallback } from "react";
 
-import {routes} from '@/config/routes/routes';
-import api, {SignInData} from '@/api/Auth';
-import {setAccess} from "@/helpers/acess";
+import { routes } from "@/config/routes/routes";
+import api, { SignInData } from "@/api/Auth";
+import { setAccess } from "@/helpers/acess";
 
 export enum SignInFieldNames {
     login = "login",
@@ -22,7 +22,7 @@ export const useSignInForm = () => {
         }
     }, []);
 
-    const onFinishFailed = (errorInfo: Error) => console.log('Failed:', errorInfo);
+    const onFinishFailed = (errorInfo: Error) => console.log("Failed:", errorInfo);
 
     return {
         currentPath,

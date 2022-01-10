@@ -13,7 +13,6 @@ import Game from "@/pages/Game";
 import { routes } from "@/config/routes/routes";
 import AccessRoute from "@/components/AccessRoute";
 
-
 const Routes: FC = () => (
     <Switch>
         <Redirect exact from={"/"} to={routes.signIn.path}/>
@@ -25,8 +24,8 @@ const Routes: FC = () => (
         <AccessRoute path={routes.leaderboard.path} exact component={Leaderboard}/>
         <AccessRoute path={routes.about.path} exact component={About}/>
         <AccessRoute path={routes.game.path} exact component={Game}/>
-        <Route path={'/error'} exact component={Error}/>
-      </Switch>
-  );
+        <Route path={"/error"} exact component={Error}/>
+    </Switch>
+);
 
 export default Routes;

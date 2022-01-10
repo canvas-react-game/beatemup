@@ -7,7 +7,6 @@
         "airbnb-base", 
         "airbnb-typescript/base"
     ],
-    "parser": "@typescript-eslint/parser",
     "rules": {
       "max-len": [2, 100],
       "max-params": [2, 4],
@@ -50,12 +49,13 @@
     },
     "overrides": [
         {
-          "files": ["**/*.ts"],
+          "files": ["**/*.ts", "**/*.tsx"],
           "parserOptions": {
             "project": "./tsconfig.json",
             "ecmaVersion": "latest",
             "sourceType": "module"
           }
         }
-    ]
+    ],
+    "parser": "@typescript-eslint/parser"
 } 

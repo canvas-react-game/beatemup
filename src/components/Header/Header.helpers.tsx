@@ -1,14 +1,15 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { routes as appRoutes } from "@/config/routes/routes";
-import { setAccess } from "@/helpers/acess";
-import api from "@/api/Auth";
+import { signOut } from "@/actions/auth.actions";
 
 import styles from "./Header.module.scss";
 
 export const useHeader = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const routes = [
         { path: appRoutes.about.path, label: "Об игре" },
         { path: appRoutes.profile.path, label: "Профиль" },
@@ -16,15 +17,9 @@ export const useHeader = () => {
         { path: appRoutes.forum.path, label: "Форум" },
     ];
 
-    const signInRoute = appRoutes.signIn.path;
-
     const onSignOut = useCallback(async (event: any) => {
         event.preventDefault();
-        const response = await api.logOut();
-        if (response) {
-            setAccess(false);
-            history.push(signInRoute);
-        }
+        dispatch(signOut(history));
     }, []);
 
     const renderSignOutButton = () => (

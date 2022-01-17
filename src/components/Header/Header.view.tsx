@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { routes as appRoutes } from "@/config/routes/routes";
-import { checkAccess } from "@/helpers/acess";
+import { useSelector } from "@/helpers/useSelector";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
@@ -19,6 +19,8 @@ const Header: FC<Props> = ({ currentPath }) => {
         renderSignOutButton,
     } = useHeader();
 
+    const isSignedIn = useSelector(state => state.auth.isSignedIn);
+
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
@@ -27,7 +29,7 @@ const Header: FC<Props> = ({ currentPath }) => {
             <div className={styles.routesContainer}>
                 <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
-                    {checkAccess() && renderSignOutButton()}
+                    {isSignedIn && renderSignOutButton()}
                 </div>
             </div>
         </div>

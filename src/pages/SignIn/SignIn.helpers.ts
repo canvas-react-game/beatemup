@@ -2,8 +2,9 @@ import { useHistory } from "react-router-dom";
 import { useCallback } from "react";
 
 import { routes } from "@/config/routes/routes";
-import api, { SignInData } from "@/api/Auth";
-import { setAccess } from "@/helpers/acess";
+import { SignInData } from "@/api/Auth";
+import {useDispatch} from "react-redux";
+import {signIn} from "@/actions/auth.actions";
 
 export enum SignInFieldNames {
     login = "login",
@@ -13,13 +14,10 @@ export enum SignInFieldNames {
 export const useSignInForm = () => {
     const history = useHistory();
     const currentPath = routes.signIn.path;
+    const dispatch = useDispatch();
 
     const onFinish = useCallback(async (values: SignInData) => {
-        const response = await api.signIn(values);
-        if (response) {
-            setAccess(true);
-            history.push(routes.main.path);
-        }
+        dispatch(signIn(values, history));
     }, []);
 
     const onFinishFailed = (errorInfo: Error) => console.log("Failed:", errorInfo);

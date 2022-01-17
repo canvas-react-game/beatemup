@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 
 import { routes as appRoutes } from "@/config/routes/routes";
 import { signOut } from "@/actions/auth.actions";
-import { useSelector } from "@/helpers/useSelector";
+import { checkAccess } from "@/helpers/acess";
 
 import styles from "./Header.module.scss";
 
 export const useHeader = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const isSignedIn = useSelector(state => state.auth.isSignedIn);
+    const isSignedIn = checkAccess();
 
     const routes = [
         { path: appRoutes.about.path, label: "Об игре" },

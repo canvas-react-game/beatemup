@@ -4,12 +4,15 @@ import { useDispatch } from "react-redux";
 
 import { routes as appRoutes } from "@/config/routes/routes";
 import { signOut } from "@/actions/auth.actions";
+import { useSelector } from "@/helpers/useSelector";
 
 import styles from "./Header.module.scss";
 
 export const useHeader = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const isSignedIn = useSelector(state => state.auth.isSignedIn);
+
     const routes = [
         { path: appRoutes.about.path, label: "Об игре" },
         { path: appRoutes.profile.path, label: "Профиль" },
@@ -27,7 +30,7 @@ export const useHeader = () => {
     );
 
     return {
-        routes,
+        routes: isSignedIn ? routes : routes.filter(route => route.path === appRoutes.about.path),
         renderSignOutButton,
     };
 };

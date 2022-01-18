@@ -12,7 +12,7 @@ const LOG_OUT = 'LOG_OUT';
 export const actions = { LOG_IN , LOG_OUT }
 
 export const signInSuccess = () => ({
-    type: actions.LOG_IN,
+    type: LOG_IN,
     payload: { isSignedIn: true }
 })
 

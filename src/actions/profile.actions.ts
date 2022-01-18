@@ -8,7 +8,7 @@ const SET_PROFILE = 'SET_PROFILE';
 export const actions = { GET_PROFILE , SET_PROFILE }
 
 export const profileFetchSuccess = (data: UserInfo) => ({
-    type: actions.GET_PROFILE,
+    type: GET_PROFILE,
     payload: { ...data }
 })
 

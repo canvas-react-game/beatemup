@@ -5,7 +5,12 @@ export interface AuthState {
     isSignedIn: boolean
 }
 
-export const authReducer = (state: AuthState = { isSignedIn: checkAccess() }, action: any) => {
+interface Action {
+    type: 'LOG_IN' | 'LOG_OUT',
+    payload: { isSignedIn: boolean }
+}
+
+export const authReducer = (state: AuthState = { isSignedIn: checkAccess() }, action: Action) => {
     switch (action.type) {
         case actions.LOG_IN:
             return { isSignedIn: true };

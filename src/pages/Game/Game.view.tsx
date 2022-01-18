@@ -29,8 +29,8 @@ const Game: FC = () => {
     });
 
     return (
-        <>
-            <canvas className={styles.game} ref={canvasRef} />
+        <div className={styles.game}>
+            <canvas ref={canvasRef} />
             <Menu
                 isActive={isActive}
                 onClose={onClose}
@@ -39,7 +39,7 @@ const Game: FC = () => {
                 isGameOver={isGameOver}
                 onResume={onResume}
             />
-        </>
+        </div>
     );
 };
 

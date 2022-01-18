@@ -19,7 +19,7 @@ class APIService {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Credentials": "true",
             },
-            body: JSON.stringify(data),
+            ...(method !== Method.GET && {body: JSON.stringify(data)})
         });
         return response ?? null;
     }

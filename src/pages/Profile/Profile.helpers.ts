@@ -1,22 +1,25 @@
-import { useCallback, useState } from "react";
+import {useCallback, useState} from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 
 import { routes } from "@/config/routes/routes";
-
 import Password from "@/components/Password";
 
 import { ProfileValue } from "./Profile.types";
+import {useSelector} from "@/helpers/useSelector";
+
+const currentPath = routes.profile.path;
 
 export const useProfileForm = () => {
-    const currentPath = `/#${routes.profile.path}`;
+    const profile = useSelector(state => state.profile);
+    console.log('profile is: ', profile);
 
     const onFinish = useCallback(
-        () => (values: ProfileValue[]) => console.log(values),
+        (values: ProfileValue[]) => console.log(values),
         [],
     );
     const onFinishFailed = useCallback(
-        () => (errorInfo: any) => console.log("Failed:", errorInfo),
+        (errorInfo: any) => console.log("Failed:", errorInfo),
         [],
     );
 

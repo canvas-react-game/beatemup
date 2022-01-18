@@ -17,6 +17,11 @@ export interface SignInData {
     password: string;
 }
 
+export interface UserInfo extends SignUpData {
+    id: number,
+    avatar: string
+}
+
 const root = "auth";
 
 type Request = "signIn" | "signOut" | undefined;
@@ -76,6 +81,14 @@ class AuthApi {
             return this.isSuccessfulRequest(response, "signOut");
         }
         return false;
+    }
+
+    public async getUserInfo(): Promise<UserInfo | null> {
+        const response = await APIService.request(Method.GET, `${root}/user`);
+        if (response.status === 200) {
+            return response.json();
+        }
+        return null;
     }
 }
 

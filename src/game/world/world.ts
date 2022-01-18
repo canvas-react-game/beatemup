@@ -1,15 +1,11 @@
 import { Camera } from "../core/camera";
-import { RectangleGeometry } from "../core/geometry/rectangle/rectangle";
 import { Renderer } from "../core/renderer";
 import { Scene } from "../core/scene";
 import { EventBus, EventTypes, KeyboardEvents } from "../core/eventBus";
-import { Color } from "../core/utils/color";
-import { Player } from "./objects/player";
-import { Enemy } from "./objects/enemy";
-import { Wall } from "./objects/wall";
-import PlayerImage from "../../../assets/images/player.png";
+import { WorldManager } from "./world.manager";
 
-type Listener = (this: Window, ev: KeyboardEvent) => any;
+type KeyListener = (this: Window, ev: KeyboardEvent) => any;
+type Listener = (this: Window, ev: Event) => any;
 
 type WorldProps = {
     canvas: HTMLCanvasElement | null
@@ -22,6 +18,7 @@ export class World {
     renderer: Renderer;
     scene: Scene;
     camera: Camera;
+    manager: WorldManager;
 
     eventBus: EventBus;
 
@@ -29,8 +26,9 @@ export class World {
     animationNumber: number | undefined;
 
     // События, от которых нужно отписаться
-    private _keyDownListener: Listener;
-    private _keyUpListener: Listener;
+    private _keyDownListener: KeyListener;
+    private _keyUpListener: KeyListener;
+    private _resizeListener: Listener;
 
     // Gameover callback to interact with GUI
     gameOverCallback: () => void;
@@ -50,69 +48,12 @@ export class World {
             height: window.innerHeight,
         });
 
-        // Задаем бэкграунд и создаем сцену
-        const background = new Color(0, 0, 255);
-        this.scene = new Scene(background);
-        // Создаем камеру (пока что пустую)
-        // const camera = new Camera()
-
-        // Создаем Игрока
-        const playerGeom = new RectangleGeometry(36, 36);
-        const player = new Player({
-            geometry: playerGeom,
-            eventBus: this.eventBus,
-        });
-        // Зададим дефолтное положение
-        player.positon.x = window.innerWidth / 2;
-        player.positon.y = window.innerHeight / 2;
-        // Загружаем изображение для спрайта игрока
-        const image = new Image(36, 36);
-        image.src = PlayerImage;
-        // Устанавливаем спрайт
-        player.sprite = image;
-
-        // Создаем противника
-        const enemyGeom = new RectangleGeometry(36, 36);
-        const enemy = new Enemy({
-            geometry: enemyGeom,
-            color: new Color(255, 0, 0),
-            gameOverCallback: this.gameOverCallback,
-        });
-        // Зададим дефолтное положение
-        enemy.positon.x = window.innerWidth / 4;
-        enemy.positon.y = window.innerHeight / 4;
-
-        // Создаем стены
-        const wall1Geom = new RectangleGeometry(30, 400);
-        const wall1 = new Wall({
-            geometry: wall1Geom,
-            color: new Color(0, 255, 0),
-        });
-        wall1.positon.x = window.innerWidth / 2 - 200;
-        wall1.positon.y = window.innerHeight / 4;
-
-        const wall2Geom = new RectangleGeometry(30, 400);
-        const wall2 = new Wall({
-            geometry: wall2Geom,
-            color: new Color(0, 255, 0),
-        });
-        wall2.positon.x = window.innerWidth / 2 + 200;
-        wall2.positon.y = window.innerHeight / 4;
-
-        const wall3Geom = new RectangleGeometry(400, 30);
-        const wall3 = new Wall({
-            geometry: wall3Geom,
-            color: new Color(0, 255, 0),
-        });
-        wall3.positon.x = window.innerWidth / 2 - 175;
-        wall3.positon.y = window.innerHeight / 2 - 290;
-
-        // NOTE: Порядок подключения влияет на очередь отрисовки
-        this.scene.add(wall1);
-        this.scene.add(wall2);
-        this.scene.add(wall3);
-        this.scene.add(player);
-        this.scene.add(enemy);
+        // World Manager
+        this.manager = new WorldManager();
+        [this.scene, this.camera] = this.manager.composeLevel(
+            this.gameOverCallback,
+            this.eventBus,
+        );
 
         this.registerEvents();
         this.startAnimataion();
@@ -183,13 +124,19 @@ export class World {
             }
         };
 
+        this._resizeListener = (e: Event) => {
+            this.renderer.resize(window.innerHeight, window.innerWidth)
+        }
+
         window.addEventListener("keydown", this._keyDownListener);
         window.addEventListener("keyup", this._keyUpListener);
+        window.addEventListener("resize", this._resizeListener);
     }
 
     destroy() {
         this.stopAnimation();
         window.removeEventListener("keydown", this._keyDownListener);
         window.removeEventListener("keyup", this._keyUpListener);
+        window.removeEventListener("resize", this._resizeListener);
     }
 }

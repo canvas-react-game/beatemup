@@ -56,7 +56,7 @@ export class Renderer {
         for (const obj of scene.objects) {
             switch (obj.geometry.type) {
                 case GeometryTypes.Rectangle:
-                    this._drawRectangle(obj);
+                    this._drawRectangle(obj, camera);
                     break;
                 default:
                     break;
@@ -67,7 +67,7 @@ export class Renderer {
     // Запустить физику и пересчитать анимацию
     prerender(scene: Scene, dt: number, now: number) {
         // Сначала пересчитываем анимацию
-        for (const obj of scene.objects) {
+        for (const obj of scene.objectWithPhysics) {
             obj.updateState(dt);
         }
         // TODO: Реализовать Quadtree collison detection
@@ -77,10 +77,10 @@ export class Renderer {
         /* eslint-enable */
 
         // Затем проверяем столкновение объектов в сцене
-        for (let i = 0; i < scene.objects.length; i += 1) {
-            for (let j = i + 1; j < scene.objects.length; j += 1) {
-                const obj1 = scene.objects[i];
-                const obj2 = scene.objects[j];
+        for (let i = 0; i < scene.objectWithPhysics.length; i += 1) {
+            for (let j = i + 1; j < scene.objectWithPhysics.length; j += 1) {
+                const obj1 = scene.objectWithPhysics[i];
+                const obj2 = scene.objectWithPhysics[j];
 
                 if (
                     isImplementingCollision(obj1)
@@ -101,17 +101,37 @@ export class Renderer {
         this.lastTime = now;
     }
 
-    // Отрисовка rectangle на канвасе
-    private _drawRectangle(object: Object2D) {
-        const c = this.context;
-        const { color } = object;
-        const geom = object.geometry as RectangleGeometry;
+    // Resize
+    resize(height: number, width: number) {
+        this.canvas.height = height
+        this.canvas.width = width
+    }
 
-        if (object.sprite) {
-            c.drawImage(object.sprite, object.positon.x, object.positon.y, geom.width, geom.height);
+    // Отрисовка rectangle на канвасе
+    private _drawRectangle(object: Object2D, camera: Camera) {
+        const c = this.context;
+        const geom = object.geometry as RectangleGeometry;
+        const { color } = object;
+        let {x, y} = object.position;
+        let {width, height} = geom;
+        // Смещаем координаты отностительно объекта привязки камеры
+        x = camera.size / 2 + (x - camera.bindedObject.position.x)
+        y = camera.size / 2 + (y - camera.bindedObject.position.y)
+        // Переводим world coordinates в координаты отрисовки
+        // TODO: Проблема округления координат
+        const K = this.canvas.width / camera.size
+        x = K * x
+        // Рассчитываем с поправкой на позиционирование камеры
+        y = K * y - (camera.size / 2 * K - this.canvas.height / 2)
+        width = K * width
+        height = K * height
+        if (object.sprite?.image) {
+            const sp = object.sprite
+            const image = sp.image as HTMLImageElement
+            c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, x, y, width, height);
         } else {
             c.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-            c.fillRect(object.positon.x, object.positon.y, geom.width, geom.height);
+            c.fillRect(x, y, width, height);
         }
     }
 }

@@ -6,15 +6,22 @@ export class Scene {
     public background: Color;
     // Список объектов в сцене
     public objects: Object2D[];
+    // Список объектов в сцене с физикой
+    public objectWithPhysics: Object2D[];
 
     constructor(background?: Color) {
         this.objects = [];
+        this.objectWithPhysics = [];
 
         this.background = background || new Color(255, 255, 255);
     }
 
-    add(object: Object2D) {
-        this.objects.push(object);
+    add(...objects: Object2D[]) {
+        this.objects.push(...objects);
+    }
+
+    addObjectWithPhysics(...objects: Object2D[]) {
+        this.objectWithPhysics.push(...objects);
     }
 
     remove(object: Object2D) {

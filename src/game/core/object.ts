@@ -1,3 +1,4 @@
+import { Sprite } from "game/world/world.manager";
 import { Geometry } from "./geometry/geometry";
 import { Color } from "./utils/color";
 import { Vector2D } from "./utils/vector";
@@ -20,7 +21,7 @@ export class Object2D {
     name: string;
     // Позиция объекта в сцене
     // NOTE: x = left, y = top
-    positon: Vector2D;
+    position: Vector2D;
     // Видимость объектв в сцене
     visible: boolean;
     // Должен ли объект обрезаться камерой при рендеринге
@@ -33,13 +34,13 @@ export class Object2D {
     color: Color;
     // Спрайт
     // TODO: Определить тип и реализовать функционал
-    sprite: HTMLImageElement | null;
+    sprite: Sprite | null;
 
     constructor(props: Object2DProps) {
         // Задаем дефолтные значения
         this.id = getObject2DId();
         this.name = "";
-        this.positon = new Vector2D(0, 0);
+        this.position = new Vector2D(0, 0);
         this.visible = true;
         this.frustumCulled = false;
         this.userData = null;
@@ -51,7 +52,7 @@ export class Object2D {
 
     // Базовые методы для объекта
     move(vect: Vector2D) {
-        this.positon.add(vect);
+        this.position.add(vect);
     }
 
     rotate() {

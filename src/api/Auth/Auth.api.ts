@@ -27,7 +27,7 @@ const root = "auth";
 type Request = "signIn" | "signOut" | undefined;
 
 class AuthApi {
-    isSuccessfulRequest(response: any, type: Request = undefined) {
+    isSuccessfulRequest(response: Response, type: Request = undefined) {
         let message = "Регистрация прошла успешно";
         let errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
@@ -86,7 +86,8 @@ class AuthApi {
     public async getUserInfo(): Promise<UserInfo | null> {
         const response = await APIService.request(Method.GET, `${root}/user`);
         if (response.status === 200) {
-            return response.json();
+            const result = await response.json();
+            return result ?? null;
         }
         return null;
     }

@@ -21,7 +21,7 @@ type PlayerSprites = {
     idle_1: Sprite,
     idle_2: Sprite,
     idle_3: Sprite,
-}
+};
 
 export class Player extends Object2D implements Collidable {
     // Скорость передвижения пиксель/сек
@@ -33,7 +33,7 @@ export class Player extends Object2D implements Collidable {
     //
     canCollide: boolean = true;
     //
-    playerSprites: PlayerSprites
+    playerSprites: PlayerSprites;
 
     constructor(props: PlayerProps) {
         super(props);
@@ -50,7 +50,7 @@ export class Player extends Object2D implements Collidable {
         this.init();
     }
 
-    init() {        
+    init() {
         this.eventBus.on(
             EventTypes.ArrowLeftDown,
             () => (this.moveState.isMovingLeft = true),
@@ -155,36 +155,36 @@ export class Player extends Object2D implements Collidable {
     private _createPlayerSprites(image?: HTMLImageElement) {
         this.playerSprites = {
             idle_0: {
-                image: image,
+                image,
                 sx: 128,
                 sy: 100,
                 sWidth: 16,
-                sHeight: 28
+                sHeight: 28,
             },
             idle_1: {
-                image: image,
-                sx: 128+16,
+                image,
+                sx: 128 + 16,
                 sy: 100,
                 sWidth: 16,
-                sHeight: 28
+                sHeight: 28,
             },
             idle_2: {
-                image: image,
-                sx: 128+16*2,
+                image,
+                sx: 128 + 16 * 2,
                 sy: 100,
                 sWidth: 16,
-                sHeight: 28
+                sHeight: 28,
             },
             idle_3: {
-                image: image,
-                sx: 128+16*3,
+                image,
+                sx: 128 + 16 * 3,
                 sy: 100,
                 sWidth: 16,
-                sHeight: 28
+                sHeight: 28,
             },
-        }
+        };
         // Устанавливаем дефолтный спрайт
-        this.sprite = this.playerSprites.idle_0
+        this.sprite = this.playerSprites.idle_0;
     }
 
     // private _updateSpritesImage(image: HTMLImageElement) {

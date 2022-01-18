@@ -5,7 +5,6 @@ type GroundProps = Object2DProps & {
 };
 
 export class Ground extends Object2D {
-
     constructor(props: GroundProps) {
         super(props);
         this.init();

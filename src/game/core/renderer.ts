@@ -103,8 +103,8 @@ export class Renderer {
 
     // Resize
     resize(height: number, width: number) {
-        this.canvas.height = height
-        this.canvas.width = width
+        this.canvas.height = height;
+        this.canvas.width = width;
     }
 
     // Отрисовка rectangle на канвасе
@@ -112,22 +112,22 @@ export class Renderer {
         const c = this.context;
         const geom = object.geometry as RectangleGeometry;
         const { color } = object;
-        let {x, y} = object.position;
-        let {width, height} = geom;
+        let { x, y } = object.position;
+        let { width, height } = geom;
         // Смещаем координаты отностительно объекта привязки камеры
-        x = camera.size / 2 + (x - camera.bindedObject.position.x)
-        y = camera.size / 2 + (y - camera.bindedObject.position.y)
+        x = camera.size / 2 + (x - camera.bindedObject.position.x);
+        y = camera.size / 2 + (y - camera.bindedObject.position.y);
         // Переводим world coordinates в координаты отрисовки
         // TODO: Проблема округления координат
-        const K = this.canvas.width / camera.size
-        x = K * x
+        const K = this.canvas.width / camera.size;
+        x *= K;
         // Рассчитываем с поправкой на позиционирование камеры
-        y = K * y - (camera.size / 2 * K - this.canvas.height / 2)
-        width = K * width
-        height = K * height
+        y = K * y - ((camera.size / 2) * K - this.canvas.height / 2);
+        width *= K;
+        height *= K;
         if (object.sprite?.image) {
-            const sp = object.sprite
-            const image = sp.image as HTMLImageElement
+            const sp = object.sprite;
+            const image = sp.image as HTMLImageElement;
             c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, x, y, width, height);
         } else {
             c.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;

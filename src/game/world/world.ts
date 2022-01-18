@@ -125,8 +125,8 @@ export class World {
         };
 
         this._resizeListener = (e: Event) => {
-            this.renderer.resize(window.innerHeight, window.innerWidth)
-        }
+            this.renderer.resize(window.innerHeight, window.innerWidth);
+        };
 
         window.addEventListener("keydown", this._keyDownListener);
         window.addEventListener("keyup", this._keyUpListener);

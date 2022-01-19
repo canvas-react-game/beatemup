@@ -74,7 +74,8 @@ export class World {
                 // вложенный цикл может вызывать обновление состояния несколько раз подряд
                 // если прошло больше времени, чем выделено на один кадр
                 dt -= STEP; 
-                this.renderer.prerender(this.scene, STEP * 1000, now);
+                // Обновляем состояние каждый STEP
+                this.renderer.prerender(this.scene);
                 // TODO: Реализовать логику camera без привязки к объекту
                 // this.camera.update()
             }

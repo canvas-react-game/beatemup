@@ -59,6 +59,7 @@ const initialFieldsState = [
 ];
 
 export const useProfileForm = () => {
+    //@ts-ignore
     const profileData = useSelector(state => state.profile);
     console.log('profile is: ', profileData);
 

@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
@@ -15,6 +15,13 @@ const appReducer = combineReducers({
     profile: profileReducer
 })
 
-const configureStore = () => createStore(appReducer, applyMiddleware(thunk));
+const configureStore = () =>
+    createStore(appReducer, compose(applyMiddleware(thunk),
+        //@ts-ignore
+        window.__REDUX_DEVTOOLS_EXTENSION__
+            //@ts-ignore
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : (f: () => void) => f
+    ));
 
 export default configureStore;

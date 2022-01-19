@@ -6,10 +6,8 @@ import { setAccess } from "@/helpers/acess";
 
 import { History } from "history";
 
-const LOG_IN = 'LOG_IN';
-const LOG_OUT = 'LOG_OUT';
-
-export const actions = { LOG_IN , LOG_OUT }
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
 
 export const signInSuccess = () => ({
     type: LOG_IN,
@@ -17,7 +15,7 @@ export const signInSuccess = () => ({
 })
 
 export const signOutSuccess = () => ({
-    type: actions.LOG_OUT,
+    type: LOG_OUT,
     payload: { isSignedIn: false }
 })
 

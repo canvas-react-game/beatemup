@@ -1,21 +1,20 @@
-import { actions } from "@/actions/profile.actions";
+import { GET_PROFILE, SET_PROFILE } from "@/actions/profile.actions";
 import { UserInfo } from "@/api/Auth";
 
 export interface ProfileState extends UserInfo {}
 
 interface Action {
-    type: 'GET_PROFILE' | 'SET_PROFILE',
-    payload: UserInfo | {}
+    type: typeof GET_PROFILE | typeof SET_PROFILE,
+    payload: { profile: UserInfo }
 }
 
 export const profileReducer = (state: ProfileState | {} = {}, action: Action) => {
     switch (action.type) {
-        case actions.GET_PROFILE:
+        case GET_PROFILE:
             return {
-                ...state,
-                ...action.payload
+                profile: { ...state, ...action.payload }
             };
-        case actions.SET_PROFILE:
+        case SET_PROFILE:
             // todo
             return {
                 ...state

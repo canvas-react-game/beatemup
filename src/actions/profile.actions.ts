@@ -2,14 +2,12 @@ import {Dispatch} from "react";
 
 import api, {UserInfo} from "@/api/Auth/Auth.api";
 
-const GET_PROFILE = 'GET_PROFILE';
-const SET_PROFILE = 'SET_PROFILE';
+export const GET_PROFILE = 'GET_PROFILE';
+export const SET_PROFILE = 'SET_PROFILE';
 
-export const actions = { GET_PROFILE , SET_PROFILE }
-
-export const profileFetchSuccess = (data: UserInfo) => ({
-    type: GET_PROFILE,
-    payload: { ...data }
+export const profileFetchSuccess = (profile: UserInfo) => ({
+    type: typeof GET_PROFILE,
+    payload: { profile }
 })
 
 export const getProfile = () =>

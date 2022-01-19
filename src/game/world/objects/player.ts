@@ -1,11 +1,17 @@
 import { Object2D, Object2DProps } from "../../core/object";
 import { EventBus, EventTypes } from "../../core/eventBus";
 import { Collidable } from "../../core/physics/physics";
-import { Box2 } from "../../core/utils/box2";
-import { Sprite } from "../world.manager";
+import { Sprite, WorldManager } from "../world.manager";
+import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
+import { Box2 } from "game/core/utils/box2";
+import Physics from "../../core/physics/physics"
+import { Vector2D } from "game/core/utils/vector";
+// import { Box2 } from "game/core/utils/box2";
+// import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 
 type PlayerProps = Object2DProps & {
     eventBus: EventBus;
+    worldManager: WorldManager;
     image?: HTMLImageElement;
 };
 
@@ -32,8 +38,12 @@ export class Player extends Object2D implements Collidable {
     speed: number = 150;
     // Global event bus
     eventBus: EventBus;
+    //
+    worldManager: WorldManager;
     // Флаги состояния передвижения
     moveState: MoveState;
+    lastDelta: number;
+    prevPosition: Vector2D;
     //
     canCollide: boolean = true;
     //
@@ -44,6 +54,7 @@ export class Player extends Object2D implements Collidable {
         super(props);
 
         this.eventBus = props.eventBus;
+        this.worldManager = props.worldManager;
         this.moveState = {
             isMovingLeft: false,
             isMovingRight: false,
@@ -113,17 +124,21 @@ export class Player extends Object2D implements Collidable {
                 else {
                     this.spriteConfig.sprite = this._getNextIdleSprite()
                 }
-            }
-            // NOTE: Обновляем shouldFlip после установки нового спрайта
+            }        
+        }
+        // NOTE: Обновляем shouldFlip после установки нового спрайта
+        if(this.spriteConfig) {
             if(this.moveState.isMovingRight) {
                 this.spriteConfig.shouldFlip = false
             }
             if(this.moveState.isMovingLeft) {
                 this.spriteConfig.shouldFlip = true
-            }           
+            }
         }
         // Обновляем position
+        this.prevPosition = this.position.copy();
         const delta = (dt / 1000) * this.speed;
+        this.lastDelta = delta;
         if (this.moveState.isMovingDown) {
             this.position.y += delta;
         }
@@ -147,43 +162,76 @@ export class Player extends Object2D implements Collidable {
 
     // NOTE: Если скорость объекта значительно больше размера препятствия, то
     // может случиться "проскок" объекта
-    // TODO: Переписать логику столкновения
-    // потому что это работает, но с багами при соприкосновении с углами стен
     onCollide(obstacle: Object2D & Collidable) {
-    // Края объекта не должны пересекаться с bounding box obstacle
-        const objGeomBB = this.geometry.boundingBox as Box2;
+        // Края объекта не должны пересекаться с bounding box obstacle
+        const objGeom = this.geometry as RectangleGeometry;
         const obstGeomBB = obstacle.geometry.boundingBox as Box2;
         const {
             isMovingRight, isMovingLeft, isMovingDown, isMovingTop,
         } = this.moveState;
-        if (this.isMoving()) {
-            if (
-                isMovingRight
-        && objGeomBB.max.x > obstacle.position.x
-        && this.position.x < obstacle.position.x
-            ) {
-                this.position.x -= objGeomBB.max.x - obstacle.position.x;
+        // Сохраняем текущую позицию (позиция после движения)
+        const position = this.position.copy()
+        // Общая идея в том, чтобы определить в следствие какого движения произошло столкновение
+        // Для этого мы берем предыдущую позицию и проверяем произойдет ли столкновение
+        // если передвинуться на расчетное значение delta
+        // Если столкновение произойдет, то пересчитываем позицию
+        // иначе восстанавливаем текущую позицию
+        if (isMovingRight) {
+            // Устанавливаем предыдущую позицию
+            this.position = this.prevPosition.copy();
+            // Делаем шаг вправо
+            this.position.x += this.lastDelta;
+            // Проверяем стало ли это причиной столкновения
+            const isCollisionCause = Physics.hasBox2DCollided(this, obstacle)
+            if(isCollisionCause) {
+                // Обновляем координаты если стало
+                this.position.x = obstacle.position.x - objGeom.width;
+                this.position.y = position.y
+                // Дальше не идем, иначе восстановим случайно позицию
+                return
             }
-            if (
-                isMovingLeft
-        && this.position.x < obstGeomBB.max.x
-        && objGeomBB.max.x > obstGeomBB.max.x
-            ) {
-                this.position.x += obstGeomBB.max.x - this.position.x;
+            else {
+                // Восстанавливаем позицию
+                this.position = position;
             }
-            if (
-                isMovingDown
-        && objGeomBB.max.y > obstacle.position.y
-        && this.position.y < obstacle.position.y
-            ) {
-                this.position.y -= objGeomBB.max.y - obstacle.position.y;
+        }
+        if (isMovingDown) {
+            this.position = this.prevPosition.copy();
+            this.position.y += this.lastDelta;
+            const isCollisionCause = Physics.hasBox2DCollided(this, obstacle)
+            if(isCollisionCause) {
+                this.position.x = position.x
+                this.position.y = obstGeomBB.min.y - objGeom.height;
+                return
             }
-            if (
-                isMovingTop
-        && this.position.y < obstGeomBB.max.y
-        && objGeomBB.max.y > obstGeomBB.max.y
-            ) {
-                this.position.y += obstGeomBB.max.y - this.position.y;
+            else {
+                this.position = position;
+            }
+        }
+        if (isMovingLeft) {
+            this.position = this.prevPosition.copy();
+            this.position.x -= this.lastDelta;
+            const isCollisionCause = Physics.hasBox2DCollided(this, obstacle)
+            if(isCollisionCause) {
+                this.position.x = obstGeomBB.max.x;
+                this.position.y = position.y
+                return
+            }
+            else {
+                this.position = position;
+            }
+        }
+        if (isMovingTop) {
+            this.position = this.prevPosition.copy();
+            this.position.y -= this.lastDelta;
+            const isCollisionCause = Physics.hasBox2DCollided(this, obstacle)
+            if(isCollisionCause) {
+                this.position.x = position.x
+                this.position.y = obstGeomBB.max.y;
+                return
+            }
+            else {
+                this.position = position;
             }
         }
     }

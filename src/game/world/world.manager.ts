@@ -29,6 +29,7 @@ export type Sprite = {
 
 export class WorldManager {
     tileSetImage: HTMLImageElement;
+    level: Level
 
     constructor() {
         const tileSetImage = new Image(512, 512);
@@ -46,26 +47,32 @@ export class WorldManager {
         const background = new Color(0, 0, 0);
         const scene = new Scene(background);
         // Генерируем рандомный уровень
-        const level = generateRandomLevel();
+        this.level = generateRandomLevel();
         // Создаем стены и tiles из матрицы уровня
-        const objects = this._createWallsAndTilesFromLevel(level);
+        const objects = this._createWallsAndTilesFromLevel(this.level);
         // И добавляем в сцену первыми
         scene.add(...objects);
         scene.addObjectWithPhysics(...objects.filter((x) => x instanceof Wall));
         // Создаем Игрока
-        const player = this._createPlayer(eventBus, level);
+        const player = this._createPlayer(eventBus, this.level);
         // Добавляем в сцену
         scene.add(player);
         scene.addObjectWithPhysics(player);
         // Устанавливаем объект привязки камеры
         camera.bindObject(player);
         // Создаем противника
-        const enemy = this._createEnemy(eventBus, level, gameOverCallback);
+        const enemy = this._createEnemy(eventBus, this.level, gameOverCallback);
         // Добавляем в сцену
         scene.add(enemy);
         scene.addObjectWithPhysics(enemy);
 
         return [scene, camera];
+    }
+
+    getTilePositionFromCoordinates(coordinates: Vector2D): Vector2D {
+        const x = Math.floor(coordinates.x / TILE_SIZE) * TILE_SIZE
+        const y = Math.floor(coordinates.y / TILE_SIZE) * TILE_SIZE
+        return new Vector2D(x, y)
     }
 
     private _createWallsAndTilesFromLevel(level: Level): Array<Object2D> {
@@ -120,6 +127,7 @@ export class WorldManager {
         const player = new Player({
             geometry: playerGeom,
             eventBus,
+            worldManager: this,
             image: this.tileSetImage,
         });
         // Зададим дефолтное положение

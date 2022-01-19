@@ -19,7 +19,7 @@ export class Enemy extends Object2D implements Collidable {
 
     init() {}
 
-    updateState(dt: number) {}
+    updateState() {}
 
     //
     onCollide(obstacle: Object2D & Collidable) {

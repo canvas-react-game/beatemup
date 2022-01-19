@@ -15,8 +15,6 @@ export class Renderer {
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
 
-    lastTime: number | null = null;
-
     constructor(props: RendererProps) {
         if (!props.canvas) {
             throw new Error("Ошибка инициализации");
@@ -65,10 +63,10 @@ export class Renderer {
     }
 
     // Запустить физику и пересчитать анимацию
-    prerender(scene: Scene, dt: number, now: number) {
+    prerender(scene: Scene) {
         // Сначала пересчитываем анимацию
         for (const obj of scene.objectWithPhysics) {
-            obj.updateState(dt);
+            obj.updateState();
         }
         // TODO: Реализовать Quadtree collison detection
         /* eslint-disable */
@@ -97,8 +95,6 @@ export class Renderer {
                 }
             }
         }
-        //
-        this.lastTime = now;
     }
 
     // Resize

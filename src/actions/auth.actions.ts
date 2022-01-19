@@ -1,12 +1,12 @@
-import { AnyAction } from "redux";
-import { ThunkAction } from "redux-thunk";
+import {AnyAction} from "redux";
+import {ThunkAction} from "redux-thunk";
 
-import api, { SignInData } from "@/api/Auth";
-import { routes } from "@/config/routes/routes";
-import { setAccess } from "@/helpers/acess";
+import api, {SignInData} from "@/api/Auth";
+import {routes} from "@/config/routes/routes";
+import {setAccess} from "@/helpers/acess";
 
-import { History } from "history";
-import { SIGN_IN, SIGN_OUT } from "./types/auth.types";
+import {History} from "history";
+import {LOADING, SIGN_IN, SIGN_OUT} from "./types/auth.types";
 
 type SignedIn = {
     type: typeof SIGN_IN;
@@ -16,14 +16,31 @@ type SignedOut = {
     type: typeof SIGN_OUT;
 };
 
-export const signInSuccess = (): SignedIn => ({ type: SIGN_IN })
+type Loading = {
+    type: typeof LOADING;
+    payload: { isLoading: boolean };
+}
 
-export const signOutSuccess = (): SignedOut => ({ type: SIGN_OUT })
+export enum AuthStages {
+    INIT = "init",
+    LOADING = "loading",
+    DONE = "done",
+}
+
+const loading = (isLoading: boolean): Loading => ({
+    type: LOADING,
+    payload: { isLoading }
+})
+
+const signInSuccess = (): SignedIn => ({ type: SIGN_IN })
+
+const signOutSuccess = (): SignedOut => ({ type: SIGN_OUT })
 
 export const signIn = (
     data: SignInData,
     history: History
 ): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state,) => {
+    dispatch(loading(true));
     try {
         const response = await api.signIn(data)
         if (response) {
@@ -32,13 +49,14 @@ export const signIn = (
             history.push(routes.main.path);
         }
     } catch (error) {
-        //dispatch(signInFailure(error));
+        dispatch(loading(false));
     }
 };
 
 export const signOut = (
     history: History
 ): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state,) => {
+    dispatch(loading(true));
     try {
         const response = await api.logOut();
         if (response) {
@@ -47,8 +65,8 @@ export const signOut = (
             history.push(routes.signIn.path);
         }
     } catch (error) {
-        //dispatch(signInFailure(error));
+        dispatch(loading(false));
     }
 };
 
-export type AuthAction = SignedOut | SignedIn;
+export type AuthAction = SignedOut | SignedIn | Loading;

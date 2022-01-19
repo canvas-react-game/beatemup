@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Link } from 'react-router-dom'
 
 import styles from "./NavBar.module.scss";
 
@@ -23,7 +24,7 @@ const NavBar: FC<Props> = ({ currentPath, routes }) => (
                 }
                 key={route.path}
             >
-                <a href={route.path}>{route.label}</a>
+                <Link to={route.path}>{route.label}</Link>
             </li>)
             }
         </ul>

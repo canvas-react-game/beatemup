@@ -15,7 +15,6 @@ const FormControls: FC<FormElement> = ({
             <>
                 <Form.Item>
                     <Button
-                        type="text"
                         onClick={() => {
                             setIsEdit(!isEdit);
                             form.resetFields();
@@ -55,7 +54,7 @@ const FormControls: FC<FormElement> = ({
 
     return (
         <Form.Item>
-            <Button type="text" onClick={() => setIsEdit(!isEdit)}>
+            <Button block type="primary" onClick={() => setIsEdit(!isEdit)}>
         Редактировать
                 <EditOutlined />
             </Button>

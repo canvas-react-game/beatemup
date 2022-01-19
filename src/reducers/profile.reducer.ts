@@ -5,14 +5,15 @@ export interface ProfileState extends UserInfo {}
 
 interface Action {
     type: typeof GET_PROFILE | typeof SET_PROFILE,
-    payload: { profile: UserInfo }
+    payload: UserInfo
 }
 
 export const profileReducer = (state: ProfileState | {} = {}, action: Action) => {
     switch (action.type) {
         case GET_PROFILE:
+            console.log('payload:', action.payload);
             return {
-                profile: { ...state, ...action.payload }
+                 ...action.payload
             };
         case SET_PROFILE:
             // todo

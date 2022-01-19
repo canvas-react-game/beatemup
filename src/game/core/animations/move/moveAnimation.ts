@@ -1,10 +1,8 @@
-import { EventBus } from "../../eventBus";
 import { Vector2D } from "../../utils/vector";
 import { STEP } from "../../../world/world.config";
 import { GameAnimation } from "../animation";
 
 type MoveAnimationProps = {
-    eventBus: EventBus
     speed: number
 }
 
@@ -17,12 +15,10 @@ export type MoveState = {
 
 export class MoveAnimation extends GameAnimation {
     moveState: MoveState;
-    eventBus: EventBus
     speed: number
     
     constructor(props: MoveAnimationProps) {
         super()
-        this.eventBus = props.eventBus;
         this.speed = props.speed;
         //
         this.moveState = {

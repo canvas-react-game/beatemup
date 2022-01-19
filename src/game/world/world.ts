@@ -61,28 +61,28 @@ export class World {
     }
 
     startAnimataion() {
-        let dt = 0, // определяем текущее время
-        last = performance.now(); // в этой переменной сохраняем время вызова предыдущего кадра
+        let dt = 0; // определяем текущее время
+        let last = performance.now(); // в этой переменной сохраняем время вызова предыдущего кадра
 
         const render = () => {
             this.animationNumber = requestAnimationFrame(() => render());
             // определяем текущее время
-            let now = performance.now(); 
+            const now = performance.now();
             // добавляем прошедшую разницу во времени
-            dt = dt + Math.min(1, (now - last) / 1000); // исправление проблемы неактивных вкладок
-            while(dt > STEP) {
+            dt += Math.min(1, (now - last) / 1000); // исправление проблемы неактивных вкладок
+            while (dt > STEP) {
                 // вложенный цикл может вызывать обновление состояния несколько раз подряд
                 // если прошло больше времени, чем выделено на один кадр
-                dt -= STEP; 
+                dt -= STEP;
                 // Обновляем состояние каждый STEP
                 this.renderer.prerender(this.scene);
                 // TODO: Реализовать логику camera без привязки к объекту
                 // this.camera.update()
             }
             // сохраняем время отрисовки последнего кадра
-            last = now; 
+            last = now;
             this.renderer.render(this.scene, this.camera);
-        }
+        };
 
         render();
     }

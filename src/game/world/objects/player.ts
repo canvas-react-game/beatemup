@@ -1,9 +1,8 @@
+import { Vector2D } from "game/core/utils/vector";
 import { Object2D, Object2DProps } from "../../core/object";
 import { EventBus, EventTypes } from "../../core/eventBus";
-import { Collidable } from "../../core/physics/physics";
+import Physics, { Collidable } from "../../core/physics/physics";
 import { WorldManager } from "../world.manager";
-import Physics from "../../core/physics/physics"
-import { Vector2D } from "game/core/utils/vector";
 import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
 
@@ -43,17 +42,17 @@ export class Player extends Object2D implements Collidable {
         // Создаем логику анимации движения
         this.moveAnimation = new MoveAnimation({
             speed: this.speed,
-        })
+        });
         this.moveStateUpdateCondition();
         // Создаем логику анимации смены sprite
         this.spriteAnimation = new SpriteAnimation({
-            sprites: this.playerSprites
-        })
+            sprites: this.playerSprites,
+        });
     }
 
     updateState() {
         // Обновляем sprite
-        this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation)
+        this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation);
         // Обновляем position
         this.prevPosition = this.position.copy();
         this.position = this.moveAnimation.update(this.position);
@@ -66,12 +65,12 @@ export class Player extends Object2D implements Collidable {
             this,
             obstacle,
             this.moveAnimation,
-            this.prevPosition
-        )
+            this.prevPosition,
+        );
     }
 
     moveStateUpdateCondition() {
-        const moveState = this.moveAnimation.moveState
+        const { moveState } = this.moveAnimation;
         //
         this.eventBus.on(
             EventTypes.ArrowLeftDown,
@@ -106,7 +105,7 @@ export class Player extends Object2D implements Collidable {
             () => (moveState.isMovingRight = false),
         );
     }
- 
+
     private _createPlayerSprites(image?: HTMLImageElement) {
         this.playerSprites = {
             idle_0: {
@@ -146,13 +145,13 @@ export class Player extends Object2D implements Collidable {
                 sHeight: 21,
             },
             run_2: {
-                sx: 192 + 16*2,
+                sx: 192 + 16 * 2,
                 sy: 107,
                 sWidth: 16,
                 sHeight: 21,
             },
             run_3: {
-                sx: 192 + 16*3,
+                sx: 192 + 16 * 3,
                 sy: 107,
                 sWidth: 16,
                 sHeight: 21,
@@ -162,7 +161,7 @@ export class Player extends Object2D implements Collidable {
         this.spriteConfig = {
             image,
             sprite: this.playerSprites.idle_0,
-            shouldFlip: false
+            shouldFlip: false,
         };
     }
 }

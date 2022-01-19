@@ -4,7 +4,7 @@ import { GameAnimation } from "../animation";
 
 type MoveAnimationProps = {
     speed: number
-}
+};
 
 export type MoveState = {
     isMovingLeft: boolean;
@@ -15,10 +15,10 @@ export type MoveState = {
 
 export class MoveAnimation extends GameAnimation {
     moveState: MoveState;
-    speed: number
-    
+    speed: number;
+
     constructor(props: MoveAnimationProps) {
-        super()
+        super();
         this.speed = props.speed;
         //
         this.moveState = {
@@ -53,5 +53,4 @@ export class MoveAnimation extends GameAnimation {
             false,
         );
     }
-
 }

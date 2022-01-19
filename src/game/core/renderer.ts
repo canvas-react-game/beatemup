@@ -125,10 +125,26 @@ export class Renderer {
         y = K * y - ((camera.size / 2) * K - this.canvas.height / 2);
         width *= K;
         height *= K;
-        if (object.sprite?.image) {
-            const sp = object.sprite;
-            const image = sp.image as HTMLImageElement;
-            c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, x, y, width, height);
+        if (object.spriteConfig?.image) {
+            const sp = object.spriteConfig.sprite;
+            const image = object.spriteConfig.image as HTMLImageElement;
+            // flip the sprite
+            if(object.spriteConfig.shouldFlip) {
+                // move to x + img's width
+                // adding img.width is necessary because we're flipping from
+                //     the right side of the img so after flipping it's still
+                //     at [x,y]
+                c.translate(x+width,y);
+                // scaleX by -1; this "trick" flips horizontally
+                c.scale(-1,1);
+                // draw the img
+                // no need for x,y since we've already translated
+                c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, 0, 0, width, height);
+                // always clean up -- reset transformations to default
+                c.setTransform(1,0,0,1,0,0);
+            } else {
+                c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, x, y, width, height);
+            }
         } else {
             c.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
             c.fillRect(x, y, width, height);

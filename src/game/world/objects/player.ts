@@ -21,6 +21,10 @@ type PlayerSprites = {
     idle_1: Sprite,
     idle_2: Sprite,
     idle_3: Sprite,
+    run_0: Sprite,
+    run_1: Sprite,
+    run_2: Sprite,
+    run_3: Sprite,
 };
 
 export class Player extends Object2D implements Collidable {
@@ -34,6 +38,7 @@ export class Player extends Object2D implements Collidable {
     canCollide: boolean = true;
     //
     playerSprites: PlayerSprites;
+    timeAfterLastSpriteUpdate: number; // in ms 
 
     constructor(props: PlayerProps) {
         super(props);
@@ -45,6 +50,7 @@ export class Player extends Object2D implements Collidable {
             isMovingTop: false,
             isMovingDown: false,
         };
+        this.timeAfterLastSpriteUpdate = 0;
 
         this._createPlayerSprites(props.image);
         this.init();
@@ -86,8 +92,38 @@ export class Player extends Object2D implements Collidable {
     }
 
     updateState(dt: number) {
+        // Update sprite
+        this.timeAfterLastSpriteUpdate += dt;
+        const shouldUpdateSprite = this._shouldUpdateSprite();
+        if(this.spriteConfig && shouldUpdateSprite) {
+            const isMoving = this.isMoving()
+            const isCurrentSpriteIdle = this._isCurrentSpriteIdle()
+            if(isMoving) {
+                if(isCurrentSpriteIdle) {
+                    this.spriteConfig.sprite = this.playerSprites.run_0
+                }
+                else {
+                    this.spriteConfig.sprite = this._getNextRunSprite()
+                }
+            }
+            else {
+                if(!isCurrentSpriteIdle) {
+                    this.spriteConfig.sprite = this.playerSprites.idle_0
+                }
+                else {
+                    this.spriteConfig.sprite = this._getNextIdleSprite()
+                }
+            }
+            // NOTE: Обновляем shouldFlip после установки нового спрайта
+            if(this.moveState.isMovingRight) {
+                this.spriteConfig.shouldFlip = false
+            }
+            if(this.moveState.isMovingLeft) {
+                this.spriteConfig.shouldFlip = true
+            }           
+        }
+        // Обновляем position
         const delta = (dt / 1000) * this.speed;
-
         if (this.moveState.isMovingDown) {
             this.position.y += delta;
         }
@@ -155,41 +191,107 @@ export class Player extends Object2D implements Collidable {
     private _createPlayerSprites(image?: HTMLImageElement) {
         this.playerSprites = {
             idle_0: {
-                image,
                 sx: 128,
-                sy: 100,
+                sy: 107,
                 sWidth: 16,
-                sHeight: 28,
+                sHeight: 21,
             },
             idle_1: {
-                image,
                 sx: 128 + 16,
-                sy: 100,
+                sy: 107,
                 sWidth: 16,
-                sHeight: 28,
+                sHeight: 21,
             },
             idle_2: {
-                image,
                 sx: 128 + 16 * 2,
-                sy: 100,
+                sy: 107,
                 sWidth: 16,
-                sHeight: 28,
+                sHeight: 21,
             },
             idle_3: {
-                image,
                 sx: 128 + 16 * 3,
-                sy: 100,
+                sy: 107,
                 sWidth: 16,
-                sHeight: 28,
+                sHeight: 21,
+            },
+            run_0: {
+                sx: 192,
+                sy: 107,
+                sWidth: 16,
+                sHeight: 21,
+            },
+            run_1: {
+                sx: 192 + 16,
+                sy: 107,
+                sWidth: 16,
+                sHeight: 21,
+            },
+            run_2: {
+                sx: 192 + 16*2,
+                sy: 107,
+                sWidth: 16,
+                sHeight: 21,
+            },
+            run_3: {
+                sx: 192 + 16*3,
+                sy: 107,
+                sWidth: 16,
+                sHeight: 21,
             },
         };
         // Устанавливаем дефолтный спрайт
-        this.sprite = this.playerSprites.idle_0;
+        this.spriteConfig = {
+            image,
+            sprite: this.playerSprites.idle_0,
+            shouldFlip: false
+        };
     }
 
-    // private _updateSpritesImage(image: HTMLImageElement) {
-    //     for(let value of Object.values(this.playerSprites)) {
-    //         value.image = image
-    //     }
-    // }
+    private _shouldUpdateSprite(): boolean {
+        if(this.timeAfterLastSpriteUpdate > 100) {
+            this.timeAfterLastSpriteUpdate = 0
+            return true
+        }
+        return false
+    }
+
+    private _isCurrentSpriteIdle(): boolean {
+        const sprite = this.spriteConfig?.sprite
+        return sprite === this.playerSprites.idle_0 ||
+                sprite === this.playerSprites.idle_1 ||
+                sprite === this.playerSprites.idle_2 ||
+                sprite === this.playerSprites.idle_3
+    }
+
+    private _getNextRunSprite(): Sprite {
+        const sprite = this.spriteConfig?.sprite
+        switch(sprite) {
+            case this.playerSprites.run_0:
+                return this.playerSprites.run_1
+            case this.playerSprites.run_1:
+                return this.playerSprites.run_2
+            case this.playerSprites.run_2:
+                return this.playerSprites.run_3
+            case this.playerSprites.run_3:
+                return this.playerSprites.run_0
+            default:
+                return this.playerSprites.run_0                                            
+        }
+    }
+
+    private _getNextIdleSprite(): Sprite {
+        const sprite = this.spriteConfig?.sprite
+        switch(sprite) {
+            case this.playerSprites.idle_0:
+                return this.playerSprites.idle_1
+            case this.playerSprites.idle_1:
+                return this.playerSprites.idle_2
+            case this.playerSprites.idle_2:
+                return this.playerSprites.idle_3
+            case this.playerSprites.idle_3:
+                return this.playerSprites.idle_0
+            default:
+                return this.playerSprites.idle_0                                            
+        }
+    }
 }

@@ -20,8 +20,6 @@ import { Camera } from "../core/camera";
 import TileSetImage from "../../../assets/tileset.png";
 
 export type Sprite = {
-    // Изображение
-    image: HTMLImageElement | undefined,
     // Положение на изображении
     sx: number,
     sy: number,
@@ -83,13 +81,15 @@ export class WorldManager {
                     ground.position = position;
                     // TODO: Перенести в класс
                     const sprite: Sprite = {
-                        image: this.tileSetImage,
                         sx: 16,
                         sy: 64,
                         sWidth: 16,
                         sHeight: 16,
                     };
-                    ground.sprite = sprite;
+                    ground.spriteConfig = {
+                        image: this.tileSetImage,
+                        sprite,
+                    };
                     objects.push(ground);
                 }
                 if (TILE_TYPES[number] === TileTypes.Wall) {
@@ -99,13 +99,15 @@ export class WorldManager {
                     wall.position = position;
                     // TODO: Перенести в класс
                     const sprite: Sprite = {
-                        image: this.tileSetImage,
                         sx: 16,
                         sy: 16,
                         sWidth: 16,
                         sHeight: 16,
                     };
-                    wall.sprite = sprite;
+                    wall.spriteConfig = {
+                        image: this.tileSetImage,
+                        sprite,
+                    };
                     objects.push(wall);
                 }
             }
@@ -114,7 +116,7 @@ export class WorldManager {
     }
 
     private _createPlayer(eventBus: EventBus, level: Level): Player {
-        const playerGeom = new RectangleGeometry(16, 28);
+        const playerGeom = new RectangleGeometry(16, 21);
         const player = new Player({
             geometry: playerGeom,
             eventBus,
@@ -161,13 +163,15 @@ export class WorldManager {
         // sprite
         // TODO: Перенести в класс
         const sprite: Sprite = {
-            image: this.tileSetImage,
             sx: 368,
             sy: 80,
             sWidth: 16,
             sHeight: 16,
         };
-        enemy.sprite = sprite;
+        enemy.spriteConfig = {
+            image: this.tileSetImage,
+            sprite
+        };
         return enemy;
     }
 }

@@ -8,6 +8,14 @@ export type Object2DProps = {
     color?: Color
 };
 
+export type ObjectSpriteConfig = {
+    // Изображение
+    image: HTMLImageElement | undefined
+    sprite: Sprite
+    // Нужно ли повернуть
+    shouldFlip?: boolean
+}
+
 // Get unique geometry id (ssr)
 const getObject2DId = (function () {
     let objectId = 0;
@@ -34,7 +42,7 @@ export class Object2D {
     color: Color;
     // Спрайт
     // TODO: Определить тип и реализовать функционал
-    sprite: Sprite | null;
+    spriteConfig: ObjectSpriteConfig | null;
 
     constructor(props: Object2DProps) {
         // Задаем дефолтные значения
@@ -44,7 +52,7 @@ export class Object2D {
         this.visible = true;
         this.frustumCulled = false;
         this.userData = null;
-        this.sprite = null;
+        this.spriteConfig = null;
         // Сохраняем тип геометрии
         this.geometry = props.geometry;
         this.color = props.color || new Color(0, 0, 0);

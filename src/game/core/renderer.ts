@@ -125,19 +125,19 @@ export class Renderer {
             const sp = object.spriteConfig.sprite;
             const image = object.spriteConfig.image as HTMLImageElement;
             // flip the sprite
-            if(object.spriteConfig.shouldFlip) {
+            if (object.spriteConfig.shouldFlip) {
                 // move to x + img's width
                 // adding img.width is necessary because we're flipping from
                 //     the right side of the img so after flipping it's still
                 //     at [x,y]
-                c.translate(x+width,y);
+                c.translate(x + width, y);
                 // scaleX by -1; this "trick" flips horizontally
-                c.scale(-1,1);
+                c.scale(-1, 1);
                 // draw the img
                 // no need for x,y since we've already translated
                 c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, 0, 0, width, height);
                 // always clean up -- reset transformations to default
-                c.setTransform(1,0,0,1,0,0);
+                c.setTransform(1, 0, 0, 1, 0, 0);
             } else {
                 c.drawImage(image, sp.sx, sp.sy, sp.sWidth, sp.sHeight, x, y, width, height);
             }

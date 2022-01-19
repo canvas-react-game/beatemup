@@ -14,7 +14,7 @@ export type ObjectSpriteConfig = {
     sprite: Sprite
     // Нужно ли повернуть
     shouldFlip?: boolean
-}
+};
 
 // Get unique geometry id (ssr)
 const getObject2DId = (function () {

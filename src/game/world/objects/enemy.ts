@@ -25,7 +25,7 @@ export class Enemy extends Object2D implements Collidable {
         super(props);
 
         this.gameOverCallback = props.gameOverCallback;
-        this._createEnemySprites(props.image)
+        this._createEnemySprites(props.image);
         this.init();
     }
 
@@ -33,17 +33,17 @@ export class Enemy extends Object2D implements Collidable {
         // Создаем логику анимации движения
         this.moveAnimation = new MoveAnimation({
             speed: this.speed,
-        })
+        });
         this.moveStateUpdateCondition();
         // Создаем логику анимации смены sprite
         this.spriteAnimation = new SpriteAnimation({
-            sprites: this.enemySprites
-        })
+            sprites: this.enemySprites,
+        });
     }
 
     updateState() {
         // Обновляем sprite
-        this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation)
+        this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation);
         // Обновляем position
         this.prevPosition = this.position.copy();
         this.position = this.moveAnimation.update(this.position);
@@ -61,7 +61,7 @@ export class Enemy extends Object2D implements Collidable {
     moveStateUpdateCondition() {
         // const moveState = this.moveAnimation.moveState
     }
- 
+
     private _createEnemySprites(image?: HTMLImageElement) {
         this.enemySprites = {
             idle_0: {
@@ -77,13 +77,13 @@ export class Enemy extends Object2D implements Collidable {
                 sHeight: 16,
             },
             idle_2: {
-                sx: 368 + 16*2,
+                sx: 368 + 16 * 2,
                 sy: 80,
                 sWidth: 16,
                 sHeight: 16,
             },
             idle_3: {
-                sx: 368 + 16*3,
+                sx: 368 + 16 * 3,
                 sy: 80,
                 sWidth: 16,
                 sHeight: 16,
@@ -101,13 +101,13 @@ export class Enemy extends Object2D implements Collidable {
                 sHeight: 16,
             },
             run_2: {
-                sx: 432 + 16*2,
+                sx: 432 + 16 * 2,
                 sy: 80,
                 sWidth: 16,
                 sHeight: 16,
             },
             run_3: {
-                sx: 432 + 16*3,
+                sx: 432 + 16 * 3,
                 sy: 80,
                 sWidth: 16,
                 sHeight: 16,
@@ -117,7 +117,7 @@ export class Enemy extends Object2D implements Collidable {
         this.spriteConfig = {
             image,
             sprite: this.enemySprites.idle_0,
-            shouldFlip: false
+            shouldFlip: false,
         };
     }
 }

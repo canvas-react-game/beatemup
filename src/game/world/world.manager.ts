@@ -29,7 +29,7 @@ export type Sprite = {
 
 export class WorldManager {
     tileSetImage: HTMLImageElement;
-    level: Level
+    level: Level;
 
     constructor() {
         const tileSetImage = new Image(512, 512);
@@ -70,9 +70,9 @@ export class WorldManager {
     }
 
     getTilePositionFromCoordinates(coordinates: Vector2D): Vector2D {
-        const x = Math.floor(coordinates.x / TILE_SIZE) * TILE_SIZE
-        const y = Math.floor(coordinates.y / TILE_SIZE) * TILE_SIZE
-        return new Vector2D(x, y)
+        const x = Math.floor(coordinates.x / TILE_SIZE) * TILE_SIZE;
+        const y = Math.floor(coordinates.y / TILE_SIZE) * TILE_SIZE;
+        return new Vector2D(x, y);
     }
 
     private _createWallsAndTilesFromLevel(level: Level): Array<Object2D> {

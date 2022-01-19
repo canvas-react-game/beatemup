@@ -16,10 +16,9 @@ const appReducer = combineReducers({
 })
 
 const configureStore = () =>
-    createStore(appReducer, compose(applyMiddleware(thunk),
-        //@ts-ignore
+    createStore(appReducer, compose(
+        applyMiddleware(thunk),
         window.__REDUX_DEVTOOLS_EXTENSION__
-            //@ts-ignore
             ? window.__REDUX_DEVTOOLS_EXTENSION__()
             : (f: () => void) => f
     ));

@@ -1,20 +1,20 @@
-import { LOG_IN, LOG_OUT } from "@/actions/auth.actions";
-import {checkAccess} from "@/helpers/acess";
+import { SIGN_IN, SIGN_OUT } from "@/actions/types/auth.types";
+import { checkAccess } from "@/helpers/acess";
+import { AuthAction } from "actions/auth.actions";
 
 export interface AuthState {
     isSignedIn: boolean
 }
 
-interface Action {
-    type: typeof LOG_IN | typeof LOG_OUT,
-    payload: { isSignedIn: boolean }
-}
+export const initialState: AuthState = {
+    isSignedIn: checkAccess()
+};
 
-export const authReducer = (state: AuthState = { isSignedIn: checkAccess() }, action: Action) => {
+export const authReducer = (state: AuthState = initialState, action: AuthAction) => {
     switch (action.type) {
-        case LOG_IN:
+        case SIGN_IN:
             return { isSignedIn: true };
-        case LOG_OUT:
+        case SIGN_OUT:
             return { isSignedIn: false };
         default:
             return state;

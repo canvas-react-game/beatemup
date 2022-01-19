@@ -59,8 +59,7 @@ const initialFieldsState = [
 ];
 
 export const useProfileForm = () => {
-    //@ts-ignore
-    const profileData = useSelector(state => state.profile);
+    const profileData = useSelector(state => state.profile.profile);
     console.log('profile is: ', profileData);
 
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);

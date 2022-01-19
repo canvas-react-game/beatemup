@@ -5,18 +5,18 @@ import thunk from 'redux-thunk';
 import { profileReducer, ProfileState } from "@/reducers/profile.reducer";
 import { authReducer, AuthState } from "@/reducers/auth.reducer";
 
-export interface AppState {
+export interface RootState {
     auth: AuthState,
     profile: ProfileState
 }
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
     auth: authReducer,
     profile: profileReducer
 })
 
 const configureStore = () =>
-    createStore(appReducer, compose(
+    createStore(rootReducer, compose(
         applyMiddleware(thunk),
         window.__REDUX_DEVTOOLS_EXTENSION__
             ? window.__REDUX_DEVTOOLS_EXTENSION__()

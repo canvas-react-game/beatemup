@@ -1,44 +1,54 @@
-import { Dispatch } from "react";
+import { AnyAction } from "redux";
+import { ThunkAction } from "redux-thunk";
 
 import api, { SignInData } from "@/api/Auth";
 import { routes } from "@/config/routes/routes";
 import { setAccess } from "@/helpers/acess";
 
 import { History } from "history";
+import { SIGN_IN, SIGN_OUT } from "./types/auth.types";
 
-export const LOG_IN = 'LOG_IN';
-export const LOG_OUT = 'LOG_OUT';
+type SignedIn = {
+    type: typeof SIGN_IN;
+};
 
-export const signInSuccess = () => ({
-    type: LOG_IN,
-    payload: { isSignedIn: true }
-})
+type SignedOut = {
+    type: typeof SIGN_OUT;
+};
 
-export const signOutSuccess = () => ({
-    type: LOG_OUT,
-    payload: { isSignedIn: false }
-})
+export const signInSuccess = (): SignedIn => ({ type: SIGN_IN })
 
-export const signIn = (values: SignInData, history: History) => {
-    return (dispatch: Dispatch<any>) => {
-        api.signIn(values).then((response) => {
-            if (response) {
-                dispatch(signInSuccess());
-                setAccess(true);
-                history.push(routes.main.path);
-            }
-        });
+export const signOutSuccess = (): SignedOut => ({ type: SIGN_OUT })
+
+export const signIn = (
+    data: SignInData,
+    history: History
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state,) => {
+    try {
+        const response = await api.signIn(data)
+        if (response) {
+            dispatch(signInSuccess());
+            setAccess(true);
+            history.push(routes.main.path);
+        }
+    } catch (error) {
+        //dispatch(signInFailure(error));
     }
-}
+};
 
-export const signOut = (history: History) => {
-    return (dispatch: Dispatch<any>) => {
-        api.logOut().then((response) => {
-            if (response) {
-                dispatch(signOutSuccess());
-                setAccess(false);
-                history.push(routes.signIn.path);
-            }
-        });
+export const signOut = (
+    history: History
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state,) => {
+    try {
+        const response = await api.logOut();
+        if (response) {
+            dispatch(signOutSuccess());
+            setAccess(false);
+            history.push(routes.signIn.path);
+        }
+    } catch (error) {
+        //dispatch(signInFailure(error));
     }
-}
+};
+
+export type AuthAction = SignedOut | SignedIn;

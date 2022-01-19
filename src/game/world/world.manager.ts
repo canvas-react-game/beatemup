@@ -48,7 +48,7 @@ export class WorldManager {
         const scene = new Scene(background);
         // Генерируем рандомный уровень
         this.level = generateRandomLevel();
-        // Создаем стены и tiles из матрицы уровня
+        // Создаем стены и землю из матрицы уровня
         const objects = this._createWallsAndTilesFromLevel(this.level);
         // И добавляем в сцену первыми
         scene.add(...objects);
@@ -136,18 +136,6 @@ export class WorldManager {
             throw new Error("Уровень сгенерирован с ошибкой");
         }
         player.position = playerPosition;
-        // Загружаем изображение для спрайта игрока
-        // const image = new Image(TILE_SIZE, TILE_SIZE);
-        // image.src = PlayerImage;
-        // Устанавливаем спрайт
-        // const playerSprite: Sprite = {
-        //     image,
-        //     sx: 0,
-        //     sy: 0,
-        //     sWidth: TILE_SIZE,
-        //     sHeight: TILE_SIZE
-        // }
-        // player.sprite = playerSprite;
         return player;
     }
 

@@ -3,6 +3,7 @@ import { Renderer } from "../core/renderer";
 import { Scene } from "../core/scene";
 import { EventBus, EventTypes, KeyboardEvents } from "../core/eventBus";
 import { WorldManager } from "./world.manager";
+import { STEP } from "./world.config";
 
 type KeyListener = (this: Window, ev: KeyboardEvent) => any;
 type Listener = (this: Window, ev: Event) => any;
@@ -60,19 +61,27 @@ export class World {
     }
 
     startAnimataion() {
-        let last = performance.now();
+        let dt = 0, // определяем текущее время
+        last = performance.now(); // в этой переменной сохраняем время вызова предыдущего кадра
+
         const render = () => {
-            // NOTE: Важно именно здесь нахождение вызова
-            // для корректного cancelAnimationFrame
             this.animationNumber = requestAnimationFrame(() => render());
-            const now = performance.now();
-            const dt = now - last;
-            last = now;
-            this.renderer.prerender(this.scene, dt, now);
-            // TODO: Реализовать класс camera
-            // this.camera.update()
+            // определяем текущее время
+            let now = performance.now(); 
+            // добавляем прошедшую разницу во времени
+            dt = dt + Math.min(1, (now - last) / 1000); // исправление проблемы неактивных вкладок
+            while(dt > STEP) {
+                // вложенный цикл может вызывать обновление состояния несколько раз подряд
+                // если прошло больше времени, чем выделено на один кадр
+                dt -= STEP; 
+                this.renderer.prerender(this.scene, STEP * 1000, now);
+                // TODO: Реализовать логику camera без привязки к объекту
+                // this.camera.update()
+            }
+            // сохраняем время отрисовки последнего кадра
+            last = now; 
             this.renderer.render(this.scene, this.camera);
-        };
+        }
 
         render();
     }

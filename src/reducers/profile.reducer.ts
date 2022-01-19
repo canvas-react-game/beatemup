@@ -1,24 +1,37 @@
-import { GET_PROFILE, SET_PROFILE } from "@/actions/profile.actions";
-import { UserInfo } from "@/api/Auth";
+import { ProfileAction } from "@/actions/profile.actions";
+import { GET_PROFILE } from "@/actions/types/profile.types";
 
-export interface ProfileState extends UserInfo {}
-
-interface Action {
-    type: typeof GET_PROFILE | typeof SET_PROFILE,
-    payload: UserInfo
+export interface ProfileState {
+    profile: {
+        id: number;
+        second_name: string;
+        first_name: string;
+        email: string;
+        phone: string;
+        login: string;
+        password: string;
+        avatar: string;
+    }
 }
 
-export const profileReducer = (state: ProfileState | {} = {}, action: Action) => {
+const initialState: ProfileState = {
+    profile: {
+        id: 0,
+        second_name: '',
+        first_name: '',
+        email: '',
+        phone: '',
+        login: '',
+        password: '',
+        avatar: '',
+    }
+};
+
+export const profileReducer = (state: ProfileState = initialState, action: ProfileAction) => {
     switch (action.type) {
         case GET_PROFILE:
-            console.log('payload:', action.payload);
             return {
                  ...action.payload
-            };
-        case SET_PROFILE:
-            // todo
-            return {
-                ...state
             };
         default:
             return state;

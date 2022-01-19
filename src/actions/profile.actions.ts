@@ -1,18 +1,30 @@
-import {Dispatch} from "react";
+import { AnyAction } from "redux";
+import { ThunkAction } from "redux-thunk";
 
-import api, {UserInfo} from "@/api/Auth/Auth.api";
+import api, { UserInfo } from "@/api/Auth/Auth.api";
 
-export const GET_PROFILE = 'GET_PROFILE';
-export const SET_PROFILE = 'SET_PROFILE';
+import { GET_PROFILE } from "./types/profile.types";
 
-export const profileFetchSuccess = (profile: UserInfo) => ({
-    type: GET_PROFILE,
-    payload: { ...profile }
+type ProfileFetched = {
+    type: typeof GET_PROFILE;
+    payload: { profile: UserInfo };
+}
+
+export const profileFetchSuccess = (profile: UserInfo): ProfileFetched => ({
+    type: GET_PROFILE ,
+    payload: { profile }
 })
 
-export const getProfile = () =>
-    (dispatch: Dispatch<any>) => {
-        api.getUserInfo().then((response) => {
-            response && dispatch(profileFetchSuccess(response));
-        });
+export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state,) => {
+    try {
+        const response = await api.getUserInfo();
+        if (response) {
+            dispatch(profileFetchSuccess(response));
+        }
+    } catch (error) {
+        //dispatch(signInFailure(error));
     }
+};
+
+export type ProfileAction = ProfileFetched;

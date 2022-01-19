@@ -6,8 +6,6 @@ import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 import { Box2 } from "game/core/utils/box2";
 import Physics from "../../core/physics/physics"
 import { Vector2D } from "game/core/utils/vector";
-// import { Box2 } from "game/core/utils/box2";
-// import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 
 type PlayerProps = Object2DProps & {
     eventBus: EventBus;

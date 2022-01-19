@@ -22,7 +22,6 @@ export class Player extends Object2D implements Collidable {
     worldManager: WorldManager;
     //
     moveAnimation: MoveAnimation;
-    // Флаги состояния передвижения
     prevPosition: Vector2D;
     //
     canCollide: boolean = true;
@@ -43,7 +42,6 @@ export class Player extends Object2D implements Collidable {
     init() {
         // Создаем логику анимации движения
         this.moveAnimation = new MoveAnimation({
-            eventBus: this.eventBus,
             speed: this.speed,
         })
         this.moveStateUpdateCondition();

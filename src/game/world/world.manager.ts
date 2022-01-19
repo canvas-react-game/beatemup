@@ -149,6 +149,7 @@ export class WorldManager {
             geometry: enemyGeom,
             color: new Color(0, 0, 255),
             gameOverCallback,
+            image: this.tileSetImage,
         });
         // Зададим дефолтное положение
         const enemyPosition = getLastGroundTileOnLevel(level);
@@ -156,18 +157,6 @@ export class WorldManager {
             throw new Error("Уровень сгенерирован с ошибкой");
         }
         enemy.position = enemyPosition;
-        // sprite
-        // TODO: Перенести в класс
-        const sprite: Sprite = {
-            sx: 368,
-            sy: 80,
-            sWidth: 16,
-            sHeight: 16,
-        };
-        enemy.spriteConfig = {
-            image: this.tileSetImage,
-            sprite
-        };
         return enemy;
     }
 }

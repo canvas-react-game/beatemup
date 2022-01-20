@@ -1,4 +1,6 @@
 import { Vector2D } from "game/core/utils/vector";
+import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
+import { CanReceiveDamage } from "game/core/animations/damage/damage";
 import { Object2D, Object2DProps } from "../../core/object";
 import { EventBus } from "../../core/eventBus";
 import Physics, { Collidable } from "../../core/physics/physics";
@@ -7,11 +9,9 @@ import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
 import { AttackAnimation, CanAttack } from "../../core/animations/attack/attack";
 import { Weapon } from "./weapon";
-import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 import { Wall } from "./wall";
 import { Enemy } from "./enemy";
 import { EventTypes } from "../world.config";
-import { CanReceiveDamage } from "game/core/animations/damage/damage";
 
 type PlayerProps = Object2DProps & {
     geometry: RectangleGeometry,
@@ -23,7 +23,7 @@ type PlayerProps = Object2DProps & {
 };
 
 export class Player extends Object2D implements Collidable, CanAttack, CanReceiveDamage {
-    gameOverCallback: () => void
+    gameOverCallback: () => void;
     //
     geometry: RectangleGeometry;
     // Скорость передвижения пиксель/сек
@@ -35,7 +35,7 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     // Анимация передвижения
     moveAnimation: MoveAnimation;
     prevPosition: Vector2D;
-    // 
+    //
     canCollide: boolean = true;
     // Анимация изменения Sprite
     spriteAnimation: SpriteAnimation;
@@ -49,18 +49,18 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
 
     // TODO: Додумать реализацию
     get health(): number {
-        return this._health
+        return this._health;
     }
     set health(value: number) {
-        this._health = value
-        if(this._health <=0 ) {
-            this.onDeath()
+        this._health = value;
+        if (this._health <= 0) {
+            this.onDeath();
         }
     }
 
     constructor(props: PlayerProps) {
         super(props);
-        
+
         this.gameOverCallback = props.gameOverCallback;
         this.eventBus = props.eventBus;
         this.worldManager = props.worldManager;
@@ -84,26 +84,26 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
             sprites: this.playerSprites,
         });
         // Создаем логику анимации атаки
-        this.attackAnimation = new AttackAnimation()
+        this.attackAnimation = new AttackAnimation();
     }
 
     updateState() {
         // Обновляем sprite
         this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation);
-        if(this.weapon.spriteConfig) {
-            this.weapon.spriteConfig.shouldFlip = this.spriteConfig?.shouldFlip
+        if (this.weapon.spriteConfig) {
+            this.weapon.spriteConfig.shouldFlip = this.spriteConfig?.shouldFlip;
         }
         // Обновляем position
         this.prevPosition = this.position.copy();
         this.position = this.moveAnimation.update(this.position);
         // Обновляем оружие
-        this.weapon = this.attackAnimation.update(this.weapon, this)
+        this.weapon = this.attackAnimation.update(this.weapon, this);
     }
 
     // NOTE: Если скорость объекта значительно больше размера препятствия, то
     // может случиться "проскок" объекта
     onCollide(obstacle: Object2D & Collidable) {
-        if(obstacle instanceof Wall || obstacle instanceof Enemy) {
+        if (obstacle instanceof Wall || obstacle instanceof Enemy) {
             this.position = Physics.getNewPositionAfterWallCollision(
                 this,
                 obstacle,
@@ -157,12 +157,12 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
 
     private _updateWeaponState() {
         this.eventBus.on(
-            EventTypes.SpaceDown, 
+            EventTypes.SpaceDown,
             () => {
-                this.weapon.active = true
-                this.weapon.visible = true
-            }
-        )
+                this.weapon.active = true;
+                this.weapon.visible = true;
+            },
+        );
     }
 
     private _createPlayerSprites(image?: HTMLImageElement) {

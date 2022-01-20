@@ -31,9 +31,9 @@ export class Object2D {
     // NOTE: x = left, y = top
     position: Vector2D;
     // Rotation in radians
-    rotation: number
+    rotation: number;
     // For Canvas Rendering
-    rotationCenter: Vector2D | undefined
+    rotationCenter: Vector2D | undefined;
     // Видимость объектв в сцене
     visible: boolean;
     // Должен ли объект обрезаться камерой при рендеринге
@@ -69,9 +69,9 @@ export class Object2D {
 
     rotateAround(center: Vector2D, angle: number) {
         this.rotation = angle;
-		this.rotationCenter = new Vector2D(
-            center.x - this.position.x, 
-            center.y - this.position.y
+        this.rotationCenter = new Vector2D(
+            center.x - this.position.x,
+            center.y - this.position.y,
         );
     }
 

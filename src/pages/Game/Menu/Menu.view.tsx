@@ -44,7 +44,9 @@ const Menu: FC<Props> = ({
             )}
 
             <Button type="primary" onClick={isPaused ? onResume : onStart}>
-                {isPaused ? "Продолжить" : `Начать ${(isGameOver || isGameWin) ? "заново" : "игру"}`}
+                {isPaused ? "Продолжить"
+                    : `Начать ${(isGameOver || isGameWin) ? "заново" : "игру"}`
+                }
             </Button>
 
             <Button type="primary" onClick={onClose}>

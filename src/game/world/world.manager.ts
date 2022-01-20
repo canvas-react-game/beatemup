@@ -126,7 +126,7 @@ export class WorldManager {
     }
 
     private _createPlayer(
-        eventBus: EventBus, 
+        eventBus: EventBus,
         level: Level,
         gameOverCallback: () => void,
     ): [Player, Weapon] {
@@ -137,7 +137,7 @@ export class WorldManager {
             worldManager: this,
             image: this.tileSetImage,
             maxHealth: 6,
-            gameOverCallback: gameOverCallback
+            gameOverCallback,
         });
         // Зададим дефолтное положение
         const playerPosition = getFirstGroundTileOnLevel(level);
@@ -146,22 +146,22 @@ export class WorldManager {
         }
         player.position = playerPosition;
         // Создадим оружие
-        const swordGeometry = new RectangleGeometry(10, 21)
+        const swordGeometry = new RectangleGeometry(10, 21);
         const sword = new Weapon({
             geometry: swordGeometry,
-            damage: 1
-        })
+            damage: 1,
+        });
         sword.spriteConfig = {
             image: this.tileSetImage,
             sprite: {
                 sx: 323,
                 sy: 26,
                 sWidth: 10,
-                sHeight: 21
-            }
-        }
+                sHeight: 21,
+            },
+        };
         sword.visible = false;
-        player.weapon = sword
+        player.weapon = sword;
         return [player, sword];
     }
 
@@ -169,16 +169,16 @@ export class WorldManager {
         scene: Scene,
         eventBus: EventBus,
         level: Level,
-        gameWinCallback: () => void
+        gameWinCallback: () => void,
     ): Enemy {
         const enemyGeom = new RectangleGeometry(TILE_SIZE, TILE_SIZE);
         const enemy = new Enemy({
-            scene: scene,
+            scene,
             geometry: enemyGeom,
             color: new Color(0, 0, 255),
             image: this.tileSetImage,
             maxHealth: 1,
-            gameWinCallback
+            gameWinCallback,
         });
         // Зададим дефолтное положение
         const enemyPosition = getLastGroundTileOnLevel(level);

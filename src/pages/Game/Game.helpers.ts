@@ -75,6 +75,6 @@ export const useGame = () => {
         onUnmount,
         setUpPauseButton,
         isGameOver,
-        isGameWin
+        isGameWin,
     };
 };

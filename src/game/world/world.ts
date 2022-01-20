@@ -137,7 +137,7 @@ export class World {
                     break;
                 case KeyboardEvents.Space:
                     eventBus.emit(EventTypes.SpaceUp);
-                    break;                    
+                    break;
                 default:
                     break;
             }

@@ -26,6 +26,5 @@ export enum KeyboardEvents {
     ArrowDown = "ArrowDown",
     ArrowRight = "ArrowRight",
     // Attack
-    Space = " "
+    Space = " ",
 }
-

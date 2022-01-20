@@ -1,8 +1,8 @@
-import { GameAnimation } from "../animation";
 import { Weapon } from "game/world/objects/weapon";
 import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 import { Object2D } from "game/core/object";
-import { Vector2D } from "../../../core/utils/vector";
+import { GameAnimation } from "../animation";
+import { Vector2D } from "../../utils/vector";
 
 export interface CanAttack {
     weapon: Weapon
@@ -10,7 +10,7 @@ export interface CanAttack {
 }
 
 type AttackAnimationProps = {
-    
+
 };
 
 // TODO: Создать разные анимации атаки для разных видов оружия
@@ -26,38 +26,38 @@ export class AttackAnimation extends GameAnimation {
     // Обновить позиции оружия и анимировать удар, если он активен
     update(weapon: Weapon, object: Object2D): Weapon {
         // Анимация удара
-        if(weapon.active) {
+        if (weapon.active) {
             // Нужно ли перевернуть
-            const shouldFlip = object.spriteConfig?.shouldFlip
+            const shouldFlip = object.spriteConfig?.shouldFlip;
             // Определяем позицию
-            const geom = object.geometry as RectangleGeometry
-            const x = object.position.x
-            const y = object.position.y
-            const width = geom.width
-            const height = geom.height
+            const geom = object.geometry as RectangleGeometry;
+            const { x } = object.position;
+            const { y } = object.position;
+            const { width } = geom;
+            const { height } = geom;
             // Позицинируем меч (подобрано)
             // TODO: Баг позиционирования слева и дальности удара !
-            let weaponX = x + width * 0.55
-            if(shouldFlip) {
-                weaponX = x - width * 0.15
+            let weaponX = x + width * 0.55;
+            if (shouldFlip) {
+                weaponX = x - width * 0.15;
             }
-            const weaponY = y - height * 0.5
-            weapon.position.x = weaponX
-            weapon.position.y = weaponY
+            const weaponY = y - height * 0.5;
+            weapon.position.x = weaponX;
+            weapon.position.y = weaponY;
             // Определяем угол поворота (текущий)
-            this.currentRotation += this.maxRotation / this.maxAnimationStep
+            this.currentRotation += this.maxRotation / this.maxAnimationStep;
             // Центром поворота устанавливаем ручку оружия
-            const weaponGeom = weapon.geometry as RectangleGeometry
-            const center = new Vector2D(weapon.position.x, weapon.position.y + weaponGeom.height)
-            weapon.rotateAround(center, this.currentRotation)
+            const weaponGeom = weapon.geometry as RectangleGeometry;
+            const center = new Vector2D(weapon.position.x, weapon.position.y + weaponGeom.height);
+            weapon.rotateAround(center, this.currentRotation);
             // Конец анимации
-            if(this.currentRotation >= this.maxRotation) {
+            if (this.currentRotation >= this.maxRotation) {
                 this.currentRotation = 0;
                 weapon.attackCount += 1;
                 weapon.active = false;
                 weapon.visible = false;
             }
         }
-        return weapon
+        return weapon;
     }
 }

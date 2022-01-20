@@ -1,3 +1,5 @@
+import { CanReceiveDamage } from "game/core/animations/damage/damage";
+import { Scene } from "game/core/scene";
 import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
 import { Vector2D } from "../../core/utils/vector";
@@ -5,8 +7,6 @@ import { Object2D, Object2DProps } from "../../core/object";
 import { Collidable } from "../../core/physics/physics";
 import { Player } from "./player";
 import { Weapon } from "./weapon";
-import { CanReceiveDamage } from "game/core/animations/damage/damage";
-import { Scene } from "game/core/scene";
 
 type EnemyProps = Object2DProps & {
     scene: Scene;
@@ -16,8 +16,8 @@ type EnemyProps = Object2DProps & {
 };
 
 export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
-    scene: Scene
-    gameWinCallback: () => void
+    scene: Scene;
+    gameWinCallback: () => void;
     canCollide: boolean = true;
     //
     speed: number = 0;
@@ -27,29 +27,29 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
     spriteAnimation: SpriteAnimation;
     enemySprites: AnimationSprites;
     //
-    prevRecievedDamage: number
+    prevRecievedDamage: number;
     // Здоровье
     maxHealth: number;
     private _health: number;
 
     // TODO: Додумать реализацию
     get health(): number {
-        return this._health
+        return this._health;
     }
     set health(value: number) {
-        this._health = value
-        if(this._health <=0 ) {
-            this.onDeath()
+        this._health = value;
+        if (this._health <= 0) {
+            this.onDeath();
         }
     }
 
     constructor(props: EnemyProps) {
         super(props);
 
-        this.scene = props.scene
-        this.gameWinCallback = props.gameWinCallback
-        this.maxHealth = props.maxHealth
-        this._health = this.maxHealth
+        this.scene = props.scene;
+        this.gameWinCallback = props.gameWinCallback;
+        this.maxHealth = props.maxHealth;
+        this._health = this.maxHealth;
         this._createEnemySprites(props.image);
         this.init();
     }
@@ -78,20 +78,20 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
     onCollide(obstacle: Object2D & Collidable) {
         if (obstacle instanceof Player) {
             obstacle.health -= 0.5;
-            console.log("Здоровье игрока: ", obstacle.health)
+            console.log("Здоровье игрока: ", obstacle.health);
         }
-        if(obstacle instanceof Weapon && obstacle.active) {
-            if(this.prevRecievedDamage != obstacle.attackCount) {
-                this.health -= obstacle.damage
-                console.log("Здоровье enemy: ", this.health)
-                this.prevRecievedDamage = obstacle.attackCount
+        if (obstacle instanceof Weapon && obstacle.active) {
+            if (this.prevRecievedDamage !== obstacle.attackCount) {
+                this.health -= obstacle.damage;
+                console.log("Здоровье enemy: ", this.health);
+                this.prevRecievedDamage = obstacle.attackCount;
             }
         }
     }
 
     onDeath() {
-        this.scene.remove(this)
-        this.gameWinCallback()
+        this.scene.remove(this);
+        this.gameWinCallback();
     }
 
     // TODO: AI

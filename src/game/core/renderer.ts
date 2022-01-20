@@ -106,8 +106,8 @@ export class Renderer {
     // Отрисовка rectangle на канвасе
     private _drawRectangle(object: Object2D, camera: Camera) {
         // Ренедерим только видимые объекты
-        if(!object.visible) {
-            return
+        if (!object.visible) {
+            return;
         }
         const c = this.context;
         const geom = object.geometry as RectangleGeometry;
@@ -134,11 +134,11 @@ export class Renderer {
             c.scale(-1, 1);
         }
         // Rotate object
-        if(object.rotation && object.rotationCenter) {
+        if (object.rotation && object.rotationCenter) {
             // Поворачиваем относительно центра
             c.translate(object.rotationCenter.x * K, object.rotationCenter.y * K);
             c.rotate(object.rotation);
-            c.translate(-object.rotationCenter.x * K, -object.rotationCenter.y * K);        
+            c.translate(-object.rotationCenter.x * K, -object.rotationCenter.y * K);
         }
         // Draw Image (Sprite)
         if (object.spriteConfig?.image) {

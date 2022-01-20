@@ -7,6 +7,7 @@ import { routes } from "@/config/routes/routes";
 export const useGame = () => {
     const [isActive, setActive] = useState(true);
     const [isGameOver, setGameOver] = useState(false);
+    const [isGameWin, setGameWin] = useState(false);
     const [isPaused, setPause] = useState(false);
     const [world] = useState(new World());
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -26,6 +27,12 @@ export const useGame = () => {
         world.destroy();
     }, []);
 
+    const callGameWin = useCallback(() => {
+        setActive(true);
+        setGameWin(true);
+        world.destroy();
+    }, []);
+
     const setUpPauseButton = useCallback(() => {
         document.addEventListener("keydown", callMenu);
     }, []);
@@ -39,8 +46,10 @@ export const useGame = () => {
         world.init({
             canvas: canvasRef.current,
             gameOverCallback: callGameOver,
+            gameWinCallback: callGameWin,
         });
         setGameOver(false);
+        setGameWin(false);
         setPause(false);
         setActive(false);
     }, []);
@@ -66,5 +75,6 @@ export const useGame = () => {
         onUnmount,
         setUpPauseButton,
         isGameOver,
+        isGameWin
     };
 };

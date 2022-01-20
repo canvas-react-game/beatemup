@@ -26,5 +26,6 @@ export class Scene {
 
     remove(object: Object2D) {
         this.objects = this.objects.filter((x) => x !== object);
+        this.objectWithPhysics = this.objectWithPhysics.filter((x) => x !== object);
     }
 }

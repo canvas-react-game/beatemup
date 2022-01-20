@@ -1,40 +1,75 @@
 import { Vector2D } from "game/core/utils/vector";
 import { Object2D, Object2DProps } from "../../core/object";
-import { EventBus, EventTypes } from "../../core/eventBus";
+import { EventBus } from "../../core/eventBus";
 import Physics, { Collidable } from "../../core/physics/physics";
 import { WorldManager } from "../world.manager";
 import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
+import { AttackAnimation, CanAttack } from "../../core/animations/attack/attack";
+import { Weapon } from "./weapon";
+import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
+import { Wall } from "./wall";
+import { Enemy } from "./enemy";
+import { EventTypes } from "../world.config";
+import { CanReceiveDamage } from "game/core/animations/damage/damage";
 
 type PlayerProps = Object2DProps & {
+    geometry: RectangleGeometry,
     eventBus: EventBus;
     worldManager: WorldManager;
+    maxHealth: number;
+    gameOverCallback: () => void;
     image?: HTMLImageElement;
 };
 
-export class Player extends Object2D implements Collidable {
+export class Player extends Object2D implements Collidable, CanAttack, CanReceiveDamage {
+    gameOverCallback: () => void
+    //
+    geometry: RectangleGeometry;
     // Скорость передвижения пиксель/сек
     speed: number = 150;
     // Global event bus
     eventBus: EventBus;
     //
     worldManager: WorldManager;
-    //
+    // Анимация передвижения
     moveAnimation: MoveAnimation;
     prevPosition: Vector2D;
-    //
+    // 
     canCollide: boolean = true;
-    //
+    // Анимация изменения Sprite
     spriteAnimation: SpriteAnimation;
     playerSprites: AnimationSprites;
+    // Оружие и анимация аттаки
+    weapon: Weapon;
+    attackAnimation: AttackAnimation;
+    // Здоровье
+    maxHealth: number;
+    private _health: number;
+
+    // TODO: Додумать реализацию
+    get health(): number {
+        return this._health
+    }
+    set health(value: number) {
+        this._health = value
+        if(this._health <=0 ) {
+            this.onDeath()
+        }
+    }
 
     constructor(props: PlayerProps) {
         super(props);
-
+        
+        this.gameOverCallback = props.gameOverCallback;
         this.eventBus = props.eventBus;
         this.worldManager = props.worldManager;
+        this.maxHealth = props.maxHealth;
+        // По дефолту полное здоровье
+        this._health = this.maxHealth;
 
         this._createPlayerSprites(props.image);
+        this._updateWeaponState();
         this.init();
     }
 
@@ -48,25 +83,39 @@ export class Player extends Object2D implements Collidable {
         this.spriteAnimation = new SpriteAnimation({
             sprites: this.playerSprites,
         });
+        // Создаем логику анимации атаки
+        this.attackAnimation = new AttackAnimation()
     }
 
     updateState() {
         // Обновляем sprite
         this.spriteConfig = this.spriteAnimation.update(this.spriteConfig, this.moveAnimation);
+        if(this.weapon.spriteConfig) {
+            this.weapon.spriteConfig.shouldFlip = this.spriteConfig?.shouldFlip
+        }
         // Обновляем position
         this.prevPosition = this.position.copy();
         this.position = this.moveAnimation.update(this.position);
+        // Обновляем оружие
+        this.weapon = this.attackAnimation.update(this.weapon, this)
     }
 
     // NOTE: Если скорость объекта значительно больше размера препятствия, то
     // может случиться "проскок" объекта
     onCollide(obstacle: Object2D & Collidable) {
-        this.position = Physics.getNewPositionAfterWallCollision(
-            this,
-            obstacle,
-            this.moveAnimation,
-            this.prevPosition,
-        );
+        if(obstacle instanceof Wall || obstacle instanceof Enemy) {
+            this.position = Physics.getNewPositionAfterWallCollision(
+                this,
+                obstacle,
+                this.moveAnimation,
+                this.prevPosition,
+            );
+        }
+    }
+
+    onDeath() {
+        this.gameOverCallback();
+        console.log("Game over !");
     }
 
     moveStateUpdateCondition() {
@@ -104,6 +153,16 @@ export class Player extends Object2D implements Collidable {
             EventTypes.ArrowRightUp,
             () => (moveState.isMovingRight = false),
         );
+    }
+
+    private _updateWeaponState() {
+        this.eventBus.on(
+            EventTypes.SpaceDown, 
+            () => {
+                this.weapon.active = true
+                this.weapon.visible = true
+            }
+        )
     }
 
     private _createPlayerSprites(image?: HTMLImageElement) {

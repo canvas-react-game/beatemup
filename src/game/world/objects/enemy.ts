@@ -4,15 +4,21 @@ import { Vector2D } from "../../core/utils/vector";
 import { Object2D, Object2DProps } from "../../core/object";
 import { Collidable } from "../../core/physics/physics";
 import { Player } from "./player";
+import { Weapon } from "./weapon";
+import { CanReceiveDamage } from "game/core/animations/damage/damage";
+import { Scene } from "game/core/scene";
 
 type EnemyProps = Object2DProps & {
-    gameOverCallback: () => void
+    scene: Scene;
+    maxHealth: number;
     image?: HTMLImageElement
+    gameWinCallback: () => void
 };
 
-export class Enemy extends Object2D implements Collidable {
+export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
+    scene: Scene
+    gameWinCallback: () => void
     canCollide: boolean = true;
-    gameOverCallback: () => void;
     //
     speed: number = 0;
     moveAnimation: MoveAnimation;
@@ -20,11 +26,30 @@ export class Enemy extends Object2D implements Collidable {
     //
     spriteAnimation: SpriteAnimation;
     enemySprites: AnimationSprites;
+    //
+    prevRecievedDamage: number
+    // Здоровье
+    maxHealth: number;
+    private _health: number;
+
+    // TODO: Додумать реализацию
+    get health(): number {
+        return this._health
+    }
+    set health(value: number) {
+        this._health = value
+        if(this._health <=0 ) {
+            this.onDeath()
+        }
+    }
 
     constructor(props: EnemyProps) {
         super(props);
 
-        this.gameOverCallback = props.gameOverCallback;
+        this.scene = props.scene
+        this.gameWinCallback = props.gameWinCallback
+        this.maxHealth = props.maxHealth
+        this._health = this.maxHealth
         this._createEnemySprites(props.image);
         this.init();
     }
@@ -52,9 +77,21 @@ export class Enemy extends Object2D implements Collidable {
     //
     onCollide(obstacle: Object2D & Collidable) {
         if (obstacle instanceof Player) {
-            this.gameOverCallback();
-            console.log("Game over !");
+            obstacle.health -= 0.5;
+            console.log("Здоровье игрока: ", obstacle.health)
         }
+        if(obstacle instanceof Weapon && obstacle.active) {
+            if(this.prevRecievedDamage != obstacle.attackCount) {
+                this.health -= obstacle.damage
+                console.log("Здоровье enemy: ", this.health)
+                this.prevRecievedDamage = obstacle.attackCount
+            }
+        }
+    }
+
+    onDeath() {
+        this.scene.remove(this)
+        this.gameWinCallback()
     }
 
     // TODO: AI

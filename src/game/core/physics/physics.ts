@@ -17,8 +17,8 @@ export function isImplementingCollision(obj1: Object2D): obj1 is Object2D & Coll
 class Physics {
     hasBox2DCollided(obj1: Object2D, obj2: Object2D): boolean {
         // Пересчитываем BoundingBox
-        obj1.geometry.calculateBoundingBox(obj1.position);
-        obj2.geometry.calculateBoundingBox(obj2.position);
+        obj1.geometry.calculateBoundingBox(obj1);
+        obj2.geometry.calculateBoundingBox(obj2);
         // Получаем BB объектов
         const box1 = obj1.geometry.boundingBox as Box2;
         const box2 = obj2.geometry.boundingBox as Box2;

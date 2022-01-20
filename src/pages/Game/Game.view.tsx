@@ -18,6 +18,7 @@ const Game: FC = () => {
         onUnmount,
         setUpPauseButton,
         isGameOver,
+        isGameWin
     } = useGame();
 
     useMountEffect(() => {
@@ -37,6 +38,7 @@ const Game: FC = () => {
                 onStart={onStart}
                 isPaused={isPaused}
                 isGameOver={isGameOver}
+                isGameWin={isGameWin}
                 onResume={onResume}
             />
         </div>

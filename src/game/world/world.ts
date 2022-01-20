@@ -1,9 +1,9 @@
 import { Camera } from "../core/camera";
 import { Renderer } from "../core/renderer";
 import { Scene } from "../core/scene";
-import { EventBus, EventTypes, KeyboardEvents } from "../core/eventBus";
+import { EventBus } from "../core/eventBus";
 import { WorldManager } from "./world.manager";
-import { STEP } from "./world.config";
+import { EventTypes, KeyboardEvents, STEP } from "./world.config";
 
 type KeyListener = (this: Window, ev: KeyboardEvent) => any;
 type Listener = (this: Window, ev: Event) => any;
@@ -11,28 +11,29 @@ type Listener = (this: Window, ev: Event) => any;
 type WorldProps = {
     canvas: HTMLCanvasElement | null
     gameOverCallback: () => void
+    gameWinCallback: () => void
 };
 
 // Игровой мир
 export class World {
     canvas: HTMLCanvasElement | null;
     renderer: Renderer;
+    // Управление анимацией рендеринга
+    animationNumber: number | undefined;
     scene: Scene;
     camera: Camera;
+    // Управление миром
     manager: WorldManager;
-
+    // Управление событиями в игре
     eventBus: EventBus;
-
-    // Управление анимацией
-    animationNumber: number | undefined;
-
     // События, от которых нужно отписаться
     private _keyDownListener: KeyListener;
     private _keyUpListener: KeyListener;
     private _resizeListener: Listener;
 
-    // Gameover callback to interact with GUI
+    // Callback to interact with GUI
     gameOverCallback: () => void;
+    gameWinCallback: () => void;
 
     /**
        Инициализирует world и начинает анимацию
@@ -40,6 +41,7 @@ export class World {
     init(props: WorldProps) {
         this.canvas = props.canvas;
         this.gameOverCallback = props.gameOverCallback;
+        this.gameWinCallback = props.gameWinCallback;
         this.eventBus = new EventBus();
 
         // Создаем Renderer
@@ -53,6 +55,7 @@ export class World {
         this.manager = new WorldManager();
         [this.scene, this.camera] = this.manager.composeLevel(
             this.gameOverCallback,
+            this.gameWinCallback,
             this.eventBus,
         );
 
@@ -110,6 +113,9 @@ export class World {
                 case KeyboardEvents.ArrowUp:
                     eventBus.emit(EventTypes.ArrowTopDown);
                     break;
+                case KeyboardEvents.Space:
+                    eventBus.emit(EventTypes.SpaceDown);
+                    break;
                 default:
                     break;
             }
@@ -129,6 +135,9 @@ export class World {
                 case KeyboardEvents.ArrowUp:
                     eventBus.emit(EventTypes.ArrowTopUp);
                     break;
+                case KeyboardEvents.Space:
+                    eventBus.emit(EventTypes.SpaceUp);
+                    break;                    
                 default:
                     break;
             }

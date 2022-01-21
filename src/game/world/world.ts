@@ -49,12 +49,12 @@ export class World {
         );
 
         // Создаем playerUI
-        if(this.uiCanvas) {
-            WorldManager.composeUIScene(this.uiCanvas)
+        if (this.uiCanvas) {
+            WorldManager.composeUIScene(this.uiCanvas);
         }
 
         // Подписываемся на событие ресайз
-        WorldEvents.on(EventTypes.Resize, this._onResize)
+        WorldEvents.on(EventTypes.Resize, this._onResize);
         // Начинаем анимацию
         this.startAnimataion();
     }
@@ -103,7 +103,7 @@ export class World {
         if (this.canvas && this.animationNumber) {
             this.canvas.height = window.innerHeight;
             this.canvas.width = window.innerWidth;
-            if(this.uiCanvas) {
+            if (this.uiCanvas) {
                 this.uiCanvas.height = window.innerHeight;
                 this.uiCanvas.width = window.innerWidth;
             }

@@ -11,8 +11,8 @@ class WorldEvents extends EventBus {
     private _resizeListener: Listener;
 
     constructor() {
-        super()
-        this.init()
+        super();
+        this.init();
     }
 
     init() {
@@ -63,7 +63,7 @@ class WorldEvents extends EventBus {
         };
 
         this._resizeListener = (e: Event) => {
-            eventBus.emit(EventTypes.Resize)
+            eventBus.emit(EventTypes.Resize);
         };
 
         window.addEventListener("keydown", this._keyDownListener);
@@ -78,4 +78,4 @@ class WorldEvents extends EventBus {
     }
 }
 
-export default new WorldEvents()
+export default new WorldEvents();

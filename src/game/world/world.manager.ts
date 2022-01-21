@@ -31,20 +31,20 @@ export type Sprite = {
 
 class WorldManager {
     // Scene
-    scene: Scene
+    scene: Scene;
     // Camera
-    camera: Camera
+    camera: Camera;
     // Игрок
-    player: Player
+    player: Player;
     // Картинка Sprites
     tileSetImage: HTMLImageElement;
     // Уровень
     level: Level;
     // UI canvas и управление
-    playerUI: PlayerUI
+    playerUI: PlayerUI;
     // Callbacks
-    gameOverCallback: () => void
-    gameWinCallback: () => void
+    gameOverCallback: () => void;
+    gameWinCallback: () => void;
 
     constructor() {
         const tileSetImage = new Image(512, 512);
@@ -81,13 +81,13 @@ class WorldManager {
         // Устанавливаем объект привязки камеры
         this.camera.bindObject(player);
         // Создаем противников
-        this._createEnemies()
+        this._createEnemies();
 
         // Создаем playerUI
         this.playerUI = new PlayerUI({
             tileSetImage: this.tileSetImage,
-            maxHealth: this.player.maxHealth
-        })
+            maxHealth: this.player.maxHealth,
+        });
 
         return [this.scene, this.camera];
     }
@@ -210,7 +210,7 @@ class WorldManager {
             geometry: enemyGeom,
             color: new Color(0, 0, 255),
             image: this.tileSetImage,
-            maxHealth: 1
+            maxHealth: 1,
         });
         // Зададим дефолтное положение
         const enemyPosition = getLastGroundTileOnLevel(level);

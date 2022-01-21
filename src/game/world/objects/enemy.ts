@@ -22,7 +22,7 @@ const ENEMY_MOVE_DIRECTIONS: Directions = {
     right: { name: "right", chance: 0.25 },
     down: { name: "down", chance: 0.25 },
     top: { name: "top", chance: 0.25 },
-}
+};
 
 export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
     scene: Scene;
@@ -40,8 +40,8 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
     maxHealth: number;
     private _health: number;
     // Частота обновления позиции
-    currentMoveStateCounter: number = 0
-    maxMoveStateUpdate: number = 30
+    currentMoveStateCounter: number = 0;
+    maxMoveStateUpdate: number = 30;
 
     // TODO: Додумать реализацию
     get health(): number {
@@ -87,13 +87,13 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
 
     //
     onCollide(obstacle: Object2D & Collidable) {
-        if(obstacle instanceof Wall) {
+        if (obstacle instanceof Wall) {
             this.position = Physics.getNewPositionAfterWallCollision(
                 this,
                 obstacle,
                 this.moveAnimation,
                 this.prevPosition,
-            );            
+            );
         }
         if (obstacle instanceof Player) {
             obstacle.health -= 0.5;
@@ -110,8 +110,8 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
 
     onDeath() {
         this.scene.remove(this);
-        const enemiesCount = this.scene.objects.filter(x => x instanceof Enemy).length
-        if(!enemiesCount) {
+        const enemiesCount = this.scene.objects.filter((x) => x instanceof Enemy).length;
+        if (!enemiesCount) {
             WorldManager.gameWinCallback();
         }
     }
@@ -119,35 +119,35 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
     // TODO: Вынести AI к анимациям
     moveStateUpdateCondition() {
         // Обновляем направление движение раз в 60 / maxMoveStateUpdate сек
-        if(this.currentMoveStateCounter < this.maxMoveStateUpdate) {
-            this.currentMoveStateCounter += 1
-            return
+        if (this.currentMoveStateCounter < this.maxMoveStateUpdate) {
+            this.currentMoveStateCounter += 1;
+            return;
         }
-        else {
-            this.currentMoveStateCounter = 0
-        }
-        const moveState = this.moveAnimation.moveState
-        moveState.isMovingDown = false
-        moveState.isMovingLeft = false
-        moveState.isMovingRight = false
-        moveState.isMovingTop = false
+
+        this.currentMoveStateCounter = 0;
+
+        const { moveState } = this.moveAnimation;
+        moveState.isMovingDown = false;
+        moveState.isMovingLeft = false;
+        moveState.isMovingRight = false;
+        moveState.isMovingTop = false;
         // Случайным образом выбираем направление и устанавливаем флаг
-        const direction = getRandomDirection(ENEMY_MOVE_DIRECTIONS)
-        switch(direction) {
+        const direction = getRandomDirection(ENEMY_MOVE_DIRECTIONS);
+        switch (direction) {
             case ENEMY_MOVE_DIRECTIONS.left:
-                moveState.isMovingLeft = true
-                break
+                moveState.isMovingLeft = true;
+                break;
             case ENEMY_MOVE_DIRECTIONS.right:
-                moveState.isMovingRight = true
-                break
+                moveState.isMovingRight = true;
+                break;
             case ENEMY_MOVE_DIRECTIONS.down:
-                moveState.isMovingDown = true
-                break
+                moveState.isMovingDown = true;
+                break;
             case ENEMY_MOVE_DIRECTIONS.top:
-                moveState.isMovingTop = true
-                break
+                moveState.isMovingTop = true;
+                break;
             default:
-                break
+                break;
         }
     }
 

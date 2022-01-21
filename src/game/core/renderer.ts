@@ -109,7 +109,7 @@ export class Renderer {
         let { x, y } = object.position;
         let { width, height } = geom;
         // Смещаем координаты отностительно объекта привязки камеры
-        if(camera.bindedObject) {
+        if (camera.bindedObject) {
             x = camera.size / 2 + (x - camera.bindedObject.position.x);
             y = camera.size / 2 + (y - camera.bindedObject.position.y);
         }
@@ -118,10 +118,10 @@ export class Renderer {
         const K = this.canvas.width / camera.size;
         x *= K;
         // Рассчитываем с поправкой на позиционирование камеры
-        if(camera.bindedObject) {
-            y = K * y  - ((camera.size / 2) * K - this.canvas.height / 2);
+        if (camera.bindedObject) {
+            y = K * y - ((camera.size / 2) * K - this.canvas.height / 2);
         } else {
-            y = K * y
+            y *= K;
         }
         width *= K;
         height *= K;

@@ -18,7 +18,7 @@ export enum EventTypes {
     SpaceDown = "SpaceDown",
     SpaceUp = "SpaceUp",
     // Resize
-    Resize = "Resize"
+    Resize = "Resize",
 }
 
 export enum KeyboardEvents {

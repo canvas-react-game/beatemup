@@ -16,7 +16,7 @@ type PositionValues = {
     y: number
     width: number
     height: number
-}
+};
 
 export class Renderer {
     canvas: HTMLCanvasElement;
@@ -116,15 +116,17 @@ export class Renderer {
         // Пересчитываем координаты мира в координаты на canvas
         // с учетом позиционирования камеры
         const K = this.canvas.width / camera.size;
-        let {x, y, width, height} = this._recalculateWorldValuesToCanvasValues(
+        const {
+            x, y, width, height,
+        } = this._recalculateWorldValuesToCanvasValues(
             camera,
             {
-                x: object.position.x, 
-                y: object.position.y, 
-                width: geom.width, 
-                height: geom.height
-            }
-        )
+                x: object.position.x,
+                y: object.position.y,
+                width: geom.width,
+                height: geom.height,
+            },
+        );
         // Выполняем преобразования для корректного отображения
         // Translate to position
         c.translate(x, y);
@@ -154,8 +156,8 @@ export class Renderer {
     }
 
     private _recalculateWorldValuesToCanvasValues(
-        camera: Camera, 
-        values: PositionValues
+        camera: Camera,
+        values: PositionValues,
     ): PositionValues {
         // Смещаем координаты отностительно объекта привязки камеры
         if (camera.bindedObject) {
@@ -174,7 +176,7 @@ export class Renderer {
         }
         values.width *= K;
         values.height *= K;
-        
-        return values
+
+        return values;
     }
 }

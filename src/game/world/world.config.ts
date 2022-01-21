@@ -17,6 +17,8 @@ export enum EventTypes {
     // Удар
     SpaceDown = "SpaceDown",
     SpaceUp = "SpaceUp",
+    // Resize
+    Resize = "Resize"
 }
 
 export enum KeyboardEvents {

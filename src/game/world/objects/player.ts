@@ -2,7 +2,6 @@ import { Vector2D } from "game/core/utils/vector";
 import { RectangleGeometry } from "game/core/geometry/rectangle/rectangle";
 import { CanReceiveDamage } from "game/core/animations/damage/damage";
 import { Object2D, Object2DProps } from "../../core/object";
-import { EventBus } from "../../core/eventBus";
 import Physics, { Collidable } from "../../core/physics/physics";
 import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
@@ -12,10 +11,10 @@ import { Wall } from "./wall";
 import { Enemy } from "./enemy";
 import { EventTypes } from "../world.config";
 import WorldManager from "../world.manager";
+import WorldEvents from "../world.events";
 
 type PlayerProps = Object2DProps & {
     geometry: RectangleGeometry,
-    eventBus: EventBus;
     maxHealth: number;
     image?: HTMLImageElement;
 };
@@ -25,8 +24,6 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     geometry: RectangleGeometry;
     // Скорость передвижения пиксель/сек
     speed: number = 150;
-    // Global event bus
-    eventBus: EventBus;
     // Анимация передвижения
     moveAnimation: MoveAnimation;
     prevPosition: Vector2D;
@@ -48,7 +45,7 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     }
     set health(value: number) {
         this._health = value;
-        WorldManager.playerUI.updateHealth(this._health);
+        WorldManager.playerUI?.updateHealth(this._health);
         if (this._health <= 0) {
             this.onDeath();
         }
@@ -57,7 +54,6 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     constructor(props: PlayerProps) {
         super(props);
 
-        this.eventBus = props.eventBus;
         this.maxHealth = props.maxHealth;
         // По дефолту полное здоровье
         this._health = this.maxHealth;
@@ -114,42 +110,42 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     moveStateUpdateCondition() {
         const { moveState } = this.moveAnimation;
         //
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowLeftDown,
             () => (moveState.isMovingLeft = true),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowBottomDown,
             () => (moveState.isMovingDown = true),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowTopDown,
             () => (moveState.isMovingTop = true),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowRightDown,
             () => (moveState.isMovingRight = true),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowLeftUp,
             () => (moveState.isMovingLeft = false),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowTopUp,
             () => (moveState.isMovingTop = false),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowBottomUp,
             () => (moveState.isMovingDown = false),
         );
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.ArrowRightUp,
             () => (moveState.isMovingRight = false),
         );
     }
 
     private _updateWeaponState() {
-        this.eventBus.on(
+        WorldEvents.on(
             EventTypes.SpaceDown,
             () => {
                 this.weapon.active = true;

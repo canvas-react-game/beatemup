@@ -1,15 +1,13 @@
 import { Camera } from "../core/camera";
 import { Renderer } from "../core/renderer";
 import { Scene } from "../core/scene";
-import { EventBus } from "../core/eventBus";
 import WorldManager from "./world.manager";
-import { EventTypes, KeyboardEvents, STEP } from "./world.config";
-
-type KeyListener = (this: Window, ev: KeyboardEvent) => any;
-type Listener = (this: Window, ev: Event) => any;
+import WorldEvents from "./world.events";
+import { EventTypes, STEP } from "./world.config";
 
 type WorldProps = {
     canvas: HTMLCanvasElement | null
+    uiCanvas: HTMLCanvasElement | null
     gameOverCallback: () => void
     gameWinCallback: () => void
 };
@@ -17,17 +15,12 @@ type WorldProps = {
 // Игровой мир
 export class World {
     canvas: HTMLCanvasElement | null;
+    uiCanvas: HTMLCanvasElement | null;
     renderer: Renderer;
     // Управление анимацией рендеринга
     animationNumber: number | undefined;
     scene: Scene;
     camera: Camera;
-    // Управление событиями в игре
-    eventBus: EventBus;
-    // События, от которых нужно отписаться
-    private _keyDownListener: KeyListener;
-    private _keyUpListener: KeyListener;
-    private _resizeListener: Listener;
 
     // Callback to interact with GUI
     gameOverCallback: () => void;
@@ -38,9 +31,9 @@ export class World {
     */
     init(props: WorldProps) {
         this.canvas = props.canvas;
+        this.uiCanvas = props.uiCanvas;
         this.gameOverCallback = props.gameOverCallback;
         this.gameWinCallback = props.gameWinCallback;
-        this.eventBus = new EventBus();
 
         // Создаем Renderer
         this.renderer = new Renderer({
@@ -53,13 +46,16 @@ export class World {
         [this.scene, this.camera] = WorldManager.composeLevel(
             this.gameOverCallback,
             this.gameWinCallback,
-            this.eventBus,
         );
 
-        // Вставляем canvas playerUI
-        this.canvas?.parentElement?.appendChild(WorldManager.playerUI.canvas);
+        // Создаем playerUI
+        if(this.uiCanvas) {
+            WorldManager.composeUIScene(this.uiCanvas)
+        }
 
-        this.registerEvents();
+        // Подписываемся на событие ресайз
+        WorldEvents.on(EventTypes.Resize, this._onResize)
+        // Начинаем анимацию
         this.startAnimataion();
     }
 
@@ -87,7 +83,7 @@ export class World {
             // Рендерим основной мир
             this.renderer.render(this.scene, this.camera);
             // Рендерим UI поверх
-            WorldManager.playerUI.renderer.render(
+            WorldManager.playerUI?.renderer.render(
                 WorldManager.playerUI.scene,
                 WorldManager.playerUI.camera,
             );
@@ -99,74 +95,22 @@ export class World {
     stopAnimation() {
         if (this.animationNumber) {
             cancelAnimationFrame(this.animationNumber);
+            this.animationNumber = undefined;
         }
     }
 
-    registerEvents() {
-        const eventBus = this.eventBus as EventBus;
-
-        this._keyDownListener = (e: KeyboardEvent) => {
-            switch (e.key) {
-                case KeyboardEvents.ArrowDown:
-                    eventBus.emit(EventTypes.ArrowBottomDown);
-                    break;
-                case KeyboardEvents.ArrowLeft:
-                    eventBus.emit(EventTypes.ArrowLeftDown);
-                    break;
-                case KeyboardEvents.ArrowRight:
-                    eventBus.emit(EventTypes.ArrowRightDown);
-                    break;
-                case KeyboardEvents.ArrowUp:
-                    eventBus.emit(EventTypes.ArrowTopDown);
-                    break;
-                case KeyboardEvents.Space:
-                    eventBus.emit(EventTypes.SpaceDown);
-                    break;
-                default:
-                    break;
+    private _onResize() {
+        if (this.canvas && this.animationNumber) {
+            this.canvas.height = window.innerHeight;
+            this.canvas.width = window.innerWidth;
+            if(this.uiCanvas) {
+                this.uiCanvas.height = window.innerHeight;
+                this.uiCanvas.width = window.innerWidth;
             }
-        };
-
-        this._keyUpListener = (e: KeyboardEvent) => {
-            switch (e.key) {
-                case KeyboardEvents.ArrowDown:
-                    eventBus.emit(EventTypes.ArrowBottomUp);
-                    break;
-                case KeyboardEvents.ArrowLeft:
-                    eventBus.emit(EventTypes.ArrowLeftUp);
-                    break;
-                case KeyboardEvents.ArrowRight:
-                    eventBus.emit(EventTypes.ArrowRightUp);
-                    break;
-                case KeyboardEvents.ArrowUp:
-                    eventBus.emit(EventTypes.ArrowTopUp);
-                    break;
-                case KeyboardEvents.Space:
-                    eventBus.emit(EventTypes.SpaceUp);
-                    break;
-                default:
-                    break;
-            }
-        };
-
-        this._resizeListener = (e: Event) => {
-            if (this.canvas) {
-                this.canvas.height = window.innerHeight;
-                this.canvas.width = window.innerWidth;
-                WorldManager.playerUI.canvas.height = window.innerHeight;
-                WorldManager.playerUI.canvas.width = window.innerWidth;
-            }
-        };
-
-        window.addEventListener("keydown", this._keyDownListener);
-        window.addEventListener("keyup", this._keyUpListener);
-        window.addEventListener("resize", this._resizeListener);
+        }
     }
 
     destroy() {
         this.stopAnimation();
-        window.removeEventListener("keydown", this._keyDownListener);
-        window.removeEventListener("keyup", this._keyUpListener);
-        window.removeEventListener("resize", this._resizeListener);
     }
 }

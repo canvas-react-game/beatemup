@@ -11,6 +11,7 @@ export const useGame = () => {
     const [isPaused, setPause] = useState(false);
     const [world] = useState(new World());
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    const uiCanvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
 
     const callMenu = useCallback((e: KeyboardEvent) => {
@@ -45,6 +46,7 @@ export const useGame = () => {
     const onStart = useCallback(() => {
         world.init({
             canvas: canvasRef.current,
+            uiCanvas: uiCanvasRef.current,
             gameOverCallback: callGameOver,
             gameWinCallback: callGameWin,
         });
@@ -69,6 +71,7 @@ export const useGame = () => {
         isActive,
         isPaused,
         canvasRef,
+        uiCanvasRef,
         onStart,
         onResume,
         onClose,

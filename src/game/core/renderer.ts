@@ -11,6 +11,13 @@ type RendererProps = {
     height: number
 };
 
+type PositionValues = {
+    x: number
+    y: number
+    width: number
+    height: number
+}
+
 export class Renderer {
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
@@ -106,26 +113,19 @@ export class Renderer {
         const c = this.context;
         const geom = object.geometry as RectangleGeometry;
         const { color } = object;
-        let { x, y } = object.position;
-        let { width, height } = geom;
-        // Смещаем координаты отностительно объекта привязки камеры
-        if (camera.bindedObject) {
-            x = camera.size / 2 + (x - camera.bindedObject.position.x);
-            y = camera.size / 2 + (y - camera.bindedObject.position.y);
-        }
-        // Переводим world coordinates в координаты отрисовки
-        // TODO: Проблема округления координат
+        // Пересчитываем координаты мира в координаты на canvas
+        // с учетом позиционирования камеры
         const K = this.canvas.width / camera.size;
-        x *= K;
-        // Рассчитываем с поправкой на позиционирование камеры
-        if (camera.bindedObject) {
-            y = K * y - ((camera.size / 2) * K - this.canvas.height / 2);
-        } else {
-            y *= K;
-        }
-        width *= K;
-        height *= K;
-        // Render
+        let {x, y, width, height} = this._recalculateWorldValuesToCanvasValues(
+            camera,
+            {
+                x: object.position.x, 
+                y: object.position.y, 
+                width: geom.width, 
+                height: geom.height
+            }
+        )
+        // Выполняем преобразования для корректного отображения
         // Translate to position
         c.translate(x, y);
         // Flip object
@@ -151,5 +151,30 @@ export class Renderer {
         }
         // Reset transformations to default
         c.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
+    private _recalculateWorldValuesToCanvasValues(
+        camera: Camera, 
+        values: PositionValues
+    ): PositionValues {
+        // Смещаем координаты отностительно объекта привязки камеры
+        if (camera.bindedObject) {
+            values.x = camera.size / 2 + (values.x - camera.bindedObject.position.x);
+            values.y = camera.size / 2 + (values.y - camera.bindedObject.position.y);
+        }
+        // Переводим world coordinates в координаты отрисовки
+        // TODO: Проблема округления координат
+        const K = this.canvas.width / camera.size;
+        values.x *= K;
+        // Рассчитываем с поправкой на позиционирование камеры
+        if (camera.bindedObject) {
+            values.y = K * values.y - ((camera.size / 2) * K - this.canvas.height / 2);
+        } else {
+            values.y *= K;
+        }
+        values.width *= K;
+        values.height *= K;
+        
+        return values
     }
 }

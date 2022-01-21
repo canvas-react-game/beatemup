@@ -1,7 +1,6 @@
 import { Color } from "../core/utils/color";
 import { RectangleGeometry } from "../core/geometry/rectangle/rectangle";
 import { Scene } from "../core/scene";
-import { EventBus } from "../core/eventBus";
 
 import { Player } from "./objects/player";
 import { Enemy } from "./objects/enemy";
@@ -41,7 +40,7 @@ class WorldManager {
     // Уровень
     level: Level;
     // UI canvas и управление
-    playerUI: PlayerUI;
+    playerUI: PlayerUI | undefined;
     // Callbacks
     gameOverCallback: () => void;
     gameWinCallback: () => void;
@@ -55,12 +54,11 @@ class WorldManager {
     composeLevel(
         gameOverCallback: () => void,
         gameWinCallback: () => void,
-        eventBus: EventBus,
     ): [Scene, Camera] {
         this.gameOverCallback = gameOverCallback;
         this.gameWinCallback = gameWinCallback;
         // Camera
-        this.camera = new Camera(LEVEL_SIZE * 1);
+        this.camera = new Camera(LEVEL_SIZE);
         // Задаем бэкграунд и создаем сцену
         const background = new Color(0, 0, 0);
         this.scene = new Scene(background);
@@ -73,7 +71,7 @@ class WorldManager {
         // В отдельный список добавляем объекты, которые имеют физику
         this.scene.addObjectWithPhysics(...objects.filter((x) => x instanceof Wall));
         // Создаем Игрока
-        const [player, sword] = this._createPlayer(eventBus, this.level);
+        const [player, sword] = this._createPlayer(this.level);
         this.player = player;
         // Добавляем в сцену
         this.scene.add(sword, player);
@@ -83,13 +81,16 @@ class WorldManager {
         // Создаем противников
         this._createEnemies();
 
+        return [this.scene, this.camera];
+    }
+
+    composeUIScene(canvas: HTMLCanvasElement) {
         // Создаем playerUI
         this.playerUI = new PlayerUI({
+            canvas,
             tileSetImage: this.tileSetImage,
             maxHealth: this.player.maxHealth,
         });
-
-        return [this.scene, this.camera];
     }
 
     getTilePositionFromCoordinates(coordinates: Vector2D): Vector2D {
@@ -146,13 +147,11 @@ class WorldManager {
     }
 
     private _createPlayer(
-        eventBus: EventBus,
         level: Level,
     ): [Player, Weapon] {
         const playerGeom = new RectangleGeometry(16, 21);
         const player = new Player({
             geometry: playerGeom,
-            eventBus,
             image: this.tileSetImage,
             maxHealth: 6,
         });

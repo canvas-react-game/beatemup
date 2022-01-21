@@ -67,6 +67,11 @@ export class Object2D {
         this.position.add(vect);
     }
 
+    /**
+     *  Вращает вокруг центра на заданнный угол
+        @center - Точка вокруг которой вращается
+        @angle - Угол вращения в радианах
+    */
     rotateAround(center: Vector2D, angle: number) {
         this.rotation = angle;
         this.rotationCenter = new Vector2D(

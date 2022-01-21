@@ -1,8 +1,10 @@
 import { Vector2D } from "../core/utils/vector";
 import { TILE_SIZE } from "./world.config";
 
+// Матрица уровня 40х40
 export type Level = Array<Array<number>>;
 
+// Виды значений в матрице уровня
 export enum TileTypes {
     Ground = "Ground",
     Wall = "Wall",
@@ -19,19 +21,19 @@ export const TILE_TYPES: TileIndexed = {
     3: TileTypes.UI,
 };
 
-type Direction = {
+export type Direction = {
     name: string
     chance: number
 };
 
-type Directions = {
+export type Directions = {
     left: Direction
     right: Direction
     down: Direction
     top: Direction
 };
 
-const getRandomDirection = (directions: Directions): Direction => {
+export const getRandomDirection = (directions: Directions): Direction => {
     let min = 0;
     const random = Math.random();
     if (random < directions.left.chance) {

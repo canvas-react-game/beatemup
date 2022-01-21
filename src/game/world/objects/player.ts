@@ -4,7 +4,6 @@ import { CanReceiveDamage } from "game/core/animations/damage/damage";
 import { Object2D, Object2DProps } from "../../core/object";
 import { EventBus } from "../../core/eventBus";
 import Physics, { Collidable } from "../../core/physics/physics";
-import { WorldManager } from "../world.manager";
 import { MoveAnimation } from "../../core/animations/move/moveAnimation";
 import { AnimationSprites, SpriteAnimation } from "../../core/animations/sprite/spriteAnimation";
 import { AttackAnimation, CanAttack } from "../../core/animations/attack/attack";
@@ -12,26 +11,22 @@ import { Weapon } from "./weapon";
 import { Wall } from "./wall";
 import { Enemy } from "./enemy";
 import { EventTypes } from "../world.config";
+import WorldManager from "../world.manager";
 
 type PlayerProps = Object2DProps & {
     geometry: RectangleGeometry,
     eventBus: EventBus;
-    worldManager: WorldManager;
     maxHealth: number;
-    gameOverCallback: () => void;
     image?: HTMLImageElement;
 };
 
 export class Player extends Object2D implements Collidable, CanAttack, CanReceiveDamage {
-    gameOverCallback: () => void;
     //
     geometry: RectangleGeometry;
     // Скорость передвижения пиксель/сек
     speed: number = 150;
     // Global event bus
     eventBus: EventBus;
-    //
-    worldManager: WorldManager;
     // Анимация передвижения
     moveAnimation: MoveAnimation;
     prevPosition: Vector2D;
@@ -53,6 +48,7 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     }
     set health(value: number) {
         this._health = value;
+        WorldManager.playerUI.updateHealth(this._health);
         if (this._health <= 0) {
             this.onDeath();
         }
@@ -61,9 +57,7 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     constructor(props: PlayerProps) {
         super(props);
 
-        this.gameOverCallback = props.gameOverCallback;
         this.eventBus = props.eventBus;
-        this.worldManager = props.worldManager;
         this.maxHealth = props.maxHealth;
         // По дефолту полное здоровье
         this._health = this.maxHealth;
@@ -114,8 +108,7 @@ export class Player extends Object2D implements Collidable, CanAttack, CanReceiv
     }
 
     onDeath() {
-        this.gameOverCallback();
-        console.log("Game over !");
+        WorldManager.gameOverCallback();
     }
 
     moveStateUpdateCondition() {

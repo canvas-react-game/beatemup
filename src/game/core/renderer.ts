@@ -97,12 +97,6 @@ export class Renderer {
         }
     }
 
-    // Resize
-    resize(height: number, width: number) {
-        this.canvas.height = height;
-        this.canvas.width = width;
-    }
-
     // Отрисовка rectangle на канвасе
     private _drawRectangle(object: Object2D, camera: Camera) {
         // Ренедерим только видимые объекты
@@ -115,14 +109,20 @@ export class Renderer {
         let { x, y } = object.position;
         let { width, height } = geom;
         // Смещаем координаты отностительно объекта привязки камеры
-        x = camera.size / 2 + (x - camera.bindedObject.position.x);
-        y = camera.size / 2 + (y - camera.bindedObject.position.y);
+        if(camera.bindedObject) {
+            x = camera.size / 2 + (x - camera.bindedObject.position.x);
+            y = camera.size / 2 + (y - camera.bindedObject.position.y);
+        }
         // Переводим world coordinates в координаты отрисовки
         // TODO: Проблема округления координат
         const K = this.canvas.width / camera.size;
         x *= K;
         // Рассчитываем с поправкой на позиционирование камеры
-        y = K * y - ((camera.size / 2) * K - this.canvas.height / 2);
+        if(camera.bindedObject) {
+            y = K * y  - ((camera.size / 2) * K - this.canvas.height / 2);
+        } else {
+            y = K * y
+        }
         width *= K;
         height *= K;
         // Render

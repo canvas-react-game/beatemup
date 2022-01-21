@@ -19,6 +19,7 @@ import { Camera } from "../core/camera";
 
 import TileSetImage from "../../../assets/tileset.png";
 import { Weapon } from "./objects/weapon";
+import { PlayerUI } from "./ui/player.ui";
 
 export type Sprite = {
     // Положение на изображении
@@ -28,9 +29,22 @@ export type Sprite = {
     sHeight: number,
 };
 
-export class WorldManager {
+class WorldManager {
+    // Scene
+    scene: Scene
+    // Camera
+    camera: Camera
+    // Игрок
+    player: Player
+    // Картинка Sprites
     tileSetImage: HTMLImageElement;
+    // Уровень
     level: Level;
+    // UI canvas и управление
+    playerUI: PlayerUI
+    // Callbacks
+    gameOverCallback: () => void
+    gameWinCallback: () => void
 
     constructor() {
         const tileSetImage = new Image(512, 512);
@@ -43,33 +57,39 @@ export class WorldManager {
         gameWinCallback: () => void,
         eventBus: EventBus,
     ): [Scene, Camera] {
+        this.gameOverCallback = gameOverCallback;
+        this.gameWinCallback = gameWinCallback;
         // Camera
-        const camera = new Camera(LEVEL_SIZE * 1);
+        this.camera = new Camera(LEVEL_SIZE * 1);
         // Задаем бэкграунд и создаем сцену
         const background = new Color(0, 0, 0);
-        const scene = new Scene(background);
+        this.scene = new Scene(background);
         // Генерируем рандомный уровень
         this.level = generateRandomLevel();
         // Создаем стены и землю из матрицы уровня
-        const objects = this._createWallsAndTilesFromLevel(this.level);
+        const objects = this._createWallsAndGroundFromLevel(this.level);
         // И добавляем в сцену первыми
-        scene.add(...objects);
+        this.scene.add(...objects);
         // В отдельный список добавляем объекты, которые имеют физику
-        scene.addObjectWithPhysics(...objects.filter((x) => x instanceof Wall));
+        this.scene.addObjectWithPhysics(...objects.filter((x) => x instanceof Wall));
         // Создаем Игрока
-        const [player, sword] = this._createPlayer(eventBus, this.level, gameOverCallback);
+        const [player, sword] = this._createPlayer(eventBus, this.level);
+        this.player = player;
         // Добавляем в сцену
-        scene.add(sword, player);
-        scene.addObjectWithPhysics(sword, player);
+        this.scene.add(sword, player);
+        this.scene.addObjectWithPhysics(sword, player);
         // Устанавливаем объект привязки камеры
-        camera.bindObject(player);
-        // Создаем противника
-        const enemy = this._createEnemy(scene, eventBus, this.level, gameWinCallback);
-        // Добавляем в сцену
-        scene.add(enemy);
-        scene.addObjectWithPhysics(enemy);
+        this.camera.bindObject(player);
+        // Создаем противников
+        this._createEnemies()
 
-        return [scene, camera];
+        // Создаем playerUI
+        this.playerUI = new PlayerUI({
+            tileSetImage: this.tileSetImage,
+            maxHealth: this.player.maxHealth
+        })
+
+        return [this.scene, this.camera];
     }
 
     getTilePositionFromCoordinates(coordinates: Vector2D): Vector2D {
@@ -78,7 +98,7 @@ export class WorldManager {
         return new Vector2D(x, y);
     }
 
-    private _createWallsAndTilesFromLevel(level: Level): Array<Object2D> {
+    private _createWallsAndGroundFromLevel(level: Level): Array<Object2D> {
         const objects: Array<Object2D> = [];
         for (let i = 0; i < level.length; i += 1) {
             for (let j = 0; j < level.length; j += 1) {
@@ -128,16 +148,13 @@ export class WorldManager {
     private _createPlayer(
         eventBus: EventBus,
         level: Level,
-        gameOverCallback: () => void,
     ): [Player, Weapon] {
         const playerGeom = new RectangleGeometry(16, 21);
         const player = new Player({
             geometry: playerGeom,
             eventBus,
-            worldManager: this,
             image: this.tileSetImage,
             maxHealth: 6,
-            gameOverCallback,
         });
         // Зададим дефолтное положение
         const playerPosition = getFirstGroundTileOnLevel(level);
@@ -165,11 +182,27 @@ export class WorldManager {
         return [player, sword];
     }
 
+    private _createEnemies() {
+        // Создаем противника 1
+        const enemy = this._createEnemy(this.scene, this.level);
+        // Добавляем в сцену
+        this.scene.add(enemy);
+        this.scene.addObjectWithPhysics(enemy);
+        // Создаем противника 2
+        const enemy2 = this._createEnemy(this.scene, this.level);
+        // Добавляем в сцену
+        this.scene.add(enemy2);
+        this.scene.addObjectWithPhysics(enemy2);
+        // Создаем противника 3
+        const enemy3 = this._createEnemy(this.scene, this.level);
+        // Добавляем в сцену
+        this.scene.add(enemy3);
+        this.scene.addObjectWithPhysics(enemy3);
+    }
+
     private _createEnemy(
         scene: Scene,
-        eventBus: EventBus,
         level: Level,
-        gameWinCallback: () => void,
     ): Enemy {
         const enemyGeom = new RectangleGeometry(TILE_SIZE, TILE_SIZE);
         const enemy = new Enemy({
@@ -177,8 +210,7 @@ export class WorldManager {
             geometry: enemyGeom,
             color: new Color(0, 0, 255),
             image: this.tileSetImage,
-            maxHealth: 1,
-            gameWinCallback,
+            maxHealth: 1
         });
         // Зададим дефолтное положение
         const enemyPosition = getLastGroundTileOnLevel(level);
@@ -189,3 +221,6 @@ export class WorldManager {
         return enemy;
     }
 }
+
+// Синглтон
+export default new WorldManager();

@@ -1,4 +1,4 @@
-import { Object2D, Object2DProps } from "../../core/object";
+import { Object2D, Object2DProps, ObjectSpriteConfig } from "../../core/object";
 import { Sprite } from "../world.manager";
 
 type HealthProps = Object2DProps & {
@@ -11,42 +11,47 @@ const HEALTH_SPITE: Sprite = {
     sx: 288,
     sy: 256,
     sWidth: 16,
-    sHeight: 16,    
-}
+    sHeight: 16,
+};
 
 const HALF_HEALTH_SPITE: Sprite = {
     sx: 304,
     sy: 256,
     sWidth: 16,
-    sHeight: 16,    
-}
+    sHeight: 16,
+};
 
 const EMPTY_HEALTH_SPITE: Sprite = {
     sx: 320,
     sy: 256,
     sWidth: 16,
-    sHeight: 16,    
-}
+    sHeight: 16,
+};
 
 export class Health extends Object2D {
-    tileSetImage: HTMLImageElement
-    isHalf: boolean
-    isEmpty: boolean
+    tileSetImage: HTMLImageElement;
+    isHalf: boolean;
+    isEmpty: boolean;
 
     constructor(props: HealthProps) {
         super(props);
-        this.isHalf = Boolean(props.isHalf)
-        this.isEmpty = Boolean(props.isEmpty)
-        this.tileSetImage = props.tileSetImage
+        this.isHalf = Boolean(props.isHalf);
+        this.isEmpty = Boolean(props.isEmpty);
+        this.tileSetImage = props.tileSetImage;
         this.init();
     }
 
     init() {
-        this.spriteConfig = { 
-            image: this.tileSetImage, 
-            sprite: this.isHalf ? HALF_HEALTH_SPITE :
-                    this.isEmpty ? EMPTY_HEALTH_SPITE :
-                                    HEALTH_SPITE
+        let spriteConfig = this.spriteConfig as ObjectSpriteConfig;
+        spriteConfig = {
+            image: this.tileSetImage,
+            sprite: HEALTH_SPITE,
+        };
+        if (this.isHalf) {
+            spriteConfig.sprite = HALF_HEALTH_SPITE;
+        }
+        if (this.isEmpty) {
+            spriteConfig.sprite = EMPTY_HEALTH_SPITE;
         }
     }
 }

@@ -57,7 +57,7 @@ export class World {
         );
 
         // Вставляем canvas playerUI
-        this.canvas?.parentElement?.appendChild(WorldManager.playerUI.canvas)
+        this.canvas?.parentElement?.appendChild(WorldManager.playerUI.canvas);
 
         this.registerEvents();
         this.startAnimataion();
@@ -90,7 +90,7 @@ export class World {
             WorldManager.playerUI.renderer.render(
                 WorldManager.playerUI.scene,
                 WorldManager.playerUI.camera,
-            )
+            );
         };
 
         render();
@@ -150,7 +150,7 @@ export class World {
         };
 
         this._resizeListener = (e: Event) => {
-            if(this.canvas) {
+            if (this.canvas) {
                 this.canvas.height = window.innerHeight;
                 this.canvas.width = window.innerWidth;
                 WorldManager.playerUI.canvas.height = window.innerHeight;

@@ -7,6 +7,7 @@ import { LEVEL_SIZE } from "../world.config";
 import { Health } from "./health";
 
 type PlayerUIProps = {
+    canvas: HTMLCanvasElement,
     tileSetImage: HTMLImageElement,
     maxHealth: number
 };
@@ -24,7 +25,7 @@ export class PlayerUI {
     tileSetImage: HTMLImageElement;
 
     constructor(props: PlayerUIProps) {
-        this.canvas = document.createElement("canvas");
+        this.canvas = props.canvas;
         this.canvas.style.position = "absolute";
         this.canvas.height = window.innerHeight;
         this.canvas.width = window.innerWidth;

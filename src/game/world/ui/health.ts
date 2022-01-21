@@ -1,4 +1,4 @@
-import { Object2D, Object2DProps, ObjectSpriteConfig } from "../../core/object";
+import { Object2D, Object2DProps } from "../../core/object";
 import { Sprite } from "../world.manager";
 
 type HealthProps = Object2DProps & {
@@ -42,16 +42,15 @@ export class Health extends Object2D {
     }
 
     init() {
-        let spriteConfig = this.spriteConfig as ObjectSpriteConfig;
-        spriteConfig = {
+        this.spriteConfig = {
             image: this.tileSetImage,
             sprite: HEALTH_SPITE,
         };
         if (this.isHalf) {
-            spriteConfig.sprite = HALF_HEALTH_SPITE;
+            this.spriteConfig.sprite = HALF_HEALTH_SPITE;
         }
         if (this.isEmpty) {
-            spriteConfig.sprite = EMPTY_HEALTH_SPITE;
+            this.spriteConfig.sprite = EMPTY_HEALTH_SPITE;
         }
     }
 }

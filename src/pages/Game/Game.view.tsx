@@ -12,6 +12,7 @@ const Game: FC = () => {
         isActive,
         isPaused,
         canvasRef,
+        uiCanvasRef,
         onStart,
         onResume,
         onClose,
@@ -32,6 +33,7 @@ const Game: FC = () => {
     return (
         <div className={styles.game}>
             <canvas ref={canvasRef} />
+            <canvas ref={uiCanvasRef} />
             <Menu
                 isActive={isActive}
                 onClose={onClose}

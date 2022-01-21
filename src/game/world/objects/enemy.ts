@@ -97,12 +97,10 @@ export class Enemy extends Object2D implements Collidable, CanReceiveDamage {
         }
         if (obstacle instanceof Player) {
             obstacle.health -= 0.5;
-            console.log("Здоровье игрока: ", obstacle.health);
         }
         if (obstacle instanceof Weapon && obstacle.active) {
             if (this.prevRecievedDamage !== obstacle.attackCount) {
                 this.health -= obstacle.damage;
-                console.log("Здоровье enemy: ", this.health);
                 this.prevRecievedDamage = obstacle.attackCount;
             }
         }

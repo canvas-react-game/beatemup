@@ -2,7 +2,7 @@ import { Camera } from "../core/camera";
 import { Renderer } from "../core/renderer";
 import { Scene } from "../core/scene";
 import { EventBus } from "../core/eventBus";
-import { WorldManager } from "./world.manager";
+import WorldManager from "./world.manager";
 import { EventTypes, KeyboardEvents, STEP } from "./world.config";
 
 type KeyListener = (this: Window, ev: KeyboardEvent) => any;
@@ -22,8 +22,6 @@ export class World {
     animationNumber: number | undefined;
     scene: Scene;
     camera: Camera;
-    // Управление миром
-    manager: WorldManager;
     // Управление событиями в игре
     eventBus: EventBus;
     // События, от которых нужно отписаться
@@ -52,12 +50,14 @@ export class World {
         });
 
         // World Manager
-        this.manager = new WorldManager();
-        [this.scene, this.camera] = this.manager.composeLevel(
+        [this.scene, this.camera] = WorldManager.composeLevel(
             this.gameOverCallback,
             this.gameWinCallback,
             this.eventBus,
         );
+
+        // Вставляем canvas playerUI
+        this.canvas?.parentElement?.appendChild(WorldManager.playerUI.canvas)
 
         this.registerEvents();
         this.startAnimataion();
@@ -84,7 +84,13 @@ export class World {
             }
             // сохраняем время отрисовки последнего кадра
             last = now;
+            // Рендерим основной мир
             this.renderer.render(this.scene, this.camera);
+            // Рендерим UI поверх
+            WorldManager.playerUI.renderer.render(
+                WorldManager.playerUI.scene,
+                WorldManager.playerUI.camera,
+            )
         };
 
         render();
@@ -144,7 +150,12 @@ export class World {
         };
 
         this._resizeListener = (e: Event) => {
-            this.renderer.resize(window.innerHeight, window.innerWidth);
+            if(this.canvas) {
+                this.canvas.height = window.innerHeight;
+                this.canvas.width = window.innerWidth;
+                WorldManager.playerUI.canvas.height = window.innerHeight;
+                WorldManager.playerUI.canvas.width = window.innerWidth;
+            }
         };
 
         window.addEventListener("keydown", this._keyDownListener);

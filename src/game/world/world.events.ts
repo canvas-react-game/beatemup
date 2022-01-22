@@ -10,10 +10,6 @@ class WorldEvents extends EventBus {
     private _keyUpListener: KeyListener;
     private _resizeListener: Listener;
 
-    constructor() {
-        super();
-    }
-
     init() {
         const eventBus = this;
 

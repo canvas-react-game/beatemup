@@ -49,11 +49,8 @@ export class Renderer {
         const { background } = scene;
         // TODO: Обрезать объекты в сцене камерой
 
-        // Сначала очищаем канвас и рисуем контур
+        // Сначала очищаем канвас
         c.clearRect(0, 0, canvas.width, canvas.height);
-        c.strokeStyle = "rgb(255, 255, 255)";
-        c.lineWidth = 1;
-        c.strokeRect(0, 0, canvas.width, canvas.height);
         // Затем рисуем бэкграунд
         c.fillStyle = `rgba(${background.r}, ${background.g}, ${background.b}, ${background.a})`;
         c.fillRect(0, 0, canvas.width, canvas.height);

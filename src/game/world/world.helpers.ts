@@ -65,7 +65,7 @@ const fillMatrix = (level: Level, i: number, j: number, window: number): Level =
 };
 
 // TODO: Фикс багов генерации уровня
-/*
+/**
     Генерирует рандомную матрицу уровня 40х40
 */
 export const generateRandomLevel = (): Level => {
@@ -196,7 +196,7 @@ export const generateRandomLevel = (): Level => {
     return level;
 };
 
-/*
+/**
     Найти первый доступный для размещения кусок земли с начала
 */
 export const getFirstGroundTileOnLevel = (level: Level): Vector2D | undefined => {
@@ -211,7 +211,7 @@ export const getFirstGroundTileOnLevel = (level: Level): Vector2D | undefined =>
     return undefined;
 };
 
-/*
+/**
     Найти первый доступный для размещения кусок земли с конца
 */
 export const getLastGroundTileOnLevel = (level: Level): Vector2D | undefined => {

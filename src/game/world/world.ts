@@ -53,6 +53,8 @@ export class World {
             WorldManager.composeUIScene(this.uiCanvas);
         }
 
+        // Инициализируем события
+        WorldEvents.init();
         // Подписываемся на событие ресайз
         WorldEvents.on(EventTypes.Resize, this._onResize);
         // Начинаем анимацию
@@ -112,5 +114,6 @@ export class World {
 
     destroy() {
         this.stopAnimation();
+        WorldEvents.unsubscribe();
     }
 }

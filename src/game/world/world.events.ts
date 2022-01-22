@@ -12,7 +12,6 @@ class WorldEvents extends EventBus {
 
     constructor() {
         super();
-        this.init();
     }
 
     init() {

@@ -2,9 +2,9 @@ import {AnyAction} from "redux";
 import {ThunkAction} from "redux-thunk";
 
 import api, {SignUpData, UserInfo} from "@/api/Auth/Auth.api";
-import profileApi from "@/api/Profile/Profile.api";
+import profileApi, {PasswordData} from "@/api/Profile/Profile.api";
 
-import {GET_PROFILE, PROFILE_LOADING, SET_PROFILE} from "./types/profile.types";
+import {GET_PROFILE, PROFILE_LOADING, SET_PROFILE, SET_PASSWORD} from "./types/profile.types";
 
 type ProfileFetched = {
     type: typeof GET_PROFILE;
@@ -19,6 +19,10 @@ type ProfileUploaded = {
 type ProfileLoading = {
     type: typeof PROFILE_LOADING;
     payload: { isLoading: boolean };
+};
+
+type PasswordUpdated = {
+    type: typeof SET_PASSWORD;
 }
 
 export enum ProfileStages {
@@ -40,6 +44,10 @@ export const profileFetchSuccess = (data: UserInfo): ProfileFetched => ({
 const profileUploadSuccess = (data: UserInfo): ProfileFetched => ({
     type: GET_PROFILE ,
     payload: { data }
+})
+
+const passwordUpdateSuccess = () => ({
+    type: SET_PASSWORD
 })
 
 export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> =>
@@ -68,4 +76,17 @@ export const setProfile = (data: Omit<SignUpData, 'password'>): ThunkAction<void
         }
     };
 
-export type ProfileAction = ProfileFetched | ProfileUploaded | ProfileLoading;
+export const setPassword = (data: PasswordData): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state) => {
+        dispatch(loading(true));
+        try {
+            const response = await profileApi.setPassword(data);
+            if (response) {
+                dispatch(passwordUpdateSuccess());
+            }
+        } catch (error) {
+            dispatch(loading(false));
+        }
+    };
+
+export type ProfileAction = ProfileFetched | ProfileUploaded | ProfileLoading | PasswordUpdated;

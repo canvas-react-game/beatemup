@@ -6,12 +6,13 @@ import { useDispatch } from "react-redux";
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
-import {getProfile, setProfile } from "@/actions/profile.actions";
+import {getProfile, setPassword, setProfile} from "@/actions/profile.actions";
 import {SignUpData, UserInfo} from "@/api/Auth";
+import {PasswordData} from "api/Profile";
 
 const currentPath = routes.profile.path;
 
-const initialFieldsState = [
+const initialFields = [
     {
         name: "first_name",
         disabled: true,
@@ -48,13 +49,25 @@ const initialFieldsState = [
         message: "Введите логин",
         placeholder: "Логин",
         component: Input,
+    }
+];
+
+// todo required if oldpass not empty
+const passwordFields = [
+    {
+        name: "oldPassword",
+        disabled: true,
+        required: false,
+        message: "Введите старый пароль",
+        placeholder: "Старый пароль",
+        component: Password,
     },
     {
-        name: "password",
+        name: "newPassword",
         disabled: true,
-        required: true,
-        message: "Введите пароль",
-        placeholder: "Пароль",
+        required: false,
+        message: "Введите новый пароль",
+        placeholder: "Новый пароль",
         component: Password,
     },
 ];
@@ -75,9 +88,12 @@ export const useProfileForm = () => {
         form.setFieldsValue(data);
     },[form, data]);
 
-    const onFinish = useCallback((values: SignUpData) => {
-            const { password, ...rest } = values;
+    const onFinish = useCallback((values: SignUpData & PasswordData) => {
+            const { oldPassword, newPassword, ...rest } = values;
             dispatch(setProfile(rest));
+            if (oldPassword && newPassword) {
+                dispatch(setPassword({ oldPassword, newPassword }));
+            }
         },[]
     );
 
@@ -95,7 +111,8 @@ export const useProfileForm = () => {
         avatar,
         profile: data,
         form,
-        fields: initialFieldsState,
+        fields: initialFields,
+        passwordFields,
         isLoading
     };
 };

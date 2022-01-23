@@ -6,7 +6,7 @@ import {SignUpData, UserInfo} from "@/api/Auth";
 
 const root = "user";
 
-interface PasswordData {
+export interface PasswordData {
     oldPassword: string,
     newPassword: string
 }
@@ -45,7 +45,7 @@ class ProfileApi {
     }
 
     public async setPassword(data: PasswordData): Promise<boolean> {
-        const response = await APIService.request(Method.PUT, `${root}/password`);
+        const response = await APIService.request(Method.PUT, `${root}/password`, data);
         if (response) {
             return this.isSuccessfulRequest(response);
         }

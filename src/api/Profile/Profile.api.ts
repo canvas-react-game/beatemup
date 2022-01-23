@@ -32,7 +32,7 @@ class ProfileApi {
         }
     }
 
-    public async setProfile(data: SignUpData): Promise<UserInfo | null> {
+    public async setProfile(data: Omit<SignUpData, 'password'>): Promise<UserInfo | null> {
         const response = await APIService.request(Method.PUT, `${root}/profile`, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);

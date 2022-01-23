@@ -6,9 +6,8 @@ import { useDispatch } from "react-redux";
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
-import { getProfile } from "@/actions/profile.actions";
-
-import { ProfileValue } from "./Profile.types";
+import {getProfile, setProfile } from "@/actions/profile.actions";
+import {SignUpData, UserInfo} from "api/Auth";
 
 const currentPath = routes.profile.path;
 
@@ -76,13 +75,14 @@ export const useProfileForm = () => {
         form.setFieldsValue(data);
     },[form, data]);
 
-    const onFinish = useCallback(
-        (values: ProfileValue[]) => console.log(values),
-        [],
+    const onFinish = useCallback((values: SignUpData) => {
+            const { password, ...rest } = values;
+            dispatch(setProfile(rest));
+        },[]
     );
 
     const onFinishFailed = useCallback(
-        (errorInfo: any) => console.log("Failed:", errorInfo),
+        (errorInfo: UserInfo) => console.log("Failed:", errorInfo),
         [],
     );
 

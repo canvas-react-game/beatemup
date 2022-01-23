@@ -61,7 +61,7 @@ export const setProfile = (data: Omit<SignUpData, 'password'>): ThunkAction<void
         try {
             const response = await profileApi.setProfile(data);
             if (response) {
-                dispatch(profileUploadSuccess(response)); // todo
+                dispatch(profileUploadSuccess(response));
             }
         } catch (error) {
             dispatch(loading(false));

@@ -1,6 +1,8 @@
+import {FormInstance} from "antd";
+
 export type FormElement = {
     isEdit: boolean;
     setIsEdit: Function;
-    form: any;
+    form: FormInstance;
     onFinish: Function;
 };

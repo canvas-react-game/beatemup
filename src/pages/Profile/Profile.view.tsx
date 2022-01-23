@@ -23,9 +23,11 @@ const Profile = () => {
         isEdit,
         setIsEdit,
         avatar,
-        initialValues,
+        profileData,
         form,
     } = useProfileForm();
+
+    console.log(profileData);
 
     const handleChangeAvatar = useCallback(
         () => ({ fileList }: any) => console.log(fileList),
@@ -56,7 +58,7 @@ const Profile = () => {
                     <Form
                         name="profile"
                         form={form}
-                        initialValues={initialValues}
+                        initialValues={profileData}
                         layout="vertical"
                     >
                         <FormFields isEdit={isEdit} />

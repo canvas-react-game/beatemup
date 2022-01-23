@@ -1,11 +1,15 @@
 const path = require("path");
+const __VERSION__ = require('child_process').execSync('git rev-list HEAD --count').toString();
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: {
+        bundle: "./src/index.tsx",
+    },
     output: {
         path: path.join(__dirname, "/dist"),
-        filename: "bundle.js",
+        filename: "[name].js",
         publicPath: '/'
     },
     resolve: {
@@ -45,6 +49,20 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: './sw.js',
+                    to: './sw.js',
+                    transform (content) {
+                        let parsed = content.toString();
+                        const version = `CACHE_VERSION_${parseInt(__VERSION__)}`
+                        parsed = parsed.replace('CACHE_VERSION', version);
+                        return Buffer.from(parsed, 'utf8');
+                    }
+                }
+            ]
         })
     ],
     devServer: {

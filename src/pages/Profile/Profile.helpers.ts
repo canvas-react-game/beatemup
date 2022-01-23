@@ -1,10 +1,12 @@
-import {useCallback, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
+import { useDispatch } from "react-redux";
 
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
+import { getProfile } from "@/actions/profile.actions";
 
 import { ProfileValue } from "./Profile.types";
 
@@ -59,17 +61,17 @@ const initialFieldsState = [
 ];
 
 export const useProfileForm = () => {
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [avatar] = useState<string | undefined>("");
+    const [form] = useForm();
+    const dispatch = useDispatch();
+
     const profileData = useSelector(state => state.profile.profile);
     console.log('profile is: ', profileData);
 
-    const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
-    const [isConfirmVisible, setIsConfirmVisible] = useState<boolean>(false);
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-
-    const [avatar] = useState<string | undefined>("");
-    const [initialValues] = useState({ ...profileData });
-    const [form] = useForm();
-    const [fields] = useState<ProfileValue[]>(initialFieldsState);
+    useEffect(() => {
+        dispatch(getProfile());
+    },[]);
 
     const onFinish = useCallback(
         (values: ProfileValue[]) => console.log(values),
@@ -85,15 +87,11 @@ export const useProfileForm = () => {
         currentPath,
         onFinish,
         onFinishFailed,
-        isPreviewVisible,
-        setIsPreviewVisible,
-        isConfirmVisible,
-        setIsConfirmVisible,
         isEdit,
         setIsEdit,
         avatar,
-        initialValues,
+        profileData,
         form,
-        fields,
+        fields: initialFieldsState,
     };
 };

@@ -52,7 +52,6 @@ const initialFields = [
     }
 ];
 
-// todo required if oldpass not empty
 const passwordFields = [
     {
         name: "oldPassword",
@@ -62,6 +61,7 @@ const passwordFields = [
         placeholder: "Старый пароль",
         component: Password,
     },
+    // todo добавить validationRules фнукцию, триггерит обязательность, если заполнен oldPassword
     {
         name: "newPassword",
         disabled: true,

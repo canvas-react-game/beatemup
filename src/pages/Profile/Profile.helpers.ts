@@ -67,11 +67,14 @@ export const useProfileForm = () => {
     const dispatch = useDispatch();
 
     const profileData = useSelector(state => state.profile.profile);
-    console.log('profile is: ', profileData);
 
     useEffect(() => {
         dispatch(getProfile());
     },[]);
+
+    useEffect(() => {
+        form.setFieldsValue(profileData);
+    },[form, profileData]);
 
     const onFinish = useCallback(
         (values: ProfileValue[]) => console.log(values),

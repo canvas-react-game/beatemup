@@ -9,13 +9,9 @@ const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
 
     return (
         <>
-            {fields.map((item: any, index: any) => {
-                const {
-                    component, name, message, required, disabled, placeholder,
-                } = item;
-
+            {fields.map((item: any, index: number) => {
+                const { component, name, message, required, disabled, placeholder } = item;
                 const Item = component;
-
                 return (
                     <Form.Item
                         key={`item-${index}`}

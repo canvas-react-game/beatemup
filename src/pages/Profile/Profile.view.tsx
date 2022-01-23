@@ -41,7 +41,7 @@ const Profile = () => {
                 <Space direction="vertical" size="middle">
                     <Row justify="space-between">
                         <Col>
-                            <Statistic title="Рекорд" value={1128} />
+                            <Statistic title="Рекорд" value={100} />
                         </Col>
                         <Col>
                             <Upload

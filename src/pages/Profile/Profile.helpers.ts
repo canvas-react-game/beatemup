@@ -7,7 +7,7 @@ import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
 import {getProfile, setProfile } from "@/actions/profile.actions";
-import {SignUpData, UserInfo} from "api/Auth";
+import {SignUpData, UserInfo} from "@/api/Auth";
 
 const currentPath = routes.profile.path;
 

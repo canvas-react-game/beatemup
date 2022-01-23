@@ -24,7 +24,7 @@ const SignUp:FC = () => {
                     onFinish={onFinish}
                     onFinishFailed={() => onFinishFailed}
                     layout='vertical'>
-                    {fieldSet.map((set) => <Form.Item name={set.name} rules={set.rules}>
+                    {fieldSet.map((set, index) => <Form.Item name={set.name} rules={set.rules} key={`${set.name}-${index}`}>
                         <Input type={set.type ?? ""} placeholder={set.placeholder} />
                     </Form.Item>)}
                     <YandexSignIn/>

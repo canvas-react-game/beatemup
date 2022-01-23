@@ -14,14 +14,14 @@ const currentPath = routes.profile.path;
 
 const initialFieldsState = [
     {
-        name: "name",
+        name: "first_name",
         disabled: true,
         required: false,
         placeholder: "Имя",
         component: Input,
     },
     {
-        name: "surname",
+        name: "second_name",
         disabled: true,
         required: false,
         placeholder: "Фамилия",
@@ -66,15 +66,15 @@ export const useProfileForm = () => {
     const [form] = useForm();
     const dispatch = useDispatch();
 
-    const profileData = useSelector(state => state.profile.profile);
+    const { data, isLoading } = useSelector(state => state.profile);
 
     useEffect(() => {
         dispatch(getProfile());
     },[]);
 
     useEffect(() => {
-        form.setFieldsValue(profileData);
-    },[form, profileData]);
+        form.setFieldsValue(data);
+    },[form, data]);
 
     const onFinish = useCallback(
         (values: ProfileValue[]) => console.log(values),
@@ -93,8 +93,9 @@ export const useProfileForm = () => {
         isEdit,
         setIsEdit,
         avatar,
-        profileData,
+        profile: data,
         form,
         fields: initialFieldsState,
+        isLoading
     };
 };

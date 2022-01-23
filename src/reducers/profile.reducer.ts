@@ -1,5 +1,5 @@
 import {ProfileAction, ProfileStages} from "@/actions/profile.actions";
-import {GET_PROFILE, PROFILE_LOADING} from "@/actions/types/profile.types";
+import {GET_PROFILE, PROFILE_LOADING, SET_PROFILE} from "@/actions/types/profile.types";
 
 export interface ProfileState {
     data: {
@@ -34,6 +34,12 @@ const initialState: ProfileState = {
 export const profileReducer = (state: ProfileState = initialState, action: ProfileAction) => {
     switch (action.type) {
         case GET_PROFILE:
+            return {
+                data: { ...action.payload.data },
+                isLoading: false,
+                stage: ProfileStages.DONE
+            };
+        case SET_PROFILE:
             return {
                 data: { ...action.payload.data },
                 isLoading: false,

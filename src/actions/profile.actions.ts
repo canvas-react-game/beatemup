@@ -13,6 +13,7 @@ type ProfileFetched = {
 
 type ProfileUploaded = {
     type: typeof SET_PROFILE;
+    payload: { data: UserInfo }
 };
 
 type ProfileLoading = {
@@ -36,7 +37,10 @@ export const profileFetchSuccess = (data: UserInfo): ProfileFetched => ({
     payload: { data }
 })
 
-const profileUploadSuccess = (): ProfileUploaded => ({ type: SET_PROFILE })
+const profileUploadSuccess = (data: UserInfo): ProfileFetched => ({
+    type: GET_PROFILE ,
+    payload: { data }
+})
 
 export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> =>
     async (dispatch, _state,) => {
@@ -51,13 +55,13 @@ export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> =>
         }
 };
 
-export const setProfile = (data: SignUpData): ThunkAction<void, unknown, unknown, AnyAction> =>
-    async (dispatch, _state,) => {
+export const setProfile = (data: Omit<SignUpData, 'password'>): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state) => {
         dispatch(loading(true));
         try {
             const response = await profileApi.setProfile(data);
             if (response) {
-                dispatch(profileUploadSuccess()); // todo
+                dispatch(profileUploadSuccess(response)); // todo
             }
         } catch (error) {
             dispatch(loading(false));

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, {FC, useCallback} from "react";
 import { Button, Form, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -10,18 +10,22 @@ const FormControls: FC<FormElement> = ({
     onFinish,
     form,
 }) => {
+
+    const handleCancel = useCallback( () => {
+        setIsEdit(!isEdit);
+        form.resetFields();
+    }, [form, isEdit]);
+
+    const handleEdit = useCallback( () => {
+        setIsEdit(!isEdit)
+    }, [isEdit]);
+
     if (isEdit) {
         return (
             <>
                 <Form.Item>
-                    <Button
-                        onClick={() => {
-                            setIsEdit(!isEdit);
-                            form.resetFields();
-                        }}
-                    >
-            Отменить
-                        <EditOutlined />
+                    <Button block type="primary" onClick={handleCancel}>
+                        Отменить<EditOutlined />
                     </Button>
                 </Form.Item>
                 <Form.Item>
@@ -54,9 +58,8 @@ const FormControls: FC<FormElement> = ({
 
     return (
         <Form.Item>
-            <Button block type="primary" onClick={() => setIsEdit(!isEdit)}>
-        Редактировать
-                <EditOutlined />
+            <Button block type="primary" onClick={handleEdit}>
+                Редактировать<EditOutlined />
             </Button>
         </Form.Item>
     );

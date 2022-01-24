@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useDispatch } from "react-redux";
@@ -10,9 +10,18 @@ import {getProfile, setPassword, setProfile} from "@/actions/profile.actions";
 import {SignUpData, UserInfo} from "@/api/Auth";
 import {PasswordData} from "api/Profile";
 
+export interface FieldSet {
+    name: string,
+    disabled: boolean,
+    required: boolean,
+    message?: string,
+    placeholder: string,
+    component: typeof Input | FC<any>,
+}
+
 const currentPath = routes.profile.path;
 
-const initialFields = [
+const initialFields: FieldSet[] = [
     {
         name: "first_name",
         disabled: true,
@@ -52,7 +61,7 @@ const initialFields = [
     }
 ];
 
-const passwordFields = [
+const passwordFields: FieldSet[] = [
     {
         name: "oldPassword",
         disabled: true,

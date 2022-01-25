@@ -8,7 +8,7 @@ import { useDispatch, shallowEqual } from "react-redux";
 import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
-import { useSelector } from "@/helpers/useSelector";
+import { useSelector } from "@/hooks/useSelector";
 import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
 import { SignUpData, UserInfo } from "@/api/Auth";
 import { useMountEffect } from "@/hooks/useMountEffect";

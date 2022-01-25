@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { routes as appRoutes } from "@/config/routes/routes";
 import { signOut } from "@/actions/auth.actions";
-import { useSelector } from "@/helpers/useSelector";
+import { useSelector } from "@/hooks/useSelector";
 
 import styles from "./Header.module.scss";
 

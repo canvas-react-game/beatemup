@@ -1,1 +1,1 @@
-export { Game } from "./Game.view";
+export { default } from "./Game.view";

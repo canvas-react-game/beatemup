@@ -1,19 +1,19 @@
 import React, { FC } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import {SignIn as Login} from "@/pages/SignIn";
-import {SignUp as SignUpView} from "@/pages/SignUp";
-import {Main} from "@/pages/Main";
-import {Profile} from "@/pages/Profile";
-import {Forum} from "@/pages/Forum";
-import {About} from "@/pages/About";
-import {LeaderBoard as Leaderboard} from "@/pages/Leaderboard";
-import {Error} from "@/pages/Error";
-import {Game} from "@/pages/Game";
+import Login from "@/pages/SignIn";
+import SignUpView from "@/pages/SignUp";
+import Main from "@/pages/Main";
+import Profile from "@/pages/Profile";
+import Forum from "@/pages/Forum";
+import About from "@/pages/About";
+import Leaderboard from "@/pages/Leaderboard";
+import Error from "@/pages/Error";
+import Game from "@/pages/Game";
 import { routes } from "@/config/routes/routes";
-import {AccessRoute} from "@/components/AccessRoute";
+import AccessRoute from "@/components/AccessRoute";
 
-export const Routes: FC = () => (
+const Routes: FC = () => (
     <Switch>
         <Redirect exact from={"/"} to={routes.signIn.path}/>
         <Route path={routes.signIn.path} exact component={Login}/>
@@ -27,3 +27,5 @@ export const Routes: FC = () => (
         <Route path={"/error"} exact component={Error}/>
     </Switch>
 );
+
+export default Routes;

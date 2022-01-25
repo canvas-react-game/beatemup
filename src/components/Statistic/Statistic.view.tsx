@@ -5,7 +5,7 @@ import styles from "./Statistic.module.scss";
 
 interface Props extends StatisticProps {}
 
-export const Statistic: FC<Props> = ({
+const Statistic: FC<Props> = ({
     title, value, style, children,
 }) => (
     <CustomStatistic
@@ -16,3 +16,5 @@ export const Statistic: FC<Props> = ({
         children={children}
     />
 );
+
+export default Statistic;

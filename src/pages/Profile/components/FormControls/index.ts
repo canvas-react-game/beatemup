@@ -1,1 +1,1 @@
-export { FormControls } from "./FormControls.view";
+export { default } from "./FormControls.view";

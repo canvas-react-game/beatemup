@@ -1,1 +1,1 @@
-export { Nav } from "./AuthNavBar.view";
+export { default } from "./AuthNavBar.view";

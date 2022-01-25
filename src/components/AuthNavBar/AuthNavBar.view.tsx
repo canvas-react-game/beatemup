@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { routes as appRoutes } from "@/config/routes/routes";
 
-import {NavBar} from "../NavBar";
+import NavBar from "../NavBar";
 import styles from "./AuthNavBar.module.scss";
 
 interface Props {
@@ -14,8 +14,10 @@ const routes = [
     { path: appRoutes.signUp.path, label: "Регистрация" },
 ];
 
-export const Nav: FC<Props> = ({ currentPath }) => (
+const Nav: FC<Props> = ({ currentPath }) => (
     <div className={styles.nav}>
         <NavBar currentPath={currentPath} routes={routes} />
     </div>
 );
+
+export default Nav;

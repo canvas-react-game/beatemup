@@ -1,1 +1,1 @@
-export { Header } from "./Header.view";
+export { default } from "./Header.view";

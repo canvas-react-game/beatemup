@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { Table } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
-import {Header} from "@/components/Header";
-import {Container} from "@/components/Container";
+import Header from "@/components/Header";
+import Container from "@/components/Container";
 
 import styles from "./LeaderBoard.module.scss";
-import { LeaderBoardData, LeaderBoardUser } from "@/mock/leaderboard";
+import { LeaderBoardData, LeaderBoardUser } from "@/__mocks__/leaderboard";
 
 // Колонки таблицы
 const columns: ColumnsType<LeaderBoardUser> = [
@@ -50,7 +50,7 @@ const onChange = (
     console.log("params", pagination, filters, sorter, extra);
 };
 
-export const LeaderBoard: FC<{}> = () => (
+const LeaderBoard: FC<{}> = () => (
     <Container>
         <Header />
         <div className={styles.leaderBoardContainer}>
@@ -64,3 +64,5 @@ export const LeaderBoard: FC<{}> = () => (
         </div>
     </Container>
 );
+
+export default LeaderBoard;

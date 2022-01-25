@@ -1,1 +1,1 @@
-export { PageLoader } from "./PageLoader.view";
+export { default } from "./PageLoader.view";

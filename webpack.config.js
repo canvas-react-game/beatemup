@@ -31,7 +31,14 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: "ts-loader",
+                use: [
+                    {
+                        loader: "ts-loader",
+                        options: {
+                            ignoreDiagnostics: [2339],
+                        },
+                    },
+                ],
                 exclude: /node_modules/,
             },
             {
@@ -51,8 +58,8 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: "./sw.ts",
-                    to: "./sw.ts",
+                    from: "./sw.js",
+                    to: "./sw.js",
                     transform(content) {
                         let parsed = content.toString();
                         const version = `CACHE_VERSION_${parseInt(
@@ -61,6 +68,7 @@ module.exports = {
                         parsed = parsed.replace("CACHE_VERSION", version);
                         return Buffer.from(parsed, "utf8");
                     },
+                    force: true,
                 },
             ],
         }),

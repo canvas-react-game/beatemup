@@ -1,18 +1,20 @@
-/// <reference lib="WebWorker" />
-declare const self: ServiceWorkerGlobalScope;
-export type {};
+/// <reference no-default-lib="true"/>
+/// <reference lib="es2017" />
+/// <reference lib="webworker" />
+const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
 // Helpers
 const canBeCached = (request: Request) =>
-    request.method === "GET" &&
-    request.url.startsWith("http") &&
-    !request.url.includes("sockjs-node");
+    request.url.startsWith("http") && !request.url.includes("sockjs-node");
 //
 
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME: string = "CACHE_VERSION";
 const URLS: string[] = [
+    "/bundle.js",
+    "/index.html",
     "/profile",
+    "/signin",
     "/forum",
     "/leaderboard",
     "/about",
@@ -21,7 +23,7 @@ const URLS: string[] = [
 ];
 //
 
-self.addEventListener("install", (event) => {
+sw.addEventListener("install", (event: any) => {
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -36,7 +38,7 @@ self.addEventListener("install", (event) => {
     );
 });
 
-self.addEventListener("activate", (event) => {
+sw.addEventListener("activate", (event: any) => {
     event.waitUntil(
         caches.keys().then((names) => {
             return Promise.all(
@@ -50,15 +52,22 @@ self.addEventListener("activate", (event) => {
     );
 });
 
-self.addEventListener("fetch", (event) => {
+sw.addEventListener("fetch", (event: any) => {
     const request = event.request;
 
     if (request.method !== "GET") {
-        // event.respondWith(
-        //     fetch(request).catch(function () {
-        //         return caches.match("/offline");
-        //     }) as Promise<Response>
-        // );
+        event.waitUntil(
+            (async () => {
+                const clientId =
+                    event.resultingClientId !== ""
+                        ? event.resultingClientId
+                        : event.clientId;
+                const client = await sw.clients.get(clientId);
+
+                client.postMessage("FORBIDDEN_METHOD");
+            })()
+        );
+
         return;
     }
 
@@ -69,7 +78,7 @@ self.addEventListener("fetch", (event) => {
             const fetchRequest = request.clone();
 
             return fetch(fetchRequest).then((response) => {
-                if (canBeCached(request)) return response;
+                if (!canBeCached(request)) return response;
 
                 const responseToCache = response.clone();
 

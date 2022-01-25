@@ -1,0 +1,71 @@
+import React, { FC, useState, useCallback, useEffect } from "react";
+import "antd/dist/antd.css";
+
+import { Typography, Button } from "antd";
+const { Title } = Typography;
+
+import styles from "./App.module.scss";
+
+interface Props {
+    onClose: Function;
+}
+
+export const ModalChild: FC<Props> = ({ onClose }) => {
+    return (
+        <>
+            <Title className={styles.title} level={2}>
+                Нет интернет соединения
+            </Title>
+
+            <Button type="primary" onClick={() => onClose()}>
+                Закрыть
+            </Button>
+        </>
+    );
+};
+
+export const useServiceWorkers = () => {
+    const [isActive, setActive] = useState(false);
+
+    const onClose = useCallback(() => {
+        setActive(false);
+    }, []);
+
+    useEffect(() => {
+        function startServiceWorker() {
+            if (sw) {
+                window.addEventListener("load", () => {
+                    sw.register("./sw.js")
+                        .then((registration) => {
+                            console.log(
+                                "ServiceWorker registration successful ",
+                                registration.scope
+                            );
+                        })
+                        .then(() => {
+                            sw.addEventListener("message", ({ data }) => {
+                                if (data === "FORBIDDEN_METHOD") {
+                                    setActive(true);
+                                }
+                            });
+                        })
+                        .catch((error: string) => {
+                            console.log(
+                                "ServiceWorker registration failed: ",
+                                error
+                            );
+                        });
+                });
+            }
+        }
+
+        startServiceWorker();
+    }, []);
+
+    const sw: ServiceWorkerContainer = navigator?.serviceWorker;
+
+    return {
+        isActive,
+        onClose,
+    };
+};

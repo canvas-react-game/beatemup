@@ -10,18 +10,16 @@ interface Props {
     title?: string;
 }
 
-const GameModal: FC<Props> = ({ isActive, children, title }) => {
-    return (
-        <CustomModal
-            className={styles.gameModal}
-            title={title}
-            visible={isActive}
-            footer={null}
-            closable={false}
-        >
-            <div className={styles.buttonContainer}>{children}</div>
-        </CustomModal>
-    );
-};
+const GameModal: FC<Props> = ({ isActive, children, title }) => (
+    <CustomModal
+        className={styles.gameModal}
+        title={title}
+        visible={isActive}
+        footer={null}
+        closable={false}
+    >
+        <div className={styles.buttonContainer}>{children}</div>
+    </CustomModal>
+);
 
 export default GameModal;

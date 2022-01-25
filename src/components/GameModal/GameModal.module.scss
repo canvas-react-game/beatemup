@@ -20,7 +20,8 @@
   }
 
   :global(.ant-modal-body) {
-    background: variables.$background
+    background:
+      variables.$background
       url("../../../assets/images/background.png") no-repeat center center;
   }
 

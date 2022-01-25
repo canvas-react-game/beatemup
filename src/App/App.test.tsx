@@ -11,12 +11,11 @@ jest.mock("@/App", () => function App() {
 });
 
 describe("App component", () => {
-    // TODO: Тест падает из-за неявной ошибки транспиляции (наверное)
-    // test("renders correctly", () => {
-    //     const tree = renderer.create(<App/>);
+    test("mock App renders correctly", () => {
+        const tree = mount(<App/>);
 
-    //     expect(tree).toMatchSnapshot();
-    // })
+        expect(tree).toMatchSnapshot();
+    })
 
     test("mock App should be Truthy", () => {
         const AppComponent = mount(<App/>);

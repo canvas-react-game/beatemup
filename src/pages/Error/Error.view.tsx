@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Typography } from "antd";
 
-import {Container} from "@/components/Container";
+import Container from "@/components/Container";
 import { routes } from "@/config/routes/routes";
 
 import styles from "./Error.module.scss";
@@ -11,7 +11,7 @@ interface Props {
     status: "404" | "403" | "500"
 }
 
-export const Error: FC<Props> = ({ status = "404" }) => {
+const Error: FC<Props> = ({ status = "404" }) => {
     const {
         container, errorContainer, title, info, back, notFound,
     } = styles;
@@ -30,3 +30,5 @@ export const Error: FC<Props> = ({ status = "404" }) => {
         </Container>
     );
 };
+
+export default Error;

@@ -1,1 +1,1 @@
-export {Routes} from "./Routes.view"
+export {default} from "./Routes.view"

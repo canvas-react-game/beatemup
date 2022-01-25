@@ -9,10 +9,12 @@ interface Props {
 
 const { Password } = CustomInput;
 
-export const CustomPassword:FC<Props> = (props) => (
+const CustomPassword:FC<Props> = (props) => (
     <Password
         prefix={<LockOutlined />}
         iconRender={() => false}
         {...props}
     />
 );
+
+export default CustomPassword;

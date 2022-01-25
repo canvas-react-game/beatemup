@@ -1,1 +1,1 @@
-export { Router } from "./Router.view";
+export { default } from "./Router.view";

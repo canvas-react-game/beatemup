@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import {Input} from "./Input.view";
+import Input from "./Input.view";
 
 describe("Input component", () => {
     test("renders correctly", () => {

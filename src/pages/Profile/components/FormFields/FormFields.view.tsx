@@ -4,7 +4,7 @@ import { Form } from "antd";
 import { useProfileForm } from "../../Profile.helpers";
 import { FormElement } from "../../Profile.types";
 
-export const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
+const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
     const { fields, passwordFields } = useProfileForm();
 
     return (
@@ -42,3 +42,5 @@ export const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
         </>
     );
 };
+
+export default FormFields;

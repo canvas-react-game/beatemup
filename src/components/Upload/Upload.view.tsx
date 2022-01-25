@@ -5,7 +5,7 @@ import styles from "./Upload.module.scss";
 
 interface Props extends UploadProps {}
 
-export const Upload: FC<Props> = ({
+const Upload: FC<Props> = ({
     action,
     listType,
     onPreview,
@@ -23,3 +23,5 @@ export const Upload: FC<Props> = ({
         children={children}
     />
 );
+
+export default Upload;

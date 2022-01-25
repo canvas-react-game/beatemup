@@ -1,1 +1,1 @@
-export { About } from "./About.view";
+export { default } from "./About.view";

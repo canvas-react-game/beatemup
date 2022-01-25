@@ -1,1 +1,1 @@
-export { UploadButton } from "./UploadButton.view";
+export { default } from "./UploadButton.view";

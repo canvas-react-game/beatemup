@@ -1,1 +1,1 @@
-export { CustomPassword } from "./Password.view";
+export { default } from "./Password.view";

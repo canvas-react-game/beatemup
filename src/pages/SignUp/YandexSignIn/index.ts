@@ -1,1 +1,1 @@
-export { YandexSignIn } from "./YandexSignIn.view";
+export { default } from "./YandexSignIn.view";

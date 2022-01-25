@@ -5,4 +5,6 @@ import styles from "./Input.module.scss";
 
 interface Props extends InputProps {}
 
-export const Input:FC<Props> = (props) => (<CustomInput className={styles.input} {...props}/>);
+const Input:FC<Props> = (props) => (<CustomInput className={styles.input} {...props}/>);
+
+export default Input;

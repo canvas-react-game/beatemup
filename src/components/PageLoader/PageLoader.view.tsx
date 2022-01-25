@@ -10,7 +10,7 @@ interface Props {
 
 const antIcon = <LoadingOutlined style={{ fontSize: 72 }} spin />;
 
-export const PageLoader: FC<Props> = ({ isSpinning, children }) => (
+const PageLoader: FC<Props> = ({ isSpinning, children }) => (
     <>
         <Spin className={styles.spinner} indicator={antIcon} size={"large"} spinning={isSpinning} />
         <div className={!isSpinning ? styles.init : styles.loading}>
@@ -19,3 +19,5 @@ export const PageLoader: FC<Props> = ({ isSpinning, children }) => (
     </>
 
 );
+
+export default PageLoader;

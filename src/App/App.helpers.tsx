@@ -25,6 +25,8 @@ export const ModalChild: FC<Props> = ({ onClose }) => (
     </>
 );
 
+const sw: ServiceWorkerContainer = navigator?.serviceWorker;
+
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);
 
@@ -62,8 +64,6 @@ export const useServiceWorkers = () => {
 
         startServiceWorker();
     }, []);
-
-    const sw: ServiceWorkerContainer = navigator?.serviceWorker;
 
     return {
         isActive,

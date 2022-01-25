@@ -10,7 +10,9 @@ const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
     return (
         <>
             {fields.map((item: any, index: number) => {
-                const { component, name, message, required, disabled, placeholder } = item;
+                const {
+                    component, name, message, required, disabled, placeholder,
+                } = item;
                 const Item = component;
                 return (
                     <Form.Item
@@ -23,7 +25,9 @@ const FormFields: FC<Pick<FormElement, "isEdit">> = ({ isEdit }) => {
                 );
             })}
             {isEdit && passwordFields.map((item: any, index: number) => {
-                const { component, name, message, required, disabled, placeholder } = item;
+                const {
+                    component, name, message, required, disabled, placeholder,
+                } = item;
                 const Item = component;
                 return (
                     <Form.Item

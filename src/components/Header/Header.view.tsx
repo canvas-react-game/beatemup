@@ -19,7 +19,7 @@ const Header: FC<Props> = ({ currentPath }) => {
         renderSignOutButton,
     } = useHeader();
 
-    const isSignedIn = useSelector(state => state.auth.isSignedIn);
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
 
     return (
         <div className={styles.container}>

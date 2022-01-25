@@ -1,6 +1,6 @@
-import {LOADING, SIGN_IN, SIGN_OUT} from "@/actions/types/auth.types";
-import {checkAccess} from "@/helpers/acess";
-import {AuthAction, AuthStages} from "@/actions/auth.actions";
+import { LOADING, SIGN_IN, SIGN_OUT } from "@/actions/types/auth.types";
+import { checkAccess } from "@/helpers/acess";
+import { AuthAction, AuthStages } from "@/actions/auth.actions";
 
 export interface AuthState {
     isSignedIn: boolean;
@@ -11,7 +11,7 @@ export interface AuthState {
 export const initialState: AuthState = {
     isSignedIn: checkAccess(),
     isLoading: false,
-    stage: AuthStages.INIT
+    stage: AuthStages.INIT,
 };
 
 export const authReducer = (state: AuthState = initialState, action: AuthAction) => {
@@ -20,21 +20,21 @@ export const authReducer = (state: AuthState = initialState, action: AuthAction)
             return {
                 isSignedIn: true,
                 isLoading: false,
-                stage: AuthStages.DONE
+                stage: AuthStages.DONE,
             };
         case SIGN_OUT:
             return {
                 isSignedIn: false,
                 isLoading: false,
-                stage: AuthStages.DONE
+                stage: AuthStages.DONE,
             };
         case LOADING:
             return {
                 isSignedIn: false,
                 isLoading: action.payload,
-                stage: AuthStages.LOADING
+                stage: AuthStages.LOADING,
             };
         default:
             return state;
     }
-}
+};

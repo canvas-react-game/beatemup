@@ -26,7 +26,7 @@ const Profile = () => {
         avatar,
         profile,
         form,
-        isLoading
+        isLoading,
     } = useProfileForm();
 
     const handleChangeAvatar = useCallback(

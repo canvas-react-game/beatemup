@@ -1,1 +1,1 @@
-export { default } from "./FormFields.view";
+export { FormFields } from "./FormFields.view";

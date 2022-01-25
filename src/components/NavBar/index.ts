@@ -1,1 +1,1 @@
-export { default } from "./NavBar.view";
+export { NavBar } from "./NavBar.view";

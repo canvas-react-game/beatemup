@@ -1,1 +1,1 @@
-export { default } from "./Button.view";
+export { Button } from "./Button.view";

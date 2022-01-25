@@ -3,21 +3,21 @@ import {
     Form, Space, Row, Col,
 } from "antd";
 
-import Container from "@/components/Container";
-import Header from "@/components/Header";
-import Upload from "@/components/Upload";
-import Statistic from "@/components/Statistic";
-import PageLoader from "@/components/PageLoader";
+import {Container} from "@/components/Container";
+import {Header} from "@/components/Header";
+import {Upload} from "@/components/Upload";
+import {Statistic} from "@/components/Statistic";
+import {PageLoader} from "@/components/PageLoader";
 
-import FormFields from "./components/FormFields";
-import FormControls from "./components/FormControls";
-import UploadButton from "./components/UploadButton";
+import {FormFields} from "./components/FormFields";
+import {FormControls} from "./components/FormControls";
+import {UploadButton} from "./components/UploadButton";
 
 import styles from "./Profile.module.scss";
 
 import { useProfileForm } from "./Profile.helpers";
 
-const Profile = () => {
+export const Profile = () => {
     const {
         currentPath,
         onFinish,
@@ -76,5 +76,3 @@ const Profile = () => {
         </PageLoader>
     );
 };
-
-export default Profile;

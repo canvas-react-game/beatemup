@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Main from "./Main.view";
+import {Main} from "@/pages/Main";
 
 import configureStore from "@/store/store";
 import { Provider } from "react-redux";

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
-import Password from "@/components/Password";
+import {CustomPassword as Password} from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
 import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
 import { SignUpData, UserInfo } from "@/api/Auth";

@@ -2,17 +2,17 @@ import React, { FC } from "react";
 import { Input, Button, Form } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
-import Container from "@/components/Container";
-import Password from "@/components/Password";
-import Nav from "@/components/AuthNavBar";
-import Header from "@/components/Header";
+import {Container} from "@/components/Container";
+import {CustomPassword as Password} from "@/components/Password";
+import {Nav} from "@/components/AuthNavBar";
+import {Header} from "@/components/Header";
 import { routes } from "@/config/routes/routes";
-import PageLoader from "@/components/PageLoader";
+import {PageLoader} from "@/components/PageLoader";
 
 import styles from "./SignIn.module.scss";
 import { SignInFieldNames, useSignInForm } from "./SignIn.helpers";
 
-const SignIn:FC = () => {
+export const SignIn:FC = () => {
     const { onFinish, onFinishFailed, isLoading } = useSignInForm();
 
     return (
@@ -45,5 +45,3 @@ const SignIn:FC = () => {
         </PageLoader>
     );
 };
-
-export default SignIn;

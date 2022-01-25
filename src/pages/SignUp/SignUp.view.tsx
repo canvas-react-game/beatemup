@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Input, Button, Form } from "antd";
 
-import Container from "@/components/Container";
-import Nav from "@/components/AuthNavBar";
-import Header from "@/components/Header";
+import {Container} from "@/components/Container";
+import {Nav} from "@/components/AuthNavBar";
+import {Header} from "@/components/Header";
 
 import styles from "./SignUp.module.scss";
 import { useSignUp } from "./SignUp.helpers";
-import YandexSignIn from "./YandexSignIn";
+import {YandexSignIn} from "./YandexSignIn";
 
-const SignUp:FC = () => {
+export const SignUp:FC = () => {
     const {
         currentPath, fieldSet, onFinish, onFinishFailed,
     } = useSignUp();
@@ -36,5 +36,3 @@ const SignUp:FC = () => {
         </Container>
     );
 };
-
-export default SignUp;

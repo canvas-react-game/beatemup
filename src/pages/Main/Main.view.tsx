@@ -2,14 +2,14 @@ import React, { FC, useEffect } from "react";
 import { Typography } from "antd";
 
 import { useDispatch } from "react-redux";
-import Container from "@/components/Container";
-import Header from "@/components/Header";
+import {Container} from "@/components/Container";
+import {Header} from "@/components/Header";
 import { routes } from "@/config/routes/routes";
 
 import styles from "./Main.module.scss";
 import { getProfile } from "@/actions/profile.actions";
 
-const Main: FC = () => {
+export const Main: FC = () => {
     const {
         gameHref, title, info, infoContainer, container,
     } = styles;
@@ -35,5 +35,3 @@ const Main: FC = () => {
         </Container>
     );
 };
-
-export default Main;

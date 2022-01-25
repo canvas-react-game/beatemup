@@ -18,6 +18,6 @@ export class Wall extends Object2D implements Collidable {
     }
 
     onCollide() {
-        console.log(`В стену ${this.id} кто-то врезался :(`);
+        // console.log(`В стену ${this.id} кто-то врезался :(`);
     }
 }

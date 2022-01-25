@@ -15,7 +15,7 @@ describe("App component", () => {
         const tree = mount(<App/>);
 
         expect(tree).toMatchSnapshot();
-    })
+    });
 
     test("mock App should be Truthy", () => {
         const AppComponent = mount(<App/>);

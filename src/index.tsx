@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 
 import configureStore from "@/store/store";
 
-import {App} from "./App/App.view";
+import { App } from "./App/App.view";
 import "./styles/table.scss";
 import "./styles/input.scss";
 import "./styles/button.scss";

@@ -11,12 +11,22 @@ export interface PasswordData {
     newPassword: string
 }
 
+enum ProfileDataType {
+    Common = "Common",
+    Password = "Password",
+}
+
 class ProfileApi {
-    isSuccessfulRequest(response: Response) {
+    isSuccessfulRequest(response: Response, dataType?: ProfileDataType) {
         const errorMessage = "Отправленные данные не корректны";
+        let message = "Данные успешно изменены";
+        if (dataType) {
+            message = dataType === ProfileDataType.Common ? "Данные профиля успешно изменены"
+                : "Пароль успешно изменен";
+        }
         switch (response.status) {
             case 200:
-                notification.success({ message: "Данные успешно изменены" });
+                notification.success({ message });
                 return true;
             case 400:
                 notification.error({ message: errorMessage });
@@ -35,7 +45,7 @@ class ProfileApi {
     public async setProfile(data: Omit<SignUpData, "password">): Promise<UserInfo | null> {
         const response = await APIService.request(Method.PUT, `${root}/profile`, data);
         if (response) {
-            const success = this.isSuccessfulRequest(response);
+            const success = this.isSuccessfulRequest(response, ProfileDataType.Common);
             if (success) {
                 const result = await response.json();
                 return result ?? null;
@@ -47,7 +57,7 @@ class ProfileApi {
     public async setPassword(data: PasswordData): Promise<boolean> {
         const response = await APIService.request(Method.PUT, `${root}/password`, data);
         if (response) {
-            return this.isSuccessfulRequest(response);
+            return this.isSuccessfulRequest(response, ProfileDataType.Password);
         }
         return false;
     }

@@ -3,7 +3,7 @@ import {
 } from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, shallowEqual } from "react-redux";
 
 import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
@@ -11,6 +11,7 @@ import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
 import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
 import { SignUpData, UserInfo } from "@/api/Auth";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
 export interface FieldSet {
     name: string,
@@ -89,11 +90,11 @@ export const useProfileForm = () => {
     const [form] = useForm();
     const dispatch = useDispatch();
 
-    const { data, isLoading } = useSelector((state) => state.profile);
+    const { data, isLoading } = useSelector((state) => state.profile, shallowEqual);
 
-    useEffect(() => {
+    useMountEffect(() => {
         dispatch(getProfile());
-    }, []);
+    });
 
     useEffect(() => {
         form.setFieldsValue(data);

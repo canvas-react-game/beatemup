@@ -1,1 +1,1 @@
-export {default} from "./Routes.view"
+export { default } from "./Routes.view";

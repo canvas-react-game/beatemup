@@ -1,11 +1,6 @@
 import React from "react";
-// import renderer from "react-test-renderer";
-
-import Enzyme, { mount, shallow } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { mount, shallow } from "enzyme";
 import App from "@/App";
-
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock("@/App", () => function App() {
     return (

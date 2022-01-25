@@ -31,7 +31,7 @@ export const authReducer = (state: AuthState = initialState, action: AuthAction)
         case LOADING:
             return {
                 isSignedIn: false,
-                isLoading: action.payload,
+                isLoading: action.payload.isLoading,
                 stage: AuthStages.LOADING,
             };
         default:

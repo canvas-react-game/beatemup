@@ -22,7 +22,7 @@ const Routes: FC = () => (
         <AccessRoute path={routes.profile.path} exact component={Profile}/>
         <AccessRoute path={routes.forum.path} exact component={Forum}/>
         <AccessRoute path={routes.leaderboard.path} exact component={Leaderboard}/>
-        <AccessRoute path={routes.about.path} exact component={About}/>
+        <Route path={routes.about.path} exact component={About}/>
         <AccessRoute path={routes.game.path} exact component={Game}/>
         <Route path={"/error"} exact component={Error}/>
     </Switch>

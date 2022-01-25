@@ -1,3 +1,4 @@
+import { Sprite } from "game/world/world.manager";
 import { Geometry } from "./geometry/geometry";
 import { Color } from "./utils/color";
 import { Vector2D } from "./utils/vector";
@@ -5,6 +6,14 @@ import { Vector2D } from "./utils/vector";
 export type Object2DProps = {
     geometry: Geometry
     color?: Color
+};
+
+export type ObjectSpriteConfig = {
+    // Изображение
+    image: HTMLImageElement | undefined
+    sprite: Sprite
+    // Нужно ли повернуть
+    shouldFlip?: boolean
 };
 
 // Get unique geometry id (ssr)
@@ -20,7 +29,11 @@ export class Object2D {
     name: string;
     // Позиция объекта в сцене
     // NOTE: x = left, y = top
-    positon: Vector2D;
+    position: Vector2D;
+    // Rotation in radians
+    rotation: number;
+    // For Canvas Rendering
+    rotationCenter: Vector2D | undefined;
     // Видимость объектв в сцене
     visible: boolean;
     // Должен ли объект обрезаться камерой при рендеринге
@@ -33,17 +46,17 @@ export class Object2D {
     color: Color;
     // Спрайт
     // TODO: Определить тип и реализовать функционал
-    sprite: HTMLImageElement | null;
+    spriteConfig: ObjectSpriteConfig | null;
 
     constructor(props: Object2DProps) {
         // Задаем дефолтные значения
         this.id = getObject2DId();
         this.name = "";
-        this.positon = new Vector2D(0, 0);
+        this.position = new Vector2D(0, 0);
         this.visible = true;
         this.frustumCulled = false;
         this.userData = null;
-        this.sprite = null;
+        this.spriteConfig = null;
         // Сохраняем тип геометрии
         this.geometry = props.geometry;
         this.color = props.color || new Color(0, 0, 0);
@@ -51,11 +64,20 @@ export class Object2D {
 
     // Базовые методы для объекта
     move(vect: Vector2D) {
-        this.positon.add(vect);
+        this.position.add(vect);
     }
 
-    rotate() {
-
+    /**
+     *  Вращает вокруг центра на заданнный угол
+        @center - Точка вокруг которой вращается
+        @angle - Угол вращения в радианах
+    */
+    rotateAround(center: Vector2D, angle: number) {
+        this.rotation = angle;
+        this.rotationCenter = new Vector2D(
+            center.x - this.position.x,
+            center.y - this.position.y,
+        );
     }
 
     scale() {
@@ -64,8 +86,8 @@ export class Object2D {
 
     // Обобщенный метод обновления текущего состояния
     // Каждый объект определяет самостоятельно
-    // dt - пройденное время
-    updateState(dt: number) {
+    // Происходит каждые STEP
+    updateState() {
 
     }
 }

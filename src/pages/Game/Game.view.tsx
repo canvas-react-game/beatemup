@@ -12,12 +12,14 @@ const Game: FC = () => {
         isActive,
         isPaused,
         canvasRef,
+        uiCanvasRef,
         onStart,
         onResume,
         onClose,
         onUnmount,
         setUpPauseButton,
         isGameOver,
+        isGameWin,
     } = useGame();
 
     useMountEffect(() => {
@@ -29,17 +31,19 @@ const Game: FC = () => {
     });
 
     return (
-        <>
-            <canvas className={styles.game} ref={canvasRef} />
+        <div className={styles.game}>
+            <canvas ref={canvasRef} />
+            <canvas ref={uiCanvasRef} />
             <Menu
                 isActive={isActive}
                 onClose={onClose}
                 onStart={onStart}
                 isPaused={isPaused}
                 isGameOver={isGameOver}
+                isGameWin={isGameWin}
                 onResume={onResume}
             />
-        </>
+        </div>
     );
 };
 

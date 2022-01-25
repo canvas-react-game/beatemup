@@ -15,9 +15,11 @@ const toggleFullScreen = () => {
 export const useGame = () => {
     const [isActive, setActive] = useState(true);
     const [isGameOver, setGameOver] = useState(false);
+    const [isGameWin, setGameWin] = useState(false);
     const [isPaused, setPause] = useState(false);
     const [world] = useState(new World());
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    const uiCanvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
 
     const callMenu = useCallback((e: KeyboardEvent) => {
@@ -37,6 +39,12 @@ export const useGame = () => {
         world.destroy();
     }, []);
 
+    const callGameWin = useCallback(() => {
+        setActive(true);
+        setGameWin(true);
+        world.destroy();
+    }, []);
+
     const setUpPauseButton = useCallback(() => {
         document.addEventListener("keydown", callMenu);
     }, []);
@@ -49,9 +57,12 @@ export const useGame = () => {
     const onStart = useCallback(() => {
         world.init({
             canvas: canvasRef.current,
+            uiCanvas: uiCanvasRef.current,
             gameOverCallback: callGameOver,
+            gameWinCallback: callGameWin,
         });
         setGameOver(false);
+        setGameWin(false);
         setPause(false);
         setActive(false);
     }, []);
@@ -71,11 +82,13 @@ export const useGame = () => {
         isActive,
         isPaused,
         canvasRef,
+        uiCanvasRef,
         onStart,
         onResume,
         onClose,
         onUnmount,
         setUpPauseButton,
         isGameOver,
+        isGameWin,
     };
 };

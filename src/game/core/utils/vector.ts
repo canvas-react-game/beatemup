@@ -14,6 +14,15 @@ export class Vector2D {
         return this;
     }
 
+    rotateAround(center: Vector2D, angle: number): Vector2D {
+        this.x = Math.cos(angle) * (this.x - center.x)
+                - Math.sin(angle) * (this.y - center.y) + center.x;
+        this.y = Math.sin(angle) * (this.x - center.x)
+                 + Math.cos(angle) * (this.y - center.y) + center.y;
+
+        return this;
+    }
+
     copy(): Vector2D {
         return new Vector2D(this.x, this.y);
     }

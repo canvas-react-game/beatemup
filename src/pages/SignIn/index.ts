@@ -1,1 +1,1 @@
-export { default } from "./SignIn.view";
+export { SignIn } from "./SignIn.view";

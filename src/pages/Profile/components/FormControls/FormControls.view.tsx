@@ -4,7 +4,7 @@ import { EditOutlined } from "@ant-design/icons";
 
 import { FormElement } from "../../Profile.types";
 
-const FormControls: FC<FormElement> = ({
+export const FormControls: FC<FormElement> = ({
     isEdit,
     setIsEdit,
     onFinish,
@@ -63,5 +63,3 @@ const FormControls: FC<FormElement> = ({
         </Form.Item>
     );
 };
-
-export default FormControls;

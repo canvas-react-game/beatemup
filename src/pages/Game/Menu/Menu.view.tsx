@@ -13,7 +13,7 @@ interface Props {
     onResume: () => void;
 }
 
-const Menu: FC<Props> = ({
+export const Menu: FC<Props> = ({
     isActive,
     isPaused,
     isGameOver,
@@ -45,5 +45,3 @@ const Menu: FC<Props> = ({
         </div>
     </CustomModal>
 );
-
-export default Menu;

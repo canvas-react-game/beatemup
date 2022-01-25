@@ -2,12 +2,12 @@ import React, { FC } from "react";
 
 import { useGame } from "@/pages/Game/Game.helpers";
 
-import Menu from "./Menu";
+import {Menu} from "./Menu";
 import styles from "./Game.module.scss";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { useUnmountEffect } from "@/hooks/useUnmountEffect";
 
-const Game: FC = () => {
+export const Game: FC = () => {
     const {
         isActive,
         isPaused,
@@ -42,5 +42,3 @@ const Game: FC = () => {
         </>
     );
 };
-
-export default Game;

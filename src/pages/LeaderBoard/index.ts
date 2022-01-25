@@ -1,1 +1,1 @@
-export { default } from "./LeaderBoard.view";
+export { LeaderBoard } from "./LeaderBoard.view";

@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { Table } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
-import Header from "@/components/Header";
-import Container from "@/components/Container";
+import {Header} from "@/components/Header";
+import {Container} from "@/components/Container";
 
 import styles from "./LeaderBoard.module.scss";
 import { LeaderBoardData, LeaderBoardUser } from "@/mock/leaderboard";
@@ -50,7 +50,7 @@ const onChange = (
     console.log("params", pagination, filters, sorter, extra);
 };
 
-const LeaderBoard: FC<{}> = () => (
+export const LeaderBoard: FC<{}> = () => (
     <Container>
         <Header />
         <div className={styles.leaderBoardContainer}>
@@ -64,5 +64,3 @@ const LeaderBoard: FC<{}> = () => (
         </div>
     </Container>
 );
-
-export default LeaderBoard;

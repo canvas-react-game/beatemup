@@ -1,1 +1,1 @@
-export { default } from "./Error.view";
+export { Error } from "./Error.view";

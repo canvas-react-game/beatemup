@@ -1,1 +1,1 @@
-export { default } from "./ErrorBoundary.view";
+export { ErrorBoundary } from "./ErrorBoundary.view";

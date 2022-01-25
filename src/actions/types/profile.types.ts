@@ -1,4 +1,4 @@
-export const GET_PROFILE = 'GET_PROFILE';
-export const SET_PROFILE = 'SET_PROFILE';
-export const SET_PASSWORD = 'SET_PASSWORD';
-export const PROFILE_LOADING = 'PROFILE_LOADING';
+export const GET_PROFILE = "GET_PROFILE";
+export const SET_PROFILE = "SET_PROFILE";
+export const SET_PASSWORD = "SET_PASSWORD";
+export const PROFILE_LOADING = "PROFILE_LOADING";

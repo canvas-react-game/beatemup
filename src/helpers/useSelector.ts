@@ -1,7 +1,7 @@
 import {
     useSelector as useReduxSelector,
     TypedUseSelectorHook,
-} from 'react-redux';
+} from "react-redux";
 
 import { RootState } from "@/store/store";
 

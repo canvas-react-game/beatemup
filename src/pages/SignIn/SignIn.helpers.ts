@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { routes } from "@/config/routes/routes";
 import { SignInData } from "@/api/Auth";
 import { signIn } from "@/actions/auth.actions";
-import { useSelector } from "@/helpers/useSelector";
+import { useSelector } from "@/hooks/useSelector";
 
 export enum SignInFieldNames {
     login = "login",

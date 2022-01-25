@@ -1,14 +1,16 @@
-import {FC, useCallback, useEffect, useState} from "react";
+import {
+    FC, useCallback, useEffect, useState,
+} from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useDispatch } from "react-redux";
 
+import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
 import { useSelector } from "@/helpers/useSelector";
-import {getProfile, setPassword, setProfile} from "@/actions/profile.actions";
-import {SignUpData, UserInfo} from "@/api/Auth";
-import {PasswordData} from "api/Profile";
+import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
+import { SignUpData, UserInfo } from "@/api/Auth";
 
 export interface FieldSet {
     name: string,
@@ -58,7 +60,7 @@ const initialFields: FieldSet[] = [
         message: "Введите логин",
         placeholder: "Логин",
         component: Input,
-    }
+    },
 ];
 
 const passwordFields: FieldSet[] = [
@@ -87,24 +89,23 @@ export const useProfileForm = () => {
     const [form] = useForm();
     const dispatch = useDispatch();
 
-    const { data, isLoading } = useSelector(state => state.profile);
+    const { data, isLoading } = useSelector((state) => state.profile);
 
     useEffect(() => {
         dispatch(getProfile());
-    },[]);
+    }, []);
 
     useEffect(() => {
         form.setFieldsValue(data);
-    },[form, data]);
+    }, [form, data]);
 
     const onFinish = useCallback((values: SignUpData & PasswordData) => {
-            const { oldPassword, newPassword, ...rest } = values;
-            dispatch(setProfile(rest));
-            if (oldPassword && newPassword) {
-                dispatch(setPassword({ oldPassword, newPassword }));
-            }
-        },[]
-    );
+        const { oldPassword, newPassword, ...rest } = values;
+        dispatch(setProfile(rest));
+        if (oldPassword && newPassword) {
+            dispatch(setPassword({ oldPassword, newPassword }));
+        }
+    }, []);
 
     const onFinishFailed = useCallback(
         (errorInfo: UserInfo) => console.log("Failed:", errorInfo),
@@ -122,6 +123,6 @@ export const useProfileForm = () => {
         form,
         fields: initialFields,
         passwordFields,
-        isLoading
+        isLoading,
     };
 };

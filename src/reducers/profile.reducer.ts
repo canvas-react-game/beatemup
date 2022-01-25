@@ -1,9 +1,9 @@
-import {ProfileAction, ProfileStages} from "@/actions/profile.actions";
+import { ProfileAction, ProfileStages } from "@/actions/profile.actions";
 import {
     GET_PROFILE,
     PROFILE_LOADING,
     SET_PASSWORD,
-    SET_PROFILE
+    SET_PROFILE,
 } from "@/actions/types/profile.types";
 
 export interface ProfileState {
@@ -24,16 +24,16 @@ export interface ProfileState {
 const initialState: ProfileState = {
     data: {
         id: 0,
-        second_name: '',
-        first_name: '',
-        email: '',
-        phone: '',
-        login: '',
-        password: '',
-        avatar: '',
+        second_name: "",
+        first_name: "",
+        email: "",
+        phone: "",
+        login: "",
+        password: "",
+        avatar: "",
     },
     isLoading: false,
-    stage: ProfileStages.INIT
+    stage: ProfileStages.INIT,
 };
 
 export const profileReducer = (state: ProfileState = initialState, action: ProfileAction) => {
@@ -42,27 +42,27 @@ export const profileReducer = (state: ProfileState = initialState, action: Profi
             return {
                 data: { ...action.payload.data },
                 isLoading: false,
-                stage: ProfileStages.DONE
+                stage: ProfileStages.DONE,
             };
         case SET_PROFILE:
             return {
                 data: { ...action.payload.data },
                 isLoading: false,
-                stage: ProfileStages.DONE
+                stage: ProfileStages.DONE,
             };
         case SET_PASSWORD:
             return {
                 data: { ...state.data },
                 isLoading: false,
-                stage: ProfileStages.DONE
+                stage: ProfileStages.DONE,
             };
         case PROFILE_LOADING:
             return {
                 data: {},
                 isLoading: action.payload,
-                stage: ProfileStages.LOADING
+                stage: ProfileStages.LOADING,
             };
         default:
             return state;
     }
-}
+};

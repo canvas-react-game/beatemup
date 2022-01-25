@@ -23,7 +23,7 @@ const URLS: string[] = [
 ];
 //
 
-sw.addEventListener("install", (event: any) => {
+sw.addEventListener("install", (event) => {
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -38,7 +38,7 @@ sw.addEventListener("install", (event: any) => {
     );
 });
 
-sw.addEventListener("activate", (event: any) => {
+sw.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((names) => {
             return Promise.all(
@@ -52,7 +52,7 @@ sw.addEventListener("activate", (event: any) => {
     );
 });
 
-sw.addEventListener("fetch", (event: any) => {
+sw.addEventListener("fetch", (event) => {
     const request = event.request;
 
     if (request.method !== "GET") {

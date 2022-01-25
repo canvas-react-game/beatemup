@@ -11,7 +11,7 @@ import styles from "./Header.module.scss";
 export const useHeader = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const isSignedIn = useSelector(state => state.auth.isSignedIn);
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
 
     const routes = [
         { path: appRoutes.about.path, label: "Об игре" },
@@ -30,7 +30,7 @@ export const useHeader = () => {
     );
 
     return {
-        routes: isSignedIn ? routes : routes.filter(route => route.path === appRoutes.about.path),
+        routes: isSignedIn ? routes : routes.filter((route) => route.path === appRoutes.about.path),
         renderSignOutButton,
     };
 };

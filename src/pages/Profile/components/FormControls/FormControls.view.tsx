@@ -1,4 +1,4 @@
-import React, {FC, useCallback} from "react";
+import React, { FC, useCallback } from "react";
 import { Button, Form, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -10,14 +10,13 @@ const FormControls: FC<FormElement> = ({
     onFinish,
     form,
 }) => {
-
-    const handleCancel = useCallback( () => {
+    const handleCancel = useCallback(() => {
         setIsEdit(!isEdit);
         form.resetFields();
     }, [form, isEdit]);
 
-    const handleEdit = useCallback( () => {
-        setIsEdit(!isEdit)
+    const handleEdit = useCallback(() => {
+        setIsEdit(!isEdit);
     }, [isEdit]);
 
     if (isEdit) {

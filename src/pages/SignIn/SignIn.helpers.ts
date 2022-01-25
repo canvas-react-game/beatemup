@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { routes } from "@/config/routes/routes";
 import { SignInData } from "@/api/Auth";
 import { signIn } from "@/actions/auth.actions";
-import {useSelector} from "@/helpers/useSelector";
+import { useSelector } from "@/helpers/useSelector";
 
 export enum SignInFieldNames {
     login = "login",
@@ -16,7 +16,7 @@ export const useSignInForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentPath = routes.signIn.path;
-    const isLoading = useSelector(state => state.auth.isLoading);
+    const isLoading = useSelector((state) => state.auth.isLoading);
 
     const onFinish = useCallback(async (values: SignInData) => {
         dispatch(signIn(values, history));
@@ -28,6 +28,6 @@ export const useSignInForm = () => {
         currentPath,
         onFinish,
         onFinishFailed,
-        isLoading
+        isLoading,
     };
 };

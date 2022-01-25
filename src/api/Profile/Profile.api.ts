@@ -2,7 +2,7 @@ import { notification } from "antd";
 
 import APIService from "@/services/API";
 import { Method } from "@/services/API/API.service";
-import {SignUpData, UserInfo} from "@/api/Auth";
+import { SignUpData, UserInfo } from "@/api/Auth";
 
 const root = "user";
 
@@ -13,10 +13,10 @@ export interface PasswordData {
 
 class ProfileApi {
     isSuccessfulRequest(response: Response) {
-        let errorMessage = "Отправленные данные не корректны";
+        const errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
             case 200:
-                notification.success({ message: 'Данные успешно изменены' });
+                notification.success({ message: "Данные успешно изменены" });
                 return true;
             case 400:
                 notification.error({ message: errorMessage });
@@ -32,7 +32,7 @@ class ProfileApi {
         }
     }
 
-    public async setProfile(data: Omit<SignUpData, 'password'>): Promise<UserInfo | null> {
+    public async setProfile(data: Omit<SignUpData, "password">): Promise<UserInfo | null> {
         const response = await APIService.request(Method.PUT, `${root}/profile`, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);
@@ -64,7 +64,6 @@ class ProfileApi {
         }
         return null;
     }
-
 }
 
 export default new ProfileApi();

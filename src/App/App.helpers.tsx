@@ -1,28 +1,29 @@
-import React, { FC, useState, useCallback, useEffect } from "react";
+import React, {
+    FC, useState, useCallback, useEffect,
+} from "react";
 import "antd/dist/antd.css";
 
 import { Typography, Button } from "antd";
-const { Title } = Typography;
 
 import styles from "./App.module.scss";
+
+const { Title } = Typography;
 
 interface Props {
     onClose: Function;
 }
 
-export const ModalChild: FC<Props> = ({ onClose }) => {
-    return (
-        <>
-            <Title className={styles.title} level={2}>
+export const ModalChild: FC<Props> = ({ onClose }) => (
+    <>
+        <Title className={styles.title} level={2}>
                 Нет интернет соединения
-            </Title>
+        </Title>
 
-            <Button type="primary" onClick={() => onClose()}>
+        <Button type="primary" onClick={() => onClose()}>
                 Закрыть
-            </Button>
-        </>
-    );
-};
+        </Button>
+    </>
+);
 
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);
@@ -39,7 +40,7 @@ export const useServiceWorkers = () => {
                         .then((registration) => {
                             console.log(
                                 "ServiceWorker registration successful ",
-                                registration.scope
+                                registration.scope,
                             );
                         })
                         .then(() => {
@@ -52,7 +53,7 @@ export const useServiceWorkers = () => {
                         .catch((error: string) => {
                             console.log(
                                 "ServiceWorker registration failed: ",
-                                error
+                                error,
                             );
                         });
                 });

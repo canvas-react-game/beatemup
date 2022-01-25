@@ -14,10 +14,7 @@ interface Props {
 const mainRoute = appRoutes.main.path;
 
 const Header: FC<Props> = ({ currentPath }) => {
-    const {
-        routes,
-        renderSignOutButton,
-    } = useHeader();
+    const { routes, renderSignOutButton } = useHeader();
 
     return (
         <div className={styles.container}>

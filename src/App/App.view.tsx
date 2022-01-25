@@ -1,39 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "antd/dist/antd.css";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
+import GameModal from "@/components/GameModal";
 
 import Router from "../Router";
 import styles from "./App.module.scss";
 
-const App = () => {
-    useEffect(() => {
-        function startServiceWorker() {
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", () => {
-                    navigator.serviceWorker
-                        .register("./sw.ts")
-                        .then((registration) => {
-                            console.log(
-                                "ServiceWorker registration successful ",
-                                registration.scope
-                            );
-                        })
-                        .catch((error: string) => {
-                            console.log(
-                                "ServiceWorker registration failed: ",
-                                error
-                            );
-                        });
-                });
-            }
-        }
+import { useServiceWorkers, ModalChild } from "./App.helpers";
 
-        startServiceWorker();
-    }, []);
+const App = () => {
+    const { onClose, isActive } = useServiceWorkers();
 
     return (
         <div className={styles.App}>
+            <GameModal isActive={isActive} title="Ошибка">
+                <ModalChild onClose={onClose} />
+            </GameModal>
+
             <ErrorBoundary>
                 <Router />
             </ErrorBoundary>

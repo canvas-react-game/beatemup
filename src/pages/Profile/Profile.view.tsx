@@ -7,6 +7,8 @@ import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Upload from "@/components/Upload";
 import Statistic from "@/components/Statistic";
+import PageLoader from "@/components/PageLoader";
+
 import FormFields from "./components/FormFields";
 import FormControls from "./components/FormControls";
 import UploadButton from "./components/UploadButton";
@@ -22,8 +24,9 @@ const Profile = () => {
         isEdit,
         setIsEdit,
         avatar,
-        initialValues,
+        profile,
         form,
+        isLoading,
     } = useProfileForm();
 
     const handleChangeAvatar = useCallback(
@@ -32,43 +35,45 @@ const Profile = () => {
     );
 
     return (
-        <Container>
-            <Header currentPath={currentPath} />
-            <div className={styles.formContainer}>
-                <Space direction="vertical" size="middle">
-                    <Row justify="space-between">
-                        <Col>
-                            <Statistic title="Рекорд" value={1128} />
-                        </Col>
-                        <Col>
-                            <Upload
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                listType="picture-card"
-                                disabled={!isEdit}
-                                onChange={handleChangeAvatar}
-                            >
-                                {avatar || <UploadButton />}
-                            </Upload>
-                        </Col>
-                    </Row>
+        <PageLoader isSpinning={isLoading}>
+            <Container>
+                <Header currentPath={currentPath} />
+                <div className={styles.formContainer}>
+                    <Space direction="vertical" size="middle">
+                        <Row justify="space-between">
+                            <Col>
+                                <Statistic title="Рекорд" value={100} />
+                            </Col>
+                            <Col>
+                                <Upload
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    listType="picture-card"
+                                    disabled={!isEdit}
+                                    onChange={handleChangeAvatar}
+                                >
+                                    {avatar || <UploadButton />}
+                                </Upload>
+                            </Col>
+                        </Row>
 
-                    <Form
-                        name="profile"
-                        form={form}
-                        initialValues={initialValues}
-                        layout="vertical"
-                    >
-                        <FormFields isEdit={isEdit} />
-                        <FormControls
-                            isEdit={isEdit}
-                            setIsEdit={setIsEdit}
+                        <Form
+                            name="profile"
                             form={form}
-                            onFinish={onFinish}
-                        />
-                    </Form>
-                </Space>
-            </div>
-        </Container>
+                            initialValues={profile}
+                            layout="vertical"
+                        >
+                            <FormFields isEdit={isEdit} />
+                            <FormControls
+                                isEdit={isEdit}
+                                setIsEdit={setIsEdit}
+                                form={form}
+                                onFinish={onFinish}
+                            />
+                        </Form>
+                    </Space>
+                </div>
+            </Container>
+        </PageLoader>
     );
 };
 

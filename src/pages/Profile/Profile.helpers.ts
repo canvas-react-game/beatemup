@@ -1,100 +1,129 @@
-import { useCallback, useState } from "react";
+import {
+    FC, useCallback, useEffect, useState,
+} from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
+import { useDispatch, shallowEqual } from "react-redux";
 
+import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
-
 import Password from "@/components/Password";
+import { useSelector } from "@/hooks/useSelector";
+import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
+import { SignUpData, UserInfo } from "@/api/Auth";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
-import { ProfileValue } from "./Profile.types";
+export interface FieldSet {
+    name: string,
+    disabled: boolean,
+    required: boolean,
+    message?: string,
+    placeholder: string,
+    component: typeof Input | FC<any>,
+}
+
+const currentPath = routes.profile.path;
+
+const initialFields: FieldSet[] = [
+    {
+        name: "first_name",
+        disabled: true,
+        required: false,
+        placeholder: "Имя",
+        component: Input,
+    },
+    {
+        name: "second_name",
+        disabled: true,
+        required: false,
+        placeholder: "Фамилия",
+        component: Input,
+    },
+    {
+        name: "email",
+        disabled: true,
+        required: true,
+        message: "Введите эл. почту",
+        placeholder: "Эл. почта",
+        component: Input,
+    },
+    {
+        name: "phone",
+        disabled: true,
+        required: false,
+        placeholder: "Телефон",
+        component: Input,
+    },
+    {
+        name: "login",
+        disabled: true,
+        required: true,
+        message: "Введите логин",
+        placeholder: "Логин",
+        component: Input,
+    },
+];
+
+const passwordFields: FieldSet[] = [
+    {
+        name: "oldPassword",
+        disabled: true,
+        required: false,
+        message: "Введите старый пароль",
+        placeholder: "Старый пароль",
+        component: Password,
+    },
+    // todo добавить validationRules фнукцию, триггерит обязательность, если заполнен oldPassword
+    {
+        name: "newPassword",
+        disabled: true,
+        required: false,
+        message: "Введите новый пароль",
+        placeholder: "Новый пароль",
+        component: Password,
+    },
+];
 
 export const useProfileForm = () => {
-    const currentPath = `/#${routes.profile.path}`;
-
-    const onFinish = useCallback(
-        () => (values: ProfileValue[]) => console.log(values),
-        [],
-    );
-    const onFinishFailed = useCallback(
-        () => (errorInfo: any) => console.log("Failed:", errorInfo),
-        [],
-    );
-
-    const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
-    const [isConfirmVisible, setIsConfirmVisible] = useState<boolean>(false);
     const [isEdit, setIsEdit] = useState<boolean>(false);
-
     const [avatar] = useState<string | undefined>("");
-    const [initialValues] = useState({
-        name: "Андрей",
-        surname: "Иванов",
-        email: "test@mail.ru",
-        phone: "+77758662255",
-        login: "test",
-        password: "12345",
-    });
     const [form] = useForm();
-    const [fields] = useState<ProfileValue[]>([
-        {
-            name: "name",
-            disabled: true,
-            required: false,
-            placeholder: "Имя",
-            component: Input,
-        },
-        {
-            name: "surname",
-            disabled: true,
-            required: false,
-            placeholder: "Фамилия",
-            component: Input,
-        },
-        {
-            name: "email",
-            disabled: true,
-            required: true,
-            message: "Введите эл. почту",
-            placeholder: "Эл. почта",
-            component: Input,
-        },
-        {
-            name: "phone",
-            disabled: true,
-            required: false,
-            placeholder: "Телефон",
-            component: Input,
-        },
-        {
-            name: "login",
-            disabled: true,
-            required: true,
-            message: "Введите логин",
-            placeholder: "Логин",
-            component: Input,
-        },
-        {
-            name: "password",
-            disabled: true,
-            required: true,
-            message: "Введите пароль",
-            placeholder: "Пароль",
-            component: Password,
-        },
-    ]);
+    const dispatch = useDispatch();
+
+    const { data, isLoading } = useSelector((state) => state.profile, shallowEqual);
+
+    useMountEffect(() => {
+        dispatch(getProfile());
+    });
+
+    useEffect(() => {
+        form.setFieldsValue(data);
+    }, [form, data]);
+
+    const onFinish = useCallback((values: SignUpData & PasswordData) => {
+        const { oldPassword, newPassword, ...rest } = values;
+        dispatch(setProfile(rest));
+        if (oldPassword && newPassword) {
+            dispatch(setPassword({ oldPassword, newPassword }));
+        }
+    }, []);
+
+    const onFinishFailed = useCallback(
+        (errorInfo: UserInfo) => console.log("Failed:", errorInfo),
+        [],
+    );
 
     return {
         currentPath,
         onFinish,
         onFinishFailed,
-        isPreviewVisible,
-        setIsPreviewVisible,
-        isConfirmVisible,
-        setIsConfirmVisible,
         isEdit,
         setIsEdit,
         avatar,
-        initialValues,
+        profile: data,
         form,
-        fields,
+        fields: initialFields,
+        passwordFields,
+        isLoading,
     };
 };

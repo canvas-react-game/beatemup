@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Container from "@/components/Container";
 
 import styles from "./LeaderBoard.module.scss";
-import { LeaderBoardData, LeaderBoardUser } from "@/mock/leaderboard";
+import { LeaderBoardData, LeaderBoardUser } from "@/__mocks__/leaderboard";
 
 // Колонки таблицы
 const columns: ColumnsType<LeaderBoardUser> = [

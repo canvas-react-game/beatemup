@@ -1,6 +1,6 @@
-import { Vector2D } from "../utils/vector";
 import { Box2 } from "../utils/box2";
 import { Circle } from "../utils/circle";
+import { Object2D } from "../object";
 
 export enum GeometryTypes {
     Rectangle = "Rectangle",
@@ -43,11 +43,11 @@ export class Geometry {
     }
 
     // TODO: Методы работы с геометрией
-    calculateBoundingBox(position: Vector2D) {
+    calculateBoundingBox(object: Object2D) {
 
     }
 
-    calculateBoundingCircle(position: Vector2D) {
+    calculateBoundingCircle(object: Object2D) {
 
     }
 }

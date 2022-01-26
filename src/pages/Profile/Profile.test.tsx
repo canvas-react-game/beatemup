@@ -59,6 +59,6 @@ describe("Profile page", () => {
 
         render(<ProfileComposed />);
 
-        expect(store.getState().profile.stage === "loading").toBe(true);
+        expect(store.getState().profile["stage"] === "loading").toBe(true);
     });
 });

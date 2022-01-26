@@ -1,1 +1,1 @@
-export { Input } from "./Input.view";
+export { default } from "./Input.view";

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { Typography } from "antd";
 
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { routes } from "@/config/routes/routes";
 
 import styles from "./Main.module.scss";
 import { getProfile } from "@/actions/profile.actions";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
 const Main: FC = () => {
     const {
@@ -16,9 +17,9 @@ const Main: FC = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useMountEffect(() => {
         dispatch(getProfile());
-    }, []);
+    });
 
     return (
         <Container>

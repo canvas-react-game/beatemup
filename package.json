@@ -5,8 +5,9 @@
   "main": "src/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --mode development --open --hot",
-    "build": "webpack --mode production",
+    "compile:sw": "tsc --target es2017 sw.ts >/dev/null",
+    "start": "npm run compile:sw & webpack serve --mode development --open --hot",
+    "build": "npm run compile:sw & webpack --mode production",
     "eslint": "node_modules/.bin/eslint ./src --fix",
     "stylelint": "node_modules/.bin/stylelint ./src --fix",
     "prepush": "npm-run-all eslint stylelint",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.2",
+    "copy-webpack-plugin": "^10.2.1",
     "css-loader": "^6.5.1",
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",

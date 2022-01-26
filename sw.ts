@@ -4,7 +4,7 @@
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
 // Helpers
-const canBeCached = (request: Request) =>
+const canBeCached = (request: Request) => request.method === "GET" &&
     request.url.startsWith("http") && !request.url.includes("sockjs-node");
 //
 
@@ -55,22 +55,6 @@ sw.addEventListener("activate", (event) => {
 sw.addEventListener("fetch", (event) => {
     const request = event.request;
 
-    if (request.method !== "GET") {
-        event.waitUntil(
-            (async () => {
-                const clientId =
-                    event.resultingClientId !== ""
-                        ? event.resultingClientId
-                        : event.clientId;
-                const client = await sw.clients.get(clientId);
-
-                client.postMessage("FORBIDDEN_METHOD");
-            })()
-        );
-
-        return;
-    }
-
     event.respondWith(
         caches.match(request).then((response) => {
             if (response) return response;
@@ -92,6 +76,22 @@ sw.addEventListener("fetch", (event) => {
                     });
 
                 return response;
+            }).catch(() => {
+                if (request.method !== "GET") {
+                    event.waitUntil(
+                        (async () => {
+                            const clientId =
+                                event.resultingClientId !== ""
+                                    ? event.resultingClientId
+                                    : event.clientId;
+                            const client = await sw.clients.get(clientId);
+            
+                            client.postMessage("FORBIDDEN_METHOD");
+                        })()
+                    );
+            
+                    return;
+                }
             }) as Promise<Response>;
         })
     );

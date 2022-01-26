@@ -59,7 +59,7 @@ export const profileReducer = (state: ProfileState = initialState, action: Profi
         case PROFILE_LOADING:
             return {
                 data: {},
-                isLoading: action.payload,
+                isLoading: action.payload.isLoading,
                 stage: ProfileStages.LOADING,
             };
         default:

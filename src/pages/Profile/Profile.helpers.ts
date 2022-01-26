@@ -1,18 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+    FC, useCallback, useEffect, useState,
+} from "react";
 import { Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, shallowEqual } from "react-redux";
 
 import { PasswordData } from "api/Profile";
 import { routes } from "@/config/routes/routes";
 import Password from "@/components/Password";
-import { useSelector } from "@/helpers/useSelector";
+import { useSelector } from "@/hooks/useSelector";
 import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
 import { SignUpData, UserInfo } from "@/api/Auth";
+import { useMountEffect } from "@/hooks/useMountEffect";
+
+export interface FieldSet {
+    name: string,
+    disabled: boolean,
+    required: boolean,
+    message?: string,
+    placeholder: string,
+    component: typeof Input | FC<any>,
+}
 
 const currentPath = routes.profile.path;
 
-const initialFields = [
+const initialFields: FieldSet[] = [
     {
         name: "first_name",
         disabled: true,
@@ -52,7 +64,7 @@ const initialFields = [
     },
 ];
 
-const passwordFields = [
+const passwordFields: FieldSet[] = [
     {
         name: "oldPassword",
         disabled: true,
@@ -78,11 +90,11 @@ export const useProfileForm = () => {
     const [form] = useForm();
     const dispatch = useDispatch();
 
-    const { data, isLoading } = useSelector((state) => state.profile);
+    const { data, isLoading } = useSelector((state) => state.profile, shallowEqual);
 
-    useEffect(() => {
+    useMountEffect(() => {
         dispatch(getProfile());
-    }, []);
+    });
 
     useEffect(() => {
         form.setFieldsValue(data);

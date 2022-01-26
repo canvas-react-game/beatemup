@@ -47,6 +47,8 @@ export const signIn = (
             dispatch(signInSuccess());
             setAccess(true);
             history.push(routes.main.path);
+        } else {
+            dispatch(loading(false));
         }
     } catch (error) {
         dispatch(loading(false));
@@ -63,6 +65,8 @@ export const signOut = (
             dispatch(signOutSuccess());
             setAccess(false);
             history.push(routes.signIn.path);
+        } else {
+            dispatch(loading(false));
         }
     } catch (error) {
         dispatch(loading(false));

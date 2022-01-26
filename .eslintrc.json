@@ -5,7 +5,8 @@
     },
     "extends": [
         "airbnb-base", 
-        "airbnb-typescript/base"
+        "airbnb-typescript/base",
+        "plugin:react-hooks/recommended"
     ],
     "rules": {
       "max-len": [2, 100],

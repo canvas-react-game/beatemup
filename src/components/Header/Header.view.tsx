@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { routes as appRoutes } from "@/config/routes/routes";
-import { useSelector } from "@/helpers/useSelector";
+import { useSelector } from "@/hooks/useSelector";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";

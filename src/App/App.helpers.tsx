@@ -1,6 +1,4 @@
-import React, {
-    FC, useState, useCallback, useEffect,
-} from "react";
+import React, { FC, useState, useCallback, useEffect } from "react";
 import "antd/dist/antd.css";
 
 import { Typography, Button } from "antd";
@@ -16,11 +14,11 @@ interface Props {
 export const ModalChild: FC<Props> = ({ onClose }) => (
     <>
         <Title className={styles.title} level={2}>
-                Нет интернет соединения
+            Нет интернет соединения
         </Title>
 
         <Button type="primary" onClick={() => onClose()}>
-                Закрыть
+            Закрыть
         </Button>
     </>
 );
@@ -37,28 +35,32 @@ export const useServiceWorkers = () => {
     useEffect(() => {
         function startServiceWorker() {
             if (sw) {
-                window.addEventListener("load", () => {
-                    sw.register("./sw.js")
-                        .then((registration) => {
-                            console.log(
-                                "ServiceWorker registration successful ",
-                                registration.scope,
-                            );
-                        })
-                        .then(() => {
-                            sw.addEventListener("message", ({ data }) => {
-                                if (data === "FORBIDDEN_METHOD") {
-                                    setActive(true);
-                                }
+                window.addEventListener(
+                    "load",
+                    () => {
+                        sw.register("./sw.js")
+                            .then((registration) => {
+                                console.log(
+                                    "ServiceWorker registration successful ",
+                                    registration.scope
+                                );
+                            })
+                            .then(() => {
+                                sw.addEventListener("message", ({ data }) => {
+                                    if (data === "FORBIDDEN_METHOD") {
+                                        setActive(true);
+                                    }
+                                });
+                            })
+                            .catch((error: string) => {
+                                console.log(
+                                    "ServiceWorker registration failed: ",
+                                    error
+                                );
                             });
-                        })
-                        .catch((error: string) => {
-                            console.log(
-                                "ServiceWorker registration failed: ",
-                                error,
-                            );
-                        });
-                });
+                    },
+                    { once: true }
+                );
             }
         }
 

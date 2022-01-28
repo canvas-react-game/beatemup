@@ -52,8 +52,9 @@ const passwordUpdateSuccess = () => ({
     type: SET_PASSWORD,
 });
 
-export const getProfile = (
-): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+// TODO: либо отключить правило в eslint либо затянуть конфиг для Prettier
+// eslint-disable-next-line max-len
+export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(loading(true));
     try {
         const response = await api.getUserInfo();

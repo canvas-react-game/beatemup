@@ -10,7 +10,7 @@ const toggleFullScreen = () => {
     } else {
         document.exitFullscreen();
     }
-}
+};
 
 export const useGame = () => {
     const [isActive, setActive] = useState(true);

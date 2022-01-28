@@ -14,6 +14,8 @@ export const initialState: AuthState = {
     stage: AuthStages.INIT,
 };
 
+// TODO: нужно указать дефолтное значение для action
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export const authReducer = (state: AuthState = initialState, action: AuthAction) => {
     switch (action.type) {
         case SIGN_IN:

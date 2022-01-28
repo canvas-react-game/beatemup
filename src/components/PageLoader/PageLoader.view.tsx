@@ -12,7 +12,8 @@ const PageLoader: FC<Props> = ({ isSpinning, children }) => {
     const antIcon = <LoadingOutlined style={{ fontSize: 72 }} spin />;
     return (
         <>
-            <Spin className={styles.spinner} indicator={antIcon} size={"large"} spinning={isSpinning} />
+            <Spin className={styles.spinner} indicator={antIcon}size={"large"}
+                spinning={isSpinning} />
             <div className={!isSpinning ? styles.init : styles.loading}>
                 {children}
             </div>

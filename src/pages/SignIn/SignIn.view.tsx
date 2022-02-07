@@ -27,12 +27,12 @@ const SignIn:FC = () => {
                         onFinishFailed={() => onFinishFailed}
                         layout='vertical'>
                         <Form.Item
-                            name={SignInFieldNames.login}
+                            name={SignInFieldNames.Login}
                             rules={[{ required: true, message: "Введите логин" }]}>
                             <Input placeholder='логин' prefix={<UserOutlined />}/>
                         </Form.Item>
                         <Form.Item
-                            name={SignInFieldNames.password}
+                            name={SignInFieldNames.Password}
                             rules={[{ required: true, message: "Введите пароль" }]}>
                             <Password placeholder='пароль' />
                         </Form.Item>

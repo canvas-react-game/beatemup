@@ -22,8 +22,6 @@ export interface FieldSet {
     component: typeof Input | FC<any>,
 }
 
-const currentPath = routes.profile.path;
-
 const initialFields: FieldSet[] = [
     {
         name: "first_name",
@@ -114,7 +112,7 @@ export const useProfileForm = () => {
     );
 
     return {
-        currentPath,
+        currentPath: routes.profile.path,
         onFinish,
         onFinishFailed,
         isEdit,

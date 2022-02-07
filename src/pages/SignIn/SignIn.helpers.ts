@@ -8,14 +8,13 @@ import { signIn } from "@/actions/auth.actions";
 import { useSelector } from "@/hooks/useSelector";
 
 export enum SignInFieldNames {
-    login = "login",
-    password = "password",
+    Login = "Login",
+    Password = "Password",
 }
 
 export const useSignInForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const currentPath = routes.signIn.path;
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     const onFinish = useCallback(async (values: SignInData) => {
@@ -25,7 +24,7 @@ export const useSignInForm = () => {
     const onFinishFailed = (errorInfo: Error) => console.log("Failed:", errorInfo);
 
     return {
-        currentPath,
+        currentPath: routes.signIn.path,
         onFinish,
         onFinishFailed,
         isLoading,

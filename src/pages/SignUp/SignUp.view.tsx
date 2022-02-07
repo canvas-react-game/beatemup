@@ -28,10 +28,10 @@ const SignUp:FC = () => {
                         key={`${set.name}-${index}`}>
                         <Input type={set.type ?? ""} placeholder={set.placeholder} />
                     </Form.Item>)}
-                    <YandexSignIn/>
                     <Form.Item>
                         <Button block type="primary" htmlType="submit">Зарегистрироваться</Button>
                     </Form.Item>
+                    <YandexSignIn/>
                 </Form>
             </div>
         </Container>

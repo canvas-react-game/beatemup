@@ -48,7 +48,12 @@ const FormControls: FC<FormElement> = ({
                     </Button>
                 </Form.Item>
                 <Form.Item>
-                    <Button block className={styles.cancelButton} type="default" onClick={handleCancel}>
+                    <Button 
+                        block 
+                        className={styles.cancelButton} 
+                        type="default" 
+                        onClick={handleCancel}
+                    >
                         Отменить
                     </Button>
                 </Form.Item>

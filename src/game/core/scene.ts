@@ -17,19 +17,17 @@ export class Scene {
     }
 
     add(objects: Object2D[] | Object2D) {
-        if(Array.isArray(objects)) {
+        if (Array.isArray(objects)) {
             this.objects.push(...objects);
-        }
-        else {
+        } else {
             this.objects.push(objects);
         }
     }
 
     addObjectWithPhysics(objects: Object2D[] | Object2D) {
-        if(Array.isArray(objects)) {
+        if (Array.isArray(objects)) {
             this.objectWithPhysics.push(...objects);
-        }
-        else {
+        } else {
             this.objectWithPhysics.push(objects);
         }
     }

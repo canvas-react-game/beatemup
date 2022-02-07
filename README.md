@@ -1,6 +1,6 @@
 
-<img src="assets/logo.png" align="right"
-     alt="Size Limit logo by Anton Lovchikov" width="140" height="55">
+<img src="assets/logo_v2.png" align="right"
+     alt="Game logo" width="90" height="55">
 ## Ultimate Dungeon Crawler 
 
 ### Описание
@@ -22,6 +22,9 @@
 - [x] Мобы
 - [ ] Оптимизации и наполнение
 - [ ] Мультиплеер
+
+<img src="assets/screenshot.png"
+     alt="Gameplay" width="1500">
 
 ## Проект
 

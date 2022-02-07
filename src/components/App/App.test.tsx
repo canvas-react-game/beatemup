@@ -1,6 +1,6 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import App from "@/App";
+import App from "@/components/App";
 
 jest.mock("@/App", () => function App() {
     return (

@@ -5,7 +5,8 @@ const __VERSION__ = require("child_process")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-module.exports = {
+module.exports = (env, argv) => ({
+    target: "web",
     entry: {
         bundle: "./src/index.tsx",
     },
@@ -69,6 +70,7 @@ module.exports = {
                             __VERSION__
                         )}`;
                         parsed = parsed.replace("CACHE_VERSION", version);
+                        parsed = parsed.replace("STARTUP_MODE", argv.mode);
                         return Buffer.from(parsed, "utf8");
                     },
                     force: true,
@@ -84,4 +86,4 @@ module.exports = {
         compress: true,
         port: 3000,
       },
-};
+});

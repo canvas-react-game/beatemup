@@ -24,7 +24,6 @@ const Menu: FC<Props> = ({
     onResume,
 }) => (
     <CustomModal
-        className={styles.gameModal}
         title="Меню"
         visible={isActive}
         footer={null}

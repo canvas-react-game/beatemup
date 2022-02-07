@@ -1,0 +1,23 @@
+@use "../variables.module.scss" as variables;
+
+.ant-notification  {
+    font-family: "Press Start 2P", cursive;
+}
+
+.ant-notification-notice {
+    background:
+      variables.$background
+      url("../../assets/images/background.png") no-repeat center center;
+}
+
+.ant-notification-notice-message {
+    color: white;
+}
+
+.ant-notification-notice-close-x {
+    color: white;
+
+    &:hover {
+        color: darken(white, 10%) !important;
+    }
+}

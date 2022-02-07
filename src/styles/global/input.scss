@@ -48,6 +48,7 @@
 
   &:not(.ant-input-affix-wrapper-disabled):focus {
     border-color: variables.$primary;
+    box-shadow: 0 0 0 2px variables.$primary-shadow;
   }
 
   &:not(.ant-input-affix-wrapper-disabled):not(:focus) {
@@ -61,6 +62,10 @@
   &:hover {
     border-color: variables.$primary;
   }
+}
+
+.ant-input-affix-wrapper-focused {
+  box-shadow: 0 0 0 2px variables.$primary-shadow;
 }
 
 .ant-form-item-has-error {

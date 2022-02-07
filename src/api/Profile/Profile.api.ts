@@ -26,7 +26,7 @@ class ProfileApi {
         }
         switch (response.status) {
             case 200:
-                notification.success({ message });
+                notification.success({ message, duration: 9999999 });
                 return true;
             case 400:
                 notification.error({ message: errorMessage });

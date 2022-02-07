@@ -67,15 +67,15 @@ class WorldManager {
         // Создаем стены и землю из матрицы уровня
         const objects = this._createWallsAndGroundFromLevel(this.level);
         // И добавляем в сцену первыми
-        this.scene.add(...objects);
+        this.scene.add(objects);
         // В отдельный список добавляем объекты, которые имеют физику
-        this.scene.addObjectWithPhysics(...objects.filter((x) => x instanceof Wall));
+        this.scene.addObjectWithPhysics(objects.filter((x) => x instanceof Wall));
         // Создаем Игрока
         const [player, sword] = this._createPlayer(this.level);
         this.player = player;
         // Добавляем в сцену
-        this.scene.add(sword, player);
-        this.scene.addObjectWithPhysics(sword, player);
+        this.scene.add([sword, player]);
+        this.scene.addObjectWithPhysics([sword, player]);
         // Устанавливаем объект привязки камеры
         this.camera.bindObject(player);
         // Создаем противников

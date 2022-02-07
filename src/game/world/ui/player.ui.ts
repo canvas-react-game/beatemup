@@ -77,7 +77,7 @@ export class PlayerUI {
             healthObjects.push(healthObject);
         }
         this.scene.objects = this.scene.objects.filter((x) => x instanceof Health);
-        this.scene.add(...healthObjects);
+        this.scene.add(healthObjects);
     }
 
     updateScore() {

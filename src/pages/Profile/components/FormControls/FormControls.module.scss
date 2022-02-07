@@ -1,13 +1,13 @@
 @use "@/styles/variables.module.scss" as variables;
 
 .cancelButton {
-    color: white;
+  color: white;
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover {
+    color: darken(variables.$primary, 10%);
     background-color: transparent;
     border-color: transparent;
-
-    &:hover {
-      color: darken(variables.$primary, 10%);
-      background-color: transparent;
-      border-color: transparent;
-    }
+  }
 }

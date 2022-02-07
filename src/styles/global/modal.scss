@@ -1,27 +1,28 @@
 @use "../variables.module.scss" as variables;
 
 .ant-modal {
-    font-family: "Press Start 2P", cursive;
-    width: 400px !important;
+  font-family: "Press Start 2P", cursive;
+  width: 400px !important;
 }
 
 .ant-modal-body {
-    background:
-      variables.$background
-      url("../../assets/images/background.png") no-repeat center center;
+  background:
+    variables.$background
+    url("../../assets/images/background.png") no-repeat center center;
 }
 
 .ant-modal-header {
-    background: variables.$background;
-    border: none;
-    text-align: center;
+  background: variables.$background;
+  border: none;
+  text-align: center;
 }
 
 .ant-modal-title {
-    color: white;
-    font-size: 24px;
+  color: white;
+  font-size: 24px;
 }
 
-.ant-modal-confirm-title, .ant-modal-confirm-content {
-    color: white !important;
+.ant-modal-confirm-title,
+.ant-modal-confirm-content {
+  color: white !important;
 }

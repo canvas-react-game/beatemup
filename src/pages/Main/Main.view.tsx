@@ -9,6 +9,7 @@ import { routes } from "@/config/routes/routes";
 import styles from "./Main.module.scss";
 import { getProfile } from "@/actions/profile.actions";
 import { useMountEffect } from "@/hooks/useMountEffect";
+import { Link } from "react-router-dom";
 
 const Main: FC = () => {
     const {
@@ -30,7 +31,7 @@ const Main: FC = () => {
                     <Typography className={info}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     </Typography>
-                    <a href={routes.game.path} className={gameHref}>Играть</a>
+                    <Link to={routes.game.path} className={gameHref}>Играть</Link>
                 </div>
             </div>
         </Container>

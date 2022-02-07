@@ -6,7 +6,7 @@ import { routes as appRoutes } from "@/config/routes/routes";
 import { signOut } from "@/actions/auth.actions";
 import { useSelector } from "@/hooks/useSelector";
 
-import styles from "./Header.module.scss";
+import Button from "@/components/Button";
 
 export const useHeader = () => {
     const history = useHistory();
@@ -26,7 +26,7 @@ export const useHeader = () => {
     }, []);
 
     const renderSignOutButton = () => (
-        <a className={styles.signIn} href='' onClick={onSignOut}>Выйти</a>
+        <Button onClick={onSignOut}>Выйти</Button>
     );
 
     return {

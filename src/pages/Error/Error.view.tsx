@@ -6,6 +6,7 @@ import { routes } from "@/config/routes/routes";
 
 import styles from "./Error.module.scss";
 import { ErrorInfo } from "./Error.helpers";
+import { Link } from "react-router-dom";
 
 interface Props {
     status: "404" | "403" | "500"
@@ -22,8 +23,12 @@ const Error: FC<Props> = ({ status = "404" }) => {
                 <div className={errorContainer}>
                     <Typography className={title}>{status}</Typography>
                     <Typography className={info}>{ErrorInfo[status]}</Typography>
-                    <a href={status === "403" ? routes.signIn.path
-                        : routes.main.path} className={back}>Вернуться</a>
+                    <Link 
+                        to={status === "403" ? routes.signIn.path : routes.main.path} 
+                        className={back}
+                    >
+                        Вернуться
+                    </Link>
                 </div>
                 <div className={notFound}/>
             </div>

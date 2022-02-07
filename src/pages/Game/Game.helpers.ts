@@ -4,11 +4,23 @@ import { useHistory } from "react-router-dom";
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
 
+const togglePointerLock = () => {
+    document.documentElement.requestPointerLock();
+}
+
+const togglePointerUnlock = () => {
+    document.exitPointerLock();
+}
+
+const exitFullScreen = () => {
+    document.exitFullscreen();
+}
+
 const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
     } else {
-        document.exitFullscreen();
+        exitFullScreen();
     }
 };
 
@@ -23,10 +35,11 @@ export const useGame = () => {
     const history = useHistory();
 
     const callMenu = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === "F1") {
             setActive(true);
             setPause(true);
             world.stopAnimation();
+            togglePointerUnlock();
         }
         if (e.key === "f") {
             toggleFullScreen();
@@ -37,12 +50,14 @@ export const useGame = () => {
         setActive(true);
         setGameOver(true);
         world.destroy();
+        togglePointerUnlock();
     }, []);
 
     const callGameWin = useCallback(() => {
         setActive(true);
         setGameWin(true);
         world.destroy();
+        togglePointerUnlock();
     }, []);
 
     const setUpPauseButton = useCallback(() => {
@@ -51,6 +66,7 @@ export const useGame = () => {
 
     const onClose = useCallback(() => {
         setActive(false);
+        exitFullScreen();
         history.push(routes.main.path);
     }, []);
 
@@ -65,12 +81,14 @@ export const useGame = () => {
         setGameWin(false);
         setPause(false);
         setActive(false);
+        togglePointerLock();
     }, []);
 
     const onResume = useCallback(() => {
         world.startAnimataion();
         setPause(false);
         setActive(false);
+        togglePointerLock();
     }, []);
 
     const onUnmount = useCallback(() => {

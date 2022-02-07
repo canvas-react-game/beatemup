@@ -61,15 +61,15 @@ class WorldEvents extends EventBus {
             eventBus.emit(EventTypes.Resize);
         };
 
-        window.addEventListener("keydown", this._keyDownListener);
-        window.addEventListener("keyup", this._keyUpListener);
-        window.addEventListener("resize", this._resizeListener);
+        window?.addEventListener("keydown", this._keyDownListener);
+        window?.addEventListener("keyup", this._keyUpListener);
+        window?.addEventListener("resize", this._resizeListener);
     }
 
     unsubscribe() {
-        window.removeEventListener("keydown", this._keyDownListener);
-        window.removeEventListener("keyup", this._keyUpListener);
-        window.removeEventListener("resize", this._resizeListener);
+        window?.removeEventListener("keydown", this._keyDownListener);
+        window?.removeEventListener("keyup", this._keyUpListener);
+        window?.removeEventListener("resize", this._resizeListener);
     }
 }
 

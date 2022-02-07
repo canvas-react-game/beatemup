@@ -1,14 +1,16 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, SetStateAction, Dispatch } from "react";
 import { useHistory } from "react-router-dom";
 
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
 
 const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        document.exitFullscreen();
+    if(typeof document !== "undefined") {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
     }
 }
 
@@ -17,7 +19,7 @@ export const useGame = () => {
     const [isGameOver, setGameOver] = useState(false);
     const [isGameWin, setGameWin] = useState(false);
     const [isPaused, setPause] = useState(false);
-    const [world] = useState(new World());
+    const [world] = useState(typeof window !== "undefined" && new World()) as [World, Dispatch<SetStateAction<World>>]
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const uiCanvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
@@ -46,7 +48,9 @@ export const useGame = () => {
     }, []);
 
     const setUpPauseButton = useCallback(() => {
-        document.addEventListener("keydown", callMenu);
+        if(typeof document !== "undefined") {
+            document.addEventListener("keydown", callMenu);
+        }
     }, []);
 
     const onClose = useCallback(() => {
@@ -55,16 +59,18 @@ export const useGame = () => {
     }, []);
 
     const onStart = useCallback(() => {
-        world.init({
-            canvas: canvasRef.current,
-            uiCanvas: uiCanvasRef.current,
-            gameOverCallback: callGameOver,
-            gameWinCallback: callGameWin,
-        });
-        setGameOver(false);
-        setGameWin(false);
-        setPause(false);
-        setActive(false);
+        if(typeof window !== "undefined") {
+            world.init({
+                canvas: canvasRef.current,
+                uiCanvas: uiCanvasRef.current,
+                gameOverCallback: callGameOver,
+                gameWinCallback: callGameWin,
+            });
+            setGameOver(false);
+            setGameWin(false);
+            setPause(false);
+            setActive(false);
+        }
     }, []);
 
     const onResume = useCallback(() => {
@@ -75,7 +81,9 @@ export const useGame = () => {
 
     const onUnmount = useCallback(() => {
         world.destroy();
-        document.removeEventListener("keydown", callMenu);
+        if(typeof document !== "undefined") {
+            document.removeEventListener("keydown", callMenu);
+        }
     }, []);
 
     return {

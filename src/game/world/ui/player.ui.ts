@@ -27,8 +27,8 @@ export class PlayerUI {
     constructor(props: PlayerUIProps) {
         this.canvas = props.canvas;
         this.canvas.style.position = "absolute";
-        this.canvas.height = window.innerHeight;
-        this.canvas.width = window.innerWidth;
+        this.canvas.height = window?.innerHeight;
+        this.canvas.width = window?.innerWidth;
 
         this.maxHealth = props.maxHealth;
         this.tileSetImage = props.tileSetImage;
@@ -39,8 +39,8 @@ export class PlayerUI {
         // Создаем Renderer
         this.renderer = new Renderer({
             canvas: this.canvas,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width: window?.innerWidth,
+            height: window?.innerHeight,
         });
         // Camera
         this.camera = new Camera(LEVEL_SIZE * 1);

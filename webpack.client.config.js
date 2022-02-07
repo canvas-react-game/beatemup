@@ -4,10 +4,12 @@ const __VERSION__ = require("child_process")
     .toString();
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+    target: "web",
     entry: {
-        bundle: "./src/index.tsx",
+        client: "./src/index.tsx",
     },
     output: {
         path: path.join(__dirname, "/dist"),
@@ -28,7 +30,18 @@ module.exports = {
             "@/store": path.resolve(__dirname, "src/store"),
             "@/reducers": path.resolve(__dirname, "src/reducers"),
             "@/actions": path.resolve(__dirname, "src/actions"),
-        }
+        },
+        fallback: {
+            "fs": false,
+            "tls": false,
+            "net": false,
+            "path": false,
+            "zlib": false,
+            "http": false,
+            "https": false,
+            "stream": false,
+            "crypto": false,
+        } 
     },
     module: {
         rules: [
@@ -50,7 +63,7 @@ module.exports = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
         ],
     },
@@ -75,6 +88,7 @@ module.exports = {
                 },
             ],
         }),
+        new MiniCssExtractPlugin()
     ],
     devServer: {
         static: {

@@ -25,7 +25,6 @@ export const ModalChild: FC<Props> = ({ onClose }) => (
     </>
 );
 
-const sw: ServiceWorkerContainer = navigator?.serviceWorker;
 
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);
@@ -35,9 +34,11 @@ export const useServiceWorkers = () => {
     }, []);
 
     useEffect(() => {
+        const sw: ServiceWorkerContainer = navigator?.serviceWorker;
+
         function startServiceWorker() {
             if (sw) {
-                window.addEventListener("load", () => {
+                window?.addEventListener("load", () => {
                     sw.register("./sw.js")
                         .then((registration) => {
                             console.log(

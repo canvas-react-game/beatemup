@@ -1,12 +1,15 @@
-type Route = {
+export type Route = {
     path: string
 };
 
-type Routes = {
+export type Routes = {
     [key: string]: Route;
 };
 
 export const routes: Routes = {
+    default: {
+        path: "/",
+    },
     main: {
         path: "/main",
     },

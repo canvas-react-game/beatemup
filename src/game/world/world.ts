@@ -38,8 +38,8 @@ export class World {
         // Создаем Renderer
         this.renderer = new Renderer({
             canvas: this.canvas,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width: window?.innerWidth,
+            height: window?.innerHeight,
         });
 
         // World Manager
@@ -103,11 +103,11 @@ export class World {
 
     private _onResize() {
         if (this.canvas && this.animationNumber) {
-            this.canvas.height = window.innerHeight;
-            this.canvas.width = window.innerWidth;
+            this.canvas.height = window?.innerHeight;
+            this.canvas.width = window?.innerWidth;
             if (this.uiCanvas) {
-                this.uiCanvas.height = window.innerHeight;
-                this.uiCanvas.width = window.innerWidth;
+                this.uiCanvas.height = window?.innerHeight;
+                this.uiCanvas.width = window?.innerWidth;
             }
         }
     }

@@ -46,9 +46,11 @@ class WorldManager {
     gameWinCallback: () => void;
 
     constructor() {
-        const tileSetImage = new Image(512, 512);
-        tileSetImage.src = TileSetImage;
-        this.tileSetImage = tileSetImage;
+        if(typeof Image !== "undefined") {
+            const tileSetImage = new Image(512, 512);
+            tileSetImage.src = TileSetImage;
+            this.tileSetImage = tileSetImage;
+        }
     }
 
     composeLevel(

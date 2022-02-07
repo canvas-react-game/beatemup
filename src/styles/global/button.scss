@@ -1,20 +1,47 @@
 @use "../variables.module.scss" as variables;
 
+.ant-btn {
+  color: white;
+  border-color: variables.$primary;
+  background-color: transparent;
+
+  &:hover {
+    color: darken(variables.$primary, 10%);
+    border-color: darken(variables.$primary, 10%);
+    background-color: transparent;
+  }
+
+  &:active {
+    color: darken(variables.$primary, 10%);
+    border-color: darken(variables.$primary, 10%);
+    background-color: transparent;
+  }
+
+  &:focus {
+    color: darken(variables.$primary, 10%);
+    border-color: darken(variables.$primary, 10%);
+    background-color: transparent;
+  }
+}
+
 .ant-btn-primary {
   border-color: variables.$primary;
   background-color: variables.$primary;
 
   &:hover {
+    color: white;
     background: darken(variables.$primary, 10%);
     border-color: darken(variables.$primary, 10%);
   }
 
   &:active {
+    color: white;
     background: darken(variables.$primary, 10%);
     border-color: darken(variables.$primary, 10%);
   }
 
   &:focus {
+    color: white;
     background: darken(variables.$primary, 10%);
     border-color: darken(variables.$primary, 10%);
   }

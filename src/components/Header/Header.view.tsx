@@ -6,12 +6,11 @@ import { useSelector } from "@/hooks/useSelector";
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
 import { useHeader } from "./Header.helpers";
+import { Link } from "react-router-dom";
 
 interface Props {
     currentPath?: string;
 }
-
-const mainRoute = appRoutes.main.path;
 
 const Header: FC<Props> = ({ currentPath }) => {
     const { routes, renderSignOutButton } = useHeader();
@@ -21,7 +20,7 @@ const Header: FC<Props> = ({ currentPath }) => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <a href={mainRoute}>Logo</a>
+                <Link to={appRoutes.main.path}>Logo</Link>
             </div>
             <div className={styles.routesContainer}>
                 <NavBar currentPath={currentPath} routes={routes} />

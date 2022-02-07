@@ -8,8 +8,8 @@ import { signIn } from "@/actions/auth.actions";
 import { useSelector } from "@/hooks/useSelector";
 
 export enum SignInFieldNames {
-    Login = "Login",
-    Password = "Password",
+    Login = "login",
+    Password = "password",
 }
 
 export const useSignInForm = () => {

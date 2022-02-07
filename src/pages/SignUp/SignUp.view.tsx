@@ -30,7 +30,7 @@ const SignUp:FC = () => {
                     </Form.Item>)}
                     <YandexSignIn/>
                     <Form.Item>
-                        <Button block type="primary" htmlType="submit">Заргеистрироваться</Button>
+                        <Button block type="primary" htmlType="submit">Зарегистрироваться</Button>
                     </Form.Item>
                 </Form>
             </div>

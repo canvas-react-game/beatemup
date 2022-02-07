@@ -89,7 +89,7 @@ Object {
                     class="ant-col"
                   >
                     <div
-                      class="ant-statistic antStatistic"
+                      class="ant-statistic"
                     >
                       <div
                         class="ant-statistic-title"
@@ -438,7 +438,7 @@ Object {
                   class="ant-col"
                 >
                   <div
-                    class="ant-statistic antStatistic"
+                    class="ant-statistic"
                   >
                     <div
                       class="ant-statistic-title"

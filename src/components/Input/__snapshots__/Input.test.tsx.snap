@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <input
-        class="ant-input input"
+        class="ant-input"
         type="text"
         value=""
       />
@@ -14,7 +14,7 @@ Object {
   </body>,
   "container": <div>
     <input
-      class="ant-input input"
+      class="ant-input"
       type="text"
       value=""
     />

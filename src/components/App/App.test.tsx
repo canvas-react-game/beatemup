@@ -2,7 +2,7 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 import App from "@/components/App";
 
-jest.mock("@/App", () => function App() {
+jest.mock("@/components/App", () => function App() {
     return (
         <div className="App">
 

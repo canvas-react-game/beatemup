@@ -3,6 +3,7 @@ import { Button, Form, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 import { FormElement } from "../../Profile.types";
+import styles from "./FormControls.module.scss";
 
 const FormControls: FC<FormElement> = ({
     isEdit,
@@ -22,11 +23,6 @@ const FormControls: FC<FormElement> = ({
     if (isEdit) {
         return (
             <>
-                <Form.Item>
-                    <Button block type="default" onClick={handleCancel}>
-                        Отменить
-                    </Button>
-                </Form.Item>
                 <Form.Item>
                     <Button
                         block
@@ -49,6 +45,11 @@ const FormControls: FC<FormElement> = ({
                         }}
                     >
             Сохранить<EditOutlined />
+                    </Button>
+                </Form.Item>
+                <Form.Item>
+                    <Button block className={styles.cancelButton} type="default" onClick={handleCancel}>
+                        Отменить
                     </Button>
                 </Form.Item>
             </>

@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import GameModal from "@/components/GameModal";
 
-import Router from "../Router";
+import Router from "@/components/Router";
 import styles from "./App.module.scss";
 
 import { useServiceWorkers, ModalChild } from "./App.helpers";

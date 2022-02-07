@@ -3,13 +3,19 @@
 /// <reference lib="webworker" />
 const sw = self;
 // Helpers
-const canBeCached = (request) => request.method === "GET" &&
-    request.url.startsWith("http") && !request.url.includes("sockjs-node");
+const canBeCached = (request) => {
+    const canCacheBundle = !(MODE === "development" && request.url.includes("bundle.js"));
+    return request.method === "GET" &&
+        request.url.startsWith("http") &&
+        !request.url.includes("sockjs-node") &&
+        canCacheBundle;
+};
 //
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME = "CACHE_VERSION";
+const MODE = "STARTUP_MODE";
 const URLS = [
-    "/bundle.js",
+    //"/bundle.js",
     "/index.html",
     "/profile",
     "/signin",

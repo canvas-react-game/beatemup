@@ -4,14 +4,20 @@
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
 // Helpers
-const canBeCached = (request: Request) => request.method === "GET" &&
-    request.url.startsWith("http") && !request.url.includes("sockjs-node");
+const canBeCached = (request: Request) => {
+    const canCacheBundle = !(MODE === "development" && request.url.includes("bundle.js"))
+    return request.method === "GET" && 
+        request.url.startsWith("http") && 
+        !request.url.includes("sockjs-node") && 
+        canCacheBundle
+};
 //
 
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME: string = "CACHE_VERSION";
+const MODE: string = "STARTUP_MODE";
 const URLS: string[] = [
-    "/bundle.js",
+    //"/bundle.js",
     "/index.html",
     "/profile",
     "/signin",

@@ -17,9 +17,10 @@
 
 - [x] Управление персонажом
 - [x] Физика столкновения
-- [ ] Наполнение игрового мира
-- [ ] Механика взаимодействия персонажей
-- [ ] Мобы
+- [x] Наполнение игрового мира
+- [x] Механика взаимодействия персонажей
+- [x] Мобы
+- [ ] Оптимизации и наполнение
 - [ ] Мультиплеер
 
 ## Проект
@@ -33,7 +34,7 @@
 
 ### Доска
 
-<a href="https://trello.com/b/alCOUp44/first-sprint">
+<a href="https://trello.com/yandexpracticumgame">
     <img src="https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white"
         alt="Trello" width="80" height="28">
 </a>

@@ -75,6 +75,16 @@ module.exports = (env, argv) => ({
                     },
                     force: true,
                 },
+                {
+                    from: "./wdyr.js",
+                    to: "./wdyr.js",
+                    transform(content) {
+                        let parsed = content.toString();
+                        parsed = parsed.replace("STARTUP_MODE", argv.mode);
+                        return Buffer.from(parsed, "utf8");
+                    },
+                    force: true,
+                },
             ],
         }),
     ],

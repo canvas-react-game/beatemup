@@ -16,12 +16,22 @@ export class Scene {
         this.background = background || new Color(255, 255, 255);
     }
 
-    add(...objects: Object2D[]) {
-        this.objects.push(...objects);
+    add(objects: Object2D[] | Object2D) {
+        if(Array.isArray(objects)) {
+            this.objects.push(...objects);
+        }
+        else {
+            this.objects.push(objects);
+        }
     }
 
-    addObjectWithPhysics(...objects: Object2D[]) {
-        this.objectWithPhysics.push(...objects);
+    addObjectWithPhysics(objects: Object2D[] | Object2D) {
+        if(Array.isArray(objects)) {
+            this.objectWithPhysics.push(...objects);
+        }
+        else {
+            this.objectWithPhysics.push(objects);
+        }
     }
 
     remove(object: Object2D) {

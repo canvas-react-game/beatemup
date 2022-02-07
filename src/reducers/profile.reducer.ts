@@ -54,7 +54,7 @@ export const profileReducer = (state: ProfileState = initialState, action: Profi
             };
         case SET_PASSWORD:
             return {
-                data: { ...state.data },
+                ...state,
                 isLoading: false,
                 stage: ProfileStages.DONE,
             };

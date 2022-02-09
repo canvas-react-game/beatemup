@@ -11,5 +11,11 @@ export type LeaderBoardRecordRequest = {
     teamName: "southpark"
 }
 
+export type LeaderBoardGetRequest = {
+    ratingFieldName: typeof TEAM_SCORE,
+    cursor: number,
+    limit: number
+}
+
 // NOTE: any потому что сюда могут любую какашку положить
 export type LeaderBoardData = Array<{data: LeaderBoardRecord & any}>

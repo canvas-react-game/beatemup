@@ -1,11 +1,11 @@
-import { LeaderBoardData } from "config/routes/leaderboard";
+import { LeaderBoardData } from "config/leaderboard";
 import { LeaderBoardState } from "reducers/leaderboard.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { LOAD, SET_LOADING } from "./types/leaderboard.types";
 import LeaderboardApi from "../api/Leaderboard"
 
-export type LeaderBoardAction = GetLeaderBoard;
+export type LeaderBoardAction = GetLeaderBoard | SetLoading;
 
 type GetLeaderBoard = {
     type: typeof LOAD,
@@ -25,16 +25,15 @@ const setLoading = (isLoading: boolean): SetLoading => ({
     payload: {isLoading} 
 })
 
-export const load = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+export const loadLeaderBoard = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(setLoading(true));
     try {
         const data = await LeaderboardApi.getLeaderBoard();
         if (data) {
             dispatch(getLeaderBoard(data))
-        } else {
-            dispatch(setLoading(true));
-        }
+        }             
+        dispatch(setLoading(false));
     } catch (error) {
-        dispatch(setLoading(true));
+        dispatch(setLoading(false));
     }
 }

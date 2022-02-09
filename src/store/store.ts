@@ -5,11 +5,12 @@ import thunk from "redux-thunk";
 
 import { profileReducer, ProfileState } from "@/reducers/profile.reducer";
 import { authReducer, AuthState } from "@/reducers/auth.reducer";
-import { leaderBoardReducer } from "reducers/leaderboard.reducer";
+import { leaderBoardReducer, LeaderBoardState } from "@/reducers/leaderboard.reducer";
 
 export interface RootState {
     auth: AuthState,
-    profile: ProfileState
+    profile: ProfileState,
+    leaderBoard: LeaderBoardState
 }
 
 const rootReducer = combineReducers({

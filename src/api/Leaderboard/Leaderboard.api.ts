@@ -2,7 +2,7 @@ import { notification } from "antd";
 
 import APIService from "@/services/API";
 import { Method } from "@/services/API/API.service";
-import { LeaderBoardData, LeaderBoardRecord, LeaderBoardRecordRequest, TEAM_SCORE } from "config/routes/leaderboard";
+import { LeaderBoardData, LeaderBoardGetRequest, LeaderBoardRecord, LeaderBoardRecordRequest, TEAM_SCORE } from "@/config/leaderboard";
 
 const root = "leaderboard";
 
@@ -16,7 +16,12 @@ const root = "leaderboard";
 class LeaderBoardApi {
 
     public async getLeaderBoard(): Promise<LeaderBoardData | null> {
-        const response = await APIService.request(Method.POST, `${root}/all`);
+        const body: LeaderBoardGetRequest = {
+            ratingFieldName: TEAM_SCORE,
+            cursor: 0,
+            limit: 10
+        }
+        const response = await APIService.request(Method.POST, `${root}/all`, body);
         if (response.ok) {
             // notification.success({ message: "" });
             const result = await response.json();

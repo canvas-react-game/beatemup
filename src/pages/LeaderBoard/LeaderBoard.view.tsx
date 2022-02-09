@@ -5,6 +5,9 @@ import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/tabl
 
 import Header from "@/components/Header";
 import Container from "@/components/Container";
+import PageLoader from "@/components/PageLoader";
+
+import { routes } from "@/config/routes/routes";
 
 import styles from "./LeaderBoard.module.scss";
 import { useLeaderBoard } from "./LeaderBoard.helpers";
@@ -56,20 +59,21 @@ const LeaderBoard: FC<{}> = () => {
         []
     )
 
-    return <Container>
-        <Header />
-        <div className={styles.leaderBoardContainer}>
-            <Table
-                className={styles.leaderBoardTable}
-                columns={columns}
-                dataSource={data}
-                onChange={onChange}
-                loading={isLoading}
-                rowKey={getRowKey}
-                pagination={false}
-            />
-        </div>
-    </Container>
+    return <PageLoader isSpinning={isLoading}>
+        <Container>
+            <Header currentPath={routes.leaderboard.path}/>
+            <div className={styles.leaderBoardContainer}>
+                <Table
+                    className={styles.leaderBoardTable}
+                    columns={columns}
+                    dataSource={data}
+                    onChange={onChange}
+                    rowKey={getRowKey}
+                    pagination={false}
+                />
+            </div>
+        </Container>
+    </PageLoader>
 };
 
 export default LeaderBoard;

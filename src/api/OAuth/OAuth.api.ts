@@ -7,11 +7,9 @@ const root = "oauth";
 
 class OAuthApi {
     isSuccessfulRequest(response: Response) {
-        let message = "Вход выполнен успешно";
         let errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
             case 200:
-                notification.success({message});
                 return true;
             case 400:
                 notification.error({message: errorMessage});
@@ -38,6 +36,17 @@ class OAuthApi {
             }
         }
         return null;
+    }
+
+    public async signUpWithYandex(code: string): Promise<boolean> {
+        const response = await APIService.request(Method.POST, `${root}/yandex`, {
+            code,
+            redirect_uri: 'http://localhost:5000'
+        });
+        if (response) {
+            return this.isSuccessfulRequest(response);
+        }
+        return false;
     }
 }
 

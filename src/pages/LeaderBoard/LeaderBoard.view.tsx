@@ -5,13 +5,13 @@ import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/lib/tabl
 
 import Header from "@/components/Header";
 import Container from "@/components/Container";
-import PageLoader from "@/components/PageLoader";
 
 import { routes } from "@/config/routes/routes";
 
 import styles from "./LeaderBoard.module.scss";
 import { useLeaderBoard } from "./LeaderBoard.helpers";
 import { LeaderBoardRecord, TEAM_SCORE } from "@/config/leaderboard"
+import Pagination from "./components/Pagination";
 
 // Колонки таблицы
 const columns: ColumnsType<{data: LeaderBoardRecord}> = [
@@ -50,7 +50,14 @@ const onChange = (
 
 const LeaderBoard: FC<{}> = () => {
 
-    const {data, isLoading} = useLeaderBoard()
+    const {
+        data,
+        isLoading,
+        canMoveLeft,
+        onMoveLeft,
+        canMoveRight,
+        onMoveRight
+    } = useLeaderBoard()
 
     const getRowKey = useCallback(
         (record: {data: LeaderBoardRecord}) => {
@@ -59,7 +66,7 @@ const LeaderBoard: FC<{}> = () => {
         []
     )
 
-    return <PageLoader isSpinning={isLoading}>
+    return (
         <Container>
             <Header currentPath={routes.leaderboard.path}/>
             <div className={styles.leaderBoardContainer}>
@@ -69,11 +76,19 @@ const LeaderBoard: FC<{}> = () => {
                     dataSource={data}
                     onChange={onChange}
                     rowKey={getRowKey}
+                    loading={isLoading}
                     pagination={false}
                 />
             </div>
+            <Pagination
+                onMoveLeft={onMoveLeft}
+                canMoveLeft={canMoveLeft}
+                onMoveRight={onMoveRight}
+                canMoveRight={canMoveRight}
+                isLoading={isLoading}
+           />
         </Container>
-    </PageLoader>
+    )
 };
 
 export default LeaderBoard;

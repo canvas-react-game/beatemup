@@ -1,4 +1,5 @@
 export const TEAM_SCORE = "southParkGameScore";
+export const RECORDS_PER_PAGE = 1;
 
 export interface LeaderBoardRecord {
     login: string
@@ -14,7 +15,7 @@ export type LeaderBoardRecordRequest = {
 export type LeaderBoardGetRequest = {
     ratingFieldName: typeof TEAM_SCORE,
     cursor: number,
-    limit: number
+    limit: typeof RECORDS_PER_PAGE
 }
 
 // NOTE: any потому что сюда могут любую какашку положить

@@ -15,11 +15,11 @@ const root = "leaderboard";
 
 class LeaderBoardApi {
 
-    public async getLeaderBoard(): Promise<LeaderBoardData | null> {
+    public async getLeaderBoard(cursor: number): Promise<LeaderBoardData | null> {
         const body: LeaderBoardGetRequest = {
             ratingFieldName: TEAM_SCORE,
-            cursor: 0,
-            limit: 10
+            cursor,
+            limit: 1
         }
         const response = await APIService.request(Method.POST, `${root}/all`, body);
         if (response.ok) {

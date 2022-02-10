@@ -12,7 +12,7 @@ export const LEADERBOARD_INIT_STATE: LeaderBoardState = {
     data: [],
 };
 
-// eslint-disable-next-line @typescript-eslint/default-param-last
+/* eslint-disable @typescript-eslint/default-param-last */
 export const leaderBoardReducer = (
     state: LeaderBoardState = LEADERBOARD_INIT_STATE,
     action: LeaderBoardAction,
@@ -32,3 +32,4 @@ export const leaderBoardReducer = (
             return state;
     }
 };
+/* eslint-enable @typescript-eslint/default-param-last */

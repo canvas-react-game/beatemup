@@ -1,5 +1,5 @@
 export const TEAM_SCORE = "southParkGameScore";
-export const RECORDS_PER_PAGE = 1;
+export const RECORDS_PER_PAGE = 10;
 
 export interface LeaderBoardRecord {
     login: string

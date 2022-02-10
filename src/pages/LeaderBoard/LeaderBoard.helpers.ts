@@ -18,28 +18,22 @@ export const useLeaderBoard = () => {
     })
 
     useEffect(() => {
-        if(data.length < RECORDS_PER_PAGE) {
-            setCanMoveRight(false)
-        }
-        else {
-            setCanMoveRight(true)
-        }
-        if(cursor === 0) {
-            setCanMoveLeft(false)
-        }
-        else {
-            setCanMoveLeft(true)
-        }
+        const canMoveRight = data.length >= RECORDS_PER_PAGE
+        setCanMoveRight(canMoveRight)
+        const canMoveLeft = cursor !== 0
+        setCanMoveLeft(canMoveLeft)
     }, [data])
 
     const onMoveRight = useCallback(() => {
-        setCursor(cursor + RECORDS_PER_PAGE)
-        dispatch(loadLeaderBoard(cursor + RECORDS_PER_PAGE))
+        const newCursor = cursor + RECORDS_PER_PAGE
+        setCursor(newCursor)
+        dispatch(loadLeaderBoard(newCursor))
     }, [data])
 
     const onMoveLeft = useCallback(() => {
-        setCursor(cursor - RECORDS_PER_PAGE)
-        dispatch(loadLeaderBoard(cursor - RECORDS_PER_PAGE))        
+        const newCursor = cursor - RECORDS_PER_PAGE
+        setCursor(newCursor)
+        dispatch(loadLeaderBoard(newCursor))        
     }, [data])
 
     return {

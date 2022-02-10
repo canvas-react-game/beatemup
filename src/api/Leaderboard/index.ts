@@ -1,1 +1,1 @@
-export {default} from "./Leaderboard.api"
+export { default } from "./Leaderboard.api";

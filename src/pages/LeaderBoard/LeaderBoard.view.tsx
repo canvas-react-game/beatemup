@@ -76,7 +76,10 @@ const LeaderBoard: FC<{}> = () => {
                     dataSource={data}
                     onChange={onChange}
                     rowKey={getRowKey}
-                    loading={isLoading}
+                    loading={{
+                        size: "large",
+                        spinning: isLoading
+                    }}
                     pagination={false}
                 />
             </div>

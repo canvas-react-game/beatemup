@@ -4,10 +4,9 @@ import { shallowEqual } from "react-redux";
 
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
-import { TEAM_SCORE } from "@/config/leaderboard";
+import { TEAM_SCORE, LeaderBoardRecord } from "@/config/leaderboard";
 import { useSelector } from "@/hooks/useSelector";
 import LeaderboardApi from "@/api/Leaderboard/Leaderboard.api";
-import { LeaderBoardRecord } from "@/config/leaderboard";
 
 const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -27,14 +26,14 @@ export const useGame = () => {
     const uiCanvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
     const user = useSelector((state) => state.profile.data, shallowEqual);
-    
+
     const createRecord = useCallback(() => {
         const data: LeaderBoardRecord = {
             login: user.login,
-            [TEAM_SCORE]: Math.round(Math.random() * 200)
-        }
-        LeaderboardApi.createLeaderBoardRecord(data)
-    }, [])
+            [TEAM_SCORE]: Math.round(Math.random() * 200),
+        };
+        LeaderboardApi.createLeaderBoardRecord(data);
+    }, []);
 
     const callMenu = useCallback((e: KeyboardEvent) => {
         if (e.key === "Escape") {

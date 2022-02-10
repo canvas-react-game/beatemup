@@ -10,13 +10,13 @@ export type LeaderBoardRecordRequest = {
     data: LeaderBoardRecord,
     ratingFieldName: typeof TEAM_SCORE,
     teamName: "southpark"
-}
+};
 
 export type LeaderBoardGetRequest = {
     ratingFieldName: typeof TEAM_SCORE,
     cursor: number,
     limit: typeof RECORDS_PER_PAGE
-}
+};
 
 // NOTE: any потому что сюда могут любую какашку положить
-export type LeaderBoardData = Array<{data: LeaderBoardRecord & any}>
+export type LeaderBoardData = Array<{ data: LeaderBoardRecord & any }>;

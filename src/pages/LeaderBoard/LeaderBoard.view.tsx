@@ -10,16 +10,16 @@ import { routes } from "@/config/routes/routes";
 
 import styles from "./LeaderBoard.module.scss";
 import { useLeaderBoard } from "./LeaderBoard.helpers";
-import { LeaderBoardRecord, TEAM_SCORE } from "@/config/leaderboard"
+import { LeaderBoardRecord, TEAM_SCORE } from "@/config/leaderboard";
 import Pagination from "./components/Pagination";
 
 // Колонки таблицы
-const columns: ColumnsType<{data: LeaderBoardRecord}> = [
+const columns: ColumnsType<{ data: LeaderBoardRecord }> = [
     {
         title: "Логин",
         dataIndex: ["data", "login"],
-        render: (value: string, item: {data: LeaderBoardRecord}) => {
-            const score = item.data[TEAM_SCORE]
+        render: (value: string, item: { data: LeaderBoardRecord }) => {
+            const score = item.data[TEAM_SCORE];
             return <div
                 className={
                     `${styles.nameContainer} ${
@@ -29,7 +29,7 @@ const columns: ColumnsType<{data: LeaderBoardRecord}> = [
                 }
             >
                 {value}
-            </div>
+            </div>;
         },
     },
     {
@@ -42,14 +42,13 @@ const columns: ColumnsType<{data: LeaderBoardRecord}> = [
 const onChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<{data: LeaderBoardRecord}> | SorterResult<any>[],
+    sorter: SorterResult<{ data: LeaderBoardRecord }> | SorterResult<any>[],
     extra: TableCurrentDataSource<any>,
 ) => {
     console.log("params", pagination, filters, sorter, extra);
 };
 
 const LeaderBoard: FC<{}> = () => {
-
     const {
         data,
         isLoading,
@@ -58,16 +57,13 @@ const LeaderBoard: FC<{}> = () => {
         canMoveRight,
         onMoveRight,
         table,
-        tableScroll
-    } = useLeaderBoard()
-
+        tableScroll,
+    } = useLeaderBoard();
 
     const getRowKey = useCallback(
-        (record: {data: LeaderBoardRecord}) => {
-            return record.data.login
-        },
-        []
-    )
+        (record: { data: LeaderBoardRecord }) => record.data.login,
+        [],
+    );
 
     return (
         <Container>
@@ -82,10 +78,10 @@ const LeaderBoard: FC<{}> = () => {
                     rowKey={getRowKey}
                     loading={{
                         size: "large",
-                        spinning: isLoading
+                        spinning: isLoading,
                     }}
                     scroll={{
-                        y: tableScroll
+                        y: tableScroll,
                     }}
                     pagination={false}
                 />
@@ -96,9 +92,9 @@ const LeaderBoard: FC<{}> = () => {
                 onMoveRight={onMoveRight}
                 canMoveRight={canMoveRight}
                 isLoading={isLoading}
-           />
+            />
         </Container>
-    )
+    );
 };
 
 export default LeaderBoard;

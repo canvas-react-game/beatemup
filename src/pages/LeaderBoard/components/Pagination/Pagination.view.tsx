@@ -12,8 +12,8 @@ type PaginationProps = {
     isLoading: boolean
 };
 
-const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
-    return <div className={styles.container}>
+const Pagination: FC<PaginationProps> = (props: PaginationProps) => (
+    <div className={styles.container}>
         <Button
             type="default"
             icon={<LeftOutlined />}
@@ -29,7 +29,7 @@ const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
             disabled={!props.canMoveRight}
         >
         </Button>
-    </div>;
-}
+    </div>
+);
 
 export default Pagination;

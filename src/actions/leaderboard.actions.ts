@@ -25,15 +25,17 @@ const setLoading = (isLoading: boolean): SetLoading => ({
     payload: {isLoading} 
 })
 
-export const loadLeaderBoard = (cursor: number): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    dispatch(setLoading(true));
-    try {
-        const data = await LeaderboardApi.getLeaderBoard(cursor);
-        if (data) {
-            dispatch(getLeaderBoard(data))
-        }             
-        dispatch(setLoading(false));
-    } catch (error) {
-        dispatch(setLoading(false));
-    }
+export const loadLeaderBoard = 
+    (cursor: number): ThunkAction<void, unknown, unknown, AnyAction> => 
+    async (dispatch, _state) => {
+        dispatch(setLoading(true));
+        try {
+            const data = await LeaderboardApi.getLeaderBoard(cursor);
+            if (data) {
+                dispatch(getLeaderBoard(data))
+            }             
+            dispatch(setLoading(false));
+        } catch (error) {
+            dispatch(setLoading(false));
+        }
 }

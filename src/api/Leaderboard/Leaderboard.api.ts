@@ -23,7 +23,6 @@ class LeaderBoardApi {
         }
         const response = await APIService.request(Method.POST, `${root}/all`, body);
         if (response.ok) {
-            // notification.success({ message: "" });
             const result = await response.json();
             return result ?? null;
         }
@@ -31,7 +30,7 @@ class LeaderBoardApi {
             // notification.success({ message: "" });
         }
         if(response.status >= 500) {
-            notification.success({ message: "Не удалось получить данные лидерборда" });
+            notification.error({ message: "Не удалось получить данные лидерборда" });
         }
         return null;
     }
@@ -44,15 +43,14 @@ class LeaderBoardApi {
         }
         const response = await APIService.request(Method.POST, `${root}`, body);
         if (response.ok) {
-            // notification.success({ message: "" });
-            const result = await response.json();
-            return result ?? null;
+            notification.success({ message: "Рекорд сохранен" });
+            return true;
         }
         if(response.status >= 400 && response.status < 500) {
-            // notification.success({ message: "" });
+            notification.error({ message: "Не удалось сохранить рекорд" });
         }
         if(response.status >= 500) {
-            notification.success({ message: "Не удалось получить данные лидерборда" });
+            notification.error({ message: "Не удалось сохранить рекорд" });
         }
         return null;
     }

@@ -7,7 +7,7 @@ import { shallowEqual, useDispatch } from "react-redux"
 
 export const useLeaderBoard = () => {
     const [canMoveLeft, setCanMoveLeft] = useState(false)
-    const [canMoveRight, setCanMoveRight] = useState(true)
+    const [canMoveRight, setCanMoveRight] = useState(false)
     const [cursor, setCursor] = useState(0)
     const dispatch = useDispatch()
 

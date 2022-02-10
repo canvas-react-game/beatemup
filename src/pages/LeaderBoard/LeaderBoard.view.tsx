@@ -56,8 +56,11 @@ const LeaderBoard: FC<{}> = () => {
         canMoveLeft,
         onMoveLeft,
         canMoveRight,
-        onMoveRight
+        onMoveRight,
+        table,
+        tableScroll
     } = useLeaderBoard()
+
 
     const getRowKey = useCallback(
         (record: {data: LeaderBoardRecord}) => {
@@ -71,6 +74,7 @@ const LeaderBoard: FC<{}> = () => {
             <Header currentPath={routes.leaderboard.path}/>
             <div className={styles.leaderBoardContainer}>
                 <Table
+                    ref={table}
                     className={styles.leaderBoardTable}
                     columns={columns}
                     dataSource={data}
@@ -79,6 +83,9 @@ const LeaderBoard: FC<{}> = () => {
                     loading={{
                         size: "large",
                         spinning: isLoading
+                    }}
+                    scroll={{
+                        y: tableScroll
                     }}
                     pagination={false}
                 />

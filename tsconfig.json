@@ -27,7 +27,7 @@
     "src",
     "typings/**/*.d.ts",
     "./node_modules/@types",
-    "types.d.ts"
+    "types.d.ts",
   ],
   "exclude": ["**/*.js"]
 }

@@ -12,6 +12,6 @@ import "./styles/index.scss";
 
 const store = configureStore();
 
-ReactDOM.render(<Provider store={store}>
+ReactDOM.hydrate(<Provider store={store}>
     <App />
 </Provider>, document.getElementById("root"));

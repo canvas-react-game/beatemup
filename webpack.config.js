@@ -29,7 +29,7 @@ module.exports = (env, argv) => ({
             "@/store": path.resolve(__dirname, "src/store"),
             "@/reducers": path.resolve(__dirname, "src/reducers"),
             "@/actions": path.resolve(__dirname, "src/actions"),
-        }
+        },
     },
     module: {
         rules: [
@@ -85,15 +85,29 @@ module.exports = (env, argv) => ({
                     },
                     force: true,
                 },
+                {
+                    from: "./server",
+                    to: "./server",
+                    transform(content) {
+                        let parsed = content.toString();
+                        const version = `CACHE_VERSION_${parseInt(
+                            __VERSION__
+                        )}`;
+                        parsed = parsed.replace("CACHE_VERSION", version);
+                        parsed = parsed.replace("STARTUP_MODE", argv.mode);
+                        return Buffer.from(parsed, "utf8");
+                    },
+                    force: true,
+                },
             ],
         }),
     ],
     devServer: {
         static: {
-          directory: path.join(__dirname, 'assets'),
+            directory: path.join(__dirname, "assets"),
         },
         historyApiFallback: true,
         compress: true,
         port: 3000,
-      },
+    },
 });

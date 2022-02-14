@@ -1,3 +1,5 @@
+import { isServer } from "@/helpers/environment";
+
 import { Color } from "../core/utils/color";
 import { RectangleGeometry } from "../core/geometry/rectangle/rectangle";
 import { Scene } from "../core/scene";
@@ -46,7 +48,11 @@ class WorldManager {
     gameWinCallback: () => void;
 
     constructor() {
-        const tileSetImage = new Image(512, 512);
+        // TODO: костыль тк в ноде нельзя new Image
+        const tileSetImage = !isServer ? new Image(512, 512) : null;
+
+        if (!tileSetImage) return
+
         tileSetImage.src = TileSetImage;
         this.tileSetImage = tileSetImage;
     }

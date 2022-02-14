@@ -1,5 +1,7 @@
-export const checkAccess = () => localStorage.getItem("isSignedIn") === "true";
+import { isServer } from "@/helpers/environment";
+
+export const checkAccess = () => !isServer ? localStorage.getItem("isSignedIn") === "true" : false;
 
 export const setAccess = (isSignedIn: boolean) => {
-    localStorage.setItem("isSignedIn", isSignedIn.toString());
+    !isServer ? localStorage.setItem("isSignedIn", isSignedIn.toString()) : false;
 };

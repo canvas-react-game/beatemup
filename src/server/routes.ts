@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getPageMiddleware } from "./middlewares";
+import { serverRenderMiddleware } from "./middlewares";
 
 const routes = (router: Router) => {
-    router.get("/", getPageMiddleware);
+    router.get("*", serverRenderMiddleware);
 };
 
 export default routes;

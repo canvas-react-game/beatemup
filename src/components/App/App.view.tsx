@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import React from "react";
 import "antd/dist/antd.css";
 
@@ -10,7 +9,7 @@ import styles from "./App.module.scss";
 
 import { useServiceWorkers, ModalChild } from "./App.helpers";
 
-const App = hot(() => {
+const App = () => {
     const { onClose, isActive } = useServiceWorkers();
 
     return (
@@ -24,6 +23,6 @@ const App = hot(() => {
             </ErrorBoundary>
         </div>
     );
-});
+};
 
 export default App;

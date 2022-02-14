@@ -8,7 +8,4 @@ app.use(express.static(`${__dirname}/dist`));
 app.use(limiterMiddleware);
 app.use("*", routes);
 
-// app.get("*", (req, res) => {
-//     res.sendFile(`${__dirname}/dist/index.html`);
-// });
-export default app;
+export { app };

@@ -7,6 +7,8 @@ import { Typography, Button } from "antd";
 
 import styles from "./App.module.scss";
 
+import { isServer } from "@/helpers/environment";
+
 const { Title } = Typography;
 
 interface Props {
@@ -25,7 +27,7 @@ export const ModalChild: FC<Props> = ({ onClose }) => (
     </>
 );
 
-const sw: ServiceWorkerContainer = navigator?.serviceWorker;
+const sw: ServiceWorkerContainer | null = !isServer ? navigator?.serviceWorker : null;
 
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);

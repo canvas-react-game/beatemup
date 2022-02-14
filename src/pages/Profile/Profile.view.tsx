@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
-import {
-    Form, Space, Row, Col,
-} from "antd";
+import { Form, Space, Row, Col } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
+import PageMeta from "@/components/PageMeta";
 import Upload from "@/components/Upload";
 import Statistic from "@/components/Statistic";
 import PageLoader from "@/components/PageLoader";
@@ -30,48 +29,52 @@ const Profile = () => {
     } = useProfileForm();
 
     const handleChangeAvatar = useCallback(
-        () => ({ fileList }: any) => console.log(fileList),
-        [],
+        () =>
+            ({ fileList }: any) =>
+                console.log(fileList),
+        []
     );
 
     return (
         <PageLoader isSpinning={isLoading}>
             <Container>
-                <Header currentPath={currentPath} />
-                <div className={styles.formContainer}>
-                    <Space direction="vertical" size="middle">
-                        <Row justify="space-between">
-                            <Col>
-                                <Statistic title="Рекорд" value={100} />
-                            </Col>
-                            <Col>
-                                <Upload
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                    listType="picture-card"
-                                    disabled={!isEdit}
-                                    onChange={handleChangeAvatar}
-                                >
-                                    {avatar || <UploadButton />}
-                                </Upload>
-                            </Col>
-                        </Row>
+                <PageMeta title="Profile" description="Profile page">
+                    <Header currentPath={currentPath} />
+                    <div className={styles.formContainer}>
+                        <Space direction="vertical" size="middle">
+                            <Row justify="space-between">
+                                <Col>
+                                    <Statistic title="Рекорд" value={100} />
+                                </Col>
+                                <Col>
+                                    <Upload
+                                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                        listType="picture-card"
+                                        disabled={!isEdit}
+                                        onChange={handleChangeAvatar}
+                                    >
+                                        {avatar || <UploadButton />}
+                                    </Upload>
+                                </Col>
+                            </Row>
 
-                        <Form
-                            name="profile"
-                            form={form}
-                            initialValues={profile}
-                            layout="vertical"
-                        >
-                            <FormFields isEdit={isEdit} />
-                            <FormControls
-                                isEdit={isEdit}
-                                setIsEdit={setIsEdit}
+                            <Form
+                                name="profile"
                                 form={form}
-                                onFinish={onFinish}
-                            />
-                        </Form>
-                    </Space>
-                </div>
+                                initialValues={profile}
+                                layout="vertical"
+                            >
+                                <FormFields isEdit={isEdit} />
+                                <FormControls
+                                    isEdit={isEdit}
+                                    setIsEdit={setIsEdit}
+                                    form={form}
+                                    onFinish={onFinish}
+                                />
+                            </Form>
+                        </Space>
+                    </div>
+                </PageMeta>
             </Container>
         </PageLoader>
     );

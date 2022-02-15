@@ -21,6 +21,7 @@ const serverRenderMiddleware = (
 ) => {
     const location = req.url;
     const context: StaticRouterContext = {};
+    console.log("location: ", location)
 
     const jsx = (
         <Provider store={store}>

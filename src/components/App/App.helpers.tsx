@@ -68,7 +68,7 @@ export const useServiceWorkers = () => {
             }
         }
 
-        startServiceWorker();
+        // startServiceWorker();
     }, []);
 
     return {

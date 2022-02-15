@@ -31,24 +31,19 @@ const Game: FC = () => {
     });
 
     return (
-        <PageMeta
-            title="Game"
-            description="Game page"
-        >
-            <div className={styles.game}>
-                <canvas ref={canvasRef} />
-                <canvas ref={uiCanvasRef} />
-                <Menu
-                    isActive={isActive}
-                    onClose={onClose}
-                    onStart={onStart}
-                    isPaused={isPaused}
-                    isGameOver={isGameOver}
-                    isGameWin={isGameWin}
-                    onResume={onResume}
-                />
-            </div>
-        </PageMeta>
+        <div className={styles.game}>
+        <canvas ref={canvasRef} />
+        <canvas ref={uiCanvasRef} />
+        <Menu
+            isActive={isActive}
+            onClose={onClose}
+            onStart={onStart}
+            isPaused={isPaused}
+            isGameOver={isGameOver}
+            isGameWin={isGameWin}
+            onResume={onResume}
+        />
+    </div>
     );
 };
 

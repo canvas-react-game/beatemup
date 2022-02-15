@@ -22,6 +22,7 @@ const serverRenderMiddleware = (
     const location = req.url;
     const context: StaticRouterContext = {};
     console.log("location: ", location)
+    console.log("coockies: ", req.headers.cookie)
 
     const jsx = (
         <Provider store={store}>

@@ -23,8 +23,7 @@ const Main: FC = () => {
 
     return (
         <Container>
-            <PageMeta title="Main" description="Main page">
-                <Header />
+            <Header />
                 <div className={container}>
                     <div className={infoContainer}>
                         <Typography className={title}>Игра</Typography>
@@ -37,7 +36,6 @@ const Main: FC = () => {
                         </Link>
                     </div>
                 </div>
-            </PageMeta>
         </Container>
     );
 };

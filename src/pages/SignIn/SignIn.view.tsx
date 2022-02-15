@@ -3,7 +3,6 @@ import { Input, Button, Form } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
 import Container from "@/components/Container";
-import PageMeta from "@/components/PageMeta";
 import Password from "@/components/Password";
 import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
@@ -19,8 +18,7 @@ const SignIn: FC = () => {
     return (
         <PageLoader isSpinning={isLoading}>
             <Container>
-                <PageMeta title="SignIn" description="SignIn page">
-                    <Header />
+            <Header />
                     <div className={styles.formContainer}>
                         <Nav currentPath={routes.signIn.path} />
                         <Form
@@ -61,7 +59,6 @@ const SignIn: FC = () => {
                             </Form.Item>
                         </Form>
                     </div>
-                </PageMeta>
             </Container>
         </PageLoader>
     );

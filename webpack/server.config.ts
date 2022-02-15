@@ -2,6 +2,7 @@ import { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 import path from "path";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config: Configuration = {
     name: "server",
@@ -35,12 +36,12 @@ const config: Configuration = {
     module: {
         rules: [
             {
-                test: /^(?!.*\.inline).*\.(svg|jpe?g|png|gif|eot|woff2?|ttf)$/,
-                loader: "null-loader",
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                loader: "null-loader",
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
                 test: /\.ts(x?)$/,
@@ -55,6 +56,10 @@ const config: Configuration = {
     externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
 
     optimization: { nodeEnv: false },
+
+    plugins: [
+        new MiniCssExtractPlugin()
+    ]
 };
 
 export default config;

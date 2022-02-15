@@ -1,5 +1,4 @@
 import { HelmetData } from "react-helmet";
-const htmlescape = require("htmlescape");
 
 const makeHTMLPage = (
     content: string,
@@ -20,8 +19,8 @@ const makeHTMLPage = (
                 </head>
 
                 <body>
-                    <div id="root">${htmlescape(content)}</div>
-                    <script type="module" src="/bundle.js"></script>
+                    <div id="root">${content}</div>
+                    <script type="module" src="bundle.js"></script>
                     <script>
                         window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
                     </script>

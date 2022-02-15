@@ -21,10 +21,7 @@
 }
 
 .spinner {
-  &:global(.ant-spin) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    color: variables.$primary;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

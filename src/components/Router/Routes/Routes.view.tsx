@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
-import {Switch, Route, Redirect, useLocation} from "react-router-dom";
+import {Switch, Route, Redirect, useLocation, useHistory} from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Login from "@/pages/SignIn";
 import SignUpView from "@/pages/SignUp";
@@ -14,16 +15,20 @@ import { routes } from "@/config/routes/routes";
 import AccessRoute from "@/components/AccessRoute";
 import api from "@/api/OAuth";
 import authApi from "@/api/Auth";
+import { signInOAuth } from "@/actions/auth.actions";
 
 const Routes: FC = () => {
     const search = useLocation().search;
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         const code = new URLSearchParams(search).get('code');
         if (code) {
              api.signUpWithYandex(code)
              .then(() => {
-                 // todo
+                 dispatch(signInOAuth(history));
+                 // todo 401
                 authApi.getUserInfo();
               });
         }

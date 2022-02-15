@@ -25,7 +25,7 @@ class OAuthApi {
         }
     }
 
-    public async getServiceId(redirectURI: string): Promise<{service_id: string} | null> {
+    public async getServiceId(redirectURI: string): Promise<string | null> {
         const response = await APIService.request(
             Method.GET, `${root}/yandex/service-id`, redirectURI);
         if (response) {
@@ -41,7 +41,7 @@ class OAuthApi {
     public async signUpWithYandex(code: string): Promise<boolean> {
         const response = await APIService.request(Method.POST, `${root}/yandex`, {
             code,
-            redirect_uri: 'http://localhost:5000'
+            redirect_uri: 'http://localhost:3000'
         });
         if (response) {
             return this.isSuccessfulRequest(response);

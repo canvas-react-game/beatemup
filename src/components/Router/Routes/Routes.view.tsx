@@ -21,9 +21,9 @@ const Routes: FC = () => {
     useEffect(() => {
         const code = new URLSearchParams(search).get('code');
         if (code) {
-            console.log(code)
              api.signUpWithYandex(code)
              .then(() => {
+                 // todo
                 authApi.getUserInfo();
               });
         }

@@ -8,6 +8,7 @@
     variables.$secondary url("../../../assets/images/background.png")
     no-repeat center center/cover;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 .title {

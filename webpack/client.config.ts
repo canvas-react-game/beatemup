@@ -15,7 +15,7 @@ const config = (env: any, argv: any): Configuration => {
             bundle: "./src/index.tsx",
         },
         output: {
-            path: path.join(__dirname, "/dist"),
+            path: path.join(__dirname, "../dist"),
             filename: "[name].js",
             publicPath: "/",
         },

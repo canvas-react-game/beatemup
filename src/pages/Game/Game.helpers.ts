@@ -1,8 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { shallowEqual } from "react-redux";
 
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
+import { TEAM_SCORE, LeaderBoardRecord } from "@/config/leaderboard";
+import { useSelector } from "@/hooks/useSelector";
+import LeaderboardApi from "@/api/Leaderboard/Leaderboard.api";
 
 const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -21,6 +25,15 @@ export const useGame = () => {
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const uiCanvasRef = React.useRef<HTMLCanvasElement>(null);
     const history = useHistory();
+    const user = useSelector((state) => state.profile.data, shallowEqual);
+
+    const createRecord = useCallback(() => {
+        const data: LeaderBoardRecord = {
+            login: user.login,
+            [TEAM_SCORE]: Math.round(Math.random() * 200),
+        };
+        LeaderboardApi.createLeaderBoardRecord(data);
+    }, []);
 
     const callMenu = useCallback((e: KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -37,12 +50,14 @@ export const useGame = () => {
         setActive(true);
         setGameOver(true);
         world.destroy();
+        createRecord();
     }, []);
 
     const callGameWin = useCallback(() => {
         setActive(true);
         setGameWin(true);
         world.destroy();
+        createRecord();
     }, []);
 
     const setUpPauseButton = useCallback(() => {

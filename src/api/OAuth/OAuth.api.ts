@@ -6,10 +6,11 @@ import { Method } from "@/services/API/API.service";
 const root = "oauth";
 
 class OAuthApi {
-    isSuccessfulRequest(response: Response) {
+    isSuccessfulRequest(response: Response, isSignIn?: boolean) {
         let errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
             case 200:
+                isSignIn && notification.success({message: 'Вход выполнен успешно'});
                 return true;
             case 400:
                 notification.error({message: errorMessage});
@@ -44,7 +45,7 @@ class OAuthApi {
             redirect_uri: 'http://localhost:3000'
         });
         if (response) {
-            return this.isSuccessfulRequest(response);
+            return this.isSuccessfulRequest(response, true);
         }
         return false;
     }

@@ -14,8 +14,8 @@ import Game from "@/pages/Game";
 import { routes } from "@/config/routes/routes";
 import AccessRoute from "@/components/AccessRoute";
 import api from "@/api/OAuth";
-import authApi from "@/api/Auth";
 import { signInOAuth } from "@/actions/auth.actions";
+import {getProfile} from "actions/profile.actions";
 
 const Routes: FC = () => {
     const search = useLocation().search;
@@ -28,8 +28,7 @@ const Routes: FC = () => {
              api.signUpWithYandex(code)
              .then(() => {
                  dispatch(signInOAuth(history));
-                 // todo 401
-                authApi.getUserInfo();
+                 dispatch(getProfile())
               });
         }
     }, []);

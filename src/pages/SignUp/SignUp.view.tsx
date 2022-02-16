@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 
 import styles from "./SignUp.module.scss";
 import { useSignUp } from "./SignUp.helpers";
-import YandexSignIn from "./YandexSignIn";
 
 const SignUp:FC = () => {
     const {
@@ -31,7 +30,6 @@ const SignUp:FC = () => {
                     <Form.Item>
                         <Button block type="primary" htmlType="submit">Зарегистрироваться</Button>
                     </Form.Item>
-                    <YandexSignIn/>
                 </Form>
             </div>
         </Container>

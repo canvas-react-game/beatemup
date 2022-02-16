@@ -7,19 +7,21 @@ const root = "oauth";
 
 class OAuthApi {
     isSuccessfulRequest(response: Response, isSignIn?: boolean) {
-        let errorMessage = "Отправленные данные не корректны";
+        const errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
             case 200:
-                isSignIn && notification.success({message: 'Вход выполнен успешно'});
+                if (isSignIn) {
+                    notification.success({ message: "Вход выполнен успешно" });
+                }
                 return true;
             case 400:
-                notification.error({message: errorMessage});
+                notification.error({ message: errorMessage });
                 return false;
             case 401:
-                notification.error({message: "Ошибка доступа"});
+                notification.error({ message: "Ошибка доступа" });
                 return false;
             case 500:
-                notification.error({message: "Произошла неизвестная ошибка"});
+                notification.error({ message: "Произошла неизвестная ошибка" });
                 return false;
             default:
                 return false;
@@ -27,8 +29,8 @@ class OAuthApi {
     }
 
     public async getServiceId(redirectURI: string): Promise<string | null> {
-        const response = await APIService.request(
-            Method.GET, `${root}/yandex/service-id`, redirectURI);
+        const response = await APIService
+            .request(Method.GET, `${root}/yandex/service-id`, redirectURI);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -42,7 +44,7 @@ class OAuthApi {
     public async signUpWithYandex(code: string): Promise<boolean> {
         const response = await APIService.request(Method.POST, `${root}/yandex`, {
             code,
-            redirect_uri: 'http://localhost:3000'
+            redirect_uri: "http://localhost:3000",
         });
         if (response) {
             return this.isSuccessfulRequest(response, true);

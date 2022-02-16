@@ -2,8 +2,9 @@ import { notification } from "antd";
 
 import APIService from "@/services/API";
 import { Method } from "@/services/API/API.service";
+import { apiRoutes } from "@/config/apiRoutes";
 
-const root = "oauth";
+const { serviceId, signIn, redirectURI } = apiRoutes.oauth;
 
 class OAuthApi {
     isSuccessfulRequest(response: Response, isSignIn?: boolean) {
@@ -29,8 +30,7 @@ class OAuthApi {
     }
 
     public async getServiceId(redirectURI: string): Promise<string | null> {
-        const response = await APIService
-            .request(Method.GET, `${root}/yandex/service-id`, redirectURI);
+        const response = await APIService.request(Method.GET, serviceId, redirectURI);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -42,9 +42,9 @@ class OAuthApi {
     }
 
     public async signUpWithYandex(code: string): Promise<boolean> {
-        const response = await APIService.request(Method.POST, `${root}/yandex`, {
+        const response = await APIService.request(Method.POST, signIn, {
             code,
-            redirect_uri: "http://localhost:3000",
+            redirect_uri: redirectURI,
         });
         if (response) {
             return this.isSuccessfulRequest(response, true);

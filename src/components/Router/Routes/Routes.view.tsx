@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import {
     Switch, Route, Redirect, useLocation, useHistory,
 } from "react-router-dom";
@@ -18,13 +18,14 @@ import { routes } from "@/config/routes/routes";
 import AccessRoute from "@/components/AccessRoute";
 import api from "@/api/OAuth";
 import { signInOAuth } from "@/actions/auth.actions";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
 const Routes: FC = () => {
     const { search } = useLocation();
     const dispatch = useDispatch();
     const history = useHistory();
 
-    useEffect(() => {
+    useMountEffect(() => {
         const code = new URLSearchParams(search).get("code");
         if (code) {
             api.signUpWithYandex(code)
@@ -33,7 +34,7 @@ const Routes: FC = () => {
                     dispatch(getProfile());
                 });
         }
-    }, []);
+    });
 
     return (
         <Switch>

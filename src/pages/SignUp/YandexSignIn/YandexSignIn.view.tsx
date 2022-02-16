@@ -3,13 +3,13 @@ import { LoginOutlined } from "@ant-design/icons";
 
 import Button from "@/components/Button";
 import api from "@/api/OAuth";
+import { apiRoutes } from "@/config/apiRoutes";
 
 import styles from "./YandexSignIn.module.scss";
 
-const providerURLroot = "https://oauth.yandex.ru/authorize?response_type=code";
-const redirectURI = "http://localhost:3000";
+const { providerURLRoot, redirectURI } = apiRoutes.oauth;
 
-const providerURL = (clientId: string) => `${providerURLroot}&client_id=${clientId}
+const providerURL = (clientId: string) => `${providerURLRoot}&client_id=${clientId}
 &redirect_uri=${redirectURI}`;
 
 const YandexSignIn: FC = () => {

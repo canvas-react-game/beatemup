@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { getProfile } from "actions/profile.actions";
+import { getProfile } from "@/actions/profile.actions";
 import Login from "@/pages/SignIn";
 import SignUpView from "@/pages/SignUp";
 import Main from "@/pages/Main";

@@ -1,11 +1,9 @@
 import express from "express";
-import { limiterMiddleware, serverRenderMiddleware } from "./middlewares";
+import router from "./router";
 
 const app = express();
 
-app.use(express.static(`${__dirname}/dist`));
-app.use(limiterMiddleware);
-
-app.get("/*", serverRenderMiddleware);
+app.use(express.static(`${__dirname}`));
+app.use("/", router);
 
 export { app };

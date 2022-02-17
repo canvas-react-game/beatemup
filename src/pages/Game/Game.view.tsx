@@ -31,10 +31,8 @@ const Game: FC = () => {
     });
 
     return (
-        <PageMeta
-            title="Game"
-            description="Game page"
-        >
+        <>
+            <PageMeta title="Game" description="Game page" />
             <div className={styles.game}>
                 <canvas ref={canvasRef} />
                 <canvas ref={uiCanvasRef} />
@@ -48,7 +46,7 @@ const Game: FC = () => {
                     onResume={onResume}
                 />
             </div>
-        </PageMeta>
+        </>
     );
 };
 

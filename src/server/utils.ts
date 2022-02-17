@@ -20,7 +20,7 @@ const makeHTMLPage = (
 
                 <body>
                     <div id="root">${content}</div>
-                    <script type="module" src="bundle.js"></script>
+                    <script type="module" src="./bundle.js"></script>
                     <script>
                         window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
                     </script>

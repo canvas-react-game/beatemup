@@ -5,32 +5,42 @@ import Container from "@/components/Container";
 import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 
+import { routes } from "@/config/routes/routes";
 import styles from "./SignUp.module.scss";
 import { useSignUp } from "./SignUp.helpers";
 import YandexSignIn from "./YandexSignIn";
 
-const SignUp:FC = () => {
-    const {
-        currentPath, fieldSet, onFinish, onFinishFailed,
-    } = useSignUp();
+const SignUp: FC = () => {
+    const { currentPath, fieldSet, onFinish, onFinishFailed } = useSignUp();
 
     return (
         <Container>
-            <Header/>
+            <Header currentPath={routes.signUp.path} />
             <div className={styles.formContainer}>
-                <Nav currentPath={currentPath}/>
+                <Nav currentPath={currentPath} />
                 <Form
-                    name='signUp'
+                    name="signUp"
                     onFinish={onFinish}
                     onFinishFailed={() => onFinishFailed}
-                    layout='vertical'>
-                    {fieldSet.map((set, index) => <Form.Item name={set.name} rules={set.rules}
-                        key={`${set.name}-${index}`}>
-                        <Input type={set.type ?? ""} placeholder={set.placeholder} />
-                    </Form.Item>)}
-                    <YandexSignIn/>
+                    layout="vertical"
+                >
+                    {fieldSet.map((set, index) => (
+                        <Form.Item
+                            name={set.name}
+                            rules={set.rules}
+                            key={`${set.name}-${index}`}
+                        >
+                            <Input
+                                type={set.type ?? ""}
+                                placeholder={set.placeholder}
+                            />
+                        </Form.Item>
+                    ))}
+                    <YandexSignIn />
                     <Form.Item>
-                        <Button block type="primary" htmlType="submit">Зарегистрироваться</Button>
+                        <Button block type="primary" htmlType="submit">
+                            Зарегистрироваться
+                        </Button>
                     </Form.Item>
                 </Form>
             </div>

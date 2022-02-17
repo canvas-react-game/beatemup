@@ -38,43 +38,42 @@ const Profile = () => {
     return (
         <PageLoader isSpinning={isLoading}>
             <Container>
-                <PageMeta title="Profile" description="Profile page">
-                    <Header currentPath={currentPath} />
-                    <div className={styles.formContainer}>
-                        <Space direction="vertical" size="middle">
-                            <Row justify="space-between">
-                                <Col>
-                                    <Statistic title="Рекорд" value={100} />
-                                </Col>
-                                <Col>
-                                    <Upload
-                                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                        listType="picture-card"
-                                        disabled={!isEdit}
-                                        onChange={handleChangeAvatar}
-                                    >
-                                        {avatar || <UploadButton />}
-                                    </Upload>
-                                </Col>
-                            </Row>
+                <PageMeta title="Profile" description="Profile page" />
+                <Header currentPath={currentPath} />
+                <div className={styles.formContainer}>
+                    <Space direction="vertical" size="middle">
+                        <Row justify="space-between">
+                            <Col>
+                                <Statistic title="Рекорд" value={100} />
+                            </Col>
+                            <Col>
+                                <Upload
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    listType="picture-card"
+                                    disabled={!isEdit}
+                                    onChange={handleChangeAvatar}
+                                >
+                                    {avatar || <UploadButton />}
+                                </Upload>
+                            </Col>
+                        </Row>
 
-                            <Form
-                                name="profile"
+                        <Form
+                            name="profile"
+                            form={form}
+                            initialValues={profile}
+                            layout="vertical"
+                        >
+                            <FormFields isEdit={isEdit} />
+                            <FormControls
+                                isEdit={isEdit}
+                                setIsEdit={setIsEdit}
                                 form={form}
-                                initialValues={profile}
-                                layout="vertical"
-                            >
-                                <FormFields isEdit={isEdit} />
-                                <FormControls
-                                    isEdit={isEdit}
-                                    setIsEdit={setIsEdit}
-                                    form={form}
-                                    onFinish={onFinish}
-                                />
-                            </Form>
-                        </Space>
-                    </div>
-                </PageMeta>
+                                onFinish={onFinish}
+                            />
+                        </Form>
+                    </Space>
+                </div>
             </Container>
         </PageLoader>
     );

@@ -2,6 +2,7 @@ import { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 import path from "path";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config: Configuration = {
     name: "server",
@@ -32,6 +33,7 @@ const config: Configuration = {
             "@/actions": path.resolve(__dirname, "../src/actions"),
         },
     },
+    plugins: [new MiniCssExtractPlugin()],
     module: {
         rules: [
             {
@@ -40,7 +42,7 @@ const config: Configuration = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                loader: "null-loader",
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
                 test: /\.ts(x?)$/,

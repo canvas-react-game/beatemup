@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import PageMeta from "@/components/PageMeta";
 import Container from "@/components/Container";
 
+import { routes } from "@/config/routes/routes";
 import styles from "./LeaderBoard.module.scss";
 import { LeaderBoardData, LeaderBoardUser } from "@/__mocks__/leaderboard";
 
@@ -55,18 +56,17 @@ const onChange = (
 
 const LeaderBoard: FC<{}> = () => (
     <Container>
-        <PageMeta title="Leaderboard" description="Leaderboard page">
-            <Header />
-            <div className={styles.leaderBoardContainer}>
-                <Table
-                    className={styles.leaderBoardTable}
-                    columns={columns}
-                    dataSource={LeaderBoardData}
-                    onChange={onChange}
-                    showSorterTooltip={false}
-                />
-            </div>
-        </PageMeta>
+        <PageMeta title="Leaderboard" description="Leaderboard page" />
+        <Header currentPath={routes.leaderboard.path} />
+        <div className={styles.leaderBoardContainer}>
+            <Table
+                className={styles.leaderBoardTable}
+                columns={columns}
+                dataSource={LeaderBoardData}
+                onChange={onChange}
+                showSorterTooltip={false}
+            />
+        </div>
     </Container>
 );
 

@@ -7,12 +7,8 @@ import { routes } from "@/config/routes/routes";
 
 const Forum: FC = () => (
     <Container>
-        <PageMeta
-            title="Forum"
-            description="Game forum"
-        >
-            <Header currentPath={routes.about.path} />
-        </PageMeta>
+        <PageMeta title="Forum" description="Game forum" />
+        <Header currentPath={routes.about.path} />
     </Container>
 );
 

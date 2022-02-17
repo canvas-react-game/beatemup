@@ -41,6 +41,8 @@ const serverRenderMiddleware = (
     res.status(context.statusCode || 200).send(
         makeHTMLPage(reactHtml, reduxState, helmetData)
     );
+
+    next();
 };
 
 // NOTE: Базовая защита от DDOS

@@ -4,7 +4,8 @@ const makeHTMLPage = (
     content: string,
     reduxState = {},
     helmetData: HelmetData
-) => `
+) => {
+    return `
         <!DOCTYPE html>
             <html lang="en">
                 <head>
@@ -13,6 +14,7 @@ const makeHTMLPage = (
                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link rel="stylesheet" href="./main.css"> 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
                     ${helmetData.title.toString()}
                     ${helmetData.meta.toString()}
@@ -20,12 +22,13 @@ const makeHTMLPage = (
 
                 <body>
                     <div id="root">${content}</div>
-                    <script type="module" src="./bundle.js"></script>
                     <script>
                         window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
                     </script>
+                    <script type="module" src="./bundle.js"></script>
                 </body>
         </html>
     `;
+};
 
 export { makeHTMLPage };

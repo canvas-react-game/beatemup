@@ -12,6 +12,7 @@ export const useHeader = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+    const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
 
     const routes = [
         { path: appRoutes.about.path, label: "Об игре" },
@@ -30,7 +31,10 @@ export const useHeader = () => {
     );
 
     return {
-        routes: isSignedIn ? routes : routes.filter((route) => route.path === appRoutes.about.path),
+        routes:
+            isSignedIn || isSignedInOAuth
+                ? routes
+                : routes.filter((route) => route.path === appRoutes.about.path),
         renderSignOutButton,
     };
 };

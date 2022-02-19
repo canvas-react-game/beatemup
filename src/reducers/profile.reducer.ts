@@ -16,7 +16,7 @@ export interface ProfileState {
         login: string;
         password: string;
         avatar: string;
-    },
+    };
     isLoading: boolean;
     stage: ProfileStages;
 }
@@ -36,9 +36,10 @@ const initialState: ProfileState = {
     stage: ProfileStages.INIT,
 };
 
-// TODO: нужно указать дефолтное значение для action
-// eslint-disable-next-line @typescript-eslint/default-param-last
-export const profileReducer = (state: ProfileState = initialState, action: ProfileAction) => {
+export const profileReducer = (
+    state: ProfileState = initialState,
+    action: ProfileAction
+) => {
     switch (action.type) {
         case GET_PROFILE:
             return {

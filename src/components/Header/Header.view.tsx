@@ -16,6 +16,7 @@ const Header: FC<Props> = ({ currentPath }) => {
     const { routes, renderSignOutButton } = useHeader();
 
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+    const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
 
     return (
         <div className={styles.container}>
@@ -25,7 +26,7 @@ const Header: FC<Props> = ({ currentPath }) => {
             <div className={styles.routesContainer}>
                 <NavBar currentPath={currentPath} routes={routes} />
                 <div className={styles.buttonContainer}>
-                    {isSignedIn && renderSignOutButton()}
+                    {(isSignedIn || isSignedInOAuth) && renderSignOutButton()}
                 </div>
             </div>
         </div>

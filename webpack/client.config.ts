@@ -1,14 +1,12 @@
 import { Configuration } from "webpack";
 import path from "path";
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const __VERSION__ = require("child_process")
     .execSync("git rev-list HEAD --count")
     .toString();
 
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-
 const config = (env: any, argv: any): Configuration => {
-
     const config: Configuration = {
         target: "web",
         entry: {
@@ -92,7 +90,7 @@ const config = (env: any, argv: any): Configuration => {
         ],
     };
 
-    return config
+    return config;
 };
 
 export default config;

@@ -5,18 +5,18 @@ const sw = self;
 // Helpers
 const canBeCached = (request) => {
     const canCacheBundle = !(MODE === "development" && request.url.includes("bundle.js"));
-    return request.method === "GET" &&
+    return (request.method === "GET" &&
         request.url.startsWith("http") &&
         !request.url.includes("sockjs-node") &&
-        canCacheBundle;
+        canCacheBundle);
 };
 //
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME = "CACHE_VERSION";
 const MODE = "STARTUP_MODE";
 const URLS = [
-    //"/bundle.js",
-    "/index.html",
+    "/main",
+    "/signup",
     "/profile",
     "/signin",
     "/forum",
@@ -53,7 +53,10 @@ sw.addEventListener("fetch", (event) => {
         if (response)
             return response;
         const fetchRequest = request.clone();
-        return fetch(fetchRequest).then((response) => {
+        return fetch(fetchRequest, {
+            credentials: "include",
+        })
+            .then((response) => {
             if (!canBeCached(request))
                 return response;
             const responseToCache = response.clone();
@@ -66,7 +69,8 @@ sw.addEventListener("fetch", (event) => {
                 console.log(error);
             });
             return response;
-        }).catch(() => {
+        })
+            .catch(() => {
             if (request.method !== "GET") {
                 event.waitUntil((async () => {
                     const clientId = event.resultingClientId !== ""

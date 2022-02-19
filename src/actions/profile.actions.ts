@@ -5,17 +5,20 @@ import api, { SignUpData, UserInfo } from "@/api/Auth/Auth.api";
 import profileApi, { PasswordData } from "@/api/Profile/Profile.api";
 
 import {
-    GET_PROFILE, PROFILE_LOADING, SET_PROFILE, SET_PASSWORD,
+    GET_PROFILE,
+    PROFILE_LOADING,
+    SET_PROFILE,
+    SET_PASSWORD,
 } from "./types/profile.types";
 
 type ProfileFetched = {
     type: typeof GET_PROFILE;
-    payload: { data: UserInfo }
+    payload: { data: UserInfo };
 };
 
 type ProfileUploaded = {
     type: typeof SET_PROFILE;
-    payload: { data: UserInfo }
+    payload: { data: UserInfo };
 };
 
 type ProfileLoading = {
@@ -52,52 +55,58 @@ const passwordUpdateSuccess = () => ({
     type: SET_PASSWORD,
 });
 
-// TODO: либо отключить правило в eslint либо затянуть конфиг для Prettier
-// eslint-disable-next-line max-len
-export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    dispatch(loading(true));
-    try {
-        const response = await api.getUserInfo();
-        if (response) {
-            dispatch(profileFetchSuccess(response));
-        } else {
+export const getProfile =
+    (): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state) => {
+        dispatch(loading(true));
+        try {
+            const response = await api.getUserInfo();
+            if (response) {
+                dispatch(profileFetchSuccess(response));
+            } else {
+                dispatch(loading(false));
+            }
+        } catch (error) {
             dispatch(loading(false));
         }
-    } catch (error) {
-        dispatch(loading(false));
-    }
-};
+    };
 
-export const setProfile = (
-    data: Omit<SignUpData, "password">,
-): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    dispatch(loading(true));
-    try {
-        const response = await profileApi.setProfile(data);
-        if (response) {
-            dispatch(profileUploadSuccess(response));
-        } else {
+export const setProfile =
+    (
+        data: Omit<SignUpData, "password">
+    ): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state) => {
+        dispatch(loading(true));
+        try {
+            const response = await profileApi.setProfile(data);
+            if (response) {
+                dispatch(profileUploadSuccess(response));
+            } else {
+                dispatch(loading(false));
+            }
+        } catch (error) {
             dispatch(loading(false));
         }
-    } catch (error) {
-        dispatch(loading(false));
-    }
-};
+    };
 
-export const setPassword = (
-    data: PasswordData,
-): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    dispatch(loading(true));
-    try {
-        const response = await profileApi.setPassword(data);
-        if (response) {
-            dispatch(passwordUpdateSuccess());
-        } else {
+export const setPassword =
+    (data: PasswordData): ThunkAction<void, unknown, unknown, AnyAction> =>
+    async (dispatch, _state) => {
+        dispatch(loading(true));
+        try {
+            const response = await profileApi.setPassword(data);
+            if (response) {
+                dispatch(passwordUpdateSuccess());
+            } else {
+                dispatch(loading(false));
+            }
+        } catch (error) {
             dispatch(loading(false));
         }
-    } catch (error) {
-        dispatch(loading(false));
-    }
-};
+    };
 
-export type ProfileAction = ProfileFetched | ProfileUploaded | ProfileLoading | PasswordUpdated;
+export type ProfileAction =
+    | ProfileFetched
+    | ProfileUploaded
+    | ProfileLoading
+    | PasswordUpdated;

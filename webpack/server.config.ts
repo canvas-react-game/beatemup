@@ -8,7 +8,7 @@ const config: Configuration = {
     name: "server",
     target: "node",
     node: { __dirname: false },
-    entry: "./src/server/server.ts",
+    entry: "./src/server/server",
     output: {
         filename: "server.js",
         libraryTarget: "commonjs2",

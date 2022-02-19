@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Route, RouteProps } from "react-router-dom";
+import { Route, RouteProps, Redirect } from "react-router-dom";
 import { useSelector } from "@/hooks/useSelector";
 
 import { checkAccess } from "@/helpers/acess";
-import Error from "@/pages/Error";
+import { routes } from "@/config/routes/routes";
 
 const AccessRoute: FC<RouteProps> = ({ component, ...props }) => {
     const Component = component as
@@ -19,7 +19,11 @@ const AccessRoute: FC<RouteProps> = ({ component, ...props }) => {
         <Route
             {...props}
             render={() =>
-                isSignedInAll ? <Component /> : <Error status="403" />
+                !isSignedInAll ? (
+                    <Component />
+                ) : (
+                    <Redirect to={routes.main.path} />
+                )
             }
         />
     );

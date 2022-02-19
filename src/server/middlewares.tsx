@@ -8,6 +8,11 @@ import configureStore from "@/store/store";
 import Helmet from "react-helmet";
 import { makeHTMLPage } from "./utils";
 import App from "../components/App";
+import {
+    signInSuccess,
+    signInOAuthSuccess,
+    signOutSuccess,
+} from "@/actions/auth.actions";
 
 /* @ts-ignore */
 import rateLimit from "express-rate-limit";
@@ -21,6 +26,14 @@ const serverRenderMiddleware = (
 ) => {
     const location = req.url;
     const context: StaticRouterContext = {};
+
+    if (req.cookies.isSignedIn == "true") {
+        store.dispatch(signInSuccess());
+    } else if (req.cookies.setSignedInOAuth == "true") {
+        store.dispatch(signInOAuthSuccess());
+    } else {
+        store.dispatch(signOutSuccess());
+    }
 
     const jsx = (
         <Provider store={store}>
@@ -38,9 +51,8 @@ const serverRenderMiddleware = (
         return;
     }
 
-    res.status(context.statusCode || 200).send(
-        makeHTMLPage(reactHtml, reduxState, helmetData)
-    );
+    // TODO: если отдавать 304 ридерект, то ломаются service-workers, надо подумать что с этим сделать
+    res.status(200).send(makeHTMLPage(reactHtml, reduxState, helmetData));
 
     next();
 };

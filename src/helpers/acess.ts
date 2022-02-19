@@ -1,7 +1,29 @@
-import { isServer } from "@/helpers/environment";
+import { isServer } from "./environment";
 
-export const checkAccess = () => !isServer ? localStorage.getItem("isSignedIn") === "true" : false;
+export const getCookie = (name: string) => {
+    if (!isServer) {
+        const matches = document.cookie.match(
+            new RegExp(
+                "(?:^|; )" +
+                    name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+                    "=([^;]*)"
+            )
+        );
 
-export const setAccess = (isSignedIn: boolean) => {
-    !isServer ? localStorage.setItem("isSignedIn", isSignedIn.toString()) : false;
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    return false;
+};
+
+// TODO: можно дописать проверку на isSignedOAuth
+export const checkAccess = (): boolean =>
+    getCookie("isSignedIn") === "true" || false;
+
+export const setSigned = (value: boolean) => {
+    document.cookie = `isSignedIn=${value.toString()}`;
+};
+
+export const setSignedOAuth = (value: boolean) => {
+    document.cookie = `setSignedInOAuth=${value.toString()}`;
 };

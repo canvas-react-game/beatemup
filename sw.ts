@@ -5,11 +5,15 @@ const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
 // Helpers
 const canBeCached = (request: Request) => {
-    const canCacheBundle = !(MODE === "development" && request.url.includes("bundle.js"))
-    return request.method === "GET" && 
-        request.url.startsWith("http") && 
-        !request.url.includes("sockjs-node") && 
+    const canCacheBundle = !(
+        MODE === "development" && request.url.includes("bundle.js")
+    );
+    return (
+        request.method === "GET" &&
+        request.url.startsWith("http") &&
+        !request.url.includes("sockjs-node") &&
         canCacheBundle
+    );
 };
 //
 
@@ -17,8 +21,8 @@ const canBeCached = (request: Request) => {
 const CACHE_NAME: string = "CACHE_VERSION";
 const MODE: string = "STARTUP_MODE";
 const URLS: string[] = [
-    //"/bundle.js",
-    "/index.html",
+    "/main",
+    "/signup",
     "/profile",
     "/signin",
     "/forum",
@@ -67,38 +71,42 @@ sw.addEventListener("fetch", (event) => {
 
             const fetchRequest = request.clone();
 
-            return fetch(fetchRequest).then((response) => {
-                if (!canBeCached(request)) return response;
+            return fetch(fetchRequest, {
+                credentials: "include",
+            })
+                .then((response) => {
+                    if (!canBeCached(request)) return response;
 
-                const responseToCache = response.clone();
+                    const responseToCache = response.clone();
 
-                caches
-                    .open(CACHE_NAME)
-                    .then((cache) => {
-                        cache.put(request, responseToCache);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                    caches
+                        .open(CACHE_NAME)
+                        .then((cache) => {
+                            cache.put(request, responseToCache);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
 
-                return response;
-            }).catch(() => {
-                if (request.method !== "GET") {
-                    event.waitUntil(
-                        (async () => {
-                            const clientId =
-                                event.resultingClientId !== ""
-                                    ? event.resultingClientId
-                                    : event.clientId;
-                            const client = await sw.clients.get(clientId);
-            
-                            client.postMessage("FORBIDDEN_METHOD");
-                        })()
-                    );
-            
-                    return;
-                }
-            }) as Promise<Response>;
+                    return response;
+                })
+                .catch(() => {
+                    if (request.method !== "GET") {
+                        event.waitUntil(
+                            (async () => {
+                                const clientId =
+                                    event.resultingClientId !== ""
+                                        ? event.resultingClientId
+                                        : event.clientId;
+                                const client = await sw.clients.get(clientId);
+
+                                client.postMessage("FORBIDDEN_METHOD");
+                            })()
+                        );
+
+                        return;
+                    }
+                }) as Promise<Response>;
         })
     );
 });

@@ -7,29 +7,29 @@ import { TOGGLE_FULLSCREEN_BUTTON, TOGGLE_MENU_BUTTON } from "@/game/world/world
 
 const togglePointerLock = () => {
     document.documentElement.requestPointerLock();
-}
+};
 
 const togglePointerUnlock = () => {
     document.exitPointerLock();
-}
+};
 
 const exitFullScreen = () => {
-    if(document.fullscreenElement) {
+    if (document.fullscreenElement) {
         document.exitFullscreen();
     }
-}
+};
 
 const openFullScreen = () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
     }
-}
+};
 
 const toggleFullScreen = () => {
-    if(document.fullscreenElement) {
-        exitFullScreen()
+    if (document.fullscreenElement) {
+        exitFullScreen();
     } else {
-        openFullScreen()
+        openFullScreen();
     }
 };
 

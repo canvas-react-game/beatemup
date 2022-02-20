@@ -13,14 +13,22 @@ const togglePointerUnlock = () => {
 }
 
 const exitFullScreen = () => {
-    document.exitFullscreen();
+    if(document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+}
+
+const openFullScreen = () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    }
 }
 
 const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+    if(document.fullscreenElement) {
+        exitFullScreen()
     } else {
-        exitFullScreen();
+        openFullScreen()
     }
 };
 
@@ -35,7 +43,7 @@ export const useGame = () => {
     const history = useHistory();
 
     const callMenu = useCallback((e: KeyboardEvent) => {
-        if (e.key === "F1") {
+        if (e.key === "q") {
             setActive(true);
             setPause(true);
             world.stopAnimation();

@@ -91,6 +91,7 @@ export const useGame = () => {
         setPause(false);
         setActive(false);
         togglePointerLock();
+        openFullScreen();
     }, []);
 
     const onResume = useCallback(() => {

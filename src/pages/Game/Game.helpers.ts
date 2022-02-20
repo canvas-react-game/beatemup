@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
+import { TOGGLE_FULLSCREEN_BUTTON, TOGGLE_MENU_BUTTON } from "@/game/world/world.config";
 
 const togglePointerLock = () => {
     document.documentElement.requestPointerLock();
@@ -43,13 +44,13 @@ export const useGame = () => {
     const history = useHistory();
 
     const callMenu = useCallback((e: KeyboardEvent) => {
-        if (e.key === "q") {
+        if (e.key === TOGGLE_MENU_BUTTON) {
             setActive(true);
             setPause(true);
             world.stopAnimation();
             togglePointerUnlock();
         }
-        if (e.key === "f") {
+        if (e.key === TOGGLE_FULLSCREEN_BUTTON) {
             toggleFullScreen();
         }
     }, []);

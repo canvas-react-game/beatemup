@@ -2,7 +2,7 @@
 
 .leaderBoardContainer {
   user-select: none;
-  height: calc(100vh - #{variables.$navbar_height} - #{variables.$margin_bottom});
+  height: calc(100vh - #{variables.$navbar_height} - #{variables.$pagination_height});
   margin: 0;
 }
 

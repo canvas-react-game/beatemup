@@ -4,15 +4,36 @@ import { shallowEqual } from "react-redux";
 
 import { World } from "@/game/world/world";
 import { routes } from "@/config/routes/routes";
+import { TOGGLE_FULLSCREEN_BUTTON, TOGGLE_MENU_BUTTON } from "@/game/world/world.config";
 import { TEAM_SCORE, LeaderBoardRecord } from "@/config/leaderboard";
 import { useSelector } from "@/hooks/useSelector";
 import LeaderboardApi from "@/api/Leaderboard/Leaderboard.api";
 
-const toggleFullScreen = () => {
+const togglePointerLock = () => {
+    document.documentElement.requestPointerLock();
+};
+
+const togglePointerUnlock = () => {
+    document.exitPointerLock();
+};
+
+const exitFullScreen = () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+};
+
+const openFullScreen = () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
+    }
+};
+
+const toggleFullScreen = () => {
+    if (document.fullscreenElement) {
+        exitFullScreen();
     } else {
-        document.exitFullscreen();
+        openFullScreen();
     }
 };
 
@@ -36,12 +57,13 @@ export const useGame = () => {
     }, []);
 
     const callMenu = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === TOGGLE_MENU_BUTTON) {
             setActive(true);
             setPause(true);
             world.stopAnimation();
+            togglePointerUnlock();
         }
-        if (e.key === "f") {
+        if (e.key === TOGGLE_FULLSCREEN_BUTTON) {
             toggleFullScreen();
         }
     }, []);
@@ -50,6 +72,7 @@ export const useGame = () => {
         setActive(true);
         setGameOver(true);
         world.destroy();
+        togglePointerUnlock();
         createRecord();
     }, []);
 
@@ -57,6 +80,7 @@ export const useGame = () => {
         setActive(true);
         setGameWin(true);
         world.destroy();
+        togglePointerUnlock();
         createRecord();
     }, []);
 
@@ -66,6 +90,7 @@ export const useGame = () => {
 
     const onClose = useCallback(() => {
         setActive(false);
+        exitFullScreen();
         history.push(routes.main.path);
     }, []);
 
@@ -80,12 +105,15 @@ export const useGame = () => {
         setGameWin(false);
         setPause(false);
         setActive(false);
+        togglePointerLock();
+        openFullScreen();
     }, []);
 
     const onResume = useCallback(() => {
         world.startAnimataion();
         setPause(false);
         setActive(false);
+        togglePointerLock();
     }, []);
 
     const onUnmount = useCallback(() => {

@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 
 import styles from "./SignUp.module.scss";
 import { useSignUp } from "./SignUp.helpers";
-import YandexSignIn from "./YandexSignIn";
 
 const SignUp:FC = () => {
     const {
@@ -28,7 +27,6 @@ const SignUp:FC = () => {
                         key={`${set.name}-${index}`}>
                         <Input type={set.type ?? ""} placeholder={set.placeholder} />
                     </Form.Item>)}
-                    <YandexSignIn/>
                     <Form.Item>
                         <Button block type="primary" htmlType="submit">Зарегистрироваться</Button>
                     </Form.Item>

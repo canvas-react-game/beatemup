@@ -55,6 +55,14 @@ export const signIn = (
     }
 };
 
+export const signInOAuth = (
+    history: History,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(signInSuccess());
+    setAccess(true);
+    history.push(routes.main.path);
+};
+
 export const signOut = (
     history: History,
 ): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {

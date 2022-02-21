@@ -5,7 +5,6 @@ import { UserOutlined } from "@ant-design/icons";
 import Container from "@/components/Container";
 import PageMeta from "@/components/PageMeta";
 import Password from "@/components/Password";
-import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 import PageLoader from "@/components/PageLoader";
 
@@ -22,7 +21,6 @@ const SignIn: FC = () => {
                 <PageMeta title="SignIn" description="SignIn page" />
                 <Header currentPath={routes.signIn.path} />
                 <div className={styles.formContainer}>
-                    <Nav currentPath={routes.signIn.path} />
                     <Form
                         name="signIn"
                         onFinish={onFinish}

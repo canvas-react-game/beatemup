@@ -53,9 +53,7 @@ sw.addEventListener("fetch", (event) => {
         if (response)
             return response;
         const fetchRequest = request.clone();
-        return fetch(fetchRequest, {
-            credentials: "include",
-        })
+        return fetch(fetchRequest)
             .then((response) => {
             if (!canBeCached(request))
                 return response;

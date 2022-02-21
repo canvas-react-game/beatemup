@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ currentPath }) => {
-    const { routes, renderSignOutButton } = useHeader();
+    const { renderSignOutButton } = useHeader();
 
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
     const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
@@ -24,7 +24,7 @@ const Header: FC<Props> = ({ currentPath }) => {
                 <Link to={appRoutes.main.path}>Logo</Link>
             </div>
             <div className={styles.routesContainer}>
-                <NavBar currentPath={currentPath} routes={routes} />
+                <NavBar currentPath={currentPath} />
                 <div className={styles.buttonContainer}>
                     {(isSignedIn || isSignedInOAuth) && renderSignOutButton()}
                 </div>

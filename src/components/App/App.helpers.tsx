@@ -1,6 +1,4 @@
-import React, {
-    FC, useState, useCallback, useEffect,
-} from "react";
+import React, { FC, useState, useCallback, useEffect } from "react";
 import "antd/dist/antd.css";
 
 import { Typography, Button } from "antd";
@@ -27,10 +25,13 @@ export const ModalChild: FC<Props> = ({ onClose }) => (
     </>
 );
 
-const sw: ServiceWorkerContainer | null = !isServer ? navigator?.serviceWorker : null;
+const sw: unknown | null = !isServer ? navigator?.serviceWorker : null;
 
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);
+    const [updateServiceWorker, setUpdateServiceWorker] = useState<
+        (() => Promise<void>) | null
+    >(null);
 
     const onClose = useCallback(() => {
         setActive(false);
@@ -42,28 +43,34 @@ export const useServiceWorkers = () => {
                 window.addEventListener(
                     "load",
                     () => {
-                        sw.register("./sw.js")
+                        (sw as ServiceWorkerContainer)
+                            .register("./sw.js")
                             .then((registration) => {
                                 console.log(
                                     "ServiceWorker registration successful ",
-                                    registration.scope,
+                                    registration.scope
                                 );
+
+                                setUpdateServiceWorker(registration.update);
                             })
                             .then(() => {
-                                sw.addEventListener("message", ({ data }) => {
-                                    if (data === "FORBIDDEN_METHOD") {
-                                        setActive(true);
+                                (sw as ServiceWorkerContainer).addEventListener(
+                                    "message",
+                                    ({ data }) => {
+                                        if (data === "FORBIDDEN_METHOD") {
+                                            setActive(true);
+                                        }
                                     }
-                                });
+                                );
                             })
                             .catch((error: string) => {
                                 console.log(
                                     "ServiceWorker registration failed: ",
-                                    error,
+                                    error
                                 );
                             });
                     },
-                    { once: true },
+                    { once: true }
                 );
             }
         }
@@ -74,5 +81,6 @@ export const useServiceWorkers = () => {
     return {
         isActive,
         onClose,
+        updateServiceWorker,
     };
 };

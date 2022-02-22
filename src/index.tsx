@@ -12,8 +12,9 @@ import App from "./components/App";
 import "./styles/index.scss";
 
 const store = configureStore();
+const render = navigator.onLine ? ReactDOM.hydrate : ReactDOM.render;
 
-ReactDOM.hydrate(
+render(
     <Provider store={store}>
         <BrowserRouter>
             <App />

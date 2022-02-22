@@ -20,7 +20,9 @@ const canBeCached = (request: Request) => {
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME: string = "CACHE_VERSION";
 const MODE: string = "STARTUP_MODE";
+const OFFLINE_URL = "/offline";
 const URLS: string[] = [
+    OFFLINE_URL,
     "/main",
     "/signup",
     "/profile",
@@ -66,45 +68,45 @@ sw.addEventListener("fetch", (event) => {
     const request = event.request;
 
     event.respondWith(
-        caches.match(request).then((response) => {
-            if (response) return response;
+        fetch(request)
+            .then((response) => {
+                if (!canBeCached(request)) return response;
 
-            const fetchRequest = request.clone();
+                const responseToCache = response.clone();
 
-            return fetch(fetchRequest)
-                .then((response) => {
-                    if (!canBeCached(request)) return response;
+                caches
+                    .open(CACHE_NAME)
+                    .then((cache) => {
+                        cache.put(request, responseToCache);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
 
-                    const responseToCache = response.clone();
+                return response;
+            })
+            .catch(() => {
+                if (request.method !== "GET") {
+                    event.waitUntil(
+                        (async () => {
+                            const clientId =
+                                event.resultingClientId !== ""
+                                    ? event.resultingClientId
+                                    : event.clientId;
+                            const client = await sw.clients.get(clientId);
 
-                    caches
-                        .open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(request, responseToCache);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
+                            client.postMessage("FORBIDDEN_METHOD");
+                        })()
+                    );
 
-                    return response;
-                })
-                .catch(() => {
-                    if (request.method !== "GET") {
-                        event.waitUntil(
-                            (async () => {
-                                const clientId =
-                                    event.resultingClientId !== ""
-                                        ? event.resultingClientId
-                                        : event.clientId;
-                                const client = await sw.clients.get(clientId);
+                    return;
+                }
 
-                                client.postMessage("FORBIDDEN_METHOD");
-                            })()
-                        );
+                return caches.match(request).then((response) => {
+                    if (response) return response;
 
-                        return;
-                    }
-                }) as Promise<Response>;
-        })
+                    return caches.match(OFFLINE_URL);
+                });
+            })
     );
 });

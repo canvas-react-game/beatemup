@@ -14,7 +14,9 @@ const canBeCached = (request) => {
 // Изменяются при каждой сборке в webpack.config.js
 const CACHE_NAME = "CACHE_VERSION";
 const MODE = "STARTUP_MODE";
+const OFFLINE_URL = "/offline";
 const URLS = [
+    OFFLINE_URL,
     "/main",
     "/signup",
     "/profile",
@@ -49,36 +51,36 @@ sw.addEventListener("activate", (event) => {
 });
 sw.addEventListener("fetch", (event) => {
     const request = event.request;
-    event.respondWith(caches.match(request).then((response) => {
-        if (response)
+    event.respondWith(fetch(request)
+        .then((response) => {
+        if (!canBeCached(request))
             return response;
-        const fetchRequest = request.clone();
-        return fetch(fetchRequest)
-            .then((response) => {
-            if (!canBeCached(request))
-                return response;
-            const responseToCache = response.clone();
-            caches
-                .open(CACHE_NAME)
-                .then((cache) => {
-                cache.put(request, responseToCache);
-            })
-                .catch((error) => {
-                console.log(error);
-            });
-            return response;
+        const responseToCache = response.clone();
+        caches
+            .open(CACHE_NAME)
+            .then((cache) => {
+            cache.put(request, responseToCache);
         })
-            .catch(() => {
-            if (request.method !== "GET") {
-                event.waitUntil((async () => {
-                    const clientId = event.resultingClientId !== ""
-                        ? event.resultingClientId
-                        : event.clientId;
-                    const client = await sw.clients.get(clientId);
-                    client.postMessage("FORBIDDEN_METHOD");
-                })());
-                return;
-            }
+            .catch((error) => {
+            console.log(error);
+        });
+        return response;
+    })
+        .catch(() => {
+        if (request.method !== "GET") {
+            event.waitUntil((async () => {
+                const clientId = event.resultingClientId !== ""
+                    ? event.resultingClientId
+                    : event.clientId;
+                const client = await sw.clients.get(clientId);
+                client.postMessage("FORBIDDEN_METHOD");
+            })());
+            return;
+        }
+        return caches.match(request).then((response) => {
+            if (response)
+                return response;
+            return caches.match(OFFLINE_URL);
         });
     }));
 });

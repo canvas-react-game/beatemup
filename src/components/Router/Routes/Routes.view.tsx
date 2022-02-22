@@ -10,6 +10,7 @@ import About from "@/pages/About";
 import Leaderboard from "@/pages/Leaderboard";
 import Error from "@/pages/Error";
 import Game from "@/pages/Game";
+import Offline from "@/pages/Offline";
 import AccessRoute from "@/components/AccessRoute";
 import AccessRedirectRoute from "@/components/AccessRedirectRoute";
 
@@ -39,6 +40,7 @@ const Routes: FC = () => (
         <Route path={routes.about.path} exact component={About} />
         <AccessRoute path={routes.game.path} exact component={Game} />
         <Route path={"/error"} exact component={Error} />
+        <Route path={"/offline"} exact component={Offline} />
     </Switch>
 );
 

@@ -29,9 +29,6 @@ const sw: unknown | null = !isServer ? navigator?.serviceWorker : null;
 
 export const useServiceWorkers = () => {
     const [isActive, setActive] = useState(false);
-    const [updateServiceWorker, setUpdateServiceWorker] = useState<
-        (() => Promise<void>) | null
-    >(null);
 
     const onClose = useCallback(() => {
         setActive(false);
@@ -50,8 +47,6 @@ export const useServiceWorkers = () => {
                                     "ServiceWorker registration successful ",
                                     registration.scope
                                 );
-
-                                setUpdateServiceWorker(registration.update);
                             })
                             .then(() => {
                                 (sw as ServiceWorkerContainer).addEventListener(
@@ -81,6 +76,5 @@ export const useServiceWorkers = () => {
     return {
         isActive,
         onClose,
-        updateServiceWorker,
     };
 };

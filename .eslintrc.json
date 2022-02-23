@@ -28,6 +28,7 @@
     "import/no-cycle": [0],
     "no-param-reassign": [0],
     "max-classes-per-file": [0],
+    "react-hooks/exhaustive-deps": ["off"],
     "@typescript-eslint/semi": [2, "always"],
     "@typescript-eslint/quotes": [2, "double"],
     "@typescript-eslint/eol-last": [0],

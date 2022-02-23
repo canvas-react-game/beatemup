@@ -30,3 +30,6 @@ export enum KeyboardEvents {
     // Attack
     Space = " ",
 }
+
+export const TOGGLE_MENU_BUTTON = "q";
+export const TOGGLE_FULLSCREEN_BUTTON = "f";

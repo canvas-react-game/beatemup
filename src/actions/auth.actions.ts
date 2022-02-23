@@ -65,6 +65,7 @@ export const signIn =
         }
     };
 
+<<<<<<< HEAD
 export const signOut =
     (history: History): ThunkAction<void, unknown, unknown, AnyAction> =>
     async (dispatch, _state) => {
@@ -79,6 +80,27 @@ export const signOut =
                 dispatch(loading(false));
             }
         } catch (error) {
+=======
+export const signInOAuth = (
+    history: History,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(signInSuccess());
+    setAccess(true);
+    history.push(routes.main.path);
+};
+
+export const signOut = (
+    history: History,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(loading(true));
+    try {
+        const response = await api.logOut();
+        if (response) {
+            dispatch(signOutSuccess());
+            setAccess(false);
+            history.push(routes.signIn.path);
+        } else {
+>>>>>>> 4038294203ed64c632dbe509165bc6bbdc6809de
             dispatch(loading(false));
         }
     };

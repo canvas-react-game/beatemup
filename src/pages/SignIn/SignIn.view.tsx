@@ -11,6 +11,7 @@ import PageLoader from "@/components/PageLoader";
 import { routes } from "@/config/routes/routes";
 import styles from "./SignIn.module.scss";
 import { SignInFieldNames, useSignInForm } from "./SignIn.helpers";
+import YandexSignIn from "./YandexSignIn/YandexSignIn.view";
 
 const SignIn: FC = () => {
     const { onFinish, onFinishFailed, isLoading } = useSignInForm();
@@ -56,6 +57,9 @@ const SignIn: FC = () => {
                             <Button block type="primary" htmlType="submit">
                                 Войти
                             </Button>
+                        </Form.Item>
+                        <Form.Item>
+                            <YandexSignIn/>
                         </Form.Item>
                     </Form>
                 </div>

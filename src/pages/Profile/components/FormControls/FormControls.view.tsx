@@ -44,7 +44,8 @@ const FormControls: FC<FormElement> = ({
                             });
                         }}
                     >
-            Сохранить<EditOutlined />
+                        Сохранить
+                        <EditOutlined />
                     </Button>
                 </Form.Item>
                 <Form.Item>
@@ -64,7 +65,8 @@ const FormControls: FC<FormElement> = ({
     return (
         <Form.Item>
             <Button block type="primary" onClick={handleEdit}>
-                Редактировать<EditOutlined />
+                Редактировать
+                <EditOutlined />
             </Button>
         </Form.Item>
     );

@@ -1,8 +1,16 @@
 import React, { FC } from "react";
 import {
-    Switch, Route, Redirect, useLocation, useHistory,
+    Switch,
+    Route,
+    Redirect,
+    useLocation,
+    useHistory,
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
+import api from "@/api/OAuth";
+import { signInOAuth } from "@/actions/auth.actions";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
 import { getProfile } from "@/actions/profile.actions";
 import Login from "@/pages/SignIn";
@@ -16,42 +24,9 @@ import Error from "@/pages/Error";
 import Game from "@/pages/Game";
 import Offline from "@/pages/Offline";
 import AccessRoute from "@/components/AccessRoute";
-<<<<<<< HEAD
 import AccessRedirectRoute from "@/components/AccessRedirectRoute";
 
 import { routes } from "@/config/routes/routes";
-
-const Routes: FC = () => (
-    <Switch>
-        <Redirect exact from={"/"} to={routes.signIn.path} />
-        <AccessRedirectRoute
-            path={routes.signIn.path}
-            exact
-            component={Login}
-        />
-        <AccessRedirectRoute
-            path={routes.signUp.path}
-            exact
-            component={SignUpView}
-        />
-        <AccessRoute path={routes.main.path} exact component={Main} />
-        <AccessRoute path={routes.profile.path} exact component={Profile} />
-        <AccessRoute path={routes.forum.path} exact component={Forum} />
-        <AccessRoute
-            path={routes.leaderboard.path}
-            exact
-            component={Leaderboard}
-        />
-        <Route path={routes.about.path} exact component={About} />
-        <AccessRoute path={routes.game.path} exact component={Game} />
-        <Route path={"/error"} exact component={Error} />
-        <Route path={"/offline"} exact component={Offline} />
-    </Switch>
-);
-=======
-import api from "@/api/OAuth";
-import { signInOAuth } from "@/actions/auth.actions";
-import { useMountEffect } from "@/hooks/useMountEffect";
 
 const Routes: FC = () => {
     const { search } = useLocation();
@@ -61,29 +36,40 @@ const Routes: FC = () => {
     useMountEffect(() => {
         const code = new URLSearchParams(search).get("code");
         if (code) {
-            api.signUpWithYandex(code)
-                .then(() => {
-                    dispatch(signInOAuth(history));
-                    dispatch(getProfile());
-                });
+            api.signUpWithYandex(code).then(() => {
+                dispatch(signInOAuth(history));
+                dispatch(getProfile());
+            });
         }
     });
 
     return (
         <Switch>
-            <Redirect exact from={"/"} to={routes.signIn.path}/>
-            <Route path={routes.signIn.path} exact component={Login}/>
-            <Route path={routes.signUp.path} exact component={SignUpView}/>
-            <AccessRoute path={routes.main.path} exact component={Main}/>
-            <AccessRoute path={routes.profile.path} exact component={Profile}/>
-            <AccessRoute path={routes.forum.path} exact component={Forum}/>
-            <AccessRoute path={routes.leaderboard.path} exact component={Leaderboard}/>
-            <Route path={routes.about.path} exact component={About}/>
-            <AccessRoute path={routes.game.path} exact component={Game}/>
-            <Route path={"/error"} exact component={Error}/>
+            <Redirect exact from={"/"} to={routes.signIn.path} />
+            <AccessRedirectRoute
+                path={routes.signIn.path}
+                exact
+                component={Login}
+            />
+            <AccessRedirectRoute
+                path={routes.signUp.path}
+                exact
+                component={SignUpView}
+            />
+            <AccessRoute path={routes.main.path} exact component={Main} />
+            <AccessRoute path={routes.profile.path} exact component={Profile} />
+            <AccessRoute path={routes.forum.path} exact component={Forum} />
+            <AccessRoute
+                path={routes.leaderboard.path}
+                exact
+                component={Leaderboard}
+            />
+            <Route path={routes.about.path} exact component={About} />
+            <AccessRoute path={routes.game.path} exact component={Game} />
+            <Route path={"/error"} exact component={Error} />
+            <Route path={"/offline"} exact component={Offline} />
         </Switch>
     );
 };
->>>>>>> 4038294203ed64c632dbe509165bc6bbdc6809de
 
 export default Routes;

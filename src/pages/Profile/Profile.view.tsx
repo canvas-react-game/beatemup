@@ -15,6 +15,7 @@ import UploadButton from "./components/UploadButton";
 import styles from "./Profile.module.scss";
 
 import { useProfileForm } from "./Profile.helpers";
+import { checkOAuthSigned } from "@/helpers/acess";
 
 const Profile = () => {
     const {
@@ -34,6 +35,7 @@ const Profile = () => {
                 console.log(fileList),
         []
     );
+    const isOAuthSigned = checkOAuthSigned();
 
     return (
         <PageLoader isSpinning={isLoading}>
@@ -65,12 +67,15 @@ const Profile = () => {
                             layout="vertical"
                         >
                             <FormFields isEdit={isEdit} />
-                            <FormControls
-                                isEdit={isEdit}
-                                setIsEdit={setIsEdit}
-                                form={form}
-                                onFinish={onFinish}
-                            />
+
+                            {!isOAuthSigned && (
+                                <FormControls
+                                    isEdit={isEdit}
+                                    setIsEdit={setIsEdit}
+                                    form={form}
+                                    onFinish={onFinish}
+                                />
+                            )}
                         </Form>
                     </Space>
                 </div>

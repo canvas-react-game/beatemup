@@ -16,9 +16,11 @@ export const getCookie = (name: string) => {
     return false;
 };
 
-// TODO: можно дописать проверку на isSignedOAuth
 export const checkAccess = (): boolean =>
     getCookie("isSignedIn") === "true" || false;
+
+export const checkOAuthSigned = (): boolean =>
+    getCookie("setSignedInOAuth") === "true" || false;
 
 export const setSigned = (value: boolean) => {
     document.cookie = `isSignedIn=${value.toString()}`;

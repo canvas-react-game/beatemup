@@ -21,7 +21,6 @@ const SignUp: FC = () => {
                     name="signUp"
                     onFinish={onFinish}
                     onFinishFailed={() => onFinishFailed}
-<<<<<<< HEAD
                     layout="vertical"
                 >
                     {fieldSet.map((set, index) => (
@@ -36,14 +35,6 @@ const SignUp: FC = () => {
                             />
                         </Form.Item>
                     ))}
-                    <YandexSignIn />
-=======
-                    layout='vertical'>
-                    {fieldSet.map((set, index) => <Form.Item name={set.name} rules={set.rules}
-                        key={`${set.name}-${index}`}>
-                        <Input type={set.type ?? ""} placeholder={set.placeholder} />
-                    </Form.Item>)}
->>>>>>> 4038294203ed64c632dbe509165bc6bbdc6809de
                     <Form.Item>
                         <Button block type="primary" htmlType="submit">
                             Зарегистрироваться

@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { createProxyMiddleware } from "http-proxy-middleware";
+import { root, base } from "@/services/API/API.service";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
@@ -63,4 +65,10 @@ const limiterMiddleware = rateLimit({
     max: 100,
 });
 
-export { serverRenderMiddleware, limiterMiddleware };
+const apiProxy = createProxyMiddleware(base, {
+    target: root,
+    changeOrigin: true,
+    cookieDomainRewrite: "localhost",
+});
+
+export { serverRenderMiddleware, limiterMiddleware, apiProxy };

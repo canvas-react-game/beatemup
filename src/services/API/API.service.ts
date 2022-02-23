@@ -6,11 +6,12 @@ export enum Method {
     DELETE = "DELETE",
 }
 
-const root = "https://ya-praktikum.tech/api/v2";
+export const root = "https://ya-praktikum.tech";
+export const base = "/api/v2";
 
 class APIService {
     async request(method: Method, url: string, data = {}) {
-        const response = await fetch(`${root}/${url}`, {
+        const response = await fetch(`${root}${base}/${url}`, {
             method,
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache",

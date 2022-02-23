@@ -27,7 +27,6 @@ const serverRenderMiddleware = (
     next: NextFunction
 ) => {
     const location = req.url;
-    const context: StaticRouterContext = {};
 
     if (req.cookies.isSignedIn == "true") {
         store.dispatch(signInSuccess());
@@ -39,7 +38,7 @@ const serverRenderMiddleware = (
 
     const jsx = (
         <Provider store={store}>
-            <StaticRouter context={context} location={location}>
+            <StaticRouter location={location}>
                 <App />
             </StaticRouter>
         </Provider>
@@ -47,11 +46,6 @@ const serverRenderMiddleware = (
     const reactHtml = renderToString(jsx);
     const reduxState = store.getState();
     const helmetData = Helmet.renderStatic();
-
-    if (context.url) {
-        res.redirect(context.url);
-        return;
-    }
 
     // TODO: если отдавать 304 ридерект, то ломаются service-workers, надо подумать что с этим сделать
     res.status(200).send(makeHTMLPage(reactHtml, reduxState, helmetData));

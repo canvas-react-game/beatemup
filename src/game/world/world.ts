@@ -56,7 +56,7 @@ export class World {
         // Инициализируем события
         WorldEvents.init();
         // Подписываемся на событие ресайз
-        WorldEvents.on(EventTypes.Resize, this._onResize);
+        WorldEvents.on(EventTypes.Resize, this._onResize.bind(this));
         // Начинаем анимацию
         this.startAnimataion();
     }

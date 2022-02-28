@@ -42,7 +42,7 @@ export const serverRenderMiddleware = (
     const reduxState = store.getState();
     const helmetData = Helmet.renderStatic();
 
-    // TODO: если отдавать 304 ридерект, 
+    // TODO: если отдавать 304 ридерект,
     // то ломаются service-workers, надо подумать что с этим сделать
     res.status(200).send(
         makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState),

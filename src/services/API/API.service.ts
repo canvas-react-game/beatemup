@@ -11,7 +11,7 @@ export const base = "/api/v2";
 
 class APIService {
     async request(method: Method, url: string, data = {}) {
-        const response = await fetch(`${root}${base}/${url}`, {
+        const response = await fetch(`${base}/${url}`, {
             method,
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache",

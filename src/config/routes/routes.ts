@@ -1,8 +1,8 @@
-type Route = {
+export type Route = {
     path: string
 };
 
-type Routes = {
+export type Routes = {
     [key: string]: Route;
 };
 

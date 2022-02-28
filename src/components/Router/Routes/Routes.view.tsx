@@ -48,26 +48,23 @@ const Routes: FC = () => {
             <Redirect exact from={"/"} to={routes.signIn.path} />
             <AccessRedirectRoute
                 path={routes.signIn.path}
-                exact
                 component={Login}
             />
             <AccessRedirectRoute
                 path={routes.signUp.path}
-                exact
                 component={SignUpView}
             />
-            <AccessRoute path={routes.main.path} exact component={Main} />
-            <AccessRoute path={routes.profile.path} exact component={Profile} />
-            <AccessRoute path={routes.forum.path} exact component={Forum} />
+            <AccessRoute path={routes.main.path} component={Main} />
+            <AccessRoute path={routes.profile.path} component={Profile} />
+            <AccessRoute path={routes.forum.path} component={Forum} />
             <AccessRoute
                 path={routes.leaderboard.path}
-                exact
                 component={Leaderboard}
             />
-            <Route path={routes.about.path} exact component={About} />
-            <AccessRoute path={routes.game.path} exact component={Game} />
-            <Route path={"/error"} exact component={Error} />
-            <Route path={"/offline"} exact component={Offline} />
+            <Route path={routes.about.path} component={About} />
+            <AccessRoute path={routes.game.path} component={Game} />
+            <Route path={"/error"} component={Error} />
+            <Route path={"/offline"} component={Offline} />
         </Switch>
     );
 };

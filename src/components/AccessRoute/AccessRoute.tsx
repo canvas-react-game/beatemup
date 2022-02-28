@@ -18,8 +18,7 @@ const AccessRoute: FC<RouteProps> = ({ component, ...props }) => {
     return (
         <Route
             {...props}
-            render={() =>
-                isSignedInAll ? <Component /> : <Error status="403" />
+            render={() => (isSignedInAll ? <Component /> : <Error status="403" />)
             }
         />
     );

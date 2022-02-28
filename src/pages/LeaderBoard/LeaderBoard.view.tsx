@@ -46,7 +46,7 @@ const onChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
     sorter: SorterResult<{ data: LeaderBoardRecord }> | SorterResult<any>[],
-    extra: TableCurrentDataSource<any>
+    extra: TableCurrentDataSource<any>,
 ) => {
     console.log("params", pagination, filters, sorter, extra);
 };
@@ -65,7 +65,7 @@ const LeaderBoard: FC<{}> = () => {
 
     const getRowKey = useCallback(
         (record: { data: LeaderBoardRecord }) => record.data.login,
-        []
+        [],
     );
 
     return (

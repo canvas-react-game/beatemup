@@ -1,13 +1,14 @@
 import { isServer } from "./environment";
 
+// @eslint-disable no-useless-escape
 export const getCookie = (name: string) => {
     if (!isServer) {
         const matches = document.cookie.match(
             new RegExp(
-                "(?:^|; )" +
-                    name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-                    "=([^;]*)"
-            )
+                `(?:^|; )${
+                    name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1")
+                }=([^;]*)`,
+            ),
         );
 
         return matches ? decodeURIComponent(matches[1]) : undefined;
@@ -15,12 +16,11 @@ export const getCookie = (name: string) => {
 
     return false;
 };
+// @eslint-enable no-useless-escape
 
-export const checkAccess = (): boolean =>
-    getCookie("isSignedIn") === "true" || false;
+export const checkAccess = (): boolean => getCookie("isSignedIn") === "true" || false;
 
-export const checkOAuthSigned = (): boolean =>
-    getCookie("setSignedInOAuth") === "true" || false;
+export const checkOAuthSigned = (): boolean => getCookie("setSignedInOAuth") === "true" || false;
 
 export const setSigned = (value: boolean) => {
     document.cookie = `isSignedIn=${value.toString()}`;

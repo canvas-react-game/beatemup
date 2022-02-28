@@ -36,9 +36,10 @@ const initialState: ProfileState = {
     stage: ProfileStages.INIT,
 };
 
+// eslint-disable @typescript-eslint/default-param-last
 export const profileReducer = (
     state: ProfileState = initialState,
-    action: ProfileAction
+    action: ProfileAction,
 ) => {
     switch (action.type) {
         case GET_PROFILE:

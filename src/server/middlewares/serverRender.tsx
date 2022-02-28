@@ -3,8 +3,8 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import configureStore from "@/store/store";
 import Helmet from "react-helmet";
+import configureStore from "@/store/store";
 import { makeHTMLPage } from "../utils/utils";
 import App from "../../components/App";
 import {
@@ -18,14 +18,14 @@ const store = configureStore();
 export const serverRenderMiddleware = (
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
 ) => {
     const location = req.url;
-    const hostUrl = `${req.protocol}://${req.get("Host")}`
+    const hostUrl = `${req.protocol}://${req.get("Host")}`;
 
-    if (req.cookies.isSignedIn == "true") {
+    if (req.cookies.isSignedIn === "true") {
         store.dispatch(signInSuccess());
-    } else if (req.cookies.setSignedInOAuth == "true") {
+    } else if (req.cookies.setSignedInOAuth === "true") {
         store.dispatch(signInOAuthSuccess());
     } else {
         store.dispatch(signOutSuccess());
@@ -43,7 +43,9 @@ export const serverRenderMiddleware = (
     const helmetData = Helmet.renderStatic();
 
     // TODO: если отдавать 304 ридерект, то ломаются service-workers, надо подумать что с этим сделать
-    res.status(200).send(makeHTMLPage(hostUrl, reactHtml, reduxState, helmetData));
+    res.status(200).send(
+        makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState)
+    );
 
     res.end();
 };

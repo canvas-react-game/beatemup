@@ -1,4 +1,6 @@
-import { createStore, compose, combineReducers, applyMiddleware } from "redux";
+import {
+    createStore, compose, combineReducers, applyMiddleware,
+} from "redux";
 import thunk from "redux-thunk";
 
 import { profileReducer, ProfileState } from "@/reducers/profile.reducer";
@@ -22,15 +24,14 @@ const rootReducer = combineReducers({
     leaderBoard: leaderBoardReducer,
 });
 
-const configureStore = () =>
-    createStore(
-        rootReducer,
-        compose(
-            applyMiddleware(thunk),
-            !isServer && window.__REDUX_DEVTOOLS_EXTENSION__
-                ? window.__REDUX_DEVTOOLS_EXTENSION__()
-                : (f: () => void) => f
-        )
-    );
+const configureStore = () => createStore(
+    rootReducer,
+    compose(
+        applyMiddleware(thunk),
+        !isServer && window.__REDUX_DEVTOOLS_EXTENSION__
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : (f: () => void) => f,
+    ),
+);
 
 export default configureStore;

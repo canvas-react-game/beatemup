@@ -1,4 +1,6 @@
-import React, { FC, useState, useCallback, useEffect } from "react";
+import React, {
+    FC, useState, useCallback, useEffect,
+} from "react";
 import "antd/dist/antd.css";
 
 import { Typography, Button } from "antd";
@@ -45,7 +47,7 @@ export const useServiceWorkers = () => {
                             .then((registration) => {
                                 console.log(
                                     "ServiceWorker registration successful ",
-                                    registration.scope
+                                    registration.scope,
                                 );
                             })
                             .then(() => {
@@ -55,17 +57,17 @@ export const useServiceWorkers = () => {
                                         if (data === "FORBIDDEN_METHOD") {
                                             setActive(true);
                                         }
-                                    }
+                                    },
                                 );
                             })
                             .catch((error: string) => {
                                 console.log(
                                     "ServiceWorker registration failed: ",
-                                    error
+                                    error,
                                 );
                             });
                     },
-                    { once: true }
+                    { once: true },
                 );
             }
         }

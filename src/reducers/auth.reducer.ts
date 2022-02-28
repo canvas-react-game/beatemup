@@ -21,9 +21,10 @@ export const initialState: AuthState = {
     stage: AuthStages.INIT,
 };
 
+// eslint-disable @typescript-eslint/default-param-last
 export const authReducer = (
     state: AuthState = initialState,
-    action: AuthAction
+    action: AuthAction,
 ) => {
     switch (action.type) {
         case SIGN_IN:

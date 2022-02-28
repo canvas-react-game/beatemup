@@ -6,6 +6,7 @@ import styles from "./NavBar.module.scss";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { routes as appRoutes } from "@/config/routes/routes";
 import { useSelector } from "@/hooks/useSelector";
+
 export interface Route {
     path: string;
     label: string;
@@ -32,7 +33,7 @@ const NavBar: FC<Props> = ({ currentPath }) => {
             setRoutes(allRoutes);
         } else {
             setRoutes(
-                allRoutes.filter((route) => route.path === appRoutes.about.path)
+                allRoutes.filter((route) => route.path === appRoutes.about.path),
             );
         }
     });

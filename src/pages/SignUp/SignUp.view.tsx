@@ -10,7 +10,9 @@ import styles from "./SignUp.module.scss";
 import { useSignUp } from "./SignUp.helpers";
 
 const SignUp: FC = () => {
-    const { currentPath, fieldSet, onFinish, onFinishFailed } = useSignUp();
+    const {
+        currentPath, fieldSet, onFinish, onFinishFailed,
+    } = useSignUp();
 
     return (
         <Container>

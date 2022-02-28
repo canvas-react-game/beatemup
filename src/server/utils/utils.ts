@@ -1,12 +1,12 @@
 import { HelmetData } from "react-helmet";
 
+// eslint-disable max-len
 const makeHTMLPage = (
     hostUrl: string,
     content: string,
+    helmetData: HelmetData,
     reduxState = {},
-    helmetData: HelmetData
-) => {
-    return `
+) => `
         <!DOCTYPE html>
             <html lang="en">
                 <head>
@@ -30,6 +30,5 @@ const makeHTMLPage = (
                 </body>
         </html>
     `;
-};
 
 export { makeHTMLPage };

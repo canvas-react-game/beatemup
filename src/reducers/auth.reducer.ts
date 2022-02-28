@@ -21,7 +21,7 @@ export const initialState: AuthState = {
     stage: AuthStages.INIT,
 };
 
-// eslint-disable @typescript-eslint/default-param-last
+/* eslint-disable @typescript-eslint/default-param-last */
 export const authReducer = (
     state: AuthState = initialState,
     action: AuthAction,
@@ -59,3 +59,4 @@ export const authReducer = (
             return state;
     }
 };
+/* eslint-enable @typescript-eslint/default-param-last */

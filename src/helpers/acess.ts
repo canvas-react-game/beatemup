@@ -1,6 +1,6 @@
 import { isServer } from "./environment";
 
-// @eslint-disable no-useless-escape
+/* eslint-disable */
 export const getCookie = (name: string) => {
     if (!isServer) {
         const matches = document.cookie.match(
@@ -16,7 +16,7 @@ export const getCookie = (name: string) => {
 
     return false;
 };
-// @eslint-enable no-useless-escape
+/* eslint-enable */
 
 export const checkAccess = (): boolean => getCookie("isSignedIn") === "true" || false;
 

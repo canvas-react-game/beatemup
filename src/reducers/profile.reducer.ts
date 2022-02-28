@@ -36,7 +36,7 @@ const initialState: ProfileState = {
     stage: ProfileStages.INIT,
 };
 
-// eslint-disable @typescript-eslint/default-param-last
+/* eslint-disable @typescript-eslint/default-param-last */
 export const profileReducer = (
     state: ProfileState = initialState,
     action: ProfileAction,
@@ -70,3 +70,4 @@ export const profileReducer = (
             return state;
     }
 };
+/* eslint-enable @typescript-eslint/default-param-last */

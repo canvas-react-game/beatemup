@@ -1,6 +1,6 @@
 import { HelmetData } from "react-helmet";
 
-// eslint-disable max-len
+/* eslint-disable max-len */
 const makeHTMLPage = (
     hostUrl: string,
     content: string,
@@ -30,5 +30,6 @@ const makeHTMLPage = (
                 </body>
         </html>
     `;
+/* eslint-enable max-len */
 
 export { makeHTMLPage };

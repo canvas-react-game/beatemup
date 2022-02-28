@@ -44,7 +44,7 @@ export const serverRenderMiddleware = (
 
     // TODO: если отдавать 304 ридерект, то ломаются service-workers, надо подумать что с этим сделать
     res.status(200).send(
-        makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState)
+        makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState),
     );
 
     res.end();

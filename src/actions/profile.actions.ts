@@ -55,55 +55,51 @@ const passwordUpdateSuccess = () => ({
     type: SET_PASSWORD,
 });
 
-export const getProfile =
-    (): ThunkAction<void, unknown, unknown, AnyAction> =>
-    async (dispatch, _state) => {
-        dispatch(loading(true));
-        try {
-            const response = await api.getUserInfo();
-            if (response) {
-                dispatch(profileFetchSuccess(response));
-            } else {
-                dispatch(loading(false));
-            }
-        } catch (error) {
+// eslint-disable-next-line max-len
+export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(loading(true));
+    try {
+        const response = await api.getUserInfo();
+        if (response) {
+            dispatch(profileFetchSuccess(response));
+        } else {
             dispatch(loading(false));
         }
-    };
+    } catch (error) {
+        dispatch(loading(false));
+    }
+};
 
-export const setProfile =
-    (
-        data: Omit<SignUpData, "password">
-    ): ThunkAction<void, unknown, unknown, AnyAction> =>
-    async (dispatch, _state) => {
-        dispatch(loading(true));
-        try {
-            const response = await profileApi.setProfile(data);
-            if (response) {
-                dispatch(profileUploadSuccess(response));
-            } else {
-                dispatch(loading(false));
-            }
-        } catch (error) {
+export const setProfile = (
+    data: Omit<SignUpData, "password">,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(loading(true));
+    try {
+        const response = await profileApi.setProfile(data);
+        if (response) {
+            dispatch(profileUploadSuccess(response));
+        } else {
             dispatch(loading(false));
         }
-    };
+    } catch (error) {
+        dispatch(loading(false));
+    }
+};
 
-export const setPassword =
-    (data: PasswordData): ThunkAction<void, unknown, unknown, AnyAction> =>
-    async (dispatch, _state) => {
-        dispatch(loading(true));
-        try {
-            const response = await profileApi.setPassword(data);
-            if (response) {
-                dispatch(passwordUpdateSuccess());
-            } else {
-                dispatch(loading(false));
-            }
-        } catch (error) {
+// eslint-disable-next-line max-len
+export const setPassword = (data: PasswordData): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(loading(true));
+    try {
+        const response = await profileApi.setPassword(data);
+        if (response) {
+            dispatch(passwordUpdateSuccess());
+        } else {
             dispatch(loading(false));
         }
-    };
+    } catch (error) {
+        dispatch(loading(false));
+    }
+};
 
 export type ProfileAction =
     | ProfileFetched

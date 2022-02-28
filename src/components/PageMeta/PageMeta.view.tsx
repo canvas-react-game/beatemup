@@ -7,17 +7,13 @@ type Props = {
     image?: string;
 };
 
-const cutTags = (text: string = "") => {
-    return text.replace(/<\/?.+?>/gi, "");
-};
+const cutTags = (text: string = "") => text.replace(/<\/?.+?>/gi, "");
 
-const prepareData = ({ title, description, image }: Props) => {
-    return {
-        title: cutTags(title),
-        description: cutTags(description).substr(0, 250),
-        image,
-    };
-};
+const prepareData = ({ title, description, image }: Props) => ({
+    title: cutTags(title),
+    description: cutTags(description).substr(0, 250),
+    image,
+});
 
 const PageMeta: FC<Props> = (props) => {
     const { title, description, image } = prepareData(props);

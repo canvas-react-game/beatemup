@@ -7,7 +7,9 @@ import Container from "@/components/Container";
 import styles from "./Offline.module.scss";
 
 const Error = () => {
-    const { container, errorContainer, title, info, back, notFound } = styles;
+    const {
+        container, errorContainer, title, info, back, notFound,
+    } = styles;
 
     return (
         <Container>

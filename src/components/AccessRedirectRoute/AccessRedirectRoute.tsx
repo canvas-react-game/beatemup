@@ -18,12 +18,11 @@ const AccessRoute: FC<RouteProps> = ({ component, ...props }) => {
     return (
         <Route
             {...props}
-            render={() =>
-                !isSignedInAll ? (
-                    <Component />
-                ) : (
-                    <Redirect to={routes.main.path} />
-                )
+            render={() => (!isSignedInAll ? (
+                <Component />
+            ) : (
+                <Redirect to={routes.main.path} />
+            ))
             }
         />
     );

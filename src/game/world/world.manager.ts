@@ -51,7 +51,7 @@ class WorldManager {
         // TODO: костыль тк в ноде нельзя new Image
         const tileSetImage = !isServer ? new Image(512, 512) : null;
 
-        if (!tileSetImage) return
+        if (!tileSetImage) return;
 
         tileSetImage.src = TileSetImage;
         this.tileSetImage = tileSetImage;

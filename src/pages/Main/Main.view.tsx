@@ -14,7 +14,9 @@ import { getProfile } from "@/actions/profile.actions";
 import { useMountEffect } from "@/hooks/useMountEffect";
 
 const Main: FC = () => {
-    const { gameHref, title, info, infoContainer, container } = styles;
+    const {
+        gameHref, title, info, infoContainer, container,
+    } = styles;
 
     const dispatch = useDispatch();
 

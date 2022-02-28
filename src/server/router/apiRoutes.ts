@@ -6,6 +6,6 @@ import {
 
 const apiRouter = express.Router();
 
-apiRouter.all(base+"/*", apiProxy);
+apiRouter.all(`${base}/*`, apiProxy);
 
-export {apiRouter};
+export { apiRouter };

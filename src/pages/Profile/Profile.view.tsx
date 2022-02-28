@@ -1,5 +1,7 @@
 import React, { useCallback } from "react";
-import { Form, Space, Row, Col } from "antd";
+import {
+    Form, Space, Row, Col,
+} from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
@@ -30,10 +32,8 @@ const Profile = () => {
     } = useProfileForm();
 
     const handleChangeAvatar = useCallback(
-        () =>
-            ({ fileList }: any) =>
-                console.log(fileList),
-        []
+        () => ({ fileList }: any) => console.log(fileList),
+        [],
     );
     const isOAuthSigned = checkOAuthSigned();
 

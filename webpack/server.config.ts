@@ -8,7 +8,7 @@ const config: Configuration = {
     name: "server",
     target: "node",
     node: { __dirname: false },
-    entry: "./src/server/server",
+    entry: "./src/server/index",
     output: {
         filename: "server.js",
         libraryTarget: "commonjs2",
@@ -47,7 +47,14 @@ const config: Configuration = {
             {
                 test: /\.ts(x?)$/,
                 exclude: /node_modules/,
-                use: { loader: "babel-loader" },
+                use: { 
+                    loader: "babel-loader",
+                    // options: {
+                    //     plugins: [
+                    //         ["@babel/plugin-proposal-decorators", { "legacy": true }]
+                    //     ]
+                    // }
+                },
             },
         ],
     },

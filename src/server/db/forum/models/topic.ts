@@ -28,4 +28,8 @@ export class Topic extends Model<Topic> {
   @AllowNull(true)
   @Column(DataType.INTEGER)
   user_id: number;
+
+  @AllowNull(true)
+  @Column(DataType.INTEGER)
+  comments_count: number;
 } 

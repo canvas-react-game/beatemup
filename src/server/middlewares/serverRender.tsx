@@ -5,7 +5,7 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Helmet from "react-helmet";
 import configureStore from "@/store/store";
-import { makeHTMLPage } from "../utils/utils";
+import { makeHTMLPage } from "../utils/makeHTMLPage";
 import App from "../../components/App";
 import {
     signInSuccess,

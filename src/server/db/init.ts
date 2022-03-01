@@ -1,4 +1,3 @@
-// import { Client } from "pg"
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import { Topic } from './forum/models/topic';
 

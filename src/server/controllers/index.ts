@@ -1,1 +1,1 @@
-export {getTopics, addTopic} from "./forum/topics"
+export {default} from "./forum/topics"

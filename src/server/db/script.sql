@@ -1,2 +1,3 @@
 -- ALTER TABLE topics RENAME createdAt TO created_at; 
+-- ALTER TABLE topics ADD COLUMN comments_count INTEGER;
 -- SELECT * FROM topics;

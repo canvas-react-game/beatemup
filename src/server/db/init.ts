@@ -2,7 +2,7 @@ import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import { Topic } from './forum/models/topic';
 
 const dbName = 'dungeonCrawler',
-    username = 'romansavelev',
+    username = undefined,
     password = undefined,
     host = 'localhost',
     port = 5432

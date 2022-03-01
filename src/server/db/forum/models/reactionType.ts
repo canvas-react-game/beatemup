@@ -1,5 +1,5 @@
 import { AllowNull, AutoIncrement, Column, 
-    DataType, Model, PrimaryKey, Table 
+    DataType, Length, Model, PrimaryKey, Table 
 } from 'sequelize-typescript';
 
 @Table({
@@ -12,6 +12,7 @@ export class ReactionType extends Model<ReactionType> {
   @Column(DataType.INTEGER)
   id: number;
 
+  @Length({max: 255})
   @AllowNull(false)
   @Column(DataType.STRING)
   type: string;

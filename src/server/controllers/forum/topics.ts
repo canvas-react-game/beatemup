@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import { ValidationError } from "sequelize"
-import { addDBTopic, getDBTopics } from "@/server/db/forum/actions/topics"
+import { addDBTopic, getDBTopics, updateDBTopic, removeDBTopic, getDBTopic } from "@/server/db/forum/actions/topics"
 import { createSafeDecorator } from "@/server/utils/safeDecorator"
 
 const topicErrorHandler = (err: unknown, res: Response) => {
@@ -30,6 +30,28 @@ class TopicController {
             return res.status(400).send({message: "Ошибка добавления топика"})
         }
         return res.status(200).send(topic)
+    }
+
+    @Safe
+    async update(req: Request, res: Response) {
+        const id = Number(req.params["id"])
+        const resultArray = await updateDBTopic(id, req.body)
+        const result = resultArray[0]
+        if(!result) {
+            return res.status(400).send({message: "Ошибка изменения топика"})
+        }
+        const topic = await getDBTopic(id)
+        return res.status(200).send(topic)
+    }
+
+    @Safe
+    async delete(req: Request, res: Response) {
+        const id = Number(req.params["id"])
+        const result = await removeDBTopic(id)
+        if(!result) {
+            return res.status(400).send({message: "Ошибка удаления топика"})
+        }
+        return res.status(200).sendStatus(200)
     }
 
 }

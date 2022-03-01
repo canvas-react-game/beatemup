@@ -1,11 +1,11 @@
-import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import { Topic } from './forum/models/topic';
+import { Sequelize, SequelizeOptions } from "sequelize-typescript";
+import { Topic } from "./forum/models/topic";
 
-const dbName = 'dungeonCrawler',
-    username = undefined,
-    password = undefined,
-    host = 'localhost',
-    port = 5432
+const dbName = "dungeonCrawler";
+const username = undefined;
+const password = undefined;
+const host = "localhost";
+const port = 5432;
 
 export const createSequelize = (): Sequelize => {
     const sequelizeOptions: SequelizeOptions = {
@@ -14,11 +14,11 @@ export const createSequelize = (): Sequelize => {
         username,
         password,
         database: dbName,
-        dialect: 'postgres'
+        dialect: "postgres",
     };
-    
+
     const db = new Sequelize(sequelizeOptions);
-    db.addModels([Topic])
-    
-    return db
-}
+    db.addModels([Topic]);
+
+    return db;
+};

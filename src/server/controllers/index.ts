@@ -1,0 +1,1 @@
+export {getTopics, addTopic} from "./forum/topics"

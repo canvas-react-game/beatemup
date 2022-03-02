@@ -29,7 +29,7 @@ class TopicController {
         const topic = await addDBTopic(req.body);
         if (!topic) {
             return res.status(HttpStatuses.BadRequest).send(
-                { message: "Ошибка добавления топика" }
+                { message: "Ошибка добавления топика" },
             );
         }
         return res.status(HttpStatuses.Created).send(topic);

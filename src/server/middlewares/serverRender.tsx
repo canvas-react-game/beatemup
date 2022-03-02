@@ -12,6 +12,7 @@ import {
     signOutSuccess,
 } from "@/actions/auth.actions";
 import AuthService from "@/server/services/auth";
+import { HttpStatuses } from "@/server/utils/httpStatuses";
 
 const store = configureStore();
 
@@ -42,7 +43,7 @@ export const serverRenderMiddleware = (
 
     // TODO: если отдавать 304 ридерект,
     // то ломаются service-workers, надо подумать что с этим сделать
-    res.status(200).send(
+    res.status(HttpStatuses.OK).send(
         makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState),
     );
 

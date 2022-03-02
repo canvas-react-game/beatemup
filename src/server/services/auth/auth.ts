@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatuses } from "@/server/utils/httpStatuses";
 
 class AuthService {
     // Авторизован так или иначе
@@ -14,7 +15,7 @@ class AuthService {
         if (this.isAuthenticated) {
             next();
         } else {
-            res.status(403).send({ message: "Пользователь не авторизован" });
+            res.status(HttpStatuses.Unauthorized).send({ message: "Пользователь не авторизован" });
         }
     }
 }

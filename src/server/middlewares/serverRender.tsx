@@ -11,7 +11,7 @@ import {
     signInSuccess,
     signOutSuccess,
 } from "@/actions/auth.actions";
-import AuthService from "@/server/services/auth"
+import AuthService from "@/server/services/auth";
 
 const store = configureStore();
 

@@ -3,7 +3,7 @@ import { base } from "@/services/API/API.service";
 import {
     apiProxy,
 } from "../middlewares";
-import AuthService from "@/server/services/auth"
+import AuthService from "@/server/services/auth";
 
 const yandexApiRouter = express.Router();
 

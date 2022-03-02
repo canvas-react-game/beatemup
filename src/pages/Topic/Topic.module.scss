@@ -1,0 +1,12 @@
+@use "../../styles/variables.module" as variables;
+
+.container {
+  padding: variables.$spacing_x1;
+}
+
+.comments {
+  padding: variables.$spacing_x2;
+  margin-top: variables.$spacing_x2;
+  height: 450px;
+  overflow: scroll;
+}

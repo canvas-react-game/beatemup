@@ -22,6 +22,9 @@ export const routes: Routes = {
     forum: {
         path: "/forum",
     },
+    topic: {
+        path: "/topic/:id",
+    },
     leaderboard: {
         path: "/leaderboard",
     },

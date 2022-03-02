@@ -2,7 +2,6 @@ import express from "express";
 import { routes, Routes } from "@/config/routes/routes";
 import {
     serverRenderMiddleware,
-    apiProxy,
     limiterMiddleware,
     redirectMiddleware,
 } from "../middlewares";
@@ -17,7 +16,7 @@ const appRoutes = (function getRoutes(routesMap: Routes): string[] {
 }(routes));
 appRoutes.push("/");
 
-appRouter.get(appRoutes, limiterMiddleware, apiProxy, serverRenderMiddleware);
+appRouter.get(appRoutes, limiterMiddleware, serverRenderMiddleware);
 // NOTE: Если дошли до сюда, то такого роута не существует и нужно сделать redirect или 404
 appRouter.get("*", redirectMiddleware);
 

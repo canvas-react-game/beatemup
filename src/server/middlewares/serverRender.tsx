@@ -9,9 +9,9 @@ import { makeHTMLPage } from "../utils/makeHTMLPage";
 import App from "../../components/App";
 import {
     signInSuccess,
-    signInOAuthSuccess,
     signOutSuccess,
 } from "@/actions/auth.actions";
+import AuthService from "@/server/services/auth"
 
 const store = configureStore();
 
@@ -23,10 +23,8 @@ export const serverRenderMiddleware = (
     const location = req.url;
     const hostUrl = `${req.protocol}://${req.get("Host")}`;
 
-    if (req.cookies.isSignedIn === "true") {
+    if (AuthService.isAuthenticated) {
         store.dispatch(signInSuccess());
-    } else if (req.cookies.setSignedInOAuth === "true") {
-        store.dispatch(signInOAuthSuccess());
     } else {
         store.dispatch(signOutSuccess());
     }

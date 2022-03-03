@@ -6,3 +6,9 @@
   margin-top: variables.$spacing_x1;
   padding: variables.$spacing_x1;
 }
+
+.buttonContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: variables.$spacing_x1;
+}

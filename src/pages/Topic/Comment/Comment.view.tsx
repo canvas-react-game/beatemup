@@ -1,5 +1,7 @@
 import React, { FC } from "react";
-import { Comment, Avatar } from "antd";
+import { Comment } from "antd";
+
+import styles from "./Comment.module.scss";
 
 interface Props {
     author?: string,
@@ -9,13 +11,10 @@ interface Props {
 const CommentContainer: FC<Props> = ({ author, message }) => {
     return (
         <Comment
-            author={<a>Hans Olo</a>}
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo"/>}
+            className={styles.comment}
+            author={<a>{author ?? "author"}</a>}
             content={
-                <p>
-                    We supply a series of design principles, practical patterns and high quality design
-                    resources.
-                </p>
+                <p>{message ?? "Say what?"}</p>
             }
         />
     );

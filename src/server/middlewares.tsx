@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { root, base } from "@/services/API/API.service";
+import { apiBaseUrl, apiBase, baseDomain } from "@/services/API/API.service";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
-import { StaticRouterContext } from "react-router";
 import { Provider } from "react-redux";
 import configureStore from "@/store/store";
 import Helmet from "react-helmet";
@@ -59,10 +58,10 @@ const limiterMiddleware = rateLimit({
     max: 100,
 });
 
-const apiProxy = createProxyMiddleware(base, {
-    target: root,
+const apiProxy = createProxyMiddleware(apiBase, {
+    target: apiBaseUrl,
     changeOrigin: true,
-    cookieDomainRewrite: "localhost",
+    cookieDomainRewrite: baseDomain,
 });
 
 export { serverRenderMiddleware, limiterMiddleware, apiProxy };

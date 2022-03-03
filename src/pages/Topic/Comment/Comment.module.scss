@@ -1,0 +1,9 @@
+@use "../../../styles/variables.module" as variables;
+
+.comment {
+  color: white;
+
+  &.ant-comment-content-author-name {
+    color: variables.$green;
+  }
+}

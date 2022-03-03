@@ -2,17 +2,14 @@ import {
     useRef,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { shallowEqual, useDispatch } from "react-redux";
-
-import { useSelector } from "@/hooks/useSelector";
 
 export const useForum = () => {
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const history = useHistory();
 
     const table = useRef<HTMLDivElement>(null);
 
-    const { data: da, isLoading } = useSelector((state) => state.leaderBoard, shallowEqual);
+    //const { data: da, isLoading } = useSelector((state) => state.leaderBoard, shallowEqual);
     const data = [
         { data: { id: 1, title: "XXX", messagesCount: 4 } },
         { data: { id: 2, title: "XXX2", messagesCount: 43 } },
@@ -28,7 +25,7 @@ export const useForum = () => {
 
     return {
         data,
-        isLoading,
+        isLoading: false,
         table,
         history,
     };

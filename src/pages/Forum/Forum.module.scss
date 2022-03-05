@@ -2,7 +2,8 @@
 
 .tableContainer {
   user-select: none;
-  height: calc(100vh - #{variables.$navbar_height} - #{variables.$pagination_height});
+  padding: 0 variables.$spacing_x3;
+  height: fit-content;
   margin: 0;
 }
 
@@ -19,4 +20,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: end;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: variables.$spacing_x3;
 }

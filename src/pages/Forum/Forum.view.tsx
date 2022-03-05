@@ -6,6 +6,8 @@ import Container from "@/components/Container";
 import PageMeta from "@/components/PageMeta";
 import Header from "@/components/Header";
 import { routes } from "@/config/routes/routes";
+import Button from "@/components/Button";
+
 import styles from "./Forum.module.scss";
 import { useForum } from "./Forum.helpers";
 
@@ -77,10 +79,13 @@ const Forum: FC = () => {
                         spinning: isLoading,
                     }}
                     scroll={{
-                        y: 500,
+                        y: 400,
                     }}
                     pagination={false}
                 />
+            </div>
+            <div className={styles.buttonContainer}>
+                <Button type='primary' >Создать</Button>
             </div>
         </Container>
     );

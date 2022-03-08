@@ -11,7 +11,6 @@ import {
     signInSuccess,
     signOutSuccess,
 } from "@/actions/auth.actions";
-import AuthService from "@/server/services/auth";
 import { HttpStatuses } from "@/server/utils/httpStatuses";
 
 const store = configureStore();
@@ -24,7 +23,7 @@ export const serverRenderMiddleware = (
     const location = req.url;
     const hostUrl = `${req.protocol}://${req.get("Host")}`;
 
-    if (AuthService.isAuthenticated) {
+    if (req.cookies.uuid && req.cookies.authCookie) {
         store.dispatch(signInSuccess());
     } else {
         store.dispatch(signOutSuccess());

@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { checkAuth } from "server/middlewares/auth";
 import TopicController from "@/server/controllers";
 import { apiBase } from "@/services/API/API.service";
-import { checkAuth } from "server/middlewares/auth";
 
 const apiRouter = express.Router();
 const middlewares = [

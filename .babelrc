@@ -7,6 +7,10 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "legacy": true }]
+  ],
   "env": {
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]

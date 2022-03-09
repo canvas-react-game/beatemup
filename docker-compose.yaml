@@ -1,0 +1,64 @@
+# docker-compose.yaml
+version: "0"
+
+services:
+    # postgresql ставим впереди server-app, так как тот server-app от этого сервиса
+    postgres:
+      # Здесь именно image, потому что мы его сами не пишем, он будет взят с докерхаба
+      image: postgres:14.1-alpine
+      restart: always
+      environment:
+        POSTGRES_USER: romansavelev
+        POSTGRES_PASSWORD: 
+        POSTGRES_DB: dungeonCrawler
+      volumes:
+        - db:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+      # Появился новый параметр — networks, о нём ниже
+      networks:
+          # Назвать сеть можно как угодно
+          - awesome
+    # Фронт с SSR
+    server-app:
+          # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
+          # находится в папке рядом с docker-compose.yaml
+      build:
+        context: .
+          # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
+      ports:
+        - "3000:3000"
+      # Проброс файлов, откуда с хоста, куда в контейнер
+      volumes:
+        - ./shared:/var/www/shared
+      # Зависимость от сервиса postgres
+      depends_on:
+        - postgres
+      # Переменные окружения
+      env-file:
+        ./dev.ev
+      # Важно добавить сеть всем сервисам, которые должны взаимодействовать между собой
+      networks:
+        - awesome
+    # GUI для управления postgres
+    pgadmin:
+      container_name: pgadmin
+      image: dpage/pgadmin4:4.18
+      restart: always
+      environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: secret
+        PGADMIN_LISTEN_PORT: 7070
+      ports:
+        - "7070:7070"
+      volumes:
+        - pgadmin-data:/var/lib/pgadmin
+      depends_on:
+        - postgres
+      networks:
+        - awesome
+
+# Настройки созданной сети между сервисами
+networks:
+    awesome:
+        driver: bridge 

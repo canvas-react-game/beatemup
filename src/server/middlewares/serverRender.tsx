@@ -5,13 +5,13 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Helmet from "react-helmet";
 import configureStore from "@/store/store";
-import { makeHTMLPage } from "../utils/utils";
+import { makeHTMLPage } from "../utils/makeHTMLPage";
 import App from "../../components/App";
 import {
     signInSuccess,
-    signInOAuthSuccess,
     signOutSuccess,
 } from "@/actions/auth.actions";
+import { HttpStatuses } from "@/server/utils/httpStatuses";
 
 const store = configureStore();
 
@@ -23,10 +23,8 @@ export const serverRenderMiddleware = (
     const location = req.url;
     const hostUrl = `${req.protocol}://${req.get("Host")}`;
 
-    if (req.cookies.isSignedIn === "true") {
+    if (req.cookies.uuid && req.cookies.authCookie) {
         store.dispatch(signInSuccess());
-    } else if (req.cookies.setSignedInOAuth === "true") {
-        store.dispatch(signInOAuthSuccess());
     } else {
         store.dispatch(signOutSuccess());
     }
@@ -44,7 +42,7 @@ export const serverRenderMiddleware = (
 
     // TODO: если отдавать 304 ридерект,
     // то ломаются service-workers, надо подумать что с этим сделать
-    res.status(200).send(
+    res.status(HttpStatuses.OK).send(
         makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState),
     );
 

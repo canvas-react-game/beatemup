@@ -8,6 +8,7 @@ export enum Method {
 
 export const root = "https://ya-praktikum.tech";
 export const base = "/api/v2";
+export const apiBase = "/api/local";
 
 class APIService {
     async request(method: Method, url: string, data = {}) {

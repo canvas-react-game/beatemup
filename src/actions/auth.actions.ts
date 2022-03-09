@@ -4,8 +4,6 @@ import { ThunkAction } from "redux-thunk";
 import { History } from "history";
 import api, { SignInData } from "@/api/Auth";
 import { routes } from "@/config/routes/routes";
-import { setSigned, setSignedOAuth } from "@/helpers/acess";
-
 import {
     LOADING, SIGN_IN, SIGN_OUT, SIGN_IN_OAUTH,
 } from "./types/auth.types";
@@ -55,7 +53,6 @@ export const signIn = (
         const response = await api.signIn(data);
         if (response) {
             dispatch(signInSuccess());
-            setSigned(true);
             history.push(routes.main.path);
         } else {
             dispatch(loading(false));
@@ -68,7 +65,6 @@ export const signIn = (
 // eslint-disable-next-line max-len
 export const signInOAuth = (history: History): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(signInOAuthSuccess());
-    setSignedOAuth(true);
     history.push(routes.main.path);
 };
 
@@ -79,8 +75,6 @@ export const signOut = (history: History): ThunkAction<void, unknown, unknown, A
         const response = await api.logOut();
         if (response) {
             dispatch(signOutSuccess());
-            setSigned(false);
-            setSignedOAuth(false);
             history.push(routes.signIn.path);
         } else {
             dispatch(loading(false));

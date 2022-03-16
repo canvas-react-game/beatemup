@@ -4,7 +4,6 @@ import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
 
 export interface ForumState {
     isLoading: boolean
-    // todo
     data: any
 }
 

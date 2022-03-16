@@ -14,7 +14,7 @@ export const useLeaderBoard = () => {
     const dispatch = useDispatch();
 
     const table = useRef<HTMLDivElement>(null);
-    const [tableScroll, setTableScroll] = useState(window.innerHeight);
+    const [tableScroll, setTableScroll] = useState(window?.innerHeight);
 
     const { data, isLoading } = useSelector((state) => state.leaderBoard, shallowEqual);
 

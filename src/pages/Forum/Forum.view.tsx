@@ -1,15 +1,12 @@
 import React, { FC, useCallback } from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useDispatch } from "react-redux";
 
 import Container from "@/components/Container";
 import PageMeta from "@/components/PageMeta";
 import Header from "@/components/Header";
 import { routes } from "@/config/routes/routes";
 import Button from "@/components/Button";
-import { useMountEffect } from "@/hooks/useMountEffect";
-import { loadForumTopics } from "@/actions/forum.actions";
 
 import styles from "./Forum.module.scss";
 import { useForum } from "./Forum.helpers";
@@ -17,7 +14,7 @@ import { useForum } from "./Forum.helpers";
 interface ForumRecord {
     id: number,
     title: string,
-    messagesCount: number
+    comments_count: number
 }
 
 const Forum: FC = () => {
@@ -27,20 +24,15 @@ const Forum: FC = () => {
         table,
         history,
     } = useForum();
-    const dispatch = useDispatch();
 
-    useMountEffect(() => {
-        dispatch(loadForumTopics());
-    });
-
-    const columns: ColumnsType<{ data: ForumRecord }> = [
+    const columns: ColumnsType<ForumRecord> = [
         {
             title: "Заголовок",
             dataIndex: ["data", "title"],
-            render: (value: string, item: { data: ForumRecord }) => {
+            render: (value: string, item: ForumRecord) => {
                 return (
                     <div className={styles.title}>
-                        {item.data.title}
+                        {item?.title}
                     </div>
                 );
             },
@@ -48,10 +40,10 @@ const Forum: FC = () => {
         {
             title: "Кол-во сообщений",
             dataIndex: ["data", "messagesCount"],
-            render: (value: string, item: { data: ForumRecord }) => {
+            render: (value: string, item: ForumRecord) => {
                 return (
                     <div className={styles.counter}>
-                        {item.data.messagesCount}
+                        {item?.comments_count ?? 0}
                     </div>
                 );
             },
@@ -63,12 +55,12 @@ const Forum: FC = () => {
     ];
 
     const handleRowClick = useCallback(
-        (record: { data: ForumRecord }) => ({ onClick: () => history.push(routes.topic.path.replace(
-            ":id", record.data.id.toString())),
+        (record: ForumRecord) => ({ onClick: () => history.push(routes.topic.path.replace(
+            ":id", record?.id.toString())),
         }), []);
 
     const getRowKey = useCallback(
-        (record: { data: ForumRecord }) => record.data.id, []);
+        (record: ForumRecord) => record?.id, []);
 
     return (
         <Container>

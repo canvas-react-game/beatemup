@@ -11,17 +11,20 @@ import {
 } from "@/reducers/leaderboard.reducer";
 
 import { isServer } from "@/helpers/environment";
+import { ForumState, forumReducer } from "@/reducers/forum.reducer";
 
 export interface RootState {
     auth: AuthState;
     profile: ProfileState;
     leaderBoard: LeaderBoardState;
+    forum: ForumState;
 }
 
 const rootReducer = combineReducers({
     auth: authReducer,
     profile: profileReducer,
     leaderBoard: leaderBoardReducer,
+    forum: forumReducer,
 });
 
 const configureStore = () => createStore(

@@ -1,31 +1,30 @@
 import {
     useRef,
 } from "react";
+import { shallowEqual, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { useSelector } from "@/hooks/useSelector";
+import { useMountEffect } from "@/hooks/useMountEffect";
+import { loadForumTopics } from "@/actions/forum.actions";
+
 export const useForum = () => {
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const table = useRef<HTMLDivElement>(null);
 
-    //const { data: da, isLoading } = useSelector((state) => state.leaderBoard, shallowEqual);
-    const data = [
-        { data: { id: 1, title: "XXX", messagesCount: 4 } },
-        { data: { id: 2, title: "XXX2", messagesCount: 43 } },
-        { data: { id: 3, title: "XXX", messagesCount: 4 } },
-        { data: { id: 4, title: "XXX2", messagesCount: 43 } },
-        { data: { id: 5, title: "XXX", messagesCount: 4 } },
-        { data: { id: 6, title: "XXX2", messagesCount: 43 } },
-        { data: { id: 7, title: "XXX", messagesCount: 4 } },
-        { data: { id: 8, title: "XXX2", messagesCount: 43 } },
-        { data: { id: 9, title: "XXX", messagesCount: 4 } },
-        { data: { id: 10, title: "XXX2", messagesCount: 43 } },
-    ];
+    const { data, isLoading } = useSelector((state) => state.forum, shallowEqual);
+
+    useMountEffect(() => {
+        dispatch(loadForumTopics());
+    });
+
+    console.log("data: ", data);
 
     return {
         data,
-        isLoading: false,
+        isLoading,
         table,
         history,
     };

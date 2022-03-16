@@ -1,9 +1,9 @@
 import { notification } from "antd";
-import APIService, { Method } from "services/API/API.service";
+import { Method, LocalAPIService } from "@/services/API/API.service";
 
 type ForumData = {};
 
-const root = "api/local/forum";
+const root = "topics";
 
 class ForumApi {
     isSuccessfulRequest(response: Response) {
@@ -26,7 +26,7 @@ class ForumApi {
     }
 
     public async getTopics(): Promise<ForumData[] | []> {
-        const response = await APIService.request(Method.GET, root);
+        const response = await LocalAPIService.request(Method.GET, root);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {

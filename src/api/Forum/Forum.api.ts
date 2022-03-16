@@ -36,6 +36,18 @@ class ForumApi {
         }
         return [];
     }
+
+    public async getTopic(id: number): Promise<ForumData | null> {
+        const response = await LocalAPIService.request(Method.GET, `${root}/${id}`);
+        if (response) {
+            const success = this.isSuccessfulRequest(response);
+            if (success) {
+                const result = await response.json();
+                return result ?? null;
+            }
+        }
+        return null;
+    }
 }
 
 export default new ForumApi();

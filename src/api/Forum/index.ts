@@ -1,1 +1,1 @@
-export { default } from './Forum.api';
+export { default } from "./Forum.api";

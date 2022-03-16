@@ -1,4 +1,4 @@
-//import { LeaderBoardData } from "config/leaderboard";
+// import { LeaderBoardData } from "config/leaderboard";
 import { ForumState } from "reducers/forum.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
@@ -29,7 +29,7 @@ const setLoading = (isLoading: boolean): SetLoading => ({
 });
 
 export const loadTopic = (id: number):
-    ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(setLoading(true));
     try {
         const data = await api.getTopic(id);

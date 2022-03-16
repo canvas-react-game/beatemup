@@ -29,24 +29,20 @@ const Forum: FC = () => {
         {
             title: "Заголовок",
             dataIndex: ["data", "title"],
-            render: (value: string, item: ForumRecord) => {
-                return (
-                    <div className={styles.title}>
-                        {item?.title}
-                    </div>
-                );
-            },
+            render: (value: string, item: ForumRecord) => (
+                <div className={styles.title}>
+                    {item?.title}
+                </div>
+            ),
         },
         {
             title: "Кол-во сообщений",
             dataIndex: ["data", "messagesCount"],
-            render: (value: string, item: ForumRecord) => {
-                return (
-                    <div className={styles.counter}>
-                        {item?.comments_count ?? 0}
-                    </div>
-                );
-            },
+            render: (value: string, item: ForumRecord) => (
+                <div className={styles.counter}>
+                    {item?.comments_count ?? 0}
+                </div>
+            ),
         },
         {
             title: "Действия",
@@ -54,13 +50,11 @@ const Forum: FC = () => {
         },
     ];
 
-    const handleRowClick = useCallback(
-        (record: ForumRecord) => ({ onClick: () => history.push(routes.topic.path.replace(
-            ":id", record?.id.toString())),
-        }), []);
+    const handleRowClick = useCallback((record: ForumRecord) => ({
+        onClick: () => history.push(routes.topic.path.replace(":id", record?.id.toString())),
+    }), []);
 
-    const getRowKey = useCallback(
-        (record: ForumRecord) => record?.id, []);
+    const getRowKey = useCallback((record: ForumRecord) => record?.id, []);
 
     return (
         <Container>

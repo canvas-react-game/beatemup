@@ -8,16 +8,14 @@ interface Props {
     message?: string,
 }
 
-const CommentContainer: FC<Props> = ({ author, message }) => {
-    return (
-        <Comment
-            className={styles.comment}
-            author={<a>{author ?? "author"}</a>}
-            content={
-                <p>{message ?? "Say what?"}</p>
-            }
-        />
-    );
-};
+const CommentContainer: FC<Props> = ({ author, message }) => (
+    <Comment
+        className={styles.comment}
+        author={<a>{author ?? "author"}</a>}
+        content={
+            <p>{message ?? "Say what?"}</p>
+        }
+    />
+);
 
 export default CommentContainer;

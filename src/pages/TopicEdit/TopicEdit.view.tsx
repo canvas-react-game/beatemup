@@ -1,5 +1,7 @@
 import React, { FC } from "react";
-import {Button, Form, Input as AntInput, Typography} from "antd";
+import {
+    Button, Form, Input as AntInput, Typography,
+} from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import Container from "@/components/Container";
@@ -14,7 +16,9 @@ import { TopicFieldNames, useTopicForm } from "./TopicEdit.helpers";
 const { TextArea } = AntInput;
 
 const TopicEdit: FC = () => {
-    const { isLoading, onFinish, onFinishFailed, currentPath, submitLabel, titleLabel } = useTopicForm();
+    const {
+        isLoading, onFinish, onFinishFailed, currentPath, submitLabel, titleLabel,
+    } = useTopicForm();
 
     return (
         <PageLoader isSpinning={isLoading}>

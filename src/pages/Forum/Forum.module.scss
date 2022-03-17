@@ -2,7 +2,7 @@
 
 .tableContainer {
   user-select: none;
-  padding: 0 variables.$spacing_x3;
+  padding: 0 variables.$spacing_x2;
   height: fit-content;
   margin: 0;
 }
@@ -23,7 +23,7 @@
 }
 
 .buttonContainer {
-  display: flex;
-  align-items: flex-start;
-  padding: variables.$spacing_x3;
+  position: absolute;
+  bottom: 0;
+  padding: variables.$spacing_x2;
 }

@@ -11,7 +11,6 @@ export const useTopic = () => {
     const { pathname } = useLocation();
 
     const id = pathname.split("/").slice(-1)[0];
-    console.log(id);
 
     useMountEffect(() => {
         dispatch(loadTopic(Number(id)));

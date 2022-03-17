@@ -53,7 +53,7 @@ export const createTopic = (
     try {
         const response = await api.createTopic(data);
         if (response) {
-            //dispatch(signInSuccess());
+            // dispatch(signInSuccess());
             history.push(routes.forum.path);
         } else {
             dispatch(setLoading(false));
@@ -71,7 +71,7 @@ export const updateTopic = (
     try {
         const response = await api.updateTopic(id, data);
         if (response) {
-            //dispatch(signInSuccess());
+            // dispatch(signInSuccess());
             // todo
         } else {
             dispatch(setLoading(false));

@@ -1,7 +1,10 @@
-// import { LeaderBoardData } from "config/leaderboard";
 import { ForumState } from "reducers/forum.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
+import { History } from "history";
+
+import { routes } from "@/config/routes/routes";
+import { TopicEditData } from "@/reducers/topic.reducer";
 
 import { LOAD, SET_LOADING } from "./types/topic.types";
 import api from "../api/Forum";
@@ -37,6 +40,42 @@ ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
             dispatch(getTopic(data));
         }
         dispatch(setLoading(false));
+    } catch (error) {
+        dispatch(setLoading(false));
+    }
+};
+
+export const createTopic = (
+    data: TopicEditData,
+    history: History,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await api.createTopic(data);
+        if (response) {
+            //dispatch(signInSuccess());
+            history.push(routes.forum.path);
+        } else {
+            dispatch(setLoading(false));
+        }
+    } catch (error) {
+        dispatch(setLoading(false));
+    }
+};
+
+export const updateTopic = (
+    id: number,
+    data: TopicEditData,
+): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await api.updateTopic(id, data);
+        if (response) {
+            //dispatch(signInSuccess());
+            // todo
+        } else {
+            dispatch(setLoading(false));
+        }
     } catch (error) {
         dispatch(setLoading(false));
     }

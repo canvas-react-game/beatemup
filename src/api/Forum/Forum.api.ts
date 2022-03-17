@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import { Method, LocalAPIService } from "@/services/API/API.service";
+import { TopicEditData } from "@/reducers/topic.reducer";
 
 type ForumData = {};
 
@@ -39,6 +40,30 @@ class ForumApi {
 
     public async getTopic(id: number): Promise<ForumData | null> {
         const response = await LocalAPIService.request(Method.GET, `${root}/${id}`);
+        if (response) {
+            const success = this.isSuccessfulRequest(response);
+            if (success) {
+                const result = await response.json();
+                return result ?? null;
+            }
+        }
+        return null;
+    }
+
+    public async createTopic(data: TopicEditData): Promise<boolean> {
+        const response = await LocalAPIService.request(Method.POST, root, data);
+        if (response) {
+            const success = this.isSuccessfulRequest(response);
+            if (success) {
+                const result = await response.json();
+                return result;
+            }
+        }
+        return false;
+    }
+
+    public async updateTopic(id: number, data: TopicEditData): Promise<TopicEditData | null> {
+        const response = await LocalAPIService.request(Method.PUT, `${root}/${id}`, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {

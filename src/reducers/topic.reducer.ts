@@ -1,15 +1,30 @@
 import { TopicAction } from "@/actions/topic.actions";
 import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
-// import { LeaderBoardData } from "@/config/leaderboard";
+
+interface TopicData {
+    id: number,
+    title: string,
+    body: string,
+    created_at: string,
+    user_id: number,
+    comments_count: number | null,
+}
 
 export interface TopicState {
     isLoading: boolean
-    data: any
+    data: TopicData
 }
 
 export const TOPIC_INIT_STATE: TopicState = {
     isLoading: false,
-    data: {},
+    data: {
+        id: 0,
+        title: "",
+        body: "",
+        created_at: "",
+        user_id: 0,
+        comments_count: null,
+    },
 };
 
 /* eslint-disable @typescript-eslint/default-param-last */

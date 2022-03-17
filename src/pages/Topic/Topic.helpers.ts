@@ -17,7 +17,7 @@ export const useTopic = () => {
     });
 
     return {
-        data,
+        topic: data,
         isLoading,
     };
 };

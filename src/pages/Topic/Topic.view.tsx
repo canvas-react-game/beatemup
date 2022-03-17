@@ -15,16 +15,8 @@ import { useTopic } from "./Topic.helpers";
 const { Title, Text } = Typography;
 
 const Topic: FC = () => {
-    const { data, isLoading } = useTopic();
-    console.log(data);
-
-    /*
-    * body: "Обсуждаем ситуацию"
-    comments_count: null
-    created_at: "1998-11-02"
-    id: 2
-    title: "Топик"
-    user_id: 0*/
+    const { topic, isLoading } = useTopic();
+    const { title, body } = topic;
 
     return (
         <PageLoader isSpinning={isLoading}>
@@ -32,8 +24,8 @@ const Topic: FC = () => {
                 <PageMeta title="Topic" description="About game" />
                 <Header currentPath={routes.topic.path} />
                 <div className={styles.container}>
-                    <Title level={2}>{data.title}</Title>
-                    <Text>{data.body}</Text>
+                    <Title level={2}>{title}</Title>
+                    <Text>{body}</Text>
                     <div className={styles.comments}>
                         <CommentContainer/>
                         <CommentContainer/>

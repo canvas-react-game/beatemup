@@ -56,6 +56,8 @@ const Forum: FC = () => {
 
     const getRowKey = useCallback((record: ForumRecord) => record?.id, []);
 
+    const onCreate = useCallback(() => history.push(routes.topicEdit.path), []);
+
     return (
         <Container>
             <PageMeta title="Forum" description="Game forum" />
@@ -79,7 +81,7 @@ const Forum: FC = () => {
                 />
             </div>
             <div className={styles.buttonContainer}>
-                <Button type='primary' >Создать</Button>
+                <Button type="primary" onClick={onCreate}>Создать</Button>
             </div>
         </Container>
     );

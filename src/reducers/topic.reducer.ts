@@ -1,10 +1,13 @@
 import { TopicAction } from "@/actions/topic.actions";
 import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
 
-interface TopicData {
-    id: number,
+export interface TopicEditData {
     title: string,
     body: string,
+}
+
+interface TopicData extends TopicEditData {
+    id: number,
     created_at: string,
     user_id: number,
     comments_count: number | null,

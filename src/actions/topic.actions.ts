@@ -53,7 +53,6 @@ export const createTopic = (
     try {
         const response = await api.createTopic(data);
         if (response) {
-            // dispatch(signInSuccess());
             history.push(routes.forum.path);
         } else {
             dispatch(setLoading(false));

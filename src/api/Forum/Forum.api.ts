@@ -11,6 +11,7 @@ class ForumApi {
         const errorMessage = "Отправленные данные не корректны";
         switch (response.status) {
             case 200:
+            case 201:
                 return true;
             case 400:
                 notification.error({ message: errorMessage });

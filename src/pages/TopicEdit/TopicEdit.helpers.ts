@@ -19,11 +19,15 @@ export const useTopicForm = () => {
     const { pathname } = useLocation();
 
     const id = pathname.split("/").slice(-1)[0];
-    const submitLabel = !isNaN(Number(id)) ? "Создать" : "Редактировать";
-    const titleLabel = !isNaN(Number(id)) ? "Создание темы" : "Редактирование темы";
+    const hasId = !isNaN(Number(id));
+
+    const submitLabel = hasId ? "Редактировать" : "Создать";
+    const titleLabel = hasId ? "Редактирование темы" : "Создание темы";
+
+    console.log(hasId);
 
     const onFinish = useCallback(async (data: TopicEditData) => {
-        if (!isNaN(Number(id))) {
+        if (hasId) {
             dispatch(updateTopic(Number(id), data));
         } else {
             dispatch(createTopic(data, history));

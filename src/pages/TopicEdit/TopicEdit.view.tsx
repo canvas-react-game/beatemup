@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import {
     Button, Form, Input as AntInput, Typography,
 } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 
 import Container from "@/components/Container";
 import PageMeta from "@/components/PageMeta";
@@ -44,7 +44,7 @@ const TopicEdit: FC = () => {
                         >
                             <Input
                                 placeholder="заголовок"
-                                prefix={<UserOutlined />}
+                                prefix={<RightOutlined />}
                             />
                         </Form.Item>
                         <Form.Item

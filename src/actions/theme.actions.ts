@@ -10,10 +10,10 @@ import {
 
 type ThemeRequest = {
     type: typeof SET_THEME;
-    payload: { data: ThemeData };
+    payload: { data: ThemeData | null };
 };
 
-export const themeRequest = (data: ThemeData): ThemeRequest => ({
+export const themeRequest = (data: ThemeData | null): ThemeRequest => ({
     type: SET_THEME,
     payload: { data },
 });

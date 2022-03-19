@@ -8,7 +8,7 @@ export interface ThemeData {
 const root = "theme";
 
 class AuthApi {
-    public async getTheme(): Promise<ThemeData> {
+    public async getTheme(): Promise<ThemeData | null> {
         const response = await APIService.request(Method.GET, `${root}`);
         if (response.status === 200) {
             const result = await response.json();
@@ -17,7 +17,7 @@ class AuthApi {
         return null;
     }
 
-    public async updateTheme(data: ThemeData): Promise<ThemeData> {
+    public async updateTheme(data: ThemeData): Promise<ThemeData | null> {
         const response = await APIService.request(Method.PUT, `${root}`, data);
         if (response.status === 200) {
             const result = await response.json();

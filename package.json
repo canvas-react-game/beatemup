@@ -12,7 +12,9 @@
     "start:server": "nodemon dist/server.js --watch",
     "start": "npm-run-all --print-label --parallel start:*",
     "eslint": "node_modules/.bin/eslint ./src --fix",
-    "stylelint": "node_modules/.bin/stylelint ./src --fix"
+    "stylelint": "node_modules/.bin/stylelint ./src --fix",
+    "prepush": "npm-run-all eslint stylelint test",
+    "husky": "node_modules/.bin/husky"
   },
   "keywords": [],
   "author": "",

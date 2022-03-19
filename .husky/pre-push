@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# npm run prepush
+npm run prepush
 git add .
 git diff-index --quiet HEAD || git commit -m "lint auto commit"

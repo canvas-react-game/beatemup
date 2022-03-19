@@ -6,18 +6,22 @@ import thunk from "redux-thunk";
 import { profileReducer, ProfileState } from "@/reducers/profile.reducer";
 import { authReducer, AuthState } from "@/reducers/auth.reducer";
 import { themeReducer, ThemeState } from "@/reducers/theme.reducer";
+import { topicReducer, TopicState } from "@/reducers/topic.reducer";
 import {
     leaderBoardReducer,
     LeaderBoardState,
 } from "@/reducers/leaderboard.reducer";
 
 import { isServer } from "@/helpers/environment";
+import { ForumState, forumReducer } from "@/reducers/forum.reducer";
 
 export interface RootState {
     auth: AuthState;
     profile: ProfileState;
     leaderBoard: LeaderBoardState;
     theme: ThemeState
+    forum: ForumState;
+    topic: TopicState;
 }
 
 const rootReducer = combineReducers({
@@ -25,6 +29,8 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     leaderBoard: leaderBoardReducer,
     theme: themeReducer,
+    forum: forumReducer,
+    topic: topicReducer,
 });
 
 const configureStore = () => createStore(

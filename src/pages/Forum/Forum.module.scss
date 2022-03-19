@@ -1,0 +1,29 @@
+@use "./src/styles/variables.module.scss" as variables;
+
+.tableContainer {
+  user-select: none;
+  padding: 0 variables.$spacing_x2;
+  height: fit-content;
+  margin: 0;
+}
+
+.title {
+  cursor: pointer;
+}
+
+.counter {
+  background-color: variables.$green;
+  border-radius: 15px;
+  height: 25px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
+  padding: variables.$spacing_x2;
+}

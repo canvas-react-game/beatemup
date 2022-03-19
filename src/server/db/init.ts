@@ -3,7 +3,7 @@ import { Topic } from "./forum/models/topic";
 
 const dbName = "dungeonCrawler";
 const username = "postgres";
-const password = "242090";
+const password = "root";
 const host = "localhost";
 const port = 5432;
 

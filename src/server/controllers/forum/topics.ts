@@ -25,6 +25,16 @@ class TopicController {
     }
 
     @Safe
+    async getTopic(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const topic = await getDBTopic(id);
+        if (!topic) {
+            return res.status(HttpStatuses.BadRequest).send({ message: "Топики отсутствуют" });
+        }
+        return res.status(HttpStatuses.OK).send(topic);
+    }
+
+    @Safe
     async add(req: Request, res: Response) {
         const topic = await addDBTopic(req.body);
         if (!topic) {

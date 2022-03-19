@@ -11,6 +11,7 @@ const middlewares = [
 ];
 
 apiRouter.get(`${apiBase}/topics`, ...middlewares, TopicController.get);
+apiRouter.get(`${apiBase}/topics/:id`, ...middlewares, TopicController.getTopic);
 apiRouter.post(`${apiBase}/topics`, ...middlewares, TopicController.add);
 apiRouter.put(`${apiBase}/topics/:id`, ...middlewares, TopicController.update);
 apiRouter.delete(`${apiBase}/topics/:id`, ...middlewares, TopicController.delete);

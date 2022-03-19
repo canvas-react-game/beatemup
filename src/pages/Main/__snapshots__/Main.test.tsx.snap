@@ -3,7 +3,9 @@
 exports[`Main page renders correctly 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": <body
+    class="light"
+  >
     <div>
       <div
         class="container"
@@ -43,6 +45,14 @@ Object {
             <div
               class="buttonContainer"
             />
+            <button
+              class="ant-btn ant-btn-primary"
+              type="button"
+            >
+              <span>
+                Светлая
+              </span>
+            </button>
           </div>
         </div>
         <div
@@ -111,6 +121,14 @@ Object {
           <div
             class="buttonContainer"
           />
+          <button
+            class="ant-btn ant-btn-primary"
+            type="button"
+          >
+            <span>
+              Светлая
+            </span>
+          </button>
         </div>
       </div>
       <div

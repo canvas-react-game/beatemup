@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 import { routes as appRoutes } from "@/config/routes/routes";
 import { useSelector } from "@/hooks/useSelector";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
-import { useHeader } from "./Header.helpers";
+import { useHeader, useTheme } from "./Header.helpers";
 
 interface Props {
     currentPath?: string;
@@ -14,6 +15,7 @@ interface Props {
 
 const Header: FC<Props> = ({ currentPath }) => {
     const { renderSignOutButton } = useHeader();
+    const { theme, changeTheme } = useTheme();
 
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
     const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
@@ -28,6 +30,9 @@ const Header: FC<Props> = ({ currentPath }) => {
                 <div className={styles.buttonContainer}>
                     {(isSignedIn || isSignedInOAuth) && renderSignOutButton()}
                 </div>
+                <Button type="primary" onClick={changeTheme}>
+                    {theme === "light" ? "Светлая" : "Темная"}
+                </Button>
             </div>
         </div>
     );

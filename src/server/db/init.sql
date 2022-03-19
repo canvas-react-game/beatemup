@@ -4,7 +4,7 @@ CREATE TABLE topics (
   body VARCHAR NOT NULL,
   user_id INT,
   created_at Date NOT NULL,
-  comments_count INT,
+  comments_count INT
 );
 
 CREATE TABLE reaction_type (
@@ -28,4 +28,10 @@ CREATE TABLE reactions (
   reaction_type_id INT NOT NULL,
   FOREIGN KEY (comment_id) REFERENCES comments (id) ON DELETE CASCADE,
   FOREIGN KEY (reaction_type_id) REFERENCES reaction_type (id) ON DELETE RESTRICT
+);
+
+CREATE TABLE themes (
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  theme VARCHAR NOT NULL
 );

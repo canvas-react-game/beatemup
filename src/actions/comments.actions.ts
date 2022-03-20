@@ -31,7 +31,7 @@ const setLoading = (isLoading: boolean): SetLoading => ({
 });
 
 export const loadComment = (id: number):
-    ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
+ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(setLoading(true));
     try {
         const data = await api.getTopic(id);

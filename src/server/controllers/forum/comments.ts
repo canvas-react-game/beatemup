@@ -18,22 +18,22 @@ class CommentsController {
     @Safe
     async get(req: Request, res: Response) {
         const id = Number(req.params.id);
-        const topics = await getDBComments(id);
-        if (!topics || !topics.length) {
+        const comments = await getDBComments(id);
+        if (!comments || !comments.length) {
             return res.status(HttpStatuses.BadRequest).send({ message: "Комментарии отсутствуют" });
         }
-        return res.status(HttpStatuses.OK).send(topics);
+        return res.status(HttpStatuses.OK).send(comments);
     }
 
     @Safe
     async add(req: Request, res: Response) {
-        const topic = await addDBComment(req.body);
-        if (!topic) {
+        const comment = await addDBComment(req.body);
+        if (!comment) {
             return res.status(HttpStatuses.BadRequest).send(
                 { message: "Ошибка добавления комментария" },
             );
         }
-        return res.status(HttpStatuses.Created).send(topic);
+        return res.status(HttpStatuses.Created).send(comment);
     }
 }
 

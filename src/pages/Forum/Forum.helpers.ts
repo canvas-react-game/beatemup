@@ -20,8 +20,6 @@ export const useForum = () => {
         dispatch(loadForumTopics());
     });
 
-    console.log("data: ", data);
-
     return {
         data,
         isLoading,

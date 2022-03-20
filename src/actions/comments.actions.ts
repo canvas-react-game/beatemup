@@ -1,9 +1,6 @@
-import { CommentsState } from "reducers/comments.reducer";
+import { CommentsEditData, CommentsState } from "reducers/comments.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { History } from "history";
-
-import { routes } from "@/config/routes/routes";
 
 import { LOAD, SET_LOADING } from "./types/topic.types";
 import api from "../api/Forum";
@@ -45,14 +42,13 @@ ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
 };
 
 export const createComment = (
-    data: any,
-    history: History,
+    data: CommentsEditData,
 ): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(setLoading(true));
     try {
-        const response = await api.createTopic(data);
+        const response = await api.createComment(data);
         if (response) {
-            history.push(routes.forum.path);
+            //history.push(routes.forum.path);
         } else {
             dispatch(setLoading(false));
         }

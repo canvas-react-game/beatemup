@@ -27,7 +27,7 @@ const Topic: FC = () => {
                     <Title level={2}>{title}</Title>
                     <Text>{body}</Text>
                     <div className={styles.comments}>
-                        {comments.map((comment) => <CommentContainer message={comment.message}/>)}
+                        {comments && comments.map((comment) => <CommentContainer key={comment.id} message={comment.message}/>)}
                     </div>
                     <CommentInput/>
                 </div>

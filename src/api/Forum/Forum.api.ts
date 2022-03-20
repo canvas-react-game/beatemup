@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import { Method, LocalAPIService } from "@/services/API/API.service";
 import { TopicEditData } from "@/reducers/topic.reducer";
-import { CommentsData } from "@/reducers/comments.reducer";
+import { CommentsData, CommentsEditData } from "@/reducers/comments.reducer";
 
 type ForumData = {};
 
@@ -67,6 +67,18 @@ class ForumApi {
 
     public async createTopic(data: TopicEditData): Promise<boolean> {
         const response = await LocalAPIService.request(Method.POST, topicRoot, data);
+        if (response) {
+            const success = this.isSuccessfulRequest(response);
+            if (success) {
+                const result = await response.json();
+                return result;
+            }
+        }
+        return false;
+    }
+
+    public async createComment(data: CommentsEditData): Promise<boolean> {
+        const response = await LocalAPIService.request(Method.POST, commentsRoot, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {

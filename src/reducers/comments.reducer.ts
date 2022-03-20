@@ -1,12 +1,15 @@
 import { CommentAction } from "@/actions/comments.actions";
 import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
 
-export interface CommentsData {
-    id: number,
+export interface CommentsEditData {
     message: string,
     user_id: number,
-    parent_id: number,
     topic_id: number,
+}
+
+export interface CommentsData extends CommentsEditData {
+    id: number,
+    parent_id: number,
 }
 
 export interface CommentsState {

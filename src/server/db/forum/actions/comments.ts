@@ -1,6 +1,7 @@
 import { Comment } from "../models/comments";
 
-export const getDBComments = (topicId: number): Promise<any> => Comment.findByPk(topicId);
+export const getDBComments = (id: number): Promise<any> => Comment
+    .findAll({ where: { topic_id: id } });
 
 // TODO: Разобраться с типами
 export const addDBComment = (comment: any): Promise<any> => {

@@ -34,7 +34,7 @@ export const loadComment = (id: number):
 ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(setLoading(true));
     try {
-        const data = await api.getTopic(id);
+        const data = await api.getComments(id);
         if (data) {
             dispatch(getComment(data));
         }

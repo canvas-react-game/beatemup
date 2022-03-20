@@ -17,8 +17,8 @@ const Safe = createSafeDecorator(commentsErrorHandler);
 class CommentsController {
     @Safe
     async get(req: Request, res: Response) {
-        const topicId = Number(req.params.topicId);
-        const topics = await getDBComments(topicId);
+        const id = Number(req.params.id);
+        const topics = await getDBComments(id);
         if (!topics || !topics.length) {
             return res.status(HttpStatuses.BadRequest).send({ message: "Комментарии отсутствуют" });
         }

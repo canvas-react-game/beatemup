@@ -41,8 +41,8 @@ class ForumApi {
         return [];
     }
 
-    public async getComments(): Promise<CommentsData[] | []> {
-        const response = await LocalAPIService.request(Method.GET, commentsRoot);
+    public async getComments(id: number): Promise<CommentsData[] | []> {
+        const response = await LocalAPIService.request(Method.GET, `${commentsRoot}/${id}`);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {

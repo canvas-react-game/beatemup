@@ -15,7 +15,7 @@ import { useTopic } from "./Topic.helpers";
 const { Title, Text } = Typography;
 
 const Topic: FC = () => {
-    const { topic, isLoading } = useTopic();
+    const { topic, comments, isLoading } = useTopic();
     const { title, body } = topic;
 
     return (
@@ -27,9 +27,7 @@ const Topic: FC = () => {
                     <Title level={2}>{title}</Title>
                     <Text>{body}</Text>
                     <div className={styles.comments}>
-                        <CommentContainer/>
-                        <CommentContainer/>
-                        <CommentContainer/>
+                        {comments.map((comment) => <CommentContainer message={comment.message}/>)}
                     </div>
                     <CommentInput/>
                 </div>

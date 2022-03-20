@@ -8,10 +8,10 @@ import { loadComment } from "@/actions/comments.actions";
 
 export const useTopic = () => {
     const dispatch = useDispatch();
-    const { data: topic, isLoading: isTopicLoading } = useSelector(
-        (state) => state.topic, shallowEqual);
-    const { data: comments, isLoading: isCommentsLoading } = useSelector(
-        (state) => state.comments, shallowEqual);
+    // eslint-disable-next-line max-len
+    const { data: topic, isLoading: isTopicLoading } = useSelector((state) => state.topic, shallowEqual);
+    // eslint-disable-next-line max-len
+    const { data: comments, isLoading: isCommentsLoading } = useSelector((state) => state.comments, shallowEqual);
     const { pathname } = useLocation();
 
     const id = Number(pathname.split("/").slice(-1)[0]);

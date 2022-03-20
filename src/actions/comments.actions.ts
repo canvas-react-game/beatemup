@@ -48,7 +48,7 @@ export const createComment = (
     try {
         const response = await api.createComment(data);
         if (response) {
-            //history.push(routes.forum.path);
+            // history.push(routes.forum.path);
         } else {
             dispatch(setLoading(false));
         }

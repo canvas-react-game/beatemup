@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
-import {shallowEqual, useDispatch} from "react-redux";
+import { shallowEqual, useDispatch } from "react-redux";
 import { Input } from "antd";
 
 import styles from "./CommentInput.module.scss";

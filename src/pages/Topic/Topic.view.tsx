@@ -27,6 +27,7 @@ const Topic: FC = () => {
                     <Title level={2}>{title}</Title>
                     <Text>{body}</Text>
                     <div className={styles.comments}>
+                        {/* eslint-disable-next-line max-len */}
                         {comments && comments.map((comment) => <CommentContainer key={comment.id} message={comment.message}/>)}
                     </div>
                     <CommentInput/>

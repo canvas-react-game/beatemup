@@ -5,7 +5,8 @@ import { CommentsData } from "@/reducers/comments.reducer";
 
 type ForumData = {};
 
-const root = "topics";
+const topicRoot = "topics";
+const commentsRoot = "comments";
 
 class ForumApi {
     isSuccessfulRequest(response: Response) {
@@ -29,7 +30,7 @@ class ForumApi {
     }
 
     public async getTopics(): Promise<ForumData[] | []> {
-        const response = await LocalAPIService.request(Method.GET, root);
+        const response = await LocalAPIService.request(Method.GET, topicRoot);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -41,8 +42,7 @@ class ForumApi {
     }
 
     public async getComments(): Promise<CommentsData[] | []> {
-        // todo
-        const response = await LocalAPIService.request(Method.GET, root);
+        const response = await LocalAPIService.request(Method.GET, commentsRoot);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -54,7 +54,7 @@ class ForumApi {
     }
 
     public async getTopic(id: number): Promise<ForumData | null> {
-        const response = await LocalAPIService.request(Method.GET, `${root}/${id}`);
+        const response = await LocalAPIService.request(Method.GET, `${topicRoot}/${id}`);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -66,7 +66,7 @@ class ForumApi {
     }
 
     public async createTopic(data: TopicEditData): Promise<boolean> {
-        const response = await LocalAPIService.request(Method.POST, root, data);
+        const response = await LocalAPIService.request(Method.POST, topicRoot, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {
@@ -78,7 +78,7 @@ class ForumApi {
     }
 
     public async updateTopic(id: number, data: TopicEditData): Promise<TopicEditData | null> {
-        const response = await LocalAPIService.request(Method.PUT, `${root}/${id}`, data);
+        const response = await LocalAPIService.request(Method.PUT, `${topicRoot}/${id}`, data);
         if (response) {
             const success = this.isSuccessfulRequest(response);
             if (success) {

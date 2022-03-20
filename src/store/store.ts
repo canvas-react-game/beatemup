@@ -13,6 +13,7 @@ import {
 
 import { isServer } from "@/helpers/environment";
 import { ForumState, forumReducer } from "@/reducers/forum.reducer";
+import { CommentsState, commentsReducer } from "@/reducers/comments.reducer";
 
 export interface RootState {
     auth: AuthState;
@@ -20,6 +21,7 @@ export interface RootState {
     leaderBoard: LeaderBoardState;
     forum: ForumState;
     topic: TopicState;
+    comments: CommentsState;
 }
 
 const rootReducer = combineReducers({
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
     leaderBoard: leaderBoardReducer,
     forum: forumReducer,
     topic: topicReducer,
+    comments: commentsReducer,
 });
 
 const configureStore = () => createStore(

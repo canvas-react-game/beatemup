@@ -6,6 +6,7 @@ import { loadLeaderBoard } from "@/actions/leaderboard.actions";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { useSelector } from "@/hooks/useSelector";
 import { RECORDS_PER_PAGE } from "@/config/leaderboard";
+import { isServer } from "@/helpers/environment";
 
 export const useLeaderBoard = () => {
     const [canMoveLeft, setCanMoveLeft] = useState(false);
@@ -14,7 +15,7 @@ export const useLeaderBoard = () => {
     const dispatch = useDispatch();
 
     const table = useRef<HTMLDivElement>(null);
-    const [tableScroll, setTableScroll] = useState(window?.innerHeight);
+    const [tableScroll, setTableScroll] = useState(!isServer ? window?.innerHeight : 0);
 
     const { data, isLoading } = useSelector((state) => state.leaderBoard, shallowEqual);
 

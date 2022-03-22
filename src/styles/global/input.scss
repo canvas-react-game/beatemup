@@ -99,29 +99,29 @@
     color: white !important;
 
     &::selection {
-      background: variables.$primary_dark;
+      background: variables.$primary;
     }
 
     &:hover {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
 
     &[disabled]:hover {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
 
     &:focus {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
 
     &:not(:focus) {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
   }
 
   .ant-input-affix-wrapper {
     background-color: transparent !important;
-    color: variables.$primary_dark;
+    color: variables.$primary;
 
     > input {
       background-color: transparent;
@@ -129,7 +129,7 @@
     }
 
     > input::selection {
-      background: variables.$primary_dark;
+      background: variables.$primary;
     }
 
     > input:-webkit-autofill {
@@ -137,24 +137,24 @@
     }
 
     &:not(.ant-input-affix-wrapper-disabled):hover {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
 
     &:not(.ant-input-affix-wrapper-disabled):focus {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
       box-shadow: 0 0 0 2px variables.$primary-shadow;
     }
 
     &:not(.ant-input-affix-wrapper-disabled):not(:focus) {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
   }
 
   .ant-input-affix-wrapper-disabled {
-    border-color: variables.$primary_dark;
+    border-color: variables.$primary;
 
     &:hover {
-      border-color: variables.$primary_dark;
+      border-color: variables.$primary;
     }
   }
 

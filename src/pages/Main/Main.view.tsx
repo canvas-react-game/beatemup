@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Typography } from "antd";
+import { Typography, Button } from "antd";
 
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import { useMountEffect } from "@/hooks/useMountEffect";
 
 const Main: FC = () => {
     const {
-        gameHref, title, info, infoContainer, container,
+        title, info, infoContainer, container,
     } = styles;
 
     const dispatch = useDispatch();
@@ -35,8 +35,10 @@ const Main: FC = () => {
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry.
                     </Typography>
-                    <Link to={routes.game.path} className={gameHref}>
-                        Играть
+                    <Link to={routes.game.path}>
+                        <Button type="primary">
+                            Играть
+                        </Button>
                     </Link>
                 </div>
             </div>

@@ -16,7 +16,8 @@ apiRouter.post(`${apiBase}/topics`, ...middlewares, TopicController.add);
 apiRouter.put(`${apiBase}/topics/:id`, ...middlewares, TopicController.update);
 apiRouter.delete(`${apiBase}/topics/:id`, ...middlewares, TopicController.delete);
 
-apiRouter.get(`${apiBase}/themes`, ...middlewares, ThemesController.get);
-apiRouter.put(`${apiBase}/themes`, ...middlewares, ThemesController.update);
+apiRouter.get(`${apiBase}/themes/:id`, ...middlewares, ThemesController.get);
+apiRouter.put(`${apiBase}/themes/:id`, ...middlewares, ThemesController.update);
+apiRouter.post(`${apiBase}/themes`, ...middlewares, ThemesController.add);
 
 export { apiRouter };

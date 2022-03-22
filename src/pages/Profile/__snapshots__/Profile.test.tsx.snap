@@ -3,9 +3,7 @@
 exports[`Profile page renders correctly 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body
-    class="light"
-  >
+  "baseElement": <body>
     <div>
       <div
         class="ant-spin ant-spin-lg ant-spin-spinning spinner"
@@ -77,7 +75,7 @@ Object {
                 type="button"
               >
                 <span>
-                  Светлая
+                  Темная
                 </span>
               </button>
             </div>
@@ -434,7 +432,7 @@ Object {
               type="button"
             >
               <span>
-                Светлая
+                Темная
               </span>
             </button>
           </div>

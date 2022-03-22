@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { updateDBTheme, getDBTheme } from "@/server/db/themes/actions/themes";
+import { updateDBTheme, getDBTheme, addDBTheme } from "@/server/db/themes/actions/themes";
 import { createSafeDecorator } from "@/server/utils/safeDecorator";
 import { HttpStatuses } from "@/server/utils/httpStatuses";
 
@@ -18,6 +18,9 @@ class ThemeController {
     async get(req: Request, res: Response) {
         const id = Number(req.params.id);
         const theme = await getDBTheme(id);
+        if (!theme) {
+            return res.status(HttpStatuses.BadRequest).send({ message: "Тема отсутствует" });
+        }
         return res.status(HttpStatuses.OK).send(theme);
     }
 
@@ -25,12 +28,24 @@ class ThemeController {
     async update(req: Request, res: Response) {
         const id = Number(req.params.id);
         const resultArray = await updateDBTheme(id, req.body);
+
         const result = resultArray[0];
         if (!result) {
             return res.status(HttpStatuses.BadRequest).send({ message: "Ошибка изменения темы" });
         }
+
         const theme = await getDBTheme(id);
         return res.status(HttpStatuses.OK).send(theme);
+    }
+
+    @Safe
+    async add(req: Request, res: Response) {
+        const currentTheme = await addDBTheme(req.body);
+
+        if (!currentTheme) {
+            return res.status(HttpStatuses.BadRequest).send({ message: "Ошибка сохранения темы" });
+        }
+        return res.status(HttpStatuses.OK).send(currentTheme);
     }
 }
 

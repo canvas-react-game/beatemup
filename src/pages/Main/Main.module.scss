@@ -27,14 +27,6 @@
   text-align: start;
 }
 
-.gameHref {
-  color: white;
-  width: 128px;
-  height: 40px;
-  background: variables.$primary;
-  padding: 7px;
-}
-
 .gameHref:hover {
   background: darken(variables.$primary, 10%);
   color: white;

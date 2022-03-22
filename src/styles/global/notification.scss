@@ -4,19 +4,40 @@
   font-family: "Press Start 2P", cursive;
 }
 
-.ant-notification-notice {
-  background: variables.$background url("../../assets/images/background.png")
-    no-repeat center center;
+.dark {
+  .ant-notification-notice {
+    background: variables.$background_dark
+      url("../../assets/images/background.png") no-repeat center center;
+  }
+
+  .ant-notification-notice-message {
+    color: white;
+  }
+
+  .ant-notification-notice-close-x {
+    color: white;
+
+    &:hover {
+      color: darken(white, 10%) !important;
+    }
+  }
 }
 
-.ant-notification-notice-message {
-  color: white;
-}
+.light {
+  .ant-notification-notice {
+    background: variables.$background url("../../assets/images/background.png")
+      no-repeat center center;
+  }
 
-.ant-notification-notice-close-x {
-  color: white;
+  .ant-notification-notice-message {
+    color: black;
+  }
 
-  &:hover {
-    color: darken(white, 10%) !important;
+  .ant-notification-notice-close-x {
+    color: black;
+
+    &:hover {
+      color: darken(black, 10%) !important;
+    }
   }
 }

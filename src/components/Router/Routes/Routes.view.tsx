@@ -23,6 +23,8 @@ import Leaderboard from "@/pages/Leaderboard";
 import Error from "@/pages/Error";
 import Game from "@/pages/Game";
 import Offline from "@/pages/Offline";
+import Topic from "@/pages/Topic";
+import TopicEdit from "@/pages/TopicEdit";
 import AccessRoute from "@/components/AccessRoute";
 import AccessRedirectRoute from "@/components/AccessRedirectRoute";
 
@@ -56,7 +58,9 @@ const Routes: FC = () => {
             />
             <AccessRoute path={routes.main.path} component={Main} />
             <AccessRoute path={routes.profile.path} component={Profile} />
-            <AccessRoute path={routes.forum.path} component={Forum} />
+            <AccessRoute exact path={routes.forum.path} component={Forum} />
+            <AccessRoute path={routes.topic.path} component={Topic} />
+            <AccessRoute exact path={routes.topicEdit.path} component={TopicEdit} />
             <AccessRoute
                 path={routes.leaderboard.path}
                 component={Leaderboard}

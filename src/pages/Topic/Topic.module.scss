@@ -1,0 +1,16 @@
+@use "../../styles/variables.module" as variables;
+
+.container {
+  padding: variables.$spacing_x2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comments {
+  flex: 1;
+  padding: variables.$spacing_x2;
+  margin-top: variables.$spacing_x2;
+  height: 50vh;
+  overflow: scroll;
+}

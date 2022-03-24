@@ -32,6 +32,8 @@ const URLS: string[] = [
     "/about",
     "/game",
     "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+    "/main.css",
+    "/bundle.js"
 ];
 //
 
@@ -64,7 +66,7 @@ sw.addEventListener("activate", (event) => {
     );
 });
 
-sw.addEventListener("fetch", (event) => {
+sw.addEventListener("fetch", (event: FetchEvent) => {
     const request = event.request;
 
     event.respondWith(

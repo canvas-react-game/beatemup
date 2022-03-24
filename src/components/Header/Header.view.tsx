@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 
 import { Link } from "react-router-dom";
+
+import { useHeader } from "./Header.helpers";
 import { routes as appRoutes } from "@/config/routes/routes";
 import { useSelector } from "@/hooks/useSelector";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
-import { useHeader } from "./Header.helpers";
 
 interface Props {
     currentPath?: string;

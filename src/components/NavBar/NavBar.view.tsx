@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 import styles from "./NavBar.module.scss";
 
+import Switch from "@/components/Switch";
 import { useMountEffect } from "@/hooks/useMountEffect";
 import { routes as appRoutes } from "@/config/routes/routes";
 import { useSelector } from "@/hooks/useSelector";
+import { useTheme } from "./Navbar.helpers";
 
 export interface Route {
     path: string;
@@ -20,6 +22,7 @@ const NavBar: FC<Props> = ({ currentPath }) => {
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
     const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
     const [routes, setRoutes] = useState<Route[]>([]);
+    const { theme, changeTheme } = useTheme();
 
     const allRoutes = [
         { path: appRoutes.about.path, label: "Об игре" },
@@ -53,6 +56,8 @@ const NavBar: FC<Props> = ({ currentPath }) => {
                         <Link to={route.path}>{route.label}</Link>
                     </li>
                 ))}
+
+                {(isSignedIn || isSignedInOAuth) && <Switch onClick={() => changeTheme(theme)} />}
             </ul>
         </nav>
     );

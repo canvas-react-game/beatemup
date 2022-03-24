@@ -37,6 +37,9 @@ export const routes: Routes = {
     game: {
         path: "/game",
     },
+    theme: {
+        path: "/themes/:id",
+    },
 };
 
 export const findRoute = (path: Route["path"]): Route | null => {

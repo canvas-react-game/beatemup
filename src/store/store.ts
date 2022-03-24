@@ -5,6 +5,8 @@ import thunk from "redux-thunk";
 
 import { profileReducer, ProfileState } from "@/reducers/profile.reducer";
 import { authReducer, AuthState } from "@/reducers/auth.reducer";
+import { themeReducer } from "@/reducers/theme.reducer";
+import { Theme } from "@/api/Theme/Theme.api";
 import { topicReducer, TopicState } from "@/reducers/topic.reducer";
 import {
     leaderBoardReducer,
@@ -18,6 +20,7 @@ export interface RootState {
     auth: AuthState;
     profile: ProfileState;
     leaderBoard: LeaderBoardState;
+    theme: Theme;
     forum: ForumState;
     topic: TopicState;
 }
@@ -26,6 +29,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     profile: profileReducer,
     leaderBoard: leaderBoardReducer,
+    theme: themeReducer,
     forum: forumReducer,
     topic: topicReducer,
 });

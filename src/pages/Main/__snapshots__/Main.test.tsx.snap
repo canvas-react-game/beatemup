@@ -43,6 +43,14 @@ Object {
             <div
               class="buttonContainer"
             />
+            <button
+              class="ant-btn ant-btn-primary"
+              type="button"
+            >
+              <span>
+                Темная
+              </span>
+            </button>
           </div>
         </div>
         <div
@@ -111,6 +119,14 @@ Object {
           <div
             class="buttonContainer"
           />
+          <button
+            class="ant-btn ant-btn-primary"
+            type="button"
+          >
+            <span>
+              Темная
+            </span>
+          </button>
         </div>
       </div>
       <div

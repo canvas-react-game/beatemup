@@ -62,6 +62,7 @@ export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> => 
         const response = await api.getUserInfo();
         if (response) {
             dispatch(profileFetchSuccess(response));
+            document.cookie = `userId=${response.id}`;
         } else {
             dispatch(loading(false));
         }

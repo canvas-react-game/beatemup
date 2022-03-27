@@ -1,11 +1,10 @@
-// import { LeaderBoardData } from "config/leaderboard";
 import { ForumState } from "reducers/forum.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { LOAD, SET_LOADING } from "./types/forum.types";
 import forumApi from "../api/Forum";
 
-export type LeaderBoardAction = GetForumTopics | SetLoading;
+export type ForumAction = GetForumTopics | SetLoading;
 
 type GetForumTopics = {
     type: typeof LOAD,

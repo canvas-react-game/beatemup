@@ -5,5 +5,6 @@ export const redirectMiddleware = (
     res: Response,
     next: NextFunction,
 ) => {
+    console.log("redirect appeared");
     res.redirect("/");
 };

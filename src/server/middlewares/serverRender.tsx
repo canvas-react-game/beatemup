@@ -29,6 +29,10 @@ export const serverRenderMiddleware = (
         store.dispatch(signOutSuccess());
     }
 
+    console.log("---------------------");
+    console.log(location);
+    console.log(store.getState().auth);
+
     const jsx = (
         <Provider store={store}>
             <StaticRouter location={location}>
@@ -39,6 +43,8 @@ export const serverRenderMiddleware = (
     const reactHtml = renderToString(jsx);
     const reduxState = store.getState();
     const helmetData = Helmet.renderStatic();
+
+    console.log(reactHtml);
 
     // TODO: если отдавать 304 ридерект,
     // то ломаются service-workers, надо подумать что с этим сделать

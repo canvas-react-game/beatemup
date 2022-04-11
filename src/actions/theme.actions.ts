@@ -2,7 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { getCookie } from "@/helpers/acess";
 
-import api, { Theme } from "@/api/Theme/Theme.api";
+import api, { Theme, ThemeData } from "@/api/Theme/Theme.api";
 
 import {
     SET_THEME,
@@ -21,7 +21,8 @@ export const themeRequest = (data: Theme | null): ThemeRequest => ({
 // eslint-disable-next-line max-len
 export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getCookie("userId") || "";
-    const theme: Theme | null = await api.getTheme(id);
+    const themeData: ThemeData | null = await api.getTheme(id);
+    const theme = themeData?.theme || "light"
     dispatch(themeRequest(theme));
 
     if (theme === "dark") {
@@ -30,7 +31,7 @@ export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => as
         document.body.classList.remove("dark");
     }
     // TODO: ?????
-    document.body.classList.add(theme || "light");
+    document.body.classList.add(theme);
 };
 
 // eslint-disable-next-line max-len

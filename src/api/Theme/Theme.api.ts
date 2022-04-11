@@ -10,7 +10,7 @@ export type ThemeData = {
 const root = "themes";
 
 class AuthApi {
-    public async getTheme(id: string): Promise<Theme | null> {
+    public async getTheme(id: string): Promise<ThemeData | null> {
         const response = await LocalAPIService.request(Method.GET, `${root}/${id}`);
 
         if (response.status === 200) {

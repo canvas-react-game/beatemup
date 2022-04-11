@@ -2,19 +2,13 @@ import { Sequelize, SequelizeOptions } from "sequelize-typescript";
 import { Topic } from "./forum/models/topic";
 import { Theme } from "./themes/models/themes";
 
-const dbName = "dungeonCrawler";
-const username = "postgres";
-const password = "242090";
-const host = "localhost";
-const port = 5432;
-
 export const createSequelize = (): Sequelize => {
     const sequelizeOptions: SequelizeOptions = {
-        host,
-        port,
-        username,
-        password,
-        database: dbName,
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT) || 5432,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
         dialect: "postgres",
     };
 

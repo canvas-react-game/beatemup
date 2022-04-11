@@ -1,7 +1,5 @@
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { notification } from "antd";
-import { resolveScopes } from "sequelize-typescript";
 import { getCookie } from "@/helpers/acess";
 
 import api, { Theme } from "@/api/Theme/Theme.api";

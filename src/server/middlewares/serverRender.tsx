@@ -23,6 +23,8 @@ export const serverRenderMiddleware = (
     const location = req.url;
     const hostUrl = `${req.protocol}://${req.get("Host")}`;
 
+    console.log("REQUEST: ", location)
+
     if (req.cookies.uuid && req.cookies.authCookie) {
         store.dispatch(signInSuccess());
     } else {
@@ -39,6 +41,9 @@ export const serverRenderMiddleware = (
     const reactHtml = renderToString(jsx);
     const reduxState = store.getState();
     const helmetData = Helmet.renderStatic();
+
+    // console.log("RESPONSE: ", makeHTMLPage(hostUrl, reactHtml, helmetData, reduxState))
+
 
     // TODO: если отдавать 304 ридерект,
     // то ломаются service-workers, надо подумать что с этим сделать

@@ -21,16 +21,16 @@ export const themeRequest = (data: Theme | null): ThemeRequest => ({
 // eslint-disable-next-line max-len
 export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getCookie("userId") || "";
-    const response: any = await api.getTheme(id);
-    dispatch(themeRequest(response ? response.theme : response));
+    const theme: Theme | null = await api.getTheme(id);
+    dispatch(themeRequest(theme));
 
-    if (response.theme === "dark") {
+    if (theme === "dark") {
         document.body.classList.remove("light");
-    } else if (response.theme === "light") {
+    } else if (theme === "light") {
         document.body.classList.remove("dark");
     }
-
-    document.body.classList.add(response.theme);
+    // TODO: ?????
+    document.body.classList.add(theme || "light");
 };
 
 // eslint-disable-next-line max-len

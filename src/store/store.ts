@@ -34,8 +34,11 @@ const rootReducer = combineReducers({
     topic: topicReducer,
 });
 
+const initialState = !isServer ? window.__INITIAL_STATE__ : {};
+
 const configureStore = () => createStore(
     rootReducer,
+    initialState,
     compose(
         applyMiddleware(thunk),
         !isServer && window.__REDUX_DEVTOOLS_EXTENSION__

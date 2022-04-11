@@ -1,5 +1,5 @@
 import { TopicAction } from "@/actions/topic.actions";
-import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
+import { TOPIC_LOAD, TOPIC_SET_LOADING } from "@/actions/types/topic.types";
 
 export interface TopicEditData {
     title: string,
@@ -36,12 +36,12 @@ export const topicReducer = (
     action: TopicAction,
 ): TopicState => {
     switch (action.type) {
-        case LOAD:
+        case TOPIC_LOAD:
             return {
                 ...state,
                 data: action.payload.data,
             };
-        case SET_LOADING:
+        case TOPIC_SET_LOADING:
             return {
                 ...state,
                 isLoading: action.payload.isLoading,

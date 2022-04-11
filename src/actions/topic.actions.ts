@@ -6,28 +6,28 @@ import { History } from "history";
 import { routes } from "@/config/routes/routes";
 import { TopicEditData } from "@/reducers/topic.reducer";
 
-import { LOAD, SET_LOADING } from "./types/topic.types";
+import { TOPIC_LOAD, TOPIC_SET_LOADING } from "./types/topic.types";
 import api from "../api/Forum";
 
 export type TopicAction = GetTopic | SetLoading;
 
 type GetTopic = {
-    type: typeof LOAD,
+    type: typeof TOPIC_LOAD,
     payload: Pick<ForumState, "data">
 };
 
 const getTopic = (data: any): GetTopic => ({
-    type: LOAD,
+    type: TOPIC_LOAD,
     payload: { data },
 });
 
 type SetLoading = {
-    type: typeof SET_LOADING,
+    type: typeof TOPIC_SET_LOADING,
     payload: Pick<ForumState, "isLoading">
 };
 
 const setLoading = (isLoading: boolean): SetLoading => ({
-    type: SET_LOADING,
+    type: TOPIC_SET_LOADING,
     payload: { isLoading },
 });
 

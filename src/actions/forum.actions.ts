@@ -1,26 +1,26 @@
 import { ForumState } from "reducers/forum.reducer";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { LOAD, SET_LOADING } from "./types/forum.types";
+import { FORUM_LOAD, FORUM_SET_LOADING } from "./types/forum.types";
 import forumApi from "../api/Forum";
 
 export type ForumAction = GetForumTopics | SetLoading;
 
 type GetForumTopics = {
-    type: typeof LOAD,
+    type: typeof FORUM_LOAD,
     payload: Pick<ForumState, "data">
 };
 const getTopics = (data: any[]): GetForumTopics => ({
-    type: LOAD,
+    type: FORUM_LOAD,
     payload: { data },
 });
 
 type SetLoading = {
-    type: typeof SET_LOADING,
+    type: typeof FORUM_SET_LOADING,
     payload: Pick<ForumState, "isLoading">
 };
 const setLoading = (isLoading: boolean): SetLoading => ({
-    type: SET_LOADING,
+    type: FORUM_SET_LOADING,
     payload: { isLoading },
 });
 

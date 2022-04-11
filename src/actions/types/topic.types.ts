@@ -1,2 +1,2 @@
-export const LOAD = "LOAD";
-export const SET_LOADING = "SET_LOADING";
+export const TOPIC_LOAD = "TOPIC_LOAD";
+export const TOPIC_SET_LOADING = "TOPIC_SET_LOADING";

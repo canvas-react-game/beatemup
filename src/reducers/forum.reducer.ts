@@ -1,6 +1,5 @@
-import { LeaderBoardAction } from "@/actions/leaderboard.actions";
-import { LOAD, SET_LOADING } from "@/actions/types/forum.types";
-// import { LeaderBoardData } from "@/config/leaderboard";
+import { ForumAction } from "@/actions/forum.actions";
+import { FORUM_LOAD, FORUM_SET_LOADING } from "@/actions/types/forum.types";
 
 export interface ForumState {
     isLoading: boolean
@@ -15,15 +14,15 @@ export const FORUM_INIT_STATE: ForumState = {
 /* eslint-disable @typescript-eslint/default-param-last */
 export const forumReducer = (
     state: ForumState = FORUM_INIT_STATE,
-    action: LeaderBoardAction,
+    action: ForumAction,
 ): ForumState => {
     switch (action.type) {
-        case LOAD:
+        case FORUM_LOAD:
             return {
                 ...state,
                 data: action.payload.data,
             };
-        case SET_LOADING:
+        case FORUM_SET_LOADING:
             return {
                 ...state,
                 isLoading: action.payload.isLoading,

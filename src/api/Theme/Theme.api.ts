@@ -9,7 +9,7 @@ export type ThemeData = {
 
 const root = "themes";
 
-class AuthApi {
+class ThemeApi {
     public async getTheme(id: string): Promise<ThemeData | null> {
         const response = await LocalAPIService.request(Method.GET, `${root}/${id}`);
 
@@ -41,4 +41,4 @@ class AuthApi {
     }
 }
 
-export default new AuthApi();
+export default new ThemeApi();

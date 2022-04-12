@@ -21,7 +21,7 @@ class ThemeApi {
         return null;
     }
 
-    public async updateTheme(id: string, data: Theme): Promise<Theme | null> {
+    public async updateTheme(id: string, data: Theme): Promise<ThemeData | null> {
         // eslint-disable-next-line max-len
         const response = await LocalAPIService.request(Method.PUT, `${root}/${id}`, { theme: data });
         if (response.status === 200) {

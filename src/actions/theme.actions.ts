@@ -13,6 +13,9 @@ type ThemeRequest = {
     payload: Theme | null;
 };
 
+const LIGHT_THEME = "light";
+const DARK_THEME = "dark";
+
 export const themeRequest = (data: Theme | null): ThemeRequest => ({
     type: SET_THEME,
     payload: data,
@@ -22,53 +25,49 @@ export const themeRequest = (data: Theme | null): ThemeRequest => ({
 export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getCookie("userId") || "";
     const themeData: ThemeData | null = await api.getTheme(id);
-    const theme = themeData?.theme || "light"
+    const theme = themeData?.theme || LIGHT_THEME
     dispatch(themeRequest(theme));
-
-    if (theme === "dark") {
-        document.body.classList.remove("light");
-    } else if (theme === "light") {
-        document.body.classList.remove("dark");
-    }
-    // TODO: ?????
-    document.body.classList.add(theme);
+    //
+    updateDOMTheme(theme)
 };
 
 // eslint-disable-next-line max-len
 export const updateTheme = (data: Theme): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getCookie("userId") || "";
-    const response: any = await api.updateTheme(id, data);
-    dispatch(themeRequest(response ? response.theme : response));
-
-    if (response.theme === "dark") {
-        document.body.classList.remove("light");
-    } else if (response.theme === "light") {
-        document.body.classList.remove("dark");
-    }
-
-    document.body.classList.add(response.theme);
+    const themeData: ThemeData | null = await api.updateTheme(id, data);
+    const theme = themeData?.theme || LIGHT_THEME
+    dispatch(themeRequest(theme));
+    //
+    updateDOMTheme(theme)
 };
 
 // eslint-disable-next-line max-len
 export const createTheme = (data: Theme): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const userId = getCookie("userId") || "";
-
-    const response: any = await api.createTheme({
+    const themeData: ThemeData | null = await api.createTheme({
         theme: data,
         user_id: userId,
     });
-    dispatch(themeRequest(response ? response.theme : response));
+    const theme = themeData?.theme || LIGHT_THEME
+    dispatch(themeRequest(theme));
+    //
+    if (!themeData) return;
+    //
+    updateDOMTheme(theme)
 
-    if (!response) return;
+};
 
-    if (response.theme === "dark") {
-        document.body.classList.remove("light");
-    } else if (response.theme === "light") {
-        document.body.classList.remove("dark");
+// Обновляем тему в DOM
+const updateDOMTheme = (theme: string) => {
+
+    if (theme === DARK_THEME) {
+        document.body.classList.remove(LIGHT_THEME);
+    } else if (theme === LIGHT_THEME) {
+        document.body.classList.remove(DARK_THEME);
     }
 
-    document.body.classList.add(response.theme);
-};
+    document.body.classList.add(theme);
+}
 
 export type ThemeAction =
     | ThemeRequest;

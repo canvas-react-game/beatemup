@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Input, Button, Form } from "antd";
 
 import Container from "@/components/Container";
-import Nav from "@/components/AuthNavBar";
 import Header from "@/components/Header";
 
 import { routes } from "@/config/routes/routes";
@@ -11,14 +10,13 @@ import { useSignUp } from "./SignUp.helpers";
 
 const SignUp: FC = () => {
     const {
-        currentPath, fieldSet, onFinish, onFinishFailed,
+        fieldSet, onFinish, onFinishFailed,
     } = useSignUp();
 
     return (
         <Container>
             <Header currentPath={routes.signUp.path} />
             <div className={styles.formContainer}>
-                <Nav currentPath={currentPath} />
                 <Form
                     name="signUp"
                     onFinish={onFinish}

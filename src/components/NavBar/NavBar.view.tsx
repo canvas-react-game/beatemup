@@ -29,14 +29,24 @@ const NavBar: FC<Props> = ({ currentPath }) => {
         { path: appRoutes.profile.path, label: "Профиль" },
         { path: appRoutes.leaderboard.path, label: "Таблица лидеров" },
         { path: appRoutes.forum.path, label: "Форум" },
+        { path: appRoutes.signUp.path, label: "Регистрация" },
+        { path: appRoutes.signIn.path, label: "Вход" },
     ];
 
     useMountEffect(() => {
         if (isSignedIn || isSignedInOAuth) {
-            setRoutes(allRoutes);
+            setRoutes(
+                allRoutes.filter(
+                    (route) => route.path !== appRoutes.signUp.path ||
+                                route.path !== appRoutes.signIn.path
+                ),
+            );
         } else {
             setRoutes(
-                allRoutes.filter((route) => route.path === appRoutes.about.path),
+                allRoutes.filter(
+                    (route) => route.path === appRoutes.signUp.path ||
+                                route.path === appRoutes.signIn.path
+                ),
             );
         }
     });

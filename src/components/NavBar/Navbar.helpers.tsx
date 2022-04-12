@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "@/hooks/useSelector";
 import { Theme } from "@/api/Theme/Theme.api";
-import { updateTheme, getTheme, createTheme } from "@/actions/theme.actions";
+import { updateTheme, createTheme } from "@/actions/theme.actions";
 
 export const useTheme = () => {
     const dispatch = useDispatch();
@@ -17,10 +16,6 @@ export const useTheme = () => {
             dispatch(createTheme("dark"));
         }
     };
-
-    useEffect(() => {
-        dispatch(getTheme());
-    }, []);
 
     return {
         theme,

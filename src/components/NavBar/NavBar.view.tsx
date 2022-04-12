@@ -25,7 +25,7 @@ const NavBar: FC<Props> = ({ currentPath }) => {
     const { theme, changeTheme } = useTheme();
 
     const allRoutes = [
-        { path: appRoutes.about.path, label: "Об игре" },
+        // { path: appRoutes.about.path, label: "Об игре" },
         { path: appRoutes.profile.path, label: "Профиль" },
         { path: appRoutes.leaderboard.path, label: "Таблица лидеров" },
         { path: appRoutes.forum.path, label: "Форум" },

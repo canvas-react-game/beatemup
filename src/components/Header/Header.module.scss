@@ -13,13 +13,10 @@
   font-weight: 400;
   text-align: center;
 
-  > a {
-    color: white;
+  .logoMainSymbol {
+    color: variables.$primary;
   }
 
-  > a:hover {
-    color: darken(variables.$primary, 10%);
-  }
 }
 
 .buttonContainer {

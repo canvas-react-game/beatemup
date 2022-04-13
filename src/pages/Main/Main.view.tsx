@@ -13,6 +13,8 @@ import styles from "./Main.module.scss";
 import { getProfile } from "@/actions/profile.actions";
 import { useMountEffect } from "@/hooks/useMountEffect";
 
+const { Text } = Typography;
+
 const Main: FC = () => {
     const {
         title, info, infoContainer, container,
@@ -30,10 +32,13 @@ const Main: FC = () => {
             <Header />
             <div className={container}>
                 <div className={infoContainer}>
-                    <Typography className={title}>Игра</Typography>
+                    <Typography className={title}>
+                        <span className={styles.titleMain}>Ultimate</span>
+                        <Text type="secondary"> Dungeon Crawler</Text>
+                    </Typography>
                     <Typography className={info}>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
+                        Очисти некогда великую обитель от насилия монстров
+                        и заблудших душ
                     </Typography>
                     <Link to={routes.game.path}>
                         <Button type="primary">

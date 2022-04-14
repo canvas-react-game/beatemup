@@ -75,12 +75,13 @@ export const signInOAuth = (history: History): ThunkAction<void, unknown, unknow
 // eslint-disable-next-line max-len
 export const signOut = (history: History): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     dispatch(loading(true));
+    setSigned(false);
+    setSignedOAuth(false);
+    history.push(routes.signIn.path);
     try {
         const response = await api.logOut();
         if (response) {
             dispatch(signOutSuccess());
-            setSigned(false);
-            history.push(routes.signIn.path);
         } else {
             dispatch(loading(false));
         }

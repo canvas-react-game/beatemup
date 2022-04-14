@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { routes } from "@/config/routes/routes";
 import { SignInData } from "@/api/Auth";
 import { signIn } from "@/actions/auth.actions";
-import { getProfile } from "@/actions/profile.actions";
 import { useSelector } from "@/hooks/useSelector";
 
 export enum SignInFieldNames {
@@ -20,7 +19,6 @@ export const useSignInForm = () => {
 
     const onFinish = useCallback(async (values: SignInData) => {
         dispatch(signIn(values, history));
-        dispatch(getProfile());
     }, []);
 
     const onFinishFailed = (errorInfo: Error) => console.log("Failed:", errorInfo);

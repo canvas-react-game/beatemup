@@ -10,6 +10,7 @@ import {
     SET_PROFILE,
     SET_PASSWORD,
 } from "./types/profile.types";
+import { setUserIdCookie } from "@/helpers/acess";
 
 type ProfileFetched = {
     type: typeof GET_PROFILE;
@@ -62,7 +63,7 @@ export const getProfile = (): ThunkAction<void, unknown, unknown, AnyAction> => 
         const response = await api.getUserInfo();
         if (response) {
             dispatch(profileFetchSuccess(response));
-            document.cookie = `userId=${response.id}`;
+            setUserIdCookie(response.id);
         } else {
             dispatch(loading(false));
         }

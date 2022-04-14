@@ -4,7 +4,7 @@ import { ThunkAction } from "redux-thunk";
 import { History } from "history";
 import api, { SignInData } from "@/api/Auth";
 import { routes } from "@/config/routes/routes";
-import { setSigned, setSignedOAuth } from "@/helpers/acess";
+import { setUserIdCookie, setSigned, setSignedOAuth } from "@/helpers/acess";
 
 import {
     LOADING, SIGN_IN, SIGN_OUT, SIGN_IN_OAUTH,
@@ -77,6 +77,7 @@ export const signOut = (history: History): ThunkAction<void, unknown, unknown, A
     dispatch(loading(true));
     setSigned(false);
     setSignedOAuth(false);
+    setUserIdCookie(0);
     history.push(routes.signIn.path);
     try {
         const response = await api.logOut();

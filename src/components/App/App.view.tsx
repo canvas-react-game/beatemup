@@ -16,11 +16,11 @@ const App = () => {
     const dispatch = useDispatch();
 
     const { onClose, isActive } = useServiceWorkers();
-    const auth = useSelector((state) => state.auth)
+    const userId = useSelector((state) => state.profile.data.id)
 
     useEffect(() => {
         dispatch(getTheme());
-    }, [auth]);
+    }, [userId]);
 
     return (
         <div className={styles.App}>

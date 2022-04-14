@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { getCookie } from "@/helpers/acess";
+import { getUserIdCookie } from "@/helpers/acess";
 
 import api, { Theme, ThemeData } from "@/api/Theme/Theme.api";
 
@@ -23,7 +23,7 @@ export const themeRequest = (data: Theme | null): ThemeRequest => ({
 
 // eslint-disable-next-line max-len
 export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    const id = getCookie("userId") || "";
+    const id = getUserIdCookie();
     const themeData: ThemeData | null = await api.getTheme(id);
     const theme = themeData?.theme || LIGHT_THEME
     dispatch(themeRequest(theme));
@@ -33,7 +33,7 @@ export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => as
 
 // eslint-disable-next-line max-len
 export const updateTheme = (data: Theme): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    const id = getCookie("userId") || "";
+    const id = getUserIdCookie();
     const themeData: ThemeData | null = await api.updateTheme(id, data);
     const theme = themeData?.theme || LIGHT_THEME
     dispatch(themeRequest(theme));
@@ -43,7 +43,7 @@ export const updateTheme = (data: Theme): ThunkAction<void, unknown, unknown, An
 
 // eslint-disable-next-line max-len
 export const createTheme = (data: Theme): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
-    const userId = getCookie("userId") || "";
+    const userId = getUserIdCookie();
     const themeData: ThemeData | null = await api.createTheme({
         theme: data,
         user_id: userId,

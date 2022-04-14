@@ -29,3 +29,6 @@ export const setSigned = (value: boolean) => {
 export const setSignedOAuth = (value: boolean) => {
     document.cookie = `setSignedInOAuth=${value.toString()}`;
 };
+
+export const getUserIdCookie = () => getCookie("userId") || "";
+export const setUserIdCookie = (id: number) => document.cookie = `userId=${id.toString()}`;

@@ -38,7 +38,8 @@ const Profile = () => {
                         {profile.avatar && <AntdImage
                             width={200}
                             height={200}
-                            src={profile.avatar}
+                            src={"api/v2/resources"+profile.avatar}
+                            crossOrigin={"use-credentials"}
                             fallback={ProfileDefault}
                         />}
                         {!profile.avatar && <div className={styles.imageEmpty}></div>}

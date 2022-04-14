@@ -1,23 +1,20 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
-    Form, Space, Row, Col,
+    Form, Space, Image as AntdImage
 } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
 import PageMeta from "@/components/PageMeta";
-import Upload from "@/components/Upload";
-import Statistic from "@/components/Statistic";
 import PageLoader from "@/components/PageLoader";
 
 import FormFields from "./components/FormFields";
 import FormControls from "./components/FormControls";
-import UploadButton from "./components/UploadButton";
 
 import styles from "./Profile.module.scss";
+import ProfileDefault from "../../../assets/images/default_profile.png";
 
 import { useProfileForm } from "./Profile.helpers";
-import { checkOAuthSigned } from "@/helpers/acess";
 
 const Profile = () => {
     const {
@@ -25,17 +22,11 @@ const Profile = () => {
         onFinish,
         isEdit,
         setIsEdit,
-        avatar,
+        isOAuthSigned,
         profile,
         form,
         isLoading,
     } = useProfileForm();
-
-    const handleChangeAvatar = useCallback(
-        () => ({ fileList }: any) => console.log(fileList),
-        [],
-    );
-    const isOAuthSigned = checkOAuthSigned();
 
     return (
         <PageLoader isSpinning={isLoading}>
@@ -43,23 +34,14 @@ const Profile = () => {
                 <PageMeta title="Profile" description="Profile page" />
                 <Header currentPath={currentPath} />
                 <div className={styles.formContainer}>
-                    <Space direction="vertical" size="middle">
-                        <Row justify="space-between">
-                            <Col>
-                                <Statistic title="Рекорд" value={100} />
-                            </Col>
-                            <Col>
-                                <Upload
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                    listType="picture-card"
-                                    disabled={!isEdit}
-                                    onChange={handleChangeAvatar}
-                                >
-                                    {avatar || <UploadButton />}
-                                </Upload>
-                            </Col>
-                        </Row>
-
+                    <Space className={styles.formInnerContainer} direction="vertical" size="middle">
+                        {profile.avatar && <AntdImage
+                            width={200}
+                            height={200}
+                            src={profile.avatar}
+                            fallback={ProfileDefault}
+                        />}
+                        {!profile.avatar && <div className={styles.imageEmpty}></div>}
                         <Form
                             name="profile"
                             form={form}

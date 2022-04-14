@@ -3,5 +3,13 @@
 .formContainer {
   margin: 0 auto auto;
   padding: variables.$spacing_x2;
-  max-width: 360px;
+}
+
+.formInnerContainer {
+  width: 500px;
+}
+
+.imageEmpty {
+  width: 200px;
+  height: 200px;
 }

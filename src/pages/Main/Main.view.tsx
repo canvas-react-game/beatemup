@@ -37,8 +37,7 @@ const Main: FC = () => {
                         <Text type="secondary"> Dungeon Crawler</Text>
                     </Typography>
                     <Typography className={info}>
-                        Очисти некогда великую обитель от насилия монстров
-                        и заблудших душ
+                        Очисти некогда великую обитель от насилия монстров и заблудших душ
                     </Typography>
                     <Link to={routes.game.path}>
                         <Button type="primary">

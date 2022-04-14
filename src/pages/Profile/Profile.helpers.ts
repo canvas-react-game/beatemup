@@ -12,6 +12,7 @@ import { useSelector } from "@/hooks/useSelector";
 import { getProfile, setPassword, setProfile } from "@/actions/profile.actions";
 import { SignUpData, UserInfo } from "@/api/Auth";
 import { useMountEffect } from "@/hooks/useMountEffect";
+import { checkOAuthSigned } from "@/helpers/acess";
 
 export interface FieldSet {
     name: string,
@@ -84,7 +85,7 @@ const passwordFields: FieldSet[] = [
 
 export const useProfileForm = () => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [avatar] = useState<string | undefined>("");
+    const [isOAuthSigned, setIsOAuthSigned] = useState<boolean>(false);
     const [form] = useForm();
     const dispatch = useDispatch();
 
@@ -92,6 +93,7 @@ export const useProfileForm = () => {
 
     useMountEffect(() => {
         dispatch(getProfile());
+        setIsOAuthSigned(checkOAuthSigned())
     });
 
     useEffect(() => {
@@ -117,7 +119,7 @@ export const useProfileForm = () => {
         onFinishFailed,
         isEdit,
         setIsEdit,
-        avatar,
+        isOAuthSigned,
         profile: data,
         form,
         fields: initialFields,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -8,18 +8,19 @@ import Router from "@/components/Router";
 
 import styles from "./App.module.scss";
 import { useServiceWorkers, ModalChild } from "./App.helpers";
-import { useMountEffect } from "@/hooks/useMountEffect";
 import { useDispatch } from "react-redux";
 import { getTheme } from "@/actions/theme.actions";
+import { useSelector } from "@/hooks/useSelector";
 
 const App = () => {
     const dispatch = useDispatch();
 
     const { onClose, isActive } = useServiceWorkers();
+    const auth = useSelector((state) => state.auth)
 
-    useMountEffect(() => {
+    useEffect(() => {
         dispatch(getTheme());
-    });
+    }, [auth]);
 
     return (
         <div className={styles.App}>

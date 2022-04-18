@@ -93,7 +93,7 @@ export const useProfileForm = () => {
 
     useMountEffect(() => {
         dispatch(getProfile());
-        setIsOAuthSigned(checkOAuthSigned())
+        setIsOAuthSigned(checkOAuthSigned());
     });
 
     useEffect(() => {

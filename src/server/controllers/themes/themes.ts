@@ -5,7 +5,7 @@ import { createSafeDecorator } from "@/server/utils/safeDecorator";
 import { HttpStatuses } from "@/server/utils/httpStatuses";
 
 const themeErrorHandler = (err: unknown, res: Response) => {
-    console.log(err)
+    console.log(err);
     if (err instanceof ValidationError) {
         return res.status(HttpStatuses.BadRequest).send({ message: "Неверный формат данных" });
     }
@@ -23,10 +23,12 @@ class ThemeController {
             // Если нет, то создаем
             const newTheme = await addDBTheme({
                 user_id: id,
-                theme: "light"
+                theme: "light",
             });
             if (!newTheme) {
-                return res.status(HttpStatuses.BadRequest).send({ message: "Ошибка сохранения темы" });
+                return res.status(HttpStatuses.BadRequest).send(
+                    { message: "Ошибка сохранения темы" }
+                );
             }
             return res.status(HttpStatuses.OK).send(newTheme);
         }
@@ -42,10 +44,12 @@ class ThemeController {
             // Если нет, то создаем
             const newTheme = await addDBTheme({
                 user_id: id,
-                theme: req.body
+                theme: req.body,
             });
             if (!newTheme) {
-                return res.status(HttpStatuses.BadRequest).send({ message: "Ошибка сохранения темы" });
+                return res.status(HttpStatuses.BadRequest).send(
+                    { message: "Ошибка сохранения темы" }
+                );
             }
             return res.status(HttpStatuses.OK).send(newTheme);
         }

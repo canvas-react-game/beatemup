@@ -37,15 +37,15 @@ const NavBar: FC<Props> = ({ currentPath }) => {
         if (isSignedIn || isSignedInOAuth) {
             setRoutes(
                 allRoutes.filter(
-                    (route) => route.path !== appRoutes.signUp.path &&
-                                route.path !== appRoutes.signIn.path
+                    (route) => route.path !== appRoutes.signUp.path
+                                && route.path !== appRoutes.signIn.path,
                 ),
             );
         } else {
             setRoutes(
                 allRoutes.filter(
-                    (route) => route.path === appRoutes.signUp.path ||
-                                route.path === appRoutes.signIn.path
+                    (route) => route.path === appRoutes.signUp.path
+                                || route.path === appRoutes.signIn.path,
                 ),
             );
         }

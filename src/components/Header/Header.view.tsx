@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { Link } from "react-router-dom";
-import { Typography } from 'antd';
+import { Typography } from "antd";
 
 import { useHeader } from "./Header.helpers";
 import { routes as appRoutes } from "@/config/routes/routes";

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    Form, Space, Image as AntdImage
+    Form, Space, Image as AntdImage,
 } from "antd";
 
 import Container from "@/components/Container";
@@ -38,7 +38,7 @@ const Profile = () => {
                         {profile.avatar && <AntdImage
                             width={200}
                             height={200}
-                            src={"api/v2/resources"+profile.avatar}
+                            src={`api/v2/resources${profile.avatar}`}
                             crossOrigin={"use-credentials"}
                             fallback={ProfileDefault}
                         />}

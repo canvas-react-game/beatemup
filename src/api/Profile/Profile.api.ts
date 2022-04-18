@@ -18,7 +18,7 @@ enum ProfileDataType {
 
 type DisplayName = {
     display_name: ""
-}
+};
 
 class ProfileApi {
     isSuccessfulRequest(response: Response, dataType?: ProfileDataType) {
@@ -48,9 +48,9 @@ class ProfileApi {
 
     public async setProfile(data: Omit<SignUpData, "password">): Promise<UserInfo | null> {
         const requestData: Omit<SignUpData, "password"> & DisplayName = {
-            ...data, 
-            display_name: ""
-        }
+            ...data,
+            display_name: "",
+        };
         const response = await APIService.request(Method.PUT, `${root}/profile`, requestData);
         if (response) {
             const success = this.isSuccessfulRequest(response, ProfileDataType.Common);

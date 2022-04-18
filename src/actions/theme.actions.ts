@@ -16,6 +16,17 @@ type ThemeRequest = {
 const LIGHT_THEME = "light";
 const DARK_THEME = "dark";
 
+// Обновляем тему в DOM
+const updateDOMTheme = (theme: string) => {
+    if (theme === DARK_THEME) {
+        document.body.classList.remove(LIGHT_THEME);
+    } else if (theme === LIGHT_THEME) {
+        document.body.classList.remove(DARK_THEME);
+    }
+
+    document.body.classList.add(theme);
+};
+
 export const themeRequest = (data: Theme | null): ThemeRequest => ({
     type: SET_THEME,
     payload: data,
@@ -25,20 +36,20 @@ export const themeRequest = (data: Theme | null): ThemeRequest => ({
 export const getTheme = (): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getUserIdCookie();
     const themeData: ThemeData | null = await api.getTheme(id);
-    const theme = themeData?.theme || LIGHT_THEME
+    const theme = themeData?.theme || LIGHT_THEME;
     dispatch(themeRequest(theme));
     //
-    updateDOMTheme(theme)
+    updateDOMTheme(theme);
 };
 
 // eslint-disable-next-line max-len
 export const updateTheme = (data: Theme): ThunkAction<void, unknown, unknown, AnyAction> => async (dispatch, _state) => {
     const id = getUserIdCookie();
     const themeData: ThemeData | null = await api.updateTheme(id, data);
-    const theme = themeData?.theme || LIGHT_THEME
+    const theme = themeData?.theme || LIGHT_THEME;
     dispatch(themeRequest(theme));
     //
-    updateDOMTheme(theme)
+    updateDOMTheme(theme);
 };
 
 // eslint-disable-next-line max-len
@@ -48,26 +59,13 @@ export const createTheme = (data: Theme): ThunkAction<void, unknown, unknown, An
         theme: data,
         user_id: userId,
     });
-    const theme = themeData?.theme || LIGHT_THEME
+    const theme = themeData?.theme || LIGHT_THEME;
     dispatch(themeRequest(theme));
     //
     if (!themeData) return;
     //
-    updateDOMTheme(theme)
-
+    updateDOMTheme(theme);
 };
-
-// Обновляем тему в DOM
-const updateDOMTheme = (theme: string) => {
-
-    if (theme === DARK_THEME) {
-        document.body.classList.remove(LIGHT_THEME);
-    } else if (theme === LIGHT_THEME) {
-        document.body.classList.remove(DARK_THEME);
-    }
-
-    document.body.classList.add(theme);
-}
 
 export type ThemeAction =
     | ThemeRequest;

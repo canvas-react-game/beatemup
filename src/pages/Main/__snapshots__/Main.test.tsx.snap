@@ -15,9 +15,19 @@ Object {
             class="logo"
           >
             <a
+              class="logoSymbols"
               href="/main"
             >
-              Logo
+              <span
+                class="logoMainSymbol"
+              >
+                U
+              </span>
+              <span
+                class="ant-typography ant-typography-secondary"
+              >
+                DC
+              </span>
             </a>
           </div>
           <div
@@ -33,9 +43,18 @@ Object {
                   class="inactive"
                 >
                   <a
-                    href="/about"
+                    href="/signup"
                   >
-                    Об игре
+                    Регистрация
+                  </a>
+                </li>
+                <li
+                  class="inactive"
+                >
+                  <a
+                    href="/signin"
+                  >
+                    Вход
                   </a>
                 </li>
               </ul>
@@ -43,14 +62,6 @@ Object {
             <div
               class="buttonContainer"
             />
-            <button
-              class="ant-btn ant-btn-primary"
-              type="button"
-            >
-              <span>
-                Темная
-              </span>
-            </button>
           </div>
         </div>
         <div
@@ -62,18 +73,33 @@ Object {
             <article
               class="ant-typography title"
             >
-              Игра
+              <span
+                class="titleMain"
+              >
+                Ultimate
+              </span>
+              <span
+                class="ant-typography ant-typography-secondary"
+              >
+                 Dungeon Crawler
+              </span>
             </article>
             <article
               class="ant-typography info"
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Очисти некогда великую обитель от насилия монстров и заблудших душ
             </article>
             <a
-              class="gameHref"
               href="/game"
             >
-              Играть
+              <button
+                class="ant-btn ant-btn-primary"
+                type="button"
+              >
+                <span>
+                  Играть
+                </span>
+              </button>
             </a>
           </div>
         </div>
@@ -91,9 +117,19 @@ Object {
           class="logo"
         >
           <a
+            class="logoSymbols"
             href="/main"
           >
-            Logo
+            <span
+              class="logoMainSymbol"
+            >
+              U
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary"
+            >
+              DC
+            </span>
           </a>
         </div>
         <div
@@ -109,9 +145,18 @@ Object {
                 class="inactive"
               >
                 <a
-                  href="/about"
+                  href="/signup"
                 >
-                  Об игре
+                  Регистрация
+                </a>
+              </li>
+              <li
+                class="inactive"
+              >
+                <a
+                  href="/signin"
+                >
+                  Вход
                 </a>
               </li>
             </ul>
@@ -119,14 +164,6 @@ Object {
           <div
             class="buttonContainer"
           />
-          <button
-            class="ant-btn ant-btn-primary"
-            type="button"
-          >
-            <span>
-              Темная
-            </span>
-          </button>
         </div>
       </div>
       <div
@@ -138,18 +175,33 @@ Object {
           <article
             class="ant-typography title"
           >
-            Игра
+            <span
+              class="titleMain"
+            >
+              Ultimate
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary"
+            >
+               Dungeon Crawler
+            </span>
           </article>
           <article
             class="ant-typography info"
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Очисти некогда великую обитель от насилия монстров и заблудших душ
           </article>
           <a
-            class="gameHref"
             href="/game"
           >
-            Играть
+            <button
+              class="ant-btn ant-btn-primary"
+              type="button"
+            >
+              <span>
+                Играть
+              </span>
+            </button>
           </a>
         </div>
       </div>

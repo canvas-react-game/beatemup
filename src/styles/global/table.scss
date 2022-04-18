@@ -90,26 +90,22 @@
     }
   }
   // Active
-  .ant-pagination-prev:focus-visible:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-prev:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary_dark;
     color: variables.$primary_dark;
   }
 
-  .ant-pagination-next:focus-visible:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-next:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary_dark;
     color: variables.$primary_dark;
   }
 
-  .ant-pagination-prev:hover:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-prev:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary_dark;
     color: variables.$primary_dark;
   }
 
-  .ant-pagination-next:hover:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-next:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary_dark;
     color: variables.$primary_dark;
   }
@@ -205,26 +201,22 @@
     }
   }
   // Active
-  .ant-pagination-prev:focus-visible:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-prev:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary;
     color: variables.$primary;
   }
 
-  .ant-pagination-next:focus-visible:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-next:focus-visible:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary;
     color: variables.$primary;
   }
 
-  .ant-pagination-prev:hover:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-prev:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary;
     color: variables.$primary;
   }
 
-  .ant-pagination-next:hover:not(.ant-pagination-disabled)
-    .ant-pagination-item-link {
+  .ant-pagination-next:hover:not(.ant-pagination-disabled) .ant-pagination-item-link {
     border-color: variables.$primary;
     color: variables.$primary;
   }

@@ -77,16 +77,10 @@
 
   /* stylelint-disable max-line-length */
   // Глобальные стили (из antd)
-  .ant-form-item-has-error
-    :not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
-  .ant-form-item-has-error
-    :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
-  .ant-form-item-has-error
-    :not(.ant-input-disabled)
-    :not(.ant-input-borderless).ant-input:hover,
-  .ant-form-item-has-error
-    :not(.ant-input-affix-wrapper-disabled)
-    :not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+  .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
+  .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
+  .ant-form-item-has-error :not(.ant-input-disabled) :not(.ant-input-borderless).ant-input:hover,
+  .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled) :not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
     background-color: transparent !important;
     border-color: #ff4d4f;
   }
@@ -170,16 +164,10 @@
 
   /* stylelint-disable max-line-length */
   // Глобальные стили (из antd)
-  .ant-form-item-has-error
-    :not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
-  .ant-form-item-has-error
-    :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
-  .ant-form-item-has-error
-    :not(.ant-input-disabled)
-    :not(.ant-input-borderless).ant-input:hover,
-  .ant-form-item-has-error
-    :not(.ant-input-affix-wrapper-disabled)
-    :not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+  .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
+  .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
+  .ant-form-item-has-error :not(.ant-input-disabled) :not(.ant-input-borderless).ant-input:hover,
+  .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled) :not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
     background-color: transparent !important;
     border-color: #ff4d4f;
   }

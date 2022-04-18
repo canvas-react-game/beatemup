@@ -27,7 +27,7 @@ class ThemeController {
             });
             if (!newTheme) {
                 return res.status(HttpStatuses.BadRequest).send(
-                    { message: "Ошибка сохранения темы" }
+                    { message: "Ошибка сохранения темы" },
                 );
             }
             return res.status(HttpStatuses.OK).send(newTheme);
@@ -48,7 +48,7 @@ class ThemeController {
             });
             if (!newTheme) {
                 return res.status(HttpStatuses.BadRequest).send(
-                    { message: "Ошибка сохранения темы" }
+                    { message: "Ошибка сохранения темы" },
                 );
             }
             return res.status(HttpStatuses.OK).send(newTheme);

@@ -6,7 +6,8 @@
 
 .dark {
   .ant-notification-notice {
-    background: variables.$background_dark
+    background:
+      variables.$background_dark
       url("../../assets/images/background.png") no-repeat center center;
   }
 
@@ -25,7 +26,8 @@
 
 .light {
   .ant-notification-notice {
-    background: variables.$background url("../../assets/images/background.png")
+    background:
+      variables.$background url("../../assets/images/background.png")
       no-repeat center center;
   }
 

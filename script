@@ -1,5 +1,5 @@
 #!/bin/sh
-git filter-branch --env-filter '
+git filter-branch -f --env-filter '
 OLD_NAME="Roman Savelev"
 OLD_EMAIL="romansavelev@MacBook-Air-Roman.local"
 CORRECT_NAME="Roolman"

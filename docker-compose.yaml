@@ -1,26 +1,23 @@
 # docker-compose.yaml
-version: "0"
+version: "3.3"
 
 services:
     # postgresql ставим впереди server-app, так как тот server-app от этого сервиса
-    postgres:
+    db:
       # Здесь именно image, потому что мы его сами не пишем, он будет взят с докерхаба
       image: postgres:14.1-alpine
       restart: always
-      environment:
-        POSTGRES_USER: romansavelev
-        POSTGRES_PASSWORD: 
-        POSTGRES_DB: dungeonCrawler
+      env_file:
+        ./.env
       volumes:
-        - db:/var/lib/postgresql/data
+        - ./postgresdata:/var/lib/postgresql/data
+        - ./src/server/db/init.sql:/docker-entrypoint-initdb.d/dbinit.sql
+      expose:
+        - 5432
       ports:
-        - "5432:5432"
-      # Появился новый параметр — networks, о нём ниже
-      networks:
-          # Назвать сеть можно как угодно
-          - awesome
+        - 5432:5432
     # Фронт с SSR
-    server-app:
+    web:
           # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
           # находится в папке рядом с docker-compose.yaml
       build:
@@ -30,35 +27,10 @@ services:
         - "3000:3000"
       # Проброс файлов, откуда с хоста, куда в контейнер
       volumes:
-        - ./shared:/var/www/shared
+        - ./assets:/var/www/assets
       # Зависимость от сервиса postgres
       depends_on:
-        - postgres
+        - db
       # Переменные окружения
-      env-file:
-        ./dev.ev
-      # Важно добавить сеть всем сервисам, которые должны взаимодействовать между собой
-      networks:
-        - awesome
-    # GUI для управления postgres
-    pgadmin:
-      container_name: pgadmin
-      image: dpage/pgadmin4:4.18
-      restart: always
-      environment:
-        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-        PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
-      ports:
-        - "7070:7070"
-      volumes:
-        - pgadmin-data:/var/lib/pgadmin
-      depends_on:
-        - postgres
-      networks:
-        - awesome
-
-# Настройки созданной сети между сервисами
-networks:
-    awesome:
-        driver: bridge 
+      env_file:
+        ./.env

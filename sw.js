@@ -26,6 +26,8 @@ const URLS = [
     "/about",
     "/game",
     "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+    "/main.css",
+    "/bundle.js"
 ];
 //
 sw.addEventListener("install", (event) => {

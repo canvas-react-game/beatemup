@@ -4,5 +4,5 @@ import { root, base } from "@/services/API/API.service";
 export const apiProxy = createProxyMiddleware(base, {
     target: root,
     changeOrigin: true,
-    cookieDomainRewrite: "localhost",
+    cookieDomainRewrite: "udg.nomoredomains.work",
 });

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Typography, Button } from "antd";
 
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Container from "@/components/Container";
@@ -10,8 +10,8 @@ import Header from "@/components/Header";
 
 import { routes } from "@/config/routes/routes";
 import styles from "./Main.module.scss";
-// import { getProfile } from "@/actions/profile.actions";
-// import { useMountEffect } from "@/hooks/useMountEffect";
+import { getProfile } from "@/actions/profile.actions";
+import { useMountEffect } from "@/hooks/useMountEffect";
 
 const { Text } = Typography;
 
@@ -20,11 +20,11 @@ const Main: FC = () => {
         title, info, infoContainer, container,
     } = styles;
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useMountEffect(() => {
-    //     dispatch(getProfile());
-    // });
+    useMountEffect(() => {
+        dispatch(getProfile());
+    });
 
     return (
         <Container>

@@ -23,8 +23,8 @@ export const serverRenderMiddleware = (
     const location = req.url;
     const host = req.get("Host");
     let protocol = "https";
-    if(host === "localhost") {
-        protocol = "http"
+    if (host === "localhost") {
+        protocol = "http";
     }
     const hostUrl = `${protocol}://${host}`;
 

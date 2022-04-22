@@ -10,7 +10,7 @@
     "build": "npm run clean & npm run compile:sw & webpack --mode production",
     "start:webpack": "webpack --mode development --watch",
     "start:server": "nodemon dist/server.js --watch",
-    "start": "npm-run-all --print-label --parallel start:*",
+    "start": "npm-run-all --print-label --parallel start:webpack start:server",
     "eslint": "node_modules/.bin/eslint ./src --fix",
     "stylelint": "node_modules/.bin/stylelint ./src --fix",
     "prepush": "npm-run-all eslint stylelint test",

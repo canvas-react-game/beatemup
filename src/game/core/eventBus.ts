@@ -1,22 +1,3 @@
-// Список всех событий в игре
-export enum EventTypes {
-    ArrowLeftDown = "ArrowLeftDown",
-    ArrowTopDown = "ArrowTopDown",
-    ArrowBottomDown = "ArrowBottomDown",
-    ArrowRightDown = "ArrowRightDown",
-    ArrowLeftUp = "ArrowLeftUp",
-    ArrowTopUp = "ArrowTopUp",
-    ArrowBottomUp = "ArrowBottomUp",
-    ArrowRightUp = "ArrowRightUp",
-}
-
-export enum KeyboardEvents {
-    ArrowLeft = "ArrowLeft",
-    ArrowUp = "ArrowUp",
-    ArrowDown = "ArrowDown",
-    ArrowRight = "ArrowRight",
-}
-
 // Класс, управляющий всеми событиями в игре
 // Например, для player если в prerender фиксируются зажатые клавишы передвижения, то
 // на основе пройденного времени нужно пересчитать перемещение объекта (+ скорость)

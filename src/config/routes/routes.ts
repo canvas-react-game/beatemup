@@ -1,8 +1,8 @@
-type Route = {
+export type Route = {
     path: string
 };
 
-type Routes = {
+export type Routes = {
     [key: string]: Route;
 };
 
@@ -22,6 +22,12 @@ export const routes: Routes = {
     forum: {
         path: "/forum",
     },
+    topic: {
+        path: "/topics/:id",
+    },
+    topicEdit: {
+        path: "/topic/edit",
+    },
     leaderboard: {
         path: "/leaderboard",
     },
@@ -30,6 +36,9 @@ export const routes: Routes = {
     },
     game: {
         path: "/game",
+    },
+    theme: {
+        path: "/themes/:id",
     },
 };
 

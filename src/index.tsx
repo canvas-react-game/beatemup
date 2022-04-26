@@ -1,9 +1,24 @@
+// import "../wdyr.js";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App/App.view";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
-import "./styles/table.scss";
-import "./styles/input.scss";
-import "./styles/button.scss";
+import configureStore from "@/store/store";
 
-ReactDOM.render(<App/>, document.getElementById("root"));
+import App from "./components/App";
+
+import "./styles/index.scss";
+
+const store = configureStore();
+const render = navigator.onLine ? ReactDOM.hydrate : ReactDOM.render;
+
+render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("root"),
+);

@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Typography } from "antd";
 
+import { Link } from "react-router-dom";
 import Container from "@/components/Container";
 import { routes } from "@/config/routes/routes";
 
@@ -22,8 +23,12 @@ const Error: FC<Props> = ({ status = "404" }) => {
                 <div className={errorContainer}>
                     <Typography className={title}>{status}</Typography>
                     <Typography className={info}>{ErrorInfo[status]}</Typography>
-                    <a href={status === "403" ? routes.signIn.path
-                        : routes.main.path} className={back}>Вернуться</a>
+                    <Link
+                        to={status === "403" ? routes.signIn.path : routes.main.path}
+                        className={back}
+                    >
+                        Вернуться
+                    </Link>
                 </div>
                 <div className={notFound}/>
             </div>

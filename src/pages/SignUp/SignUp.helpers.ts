@@ -14,7 +14,6 @@ enum SignUpFieldNames {
 
 export const useSignUp = () => {
     const history = useHistory();
-    const currentPath = routes.signUp.path;
 
     const fieldSet = [
         {
@@ -60,7 +59,7 @@ export const useSignUp = () => {
     const onFinishFailed = (errorInfo: Error) => console.log("Failed:", errorInfo);
 
     return {
-        currentPath,
+        currentPath: routes.signUp.path,
         fieldSet,
         onFinish,
         onFinishFailed,

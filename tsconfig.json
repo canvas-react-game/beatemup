@@ -1,38 +1,34 @@
 {
-    "compilerOptions": {
-        "lib": [
-            "dom",
-            "es2017"
-        ],
-        "module": "esnext",
-        "moduleResolution": "node",
-        "target": "es5",
-        "jsx": "react",
-        "importHelpers": true,
-        "noUnusedLocals": true,
-        "esModuleInterop": true,
-        "strict": true,
-        "strictPropertyInitialization": false,
-        "allowSyntheticDefaultImports": true,
-        "experimentalDecorators": true,
-        "skipLibCheck": true,
-        "declaration": false,
-        "sourceMap": false,
-        "baseUrl": ".",
-        "outDir": "./dist",
-        "paths": {
-            "*": ["./src/*"],
-            "@/*": ["./src/*"]
-        },
-        "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
+  "compilerOptions": {
+    "lib": ["dom", "es2017", "webworker"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "importHelpers": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,     
+    "skipLibCheck": true,
+    "declaration": false,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "paths": {
+      "*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
-    "include": [
-        "src",
-        "typings/**/*.d.ts",
-        "./node_modules/@types",
-        "types.d.ts"
-    ],
-    "exclude": [
-        "**/*.js"
-    ]
+    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
+  },
+  "include": [
+    "src",
+    "typings/**/*.d.ts",
+    "./node_modules/@types",
+    "types.d.ts", "index.ts", "src/server/index.js",
+  ],
+  "exclude": ["**/*.js"]
 }

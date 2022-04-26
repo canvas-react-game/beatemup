@@ -1,0 +1,21 @@
+@use "../variables.module.scss" as variables;
+
+.dark {
+  .ant-spin {
+    color: variables.$primary_dark;
+  }
+
+  .ant-spin-dot-item {
+    background-color: variables.$primary_dark;
+  }
+}
+
+.light {
+  .ant-spin {
+    color: variables.$primary;
+  }
+
+  .ant-spin-dot-item {
+    background-color: variables.$primary;
+  }
+}

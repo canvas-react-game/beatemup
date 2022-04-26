@@ -12,33 +12,8 @@
   }
 }
 
-.gameModal {
-  // todo более того, шрифт тоже не подгружается просто так
-  &:global(.ant-modal) {
-    font-family: "Press Start 2P", cursive;
-    width: 400px !important;
-  }
-
-  :global(.ant-modal-body) {
-    background:
-      variables.$background
-      url("../../../../assets/images/background.png") no-repeat center center;
-  }
-
-  :global(.ant-modal-header) {
-    background: variables.$background;
-    border: none;
-    text-align: center;
-  }
-
-  :global(.ant-modal-title) {
-    color: white;
-    font-size: 24px;
-  }
-
-  .title {
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
-  }
+.title {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
 }

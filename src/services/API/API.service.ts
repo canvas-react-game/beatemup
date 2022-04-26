@@ -6,11 +6,19 @@ export enum Method {
     DELETE = "DELETE",
 }
 
-const root = "https://ya-praktikum.tech/api/v2";
+export const root = "https://ya-praktikum.tech";
+export const base = "/api/v2";
+export const apiBase = "/api/local";
 
 class APIService {
+    private readonly base: Request | string;
+
+    constructor(isLocalBase?: boolean) {
+        this.base = isLocalBase ? apiBase : base;
+    }
+
     async request(method: Method, url: string, data = {}) {
-        const response = await fetch(`${root}/${url}`, {
+        const response = await fetch(`${this.base}/${url}`, {
             method,
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache",
@@ -19,10 +27,12 @@ class APIService {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Credentials": "true",
             },
-            body: JSON.stringify(data),
+            ...(method !== Method.GET && { body: JSON.stringify(data) }),
         });
         return response ?? null;
     }
 }
 
 export default new APIService();
+
+export const LocalAPIService = new APIService(true);

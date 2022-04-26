@@ -1,0 +1,24 @@
+@use "../../../styles/variables.module" as variables;
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 24px;
+
+  > a {
+    color: variables.$primary;
+    margin-left: 7px;
+  }
+
+  > a:hover {
+    color: darken(variables.$primary, 10%);
+  }
+}
+
+.icon {
+  > * {
+    color: variables.$primary;
+  }
+}

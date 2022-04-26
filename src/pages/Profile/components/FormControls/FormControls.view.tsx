@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { Button, Form, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 import { FormElement } from "../../Profile.types";
+import styles from "./FormControls.module.scss";
 
 const FormControls: FC<FormElement> = ({
     isEdit,
@@ -10,21 +11,18 @@ const FormControls: FC<FormElement> = ({
     onFinish,
     form,
 }) => {
+    const handleCancel = useCallback(() => {
+        setIsEdit(!isEdit);
+        form.resetFields();
+    }, [form, isEdit]);
+
+    const handleEdit = useCallback(() => {
+        setIsEdit(!isEdit);
+    }, [isEdit]);
+
     if (isEdit) {
         return (
             <>
-                <Form.Item>
-                    <Button
-                        type="text"
-                        onClick={() => {
-                            setIsEdit(!isEdit);
-                            form.resetFields();
-                        }}
-                    >
-            Отменить
-                        <EditOutlined />
-                    </Button>
-                </Form.Item>
                 <Form.Item>
                     <Button
                         block
@@ -46,7 +44,18 @@ const FormControls: FC<FormElement> = ({
                             });
                         }}
                     >
-            Сохранить
+                        Сохранить
+                        <EditOutlined />
+                    </Button>
+                </Form.Item>
+                <Form.Item>
+                    <Button
+                        block
+                        className={styles.cancelButton}
+                        type="default"
+                        onClick={handleCancel}
+                    >
+                        Отменить
                     </Button>
                 </Form.Item>
             </>
@@ -55,8 +64,8 @@ const FormControls: FC<FormElement> = ({
 
     return (
         <Form.Item>
-            <Button type="text" onClick={() => setIsEdit(!isEdit)}>
-        Редактировать
+            <Button block type="primary" onClick={handleEdit}>
+                Редактировать
                 <EditOutlined />
             </Button>
         </Form.Item>

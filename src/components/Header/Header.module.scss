@@ -13,12 +13,8 @@
   font-weight: 400;
   text-align: center;
 
-  > a {
-    color: white;
-  }
-
-  > a:hover {
-    color: darken(variables.$primary, 10%);
+  .logoMainSymbol {
+    color: variables.$primary;
   }
 }
 
@@ -35,13 +31,8 @@
 .routesContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 14px;
-}
-
-.signIn {
-  width: 84px;
-  height: 24px;
-  background-color: variables.$primary;
 }
 
 .signUp {

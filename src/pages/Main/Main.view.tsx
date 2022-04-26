@@ -1,26 +1,49 @@
 import React, { FC } from "react";
-import { Typography } from "antd";
+import { Typography, Button } from "antd";
+
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Container from "@/components/Container";
+import PageMeta from "@/components/PageMeta";
 import Header from "@/components/Header";
-import { routes } from "@/config/routes/routes";
 
+import { routes } from "@/config/routes/routes";
 import styles from "./Main.module.scss";
+import { getProfile } from "@/actions/profile.actions";
+import { useMountEffect } from "@/hooks/useMountEffect";
+
+const { Text } = Typography;
 
 const Main: FC = () => {
     const {
-        gameHref, title, info, infoContainer, container,
+        title, info, infoContainer, container,
     } = styles;
+
+    const dispatch = useDispatch();
+
+    useMountEffect(() => {
+        dispatch(getProfile());
+    });
+
     return (
         <Container>
-            <Header/>
+            <PageMeta title="Main" description="Main page" />
+            <Header />
             <div className={container}>
                 <div className={infoContainer}>
-                    <Typography className={title}>Игра</Typography>
-                    <Typography className={info}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    <Typography className={title}>
+                        <span className={styles.titleMain}>Ultimate</span>
+                        <Text type="secondary"> Dungeon Crawler</Text>
                     </Typography>
-                    <a href={routes.game.path} className={gameHref}>Играть</a>
+                    <Typography className={info}>
+                        Очисти некогда великую обитель от насилия монстров и заблудших душ
+                    </Typography>
+                    <Link to={routes.game.path}>
+                        <Button type="primary">
+                            Играть
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </Container>

@@ -1,0 +1,17 @@
+@use "../variables.module.scss" as variables;
+
+.light {
+  .ant-typography {
+    color: white;
+  }
+
+  .ant-typography[type="secondary"] {
+    color: white;
+  }
+}
+
+.dark {
+  .ant-typography[type="secondary"] {
+    color: variables.$primary_dark;
+  }
+}

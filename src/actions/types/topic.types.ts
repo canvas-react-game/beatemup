@@ -1,0 +1,2 @@
+export const TOPIC_LOAD = "TOPIC_LOAD";
+export const TOPIC_SET_LOADING = "TOPIC_SET_LOADING";

@@ -1,33 +1,39 @@
 import React, { FC } from "react";
 
+import { Link } from "react-router-dom";
+import { Typography } from "antd";
+
+import { useHeader } from "./Header.helpers";
 import { routes as appRoutes } from "@/config/routes/routes";
-import { checkAccess } from "@/helpers/acess";
+import { useSelector } from "@/hooks/useSelector";
 
 import styles from "./Header.module.scss";
 import NavBar from "../NavBar";
-import { useHeader } from "./Header.helpers";
+
+const { Text } = Typography;
 
 interface Props {
     currentPath?: string;
 }
 
-const mainRoute = appRoutes.main.path;
-
 const Header: FC<Props> = ({ currentPath }) => {
-    const {
-        routes,
-        renderSignOutButton,
-    } = useHeader();
+    const { renderSignOutButton } = useHeader();
+
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+    const isSignedInOAuth = useSelector((state) => state.auth.isSignedInOAuth);
 
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <a href={mainRoute}>Logo</a>
+                <Link to={appRoutes.main.path} className={styles.logoSymbols}>
+                    <span className={styles.logoMainSymbol}>U</span>
+                    <Text type="secondary">DC</Text>
+                </Link>
             </div>
             <div className={styles.routesContainer}>
-                <NavBar currentPath={currentPath} routes={routes} />
+                <NavBar currentPath={currentPath} />
                 <div className={styles.buttonContainer}>
-                    {checkAccess() && renderSignOutButton()}
+                    {(isSignedIn || isSignedInOAuth) && renderSignOutButton()}
                 </div>
             </div>
         </div>

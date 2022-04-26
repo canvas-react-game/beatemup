@@ -1,0 +1,36 @@
+# docker-compose.yaml
+version: "3.3"
+
+services:
+    # postgresql ставим впереди server-app, так как тот server-app от этого сервиса
+    db:
+      # Здесь именно image, потому что мы его сами не пишем, он будет взят с докерхаба
+      image: postgres:14.1-alpine
+      restart: always
+      env_file:
+        ./.env
+      volumes:
+        - ./postgresdata:/var/lib/postgresql/data
+        - ./src/server/db/init.sql:/docker-entrypoint-initdb.d/dbinit.sql
+      expose:
+        - 5432
+      ports:
+        - 5432:5432
+    # Фронт с SSR
+    web:
+          # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
+          # находится в папке рядом с docker-compose.yaml
+      build:
+        context: .
+          # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
+      ports:
+        - "80:3000"
+      # Проброс файлов, откуда с хоста, куда в контейнер
+      volumes:
+        - ./assets:/var/www/assets
+      # Зависимость от сервиса postgres
+      depends_on:
+        - db
+      # Переменные окружения
+      env_file:
+        ./.env

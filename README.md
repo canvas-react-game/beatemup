@@ -1,6 +1,5 @@
+<img src="assets/logo.png" height="25" width="65" align="right" alt="Logo" >
 
-<img src="assets/logo.png" align="right"
-     alt="Size Limit logo by Anton Lovchikov" width="140" height="55">
 ## Ultimate Dungeon Crawler 
 
 ### Описание
@@ -8,19 +7,23 @@
 
 ### Играть
 
-<a href="https://ultimatedungeoncrawler.herokuapp.com/">
-    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"
-        alt="Heroku" width="80" height="28">
+<a href="https://udc.ya-praktikum.tech/">
+    <img src="assets/play.png" height="50">
 </a>
+
 
 ### Возможности
 
 - [x] Управление персонажом
 - [x] Физика столкновения
-- [ ] Наполнение игрового мира
-- [ ] Механика взаимодействия персонажей
-- [ ] Мобы
+- [x] Наполнение игрового мира
+- [x] Механика взаимодействия персонажей
+- [x] Мобы
+- [ ] Оптимизации и наполнение
 - [ ] Мультиплеер
+
+<img src="assets/screenshot.png"
+     alt="Gameplay" width="1500">
 
 ## Проект
 
@@ -33,7 +36,7 @@
 
 ### Доска
 
-<a href="https://trello.com/b/alCOUp44/first-sprint">
+<a href="https://trello.com/yandexpracticumgame">
     <img src="https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white"
         alt="Trello" width="80" height="28">
 </a>

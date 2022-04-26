@@ -1,0 +1,43 @@
+@use "../variables.module.scss" as variables;
+
+.ant-modal {
+  font-family: "Press Start 2P", cursive;
+  width: 400px !important;
+}
+
+.ant-modal-title {
+  color: white;
+  font-size: 24px;
+}
+
+.ant-modal-confirm-title,
+.ant-modal-confirm-content {
+  color: white !important;
+}
+
+.dark {
+  .ant-modal-body {
+    background:
+      variables.$background_dark
+      url("../../assets/images/background.png") no-repeat center center;
+  }
+
+  .ant-modal-header {
+    background: variables.$background_dark;
+    text-align: center;
+  }
+}
+
+.light {
+  .ant-modal-body {
+    background:
+      variables.$background url("../../assets/images/background.png")
+      no-repeat center center;
+  }
+
+  .ant-modal-header {
+    background: variables.$background;
+    border: none;
+    text-align: center;
+  }
+}

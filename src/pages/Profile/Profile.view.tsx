@@ -1,17 +1,18 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
-    Form, Space, Row, Col,
+    Form, Space, Image as AntdImage,
 } from "antd";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
-import Upload from "@/components/Upload";
-import Statistic from "@/components/Statistic";
+import PageMeta from "@/components/PageMeta";
+import PageLoader from "@/components/PageLoader";
+
 import FormFields from "./components/FormFields";
 import FormControls from "./components/FormControls";
-import UploadButton from "./components/UploadButton";
 
 import styles from "./Profile.module.scss";
+import ProfileDefault from "../../../assets/images/default_profile.png";
 
 import { useProfileForm } from "./Profile.helpers";
 
@@ -21,54 +22,48 @@ const Profile = () => {
         onFinish,
         isEdit,
         setIsEdit,
-        avatar,
-        initialValues,
+        isOAuthSigned,
+        profile,
         form,
+        isLoading,
     } = useProfileForm();
 
-    const handleChangeAvatar = useCallback(
-        () => ({ fileList }: any) => console.log(fileList),
-        [],
-    );
-
     return (
-        <Container>
-            <Header currentPath={currentPath} />
-            <div className={styles.formContainer}>
-                <Space direction="vertical" size="middle">
-                    <Row justify="space-between">
-                        <Col>
-                            <Statistic title="Рекорд" value={1128} />
-                        </Col>
-                        <Col>
-                            <Upload
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                listType="picture-card"
-                                disabled={!isEdit}
-                                onChange={handleChangeAvatar}
-                            >
-                                {avatar || <UploadButton />}
-                            </Upload>
-                        </Col>
-                    </Row>
-
-                    <Form
-                        name="profile"
-                        form={form}
-                        initialValues={initialValues}
-                        layout="vertical"
-                    >
-                        <FormFields isEdit={isEdit} />
-                        <FormControls
-                            isEdit={isEdit}
-                            setIsEdit={setIsEdit}
+        <PageLoader isSpinning={isLoading}>
+            <Container>
+                <PageMeta title="Profile" description="Profile page" />
+                <Header currentPath={currentPath} />
+                <div className={styles.formContainer}>
+                    <Space className={styles.formInnerContainer} direction="vertical" size="middle">
+                        {profile.avatar && <AntdImage
+                            width={200}
+                            height={200}
+                            src={`api/v2/resources${profile.avatar}`}
+                            crossOrigin={"use-credentials"}
+                            fallback={ProfileDefault}
+                        />}
+                        {!profile.avatar && <div className={styles.imageEmpty}></div>}
+                        <Form
+                            name="profile"
                             form={form}
-                            onFinish={onFinish}
-                        />
-                    </Form>
-                </Space>
-            </div>
-        </Container>
+                            initialValues={profile}
+                            layout="vertical"
+                        >
+                            <FormFields isEdit={isEdit} />
+
+                            {!isOAuthSigned && (
+                                <FormControls
+                                    isEdit={isEdit}
+                                    setIsEdit={setIsEdit}
+                                    form={form}
+                                    onFinish={onFinish}
+                                />
+                            )}
+                        </Form>
+                    </Space>
+                </div>
+            </Container>
+        </PageLoader>
     );
 };
 

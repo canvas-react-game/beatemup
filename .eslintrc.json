@@ -1,61 +1,63 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "airbnb-base", 
-        "airbnb-typescript/base"
-    ],
-    "rules": {
-      "max-len": [2, 100],
-      "max-params": [2, 4],
-      "semi": [2, "always"],
-      "quotes": [2, "double"],
-      "linebreak-style": [0],
-      "eol-last": [2, "always"],
-      "import/prefer-default-export": [0],
-      "import/extensions": [0],
-      "no-restricted-globals": [0],
-      "no-restricted-exports": [0],
-      "no-restricted-syntax": [0],
-      "no-underscore-dangle": [0],
-      "no-prototype-builtins": [0],
-      "no-return-assign": [0],
-      "prefer-destructuring": [1],
-      "class-methods-use-this": [0],
-      "import/no-cycle": [0],
-      "no-param-reassign": [0],
-      "max-classes-per-file": [0],
-      "@typescript-eslint/semi": [2, "always"],
-      "@typescript-eslint/quotes": [2, "double"],
-      "@typescript-eslint/eol-last": [0],
-      "@typescript-eslint/lines-between-class-members": [0],
-      "@typescript-eslint/no-shadow": [0],
-      "@typescript-eslint/indent": [2, 4],
-      "@typescript-eslint/no-unused-vars": [0],
-      "@typescript-eslint/naming-convention": [
-        "error",
-        {
-          "selector": "variableLike",
-          "leadingUnderscore": "allow",
-          "format": ["camelCase", "PascalCase", "UPPER_CASE"]
-        },
-        {
-          "selector": "typeLike",
-          "format": ["PascalCase", "UPPER_CASE"]
+  "env": {
+      "browser": true,
+      "es2021": true
+  },
+  "extends": [
+      "airbnb-base",
+      "airbnb-typescript/base",
+      "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "max-len": [2, 100],
+    "max-params": [2, 4],
+    "semi": [2, "always"],
+    "quotes": [2, "double"],
+    "linebreak-style": [0],
+    "eol-last": [2, "always"],
+    "import/prefer-default-export": [0],
+    "import/extensions": [0],
+    "no-restricted-globals": [0],
+    "no-restricted-exports": [0],
+    "no-restricted-syntax": [0],
+    "no-underscore-dangle": [0],
+    "no-prototype-builtins": [0],
+    "no-return-assign": [0],
+    "prefer-destructuring": [1],
+    "class-methods-use-this": [0],
+    "import/no-cycle": [0],
+    "no-param-reassign": [0],
+    "max-classes-per-file": [0],
+    "react-hooks/exhaustive-deps": ["off"],
+    "@typescript-eslint/semi": [2, "always"],
+    "@typescript-eslint/quotes": [2, "double"],
+    "@typescript-eslint/eol-last": [0],
+    "@typescript-eslint/lines-between-class-members": [0],
+    "@typescript-eslint/no-shadow": [0],
+    "@typescript-eslint/indent": [2, 4],
+    "@typescript-eslint/no-unused-vars": [0],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variableLike",
+        "leadingUnderscore": "allow",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase", "UPPER_CASE"]
+      }
+    ]
+  },
+  "overrides": [
+      {
+        "files": ["**/*.ts", "**/*.tsx"],
+        "parserOptions": {
+          "project": "./tsconfig.json",
+          "ecmaVersion": "latest",
+          "sourceType": "module"
         }
-      ]
-    },
-    "overrides": [
-        {
-          "files": ["**/*.ts", "**/*.tsx"],
-          "parserOptions": {
-            "project": "./tsconfig.json",
-            "ecmaVersion": "latest",
-            "sourceType": "module"
-          }
-        }
-    ],
-    "parser": "@typescript-eslint/parser"
+      }
+  ],
+  "parser": "@typescript-eslint/parser"
 } 

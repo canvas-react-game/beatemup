@@ -1,4 +1,4 @@
-<img src="assets/logo.png" height="20" align="right">
+<img src="assets/logo.png" height="20" width="60" align="right" alt="Logo">
 ## Ultimate Dungeon Crawler 
 
 ### Описание

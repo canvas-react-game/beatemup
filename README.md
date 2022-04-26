@@ -1,7 +1,5 @@
-<div style="display:flex;flex-direction:row;justify-content:space-between;">
-    ## Ultimate Dungeon Crawler 
-    <img src="assets/logo.png" height="20">
-</div>
+<img src="assets/logo.png" height="20" align="right">
+## Ultimate Dungeon Crawler 
 
 ### Описание
 Броди по заброшенному подземелью, убивай коварных врагов и освободи некогда великую обитель от населившей её нечисти!

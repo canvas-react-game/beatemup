@@ -1,33 +1,34 @@
 import React, { FC, useCallback } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { LoginOutlined } from "@ant-design/icons";
 
 import Button from "@/components/Button";
-import api from "@/api/OAuth";
+// import api from "@/api/OAuth";
 import { apiRoutes } from "@/config/apiRoutes";
-import { getProfile } from "@/actions/profile.actions";
+// import { getProfile } from "@/actions/profile.actions";
 
 import styles from "./YandexSignIn.module.scss";
 
-const { providerURLRoot, redirectURI } = apiRoutes.oauth;
+const { providerURLRoot, redirectURI, udcClientId } = apiRoutes.oauth;
 
 const providerURL = (clientId: string) => `${providerURLRoot}&client_id=${clientId}
 &redirect_uri=${redirectURI}`;
 
 const YandexSignIn: FC = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const onClick = useCallback(async () => {
-        api.getServiceId(redirectURI)
-            .then((serviceId) => {
-                if (serviceId) {
-                    window.location.replace(providerURL(serviceId));
-                }
-                dispatch(getProfile());
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        // api.getServiceId(redirectURI)
+        //     .then((serviceId) => {
+        //         if (serviceId) {
+        //             window.location.replace(providerURL(serviceId));
+        //         }
+        //         dispatch(getProfile());
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+        window.location.replace(providerURL(udcClientId));
     }, []);
 
     return (

@@ -4,6 +4,6 @@ export const apiRoutes = {
         redirectURI: "https://udg.nomoredomains.work", // localhost:3000
         serviceId: "oauth/yandex/service-id",
         signIn: "oauth/yandex",
-        udcClientId: "b7aa7e3038ed42358ea3cd11acddef45"
+        udcClientId: "b7aa7e3038ed42358ea3cd11acddef45",
     },
 };

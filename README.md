@@ -1,6 +1,6 @@
 <div style="display:flex;flex-direction:row;justify-content:space-between;">
     ## Ultimate Dungeon Crawler 
-    <img src="logo.svg">
+    <img src="assets/logo.png" height="20">
 </div>
 
 ### Описание
@@ -9,12 +9,7 @@
 ### Играть
 
 <a href="https://udc.ya-praktikum.tech/">
-    <svg width="120" height="50" rx="10" ry="10">
-    <g>
-        <rect x="0" y="0" width="100" height="50" />
-        <text x="10" y="35" fill="#ff7a45" class="icon">PLAY</text>
-    </g>
-    </svg>
+    <img src="assets/play.png" height="50">
 </a>
 
 

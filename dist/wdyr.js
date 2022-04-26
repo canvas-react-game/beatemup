@@ -1,1 +1,8 @@
-import React from"react";"development"===process.env.NODE_ENV&&require("@welldone-software/why-did-you-render")(React,{trackAllPureComponents:!0});
+import React from 'react';
+
+if (process.env.NODE_ENV === "development") {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+  });
+}

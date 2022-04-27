@@ -1,17 +1,6 @@
-<div style="display:flex;flex-direction:row;justify-content:space-between;">
-    ## Ultimate Dungeon Crawler 
-    <svg height="30" width="90">
-        <style type="text/css">
-            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-            .icon {
-                font-family:'Press Start 2P';
-                font-size:20px;
-            };
-        </style>
-        <text x="0" y="20" fill="#ff7a45" class="icon">U</text>
-        <text x="21" y="20" fill="black" class="icon">DC</text>
-    </svg>
-</div>
+<img src="assets/logo.png" height="25" width="65" align="right" alt="Logo" >
+
+## Ultimate Dungeon Crawler 
 
 ### Описание
 Броди по заброшенному подземелью, убивай коварных врагов и освободи некогда великую обитель от населившей её нечисти!
@@ -19,12 +8,7 @@
 ### Играть
 
 <a href="https://udc.ya-praktikum.tech/">
-    <svg width="120" height="50" rx="10" ry="10">
-    <g>
-        <rect x="0" y="0" width="100" height="50" />
-        <text x="10" y="35" fill="#ff7a45" class="icon">PLAY</text>
-    </g>
-    </svg>
+    <img src="assets/play.png" height="50">
 </a>
 
 

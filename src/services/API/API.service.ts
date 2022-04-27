@@ -18,7 +18,11 @@ class APIService {
     }
 
     async request(method: Method, url: string, data = {}) {
-        const response = await fetch(`${this.base}/${url}`, {
+        let URL = `${this.base}/${url}`
+        if(method === Method.GET && Object.entries(data).length) {
+            URL += `?${new URLSearchParams(data)}`
+        }
+        const response = await fetch(URL, {
             method,
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache",

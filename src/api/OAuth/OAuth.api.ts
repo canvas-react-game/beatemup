@@ -31,7 +31,7 @@ class OAuthApi {
 
     public async getServiceId(redirectURI: string): Promise<string | null> {
         const response = await APIService.request(Method.GET, serviceId, {
-            redirect_uri: redirectURI
+            redirect_uri: redirectURI,
         });
         if (response) {
             const success = this.isSuccessfulRequest(response);

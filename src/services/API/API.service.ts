@@ -18,9 +18,9 @@ class APIService {
     }
 
     async request(method: Method, url: string, data = {}) {
-        let URL = `${this.base}/${url}`
-        if(method === Method.GET && Object.entries(data).length) {
-            URL += `?${new URLSearchParams(data)}`
+        let URL = `${this.base}/${url}`;
+        if (method === Method.GET && Object.entries(data).length) {
+            URL += `?${new URLSearchParams(data)}`;
         }
         const response = await fetch(URL, {
             method,
